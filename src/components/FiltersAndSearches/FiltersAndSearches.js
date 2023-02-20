@@ -13,7 +13,6 @@ import { TextField, Button } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router";
 
 // import AllyName from "components/DropDowns/AllyName";
-import store from "../../store";
 import { Form, FormGroup, Input,Label } from 'reactstrap';
 import IntlMessages from 'Util/IntlMessages';
 
@@ -76,7 +75,6 @@ export function FiltersAndSearches({
   }
 
   
-console.log(<IntlMessages id={"kk"}/>,"k")
   return (
     <form className="w-100" onSubmit={(e) => e.preventDefault()}>
       <div className="row grid-gap-10 w-100 m-0">

@@ -17,7 +17,6 @@ import { dataTypes, Alert } from "Constants/constants";
  * @returns {JSX | string} Cell Content in a table
  */
 import { Link } from "react-router-dom";
-import store from "../../store";
 
 const {
   TEXT,
@@ -36,7 +35,6 @@ const {
 
 function CellData({ data, record, locale, actions, actionsArgs, dropdownActions }) {
   const dataValue = record[data?.dataRef];
-  const { ally_id } = store?.getState()?.authUser.user || {};
   switch (true) {
     case data?.dataType === DROPDOWN :
         return  dropdownActions(record)
