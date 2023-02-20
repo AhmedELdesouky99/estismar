@@ -37,7 +37,6 @@ const {
 function CellData({ data, record, locale, actions, actionsArgs, dropdownActions }) {
   const dataValue = record[data?.dataRef];
   const { ally_id } = store?.getState()?.authUser.user || {};
-console.log(dropdownActions,"dropdown")
   switch (true) {
     case data?.dataType === DROPDOWN :
         return  dropdownActions(record)

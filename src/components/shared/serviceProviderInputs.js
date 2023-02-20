@@ -123,7 +123,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
         }
       });
   };
-  console.log(data, "data");
   const AddServiceProvider = () => {
     client
       .post("/service-provider", {
@@ -164,7 +163,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
         type: "update",
       })
       .then((res) => {
-        console.log(res.data.data, "s");
         if (res.data.success) {
           // swal("تم تعديل مزود الخدمة بنجاح", "success");
           swal({
@@ -265,7 +263,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
             loader={loader}
             image={EnImage}
             setImage={(file) => {
-              // console.log(file,"file")
               uploadEnimage(file);
             }}
           />
@@ -696,8 +693,7 @@ const ServiceProviderInputs = ({ providerDetails }) => {
             image={firstImage}
             name="السجل التجاري"
             setImage={(file) => {
-              // console.log(file,"file")
-              //    setFirstImage
+             
               UploadFile(file, "first");
             }}
           />
@@ -707,8 +703,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
             image={secondImage}
             name="الشهادة الضريبية"
             setImage={(file) => {
-              // console.log(file,"file")
-              //    setFirstImage
               UploadFile(file, "second");
             }}
           />
@@ -720,8 +714,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
             image={thirdImage}
             name={"عقد التأسيس"}
             setImage={(file) => {
-              // console.log(file,"file")
-              //    setFirstImage
               UploadFile(file, "third");
             }}
           />

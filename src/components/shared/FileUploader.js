@@ -67,7 +67,6 @@ function FileUpload({
                 accept="image/jpeg, jpeg, png, image/png, gif, image/gif"
                 onChange={(e) => {
                   const file = e.target.files[0];
-                  console.log(e.target.files[0],"file")
                    
                   setImage(file)
                 }}

@@ -32,7 +32,6 @@ const getUrlString = (path, sub, index) => {
 const PageTitleBar = ({ title, match, enableBreadCrumb }) => {
    const path = match?.pathname?.substr(1);
    const subPath = path?.split('/');
-   console.log(match,"match")
    return (
       <div className="page-title d-flex justify-content-between align-items-center">
          {/* {title &&

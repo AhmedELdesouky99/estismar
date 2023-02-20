@@ -117,7 +117,6 @@ useEffect(()=>{
         }
       });
   }
-  console.log(data,"data")
   const AddAssetsOwner=()=>{
     client.post("/asset-owner",{
       ...data,
@@ -147,7 +146,6 @@ useEffect(()=>{
       files_ids:files,
       type : "update",
     }).then((res)=>{
-      console.log(res.data.data,"s")
       if(res.data.success){
         swal({
           title: "",
@@ -689,8 +687,6 @@ useEffect(()=>{
               image={firstImage}
               name="صك الوقفية"
               setImage={(file) => {
-                // console.log(file,"file")
-             //    setFirstImage
                 UploadFile(file,"first");
               }}
             />
@@ -701,8 +697,6 @@ useEffect(()=>{
               image={secondImage}
               name="الشهادة الضريبية"
               setImage={(file) => {
-                // console.log(file,"file")
-             //    setFirstImage
                 UploadFile(file,"second");
               }}
             />
@@ -715,8 +709,6 @@ useEffect(()=>{
             image={thirdImage}
             name={"عقد التأسيس"}
             setImage={(file) => {
-                // console.log(file,"file")
-             //    setFirstImage
                 UploadFile(file,"third");
               }}
             />
@@ -726,8 +718,6 @@ useEffect(()=>{
              image={forthImage}
              name={"دورة عمل الوقف"}
              setImage={(file) => {
-                 // console.log(file,"file")
-              //    setFirstImage
                  UploadFile(file,"forth");
                }}
             />
