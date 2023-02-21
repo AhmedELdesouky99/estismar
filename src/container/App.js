@@ -63,7 +63,13 @@ const InitialPath = ({ component: Component, authUser, ...rest }) =>
       render={props =>
          authUser
             ? <Component {...props} />
-            : <Component {...props}/>
+            // : <Redirect
+            //    to={{
+            //       pathname: '/signin',
+            //       state: { from: props.location }
+            //    }}
+            // />
+            :<Component {...props} />
          }
    />;
 
