@@ -2,7 +2,7 @@
  * App Config File
  */
 const AppConfig = {
-   appLogo: require('Assets/img/site-logo.png'),          // App Logo
+   appLogo: require('Assets/img/favicon.png'),          // App Logo
    brandName: 'Reactify',                                    // Brand Name
    navCollapsed: false,                                      // Sidebar collapse
    darkMode: false,                                          // Dark Mode

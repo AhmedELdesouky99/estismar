@@ -211,7 +211,7 @@ export default {
          "menu_icon": <svg id="ic-home" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28.5 28.362">
                      <path id="Layer_2" data-name="Layer 2" d="M30.131,15.291l-2.017-1.97L17.079,2.358a1.139,1.139,0,0,0-1.661,0L4.383,13.2l-1.97,1.946a1.187,1.187,0,1,0,1.661,1.685v12.34A1.187,1.187,0,0,0,5.261,30.36H27.307a1.187,1.187,0,0,0,1.187-1.187V16.953a1.234,1.234,0,0,0,.831.332,1.21,1.21,0,0,0,.854-.356,1.163,1.163,0,0,0-.047-1.637ZM12.4,28.106V18.424h7.119v9.682Zm13.669,0H21.944V17.237a1.21,1.21,0,0,0-1.187-1.187H11.265a1.21,1.21,0,0,0-1.187,1.187V28.106H6.4V14.6L16.249,4.85,26.073,14.6Z" transform="translate(-1.993 -1.998)" fill="#fff"/>
                    </svg>,
-         "path": "/app/dashboard/ecommerce",
+         "path": "/app/home",
          "new_item": false,
          "child_routes": null
       },
@@ -302,7 +302,7 @@ export default {
 </svg>
 
          ,
-         "path": "/app/todo",
+         "path": "/app/",
          "new_item": false,
          "child_routes": null
       },
@@ -319,7 +319,7 @@ export default {
 </svg>
 
          ,
-         "path": "/app/todo",
+         "path": "/app/",
          "new_item": false,
          "child_routes": null
       },
@@ -337,7 +337,7 @@ export default {
        
 
          ,
-         "path": "/app/todo",
+         "path": "/app/",
          "new_item": false,
          "child_routes": null
       },
@@ -354,7 +354,7 @@ export default {
 </svg>
 
          ,
-         "path": "/app/todo",
+         "path": "/app/",
          "new_item": false,
          "child_routes": null
       },
@@ -372,7 +372,7 @@ export default {
          </g>
        </svg>
          ,
-         "path": "/app/todo",
+         "path": "/app/",
          "new_item": false,
          "child_routes": null
       },
@@ -385,7 +385,7 @@ export default {
   <path id="Path_22587" data-name="Path 22587" d="M163.072,338.3h-1.381a.691.691,0,1,0,0,1.381h1.381a.691.691,0,1,0,0-1.381Zm3.8,1.381h1.381a.691.691,0,1,0,0-1.381H166.87a.691.691,0,1,0,0,1.381Zm11.319-2.127-1.252.584a.691.691,0,1,0,.584,1.252l1.252-.584a.691.691,0,0,0-.584-1.252Z" transform="translate(-150.893 -317.459)" fill="#fff"/>
 </svg>
          ,
-         "path": "/app/todo",
+         "path": "/app/",
          "new_item": false,
          "child_routes": null
       },
@@ -405,7 +405,7 @@ export default {
                </g>
          </svg>
          ,
-         "path": "/app/todo",
+         "path": "/app/",
          "new_item": false,
          "child_routes": null
       },

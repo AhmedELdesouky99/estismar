@@ -47,10 +47,10 @@ export default class EcommerceDashboard extends Component {
 		return (
 			<div className="ecom-dashboard-wrapper">
 				<Helmet>
-					<title>Ecommerce Dashboard</title>
-					<meta name="description" content="Reactify Ecommerce Dashboard" />
+					<title>لوحة التحكم</title>
+					<meta name="description" content="لوحة التحكم" />
 				</Helmet>
-				<PageTitleBar title={<IntlMessages id="sidebar.ecommerce" />} match={match} />
+				<PageTitleBar title={<IntlMessages id="لوحة التحكم" />} match={match} />
 				<div className="row">
 					<div className="col-sm-6 col-md-4 w-xs-half-block">
 						<VisitorAreaChartWidget
