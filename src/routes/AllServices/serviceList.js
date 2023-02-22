@@ -9,6 +9,8 @@ import RctCollapsibleCard from "Components/RctCollapsibleCard/RctCollapsibleCard
 import CustomTable from "Components/shared/CustomTable";
 import { ServiceData } from "./ServiceData";
 import StatusDropDown from "Components/shared/StatusDropDown"
+import PerPage from "Components/shared/PerPage";
+
 import axios from "axios"
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin" 
@@ -21,11 +23,13 @@ function ServiceList({ allowners, loading, setPage, limit, setLimit ,status}) {
     metadata: {},
   });
   const { collection ,metadata} = owners;
-console.log(collection,"collection")
   useEffect(() => {
     setOwners({
       collection: allowners?.data,
-      metadata: allowners?.allowners?.metadata,
+      metadata: {
+        totalCount:allowners?.total,
+        currentPage:allowners?.current_page
+      }, 
     });
   }, [allowners]);
 
@@ -102,7 +106,7 @@ console.log(collection,"collection")
           />
         </RctCollapsibleCard>
       </div>
-      <div className="d-flex justify-content-around">
+      {/* <div className="d-flex justify-content-around">
         {metadata?.currentPage && (
           <>
             <Pagination
@@ -121,7 +125,7 @@ console.log(collection,"collection")
             />
           </>
         )}
-      </div>
+      </div> */}
     </Typography>
   );
 }

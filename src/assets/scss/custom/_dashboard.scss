@@ -642,3 +642,12 @@ button.active{
 .PrivateTabIndicator-colorPrimary-6{
   background-color: #D4B265 !important;
 }
+
+.MuiPaginationItem-root{
+  border-radius: 0px !important;
+
+}
+.MuiPaginationItem-page.Mui-selected{
+  background-color: #005D5E !important;
+  color: #fff !important;
+}

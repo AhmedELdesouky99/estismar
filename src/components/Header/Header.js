@@ -114,9 +114,8 @@ class Header extends Component {
 										</Tooltip>
 									</li>
 								}
-								{!horizontalMenu && <QuickLinks />}
-								<li className="list-inline-item search-icon d-inline-block">
-									{/* <SearchForm /> */}
+								{/* {!horizontalMenu && <QuickLinks />} */}
+								{/* <li className="list-inline-item search-icon d-inline-block">
 									<IconButton mini="true" className="search-icon-btn" onClick={() => this.openMobileSearchForm()}>
 										<i className="zmdi zmdi-search"></i>
 									</IconButton>
@@ -124,7 +123,7 @@ class Header extends Component {
 										isOpen={isMobileSearchFormVisible}
 										onClose={() => this.setState({ isMobileSearchFormVisible: false })}
 									/>
-								</li>
+								</li> */}
 							</ul>
 						}
 					</div>
@@ -146,8 +145,8 @@ class Header extends Component {
 							</li>
 						} */}
 						<LanguageProvider />
-						<Notifications />
-						<Cart />
+						{/* <Notifications />
+						<Cart /> */}
 						{/* <li className="list-inline-item setting-icon">
 							<Tooltip title="Chat" placement="bottom">
 								<IconButton aria-label="settings" onClick={() => this.setState({ customizer: true })}>

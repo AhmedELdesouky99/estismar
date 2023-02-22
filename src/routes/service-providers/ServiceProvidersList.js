@@ -9,6 +9,7 @@ import RctCollapsibleCard from "Components/RctCollapsibleCard/RctCollapsibleCard
 import CustomTable from "Components/shared/CustomTable";
 import { ServiceData } from "./ServiceData";
 import StatusDropDown from "Components/shared/StatusDropDown"
+import PerPage from "Components/shared/PerPage";
 
 import axios from "axios"
 const client = axios.create({
@@ -26,7 +27,12 @@ function ServiceProvidersList({ allservices, loading, setPage, limit, setLimit,s
    
     setServices({
       collection: allservices?.data,
-      metadata: allservices?.allservices?.metadata,
+    
+      metadata: {
+        totalCount:allservices?.total,
+        currentPage:allservices?.current_page
+      }, 
+      // allservices?.allservices?.metadata,
     });
   }, [allservices]);
 
@@ -83,7 +89,7 @@ function ServiceProvidersList({ allservices, loading, setPage, limit, setLimit,s
           />
         </RctCollapsibleCard>
       </div>
-      <div className="d-flex justify-content-around">
+      {/* <div className="d-flex justify-content-around">
         {metadata?.currentPage && (
           <>
             <Pagination
@@ -102,7 +108,7 @@ function ServiceProvidersList({ allservices, loading, setPage, limit, setLimit,s
             />
           </>
         )}
-      </div>
+      </div> */}
     </Typography>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback  } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
 // // page title bar
@@ -22,15 +22,21 @@ export default function OwnerAssets() {
   const location = useLocation();
   const history = useHistory();
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(30);
+  const [limit, setLimit] = useState(10);
   const [owners,setOwners]=useState()
   const [status,setStatus]=useState()
 
   useEffect(()=>{
-    client.get(`/asset-owner?limit=${limit}`).then(res=>setOwners(res.data.data,"res"))
     client.get("/asset-owner-status").then((res)=>setStatus(res.data.data))
 
   },[])
+  useEffect(()=>{
+   
+  
+      client.get(`/asset-owner?limit=${limit}&page=${page}`).then(res=>setOwners(res.data.data))
+ 
+     
+  },[page,limit])
   return (
     <div className="clients-wrapper">
        <Helmet>

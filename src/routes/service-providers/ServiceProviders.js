@@ -15,6 +15,7 @@ import { FormattedMessage } from "react-intl";
 
 import { Button } from "reactstrap";
 import axios from "axios"
+
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin" 
  
@@ -23,13 +24,15 @@ export default function ServiceProviders() {
   const location = useLocation();
   const history = useHistory();
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(30);
+  const [limit, setLimit] = useState(10);
   const [services,setServices]=useState()
   const [status,setStatus]=useState()
   useEffect(()=>{
-    client.get(`/service-provider?limit=${limit}`).then(res=>setServices(res.data.data,"res"))
     client.get("/service-provider-status").then((res)=>setStatus(res.data.data))
   },[])
+  useEffect(()=>{
+    client.get(`/service-provider?limit=${limit}&page=${page}`).then(res=>setServices(res.data.data))   
+},[page,limit])
   return (
     <div className="clients-wrapper">
       <Helmet>

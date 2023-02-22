@@ -21,16 +21,19 @@ export default function Services() {
   const location = useLocation();
   const history = useHistory();
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(30);
+  const [limit, setLimit] = useState(10);
   const [owners, setOwners] = useState();
   const [status, setStatus] = useState();
 
   useEffect(() => {
-    client
-      .get(`/service?limit=${limit}`)
-      .then((res) => setOwners(res.data.data, "res"));
+   
     client.get("/service-status").then((res) => setStatus(res.data.data));
   }, []);
+  useEffect(()=>{
+    client
+    .get(`/service?limit=${limit}&page=${page}`)
+    .then((res) => setOwners(res.data.data));
+},[page,limit])
   return (
     <div className="clients-wrapper">
       <Helmet>
