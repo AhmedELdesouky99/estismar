@@ -12,11 +12,17 @@ function StatusDropDown(props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 useEffect(()=>{
-  if(props?.status?.length){
-    const activeStatus = props?.status.find(one=>one.id == props.activationStatus)
+  if(props.activationStatus !=undefined){
+    const activeStatus =  [
+      {name:"مفعل",id:1},
+      {name:"قيد الانتظار",id:0},
+      {name:"مرفوض",id:-1},
+  ].find(one=>one.id == props.activationStatus)
+  console.log(StatusDropDown,"StatusDropDown")
     setActiveStatus(activeStatus)
   }
-},[props])
+},[props.activationStatus])
+console.log(props,"prop")
 const changeStatus=(status)=>{
   setActiveStatus(status)
   props.client.put(`${props.url}`,{
@@ -27,13 +33,17 @@ const changeStatus=(status)=>{
   return (
     <Dropdown isOpen={dropdownOpen} toggle={toggle} {...props}>
       <DropdownToggle caret size="md" style={{background:activeStatus?.title == 
-"قيد الانتظار" ?  "#EEB656":  "",border:"none",width:"90px"}}>
-        {activeStatus?.title}
+"قيد الانتظار" ?  "#EEB656":  "",border:"none",width:"fit-content"}}>
+        {activeStatus?.name}
       </DropdownToggle>
       <DropdownMenu>
         {
-           props?.status?.map((onestatus)=>(
-            <DropdownItem onClick={()=>changeStatus(onestatus)}>{onestatus.title}</DropdownItem>
+           [
+            {name:"مفعل",id:1},
+            {name:"قيد الانتظار",id:0},
+            {name:"مرفوض",id:-1},
+        ].map((onestatus)=>(
+            <DropdownItem onClick={()=>changeStatus(onestatus)}>{onestatus.name}</DropdownItem>
            ))
         }     
       </DropdownMenu>

@@ -106,7 +106,7 @@ function ServiceList({ allowners, loading, setPage, limit, setLimit ,status}) {
           />
         </RctCollapsibleCard>
       </div>
-      {/* <div className="d-flex justify-content-around">
+      <div className="d-flex justify-content-around">
         {metadata?.currentPage && (
           <>
             <Pagination
@@ -125,7 +125,7 @@ function ServiceList({ allowners, loading, setPage, limit, setLimit ,status}) {
             />
           </>
         )}
-      </div> */}
+      </div>
     </Typography>
   );
 }

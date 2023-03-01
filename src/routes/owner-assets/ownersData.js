@@ -10,13 +10,13 @@ const { TEXT, ACTIONS, FUNC,DROPDOWN } = dataTypes;
 export const OwnersData = [
   {
     headerId: "ID",
-    dataRef: "id",
+    dataRef: "user_id",
     dataType: TEXT,
   },
   {
     headerId: "الأوقاف",
     dataType: TEXT,
-    dataRef: "name",
+    dataRef: "asset_name_ar",
   },
   {
     headerId: "تاريخ الانضمام",

@@ -24,6 +24,7 @@ export default function Services() {
   const [limit, setLimit] = useState(10);
   const [owners, setOwners] = useState();
   const [status, setStatus] = useState();
+  const [query, setQuery] = useState({});
 
   useEffect(() => {
    
@@ -31,9 +32,17 @@ export default function Services() {
   }, []);
   useEffect(()=>{
     client
-    .get(`/service?limit=${limit}&page=${page}`)
-    .then((res) => setOwners(res.data.data));
-},[page,limit])
+    // .get(`/service?limit=${limit}&page=${page}`)
+    // .then((res) => setOwners(res.data.data));
+    client.get(`/service`,{
+      params:{
+        limit,
+        page,
+        name:query.name ? query.name : undefined,
+        status: query.status ? query.status : undefined
+      }
+    }).then(res=>setOwners(res.data.data))
+},[page,limit,query])
   return (
     <div className="clients-wrapper">
       <Helmet>
@@ -122,14 +131,12 @@ export default function Services() {
             <FiltersAndSearches
               make="make"
               submitbtnid="search.filter"
-              fields={[
-                { type: "search", name: "اسم الوقف" },
-                { type: "search", name: "الحاله" },
-              ]}
-              filters={["parent"]}
-              model="model"
-              is_active="isActive"
-              multi
+             
+              filters={["parent","status","fields","service_provider"]}
+              query={query}
+              setPage={setPage}
+              setQuery={setQuery}
+            
             />
           </div>
         </RctCardContent>

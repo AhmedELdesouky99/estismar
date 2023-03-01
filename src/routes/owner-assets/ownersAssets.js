@@ -25,6 +25,7 @@ export default function OwnerAssets() {
   const [limit, setLimit] = useState(10);
   const [owners,setOwners]=useState()
   const [status,setStatus]=useState()
+  const [query, setQuery] = useState({});
 
   useEffect(()=>{
     client.get("/asset-owner-status").then((res)=>setStatus(res.data.data))
@@ -33,10 +34,29 @@ export default function OwnerAssets() {
   useEffect(()=>{
    
   
-      client.get(`/asset-owner?limit=${limit}&page=${page}`).then(res=>setOwners(res.data.data))
+      client.get(`/asset-owner`,{
+        params:{
+          limit,
+          page,
+          name:query.name ? query.name : undefined,
+          status: query.status ? query.status : undefined
+        }
+      }).then(res=>setOwners(res.data.data))
  
      
-  },[page,limit])
+  },[page,limit,query])
+
+  // const submitFilter=(query)=>{
+
+  //      client.get(`/asset-owner`,{
+  //       params: {
+  //         name:query.name ? query.name  : undefined,
+  //         status:query.status ? query.status : undefined,
+  //         limit,
+  //         page,
+  //       }
+  //      }).then(res=>setOwners(res.data.data))
+  // }
   return (
     <div className="clients-wrapper">
        <Helmet>
@@ -102,11 +122,11 @@ export default function OwnerAssets() {
                   <FiltersAndSearches
                     make="make"
                     submitbtnid="search.filter"
-                    fields={[{ type: "search", name: "اسم الوقف" },{ type: "search", name: "الحاله" }]}
-                    filters={["parent"]}
-                    model="model"
-                    is_active="isActive"
-                    multi
+                    fields={[{ type: "search", name:"name" }]}
+                    query={query}
+                    setPage={setPage}
+                    setQuery={setQuery}
+                    filters={["status"]}
                   />
                 </div>
         </RctCardContent>

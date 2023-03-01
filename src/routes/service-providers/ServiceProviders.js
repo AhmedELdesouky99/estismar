@@ -27,12 +27,47 @@ export default function ServiceProviders() {
   const [limit, setLimit] = useState(10);
   const [services,setServices]=useState()
   const [status,setStatus]=useState()
+  const [pageSelect,setPageSelect]=useState(1)
+  const [fields,setFields]=useState([])
+  const [query, setQuery] = useState({});
+
+  const [meta,setMeta]=useState()
   useEffect(()=>{
     client.get("/service-provider-status").then((res)=>setStatus(res.data.data))
   },[])
   useEffect(()=>{
-    client.get(`/service-provider?limit=${limit}&page=${page}`).then(res=>setServices(res.data.data))   
-},[page,limit])
+    client.get(`/service-provider`,{
+      params:{
+        limit,
+        page,
+        name:query.name ? query.name : undefined,
+        status: query.status ? query.status : undefined,
+        field_id: query.field_id ? query.field_id :undefined
+      }
+    }).then(res=>setServices(res.data.data))
+},[page,limit,query])
+useEffect(()=>{
+  client.get("/service-provider-fields" ,{
+    params:{
+      page:pageSelect
+    }
+  }).then((res)=>{
+    console.log(res.data.data.data,"fields")
+    const options =res.data.data.data.map(field=>(
+      {
+        label:field.name,
+        value:field.id
+      }
+    ))
+    setFields(options)
+    setMeta({
+        last_page:res.data.data?.last_page,
+        currentPage:res.data.data?.current_page
+    })
+  })
+
+  
+},[pageSelect])
   return (
     <div className="clients-wrapper">
       <Helmet>
@@ -98,11 +133,17 @@ export default function ServiceProviders() {
                   <FiltersAndSearches
                     make="make"
                     submitbtnid="search.filter"
-                    fields={[{ type: "search", name: "اسم مزود الخدمه" }]}
-                    filters={["parent"]}
+                    fields={[{ type: "search", name: "name" }]}
+                    filters={["parent","fields","status"]}
                     model="model"
                     is_active="isActive"
                     multi
+                    query={query}
+                    setPage={setPage}
+                    setQuery={setQuery}
+                    setPageSelect={setPageSelect}
+                    options={fields}
+                    metadata={meta}
                   />
                 </div>
         </RctCardContent>

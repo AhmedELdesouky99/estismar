@@ -13,8 +13,12 @@ import { TextField, Button } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router";
 
 // import AllyName from "components/DropDowns/AllyName";
-import { Form, FormGroup, Input,Label } from 'reactstrap';
-import IntlMessages from 'Util/IntlMessages';
+import { Form, FormGroup, Input, Label } from "reactstrap";
+import IntlMessages from "Util/IntlMessages";
+import DropDownStatus from "../shared/DropDownStatus";
+import CustomSelect from "../shared/custom-select";
+import FieldsDropDown from "../shared/FieldsDropDown";
+import ServiceProviderDropDown from "../shared/ServiceProviderDropDown";
 
 const trimFields = ["email", "nid"];
 
@@ -42,26 +46,21 @@ export function FiltersAndSearches({
   branchesDeletedFilter,
   isDeltedFilterSelected,
   setValue,
-
+  setPageSelect,
+  options,
+  metadata,
 }) {
   const submitBtnRef = useRef();
   const history = useHistory();
   const location = useLocation();
   const [collectedQuery, setcollectedQuery] = useState({});
+
   // NOTE: Mobile number is set twice.
 
-
-
-
-  
   /**
    * depends on history location search on mount
    * if we have values this function should pass all values to the corresponding field
    */
-
-
-
-
 
   function clearInputs() {
     setMobileNumber("");
@@ -74,7 +73,6 @@ export function FiltersAndSearches({
     setQuery(query);
   }
 
-  
   return (
     <form className="w-100" onSubmit={(e) => e.preventDefault()}>
       <div className="row grid-gap-10 w-100 m-0">
@@ -84,92 +82,110 @@ export function FiltersAndSearches({
             if (!field.name) return Alert("Please Provide a name");
             return (
               <div className="col-sm-12 col-md-3 mt-1" key={field?.name}>
-                {/* <TextField
-                  inputProps={{
-                    type: "text",
-                  }}
-                  label={field?.placeholder || <FormattedMessage id= {`${field?.name}.placeholder`}/>}
-                  className="custom-textfield"
-                  fullWidth={false}
-                  variant="outlined"
-                  id={field?.name}
-                  value={collectedQuery?.[field?.name] || ""}
-                  onChange={(e) => {
-                    setcollectedQuery({
-                      ...collectedQuery,
-                      [field?.name]: trimFields.includes(field.name)
-                        ? e.target.value.trim()
-                        : e.target.value.trimStart(),
-                    });
-                  }}
-                  placeholder={
-                    field?.placeholder || <FormattedMessage id={`${field?.name}.placeholder`} />
-                  }
-                /> */}
-                 <FormGroup>
-    <Label for="exampleEmail">
-    <FormattedMessage id={field?.name} />
-    </Label>
-    <Input
-    style={{borderColor:"#D4B265",}}
-      id={field?.name}
-      name={ field?.placeholder || <FormattedMessage id={`${field?.name}.placeholder`} />}
-      placeholder={field.name}
-      type="text"
-    />  
-  </FormGroup>
+                <FormGroup>
+                  <Label for="exampleEmail">
+                    <FormattedMessage id={field?.name} />
+                  </Label>
+                  <Input
+                    style={{ borderColor: "#D4B265" }}
+                    id={field?.name}
+                    name={
+                      field?.placeholder || (
+                        <FormattedMessage id={`${field?.name}.placeholder`} />
+                      )
+                    }
+                    placeholder={field.name}
+                    onChange={(e) => {
+                      setcollectedQuery({
+                        ...collectedQuery,
+                        [field?.name]: trimFields.includes(field.name)
+                          ? e.target.value.trim()
+                          : e.target.value.trimStart(),
+                      });
+                    }}
+                    type="text"
+                  />
+                </FormGroup>
               </div>
             );
           })}
-        {filters?.includes("ally")  && (
-          <div className="col-md-2 mt-1">
-            {/* <AllyName
-              valueAttribute="id"
-              selectedAlly={
-                manager
-                  ? collectedQuery.allyIds
-                  : branch
-                  ? collectedQuery.allyCompanyIds
-                  : collectedQuery?.allyId
-              }
-              onAllyChange={changeAlly}
-              setSelectedAlly={(Id) => {
-                if (manager) {
-                  return setcollectedQuery({ ...collectedQuery, allyIds: Id });
-                }
-                if (branch) {
-                  return setcollectedQuery({ ...collectedQuery, allyCompanyIds: Id });
-                }
-                return setcollectedQuery({ ...collectedQuery, allyId: Id });
-              }}
-            /> */}
+ 
+        {filters.includes("fields") && (
+          <div className="col-md-3 mt-1">
+            <FormGroup>
+              <Label for="exampleEmail">
+                <FormattedMessage id={"قائمة التصنيفات"} />
+              </Label>
+
+              <FieldsDropDown
+                onChange={(sel) => {
+                  setcollectedQuery({ ...collectedQuery, field_id: sel.value });
+                }}
+              />
+            </FormGroup>
           </div>
         )}
-      
-        <div className="mt-1 d-flex flex-row justify-content-end" style={{alignSelf:"center"}}>
+        {filters.includes("service_provider") && (
+          <div className="col-md-3 mt-1">
+            <FormGroup>
+              <Label for="exampleEmail">
+                <FormattedMessage id={"مزود الخدمة"} />
+              </Label>
+
+              <ServiceProviderDropDown
+                onChange={(sel) => {
+                  setcollectedQuery({ ...collectedQuery, service_provider_id: sel.value });
+                }}
+              />
+            </FormGroup>
+          </div>
+        )}
+       {filters?.includes("status") && (
+          <div className="col-md-2 mt-1">
+            <FormGroup>
+              <Label for="exampleEmail">
+                <FormattedMessage id={"االحالة"} />
+              </Label>
+              <DropDownStatus
+                valueAttribute="id"
+                selectedStatus={collectedQuery?.status}
+                onChange={(status) => {
+                  return setcollectedQuery({ ...collectedQuery, status: status.value == 0 ? "0" :status.value });
+                }}
+              />
+            </FormGroup>
+          </div>
+        )}
+        <div
+          className="mt-1 d-flex flex-row justify-content-end"
+          style={{ alignSelf: "center" }}
+        >
           <Button
             variant="contained"
             color="primary"
-            style={{background:"#D4B265",width:"200px",fontWeight:"bold"}}
+            style={{
+              background: "#D4B265",
+              width: "200px",
+              fontWeight: "bold",
+            }}
             className="mx-smt-15 btn  mr-1 ml-1"
             type="submit"
             ref={submitBtnRef}
             onClick={() => {
               const trimmedQuery = {};
-              sessionStorage.setItem(location.pathname, JSON.stringify(collectedQuery));
+              sessionStorage.setItem(
+                location.pathname,
+                JSON.stringify(collectedQuery)
+              );
               Object.entries(collectedQuery).forEach(([key, val]) => {
                 trimmedQuery[key] = typeof val === "string" ? val?.trim() : val;
               });
-              if (trimmedQuery?.is_active === -1) {
-                trimmedQuery.is_active = null;
-              }
-              if (trimmedQuery[mobileRef] === "") {
-                trimmedQuery.mobile = null;
-              }
+
               history.replace({ search: JSON.stringify(trimmedQuery) });
               setPage(1);
               setQuery(trimmedQuery);
-              refetch();
+              // submitFilter(trimmedQuery)
+              // refetch();
             }}
           >
             <span className="mr-1 ml-1">

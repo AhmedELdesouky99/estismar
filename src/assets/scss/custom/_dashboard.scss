@@ -1,4 +1,11 @@
 /*========== Dashboard Scss ========*/
+// @font-face {
+//   font-family: "Light";   /*Can be any text*/
+//   src: url("../../../fonts/THESANSARABIC-BOLD.ttf") format("truetype");
+//     font-weight: normal;
+//   font-style: normal;
+//   font-display: swap;
+// }
 .dash-cards, .dash-cards-lg {
   .card-top-action {
     border-radius: 100%;
@@ -504,7 +511,6 @@
 }
 .title{
   color:#005D5E;
-  font-weight: 900;
 }
 .title::after{
     position: absolute;
@@ -650,4 +656,66 @@ button.active{
 .MuiPaginationItem-page.Mui-selected{
   background-color: #005D5E !important;
   color: #fff !important;
+}
+
+
+
+// select 
+// .MuiSelect-select.MuiSelect-select{
+// 	border-radius: 6px !important;
+// 	height: 22px !important;
+// 	padding: 0.4375rem 1rem 0.4375rem 2rem !important;
+// 	font-size: 1rem !important;
+// 	font-weight: 400 !important;
+// 	line-height: 2 !important;
+// 	color: #005D5E !important;
+// 	background-color: #fff !important;
+// 	border: 0.0625rem solid#D4B265 !important;
+// }
+// .MuiInput-underline:before{
+// 	border-bottom: none !important;
+// }
+// .MuiInput-underline:hover:not(.Mui-disabled):before{
+// 	border-bottom: none !important;
+// }
+// .MuiSelect-icon{
+// 	top: inherit !important;
+// 	color: #D4B265 !important;
+// 	left: 10px !important;
+// 	right: auto !important;
+// 	border-right: 1px solid #D4B265 !important;
+// }
+// .MuiSvgIcon-root{
+// 	width: 1.5em !important;
+//  	height: 1.5em !important;
+// }
+.MuiInput-underline:after{
+	border-bottom: none !important;
+}
+.css-yk16xz-control{
+  border-color: #D4B265 !important;
+}
+.css-1pahdxg-control:focus{
+  border-color: #D4B265 !important;
+  box-shadow: 0 0 0 1px #D4B265 !important;
+}
+.css-1pahdxg-control:focus{
+  border-color: #D4B265 !important;
+  box-shadow: 0 0 0 1px #D4B265 !important;
+}
+.css-1pahdxg-control{
+  border-color: #D4B265 !important;
+  box-shadow: 0 0 0 1px #D4B265 !important;
+}
+.css-1okebmr-indicatorSeparator{
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  background-color: #D4B265 !important;
+
+}
+.css-tlfecz-indicatorContainer{
+  color: #D4B265 !important;
+}
+*{
+  font-family: Light;
 }

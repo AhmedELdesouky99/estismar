@@ -45,13 +45,13 @@ function OwnersList({ allowners, loading, setPage, limit, setLimit ,status}) {
     
   };
 
-  const actions = ({ id }) => (
+  const actions = ({ user_id }) => (
     <div className="d-flex align-items-center" style={{ gap: "5px" }}>
       {/* Redirects to Car details */}
 
       
         <Tooltip title={ "common.edit"} placement="top">
-          <Link to={`/app/owners-assets/${id}`}>
+          <Link to={`/app/owners-assets/${user_id}`}>
             <button className="border-0" style={{background:"#23D381",color:"#fff"}}>
             <i className=" ti-eye m-1"></i>
 
@@ -65,14 +65,14 @@ function OwnersList({ allowners, loading, setPage, limit, setLimit ,status}) {
         <i
           style={{ cursor: "pointer" }}
           className=" ti-trash m-1"
-          onClick={() => handelDeleteBanner(id)}
+          onClick={() => handelDeleteBanner(user_id)}
         ></i>
         </button>
       </Tooltip>
     </div>
   );
   const dropdownActions =(record)=>(
-    <StatusDropDown status={status} activationStatus={record.is_active} id={record.id} client={client} url={`asset-owner/${record.id}`}/>
+    <StatusDropDown  activationStatus={record.user.is_active} id={record.user.id} client={client} url={`asset-owner/${record.user.id}`}/>
   )
   return (
     <Typography component="div" style={{ padding: "10px", marginTop: "20px" }}>
@@ -83,12 +83,12 @@ function OwnersList({ allowners, loading, setPage, limit, setLimit ,status}) {
             loading={loading}
             tableRecords={collection}
             actions={actions}
-            actionsArgs={["id"]}
+            actionsArgs={["user_id"]}
             dropdownActions={dropdownActions}
           />
         </RctCollapsibleCard>
       </div>
-      {/* <div className="d-flex justify-content-around">
+      <div className="d-flex justify-content-around">
         {metadata?.currentPage && (
           <>
             <Pagination
@@ -107,7 +107,7 @@ function OwnersList({ allowners, loading, setPage, limit, setLimit ,status}) {
             />
           </>
         )}
-      </div> */}
+      </div>
     </Typography>
   );
 }
