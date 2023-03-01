@@ -84,7 +84,7 @@ export function FiltersAndSearches({
               <div className="col-sm-12 col-md-3 mt-1" key={field?.name}>
                 <FormGroup>
                   <Label for="exampleEmail">
-                    <FormattedMessage id={field?.name} />
+                    <FormattedMessage id={field?.label} />
                   </Label>
                   <Input
                     style={{ borderColor: "#D4B265" }}
@@ -94,7 +94,7 @@ export function FiltersAndSearches({
                         <FormattedMessage id={`${field?.name}.placeholder`} />
                       )
                     }
-                    placeholder={field.name}
+                    placeholder={field.placeholder}
                     onChange={(e) => {
                       setcollectedQuery({
                         ...collectedQuery,

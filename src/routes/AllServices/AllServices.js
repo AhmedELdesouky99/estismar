@@ -38,7 +38,8 @@ export default function Services() {
       params:{
         limit,
         page,
-        name:query.name ? query.name : undefined,
+        field_id:query.field_id ? query.field_id : undefined,
+        service_provider_id:query.service_provider_id ? query.service_provider_id : undefined,
         status: query.status ? query.status : undefined
       }
     }).then(res=>setOwners(res.data.data))

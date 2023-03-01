@@ -43,7 +43,34 @@ const AddEditService = () => {
     id: 1,
     title: "عقد التاسيس",
   });
-  const [Service, setService] = useState({});
+  const [Service, setService] = useState(
+    {
+      "title" : "",
+      "description" : "",
+      "provider_id" : "",
+      "field_id" : "",
+  
+      "executive_steps" : [], 
+      "executive_result" : [],
+  
+      "cost" :"", 
+      "tax_ratio" : "", 
+      "support_ratio" : "", 
+      "cost_after_study" : false,
+  
+      "executive_time_type" : "", 
+      "executive_time" : "", 
+      "stages_of_delivery" : [ 
+         
+      ], 
+      "service_requirment" : [
+        
+      ], 
+      "service_border" : [
+         
+      ]
+  }
+  );
   useEffect(() => {
     client.get("/required-files").then((res) => {
       const options = res.data.data?.map((one) => ({

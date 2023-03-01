@@ -122,7 +122,7 @@ export default function OwnerAssets() {
                   <FiltersAndSearches
                     make="make"
                     submitbtnid="search.filter"
-                    fields={[{ type: "search", name:"name" }]}
+                    fields={[{ type: "search", name:"name" ,label:"الوقف",placeholder:"اسم الوقف" }]}
                     query={query}
                     setPage={setPage}
                     setQuery={setQuery}

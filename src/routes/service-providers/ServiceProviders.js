@@ -133,7 +133,7 @@ useEffect(()=>{
                   <FiltersAndSearches
                     make="make"
                     submitbtnid="search.filter"
-                    fields={[{ type: "search", name: "name" }]}
+                    fields={[{ type: "search", name: "name",label:"مزود الخدمة",placeholder:"اسم مزود الخدمة"  }]}
                     filters={["parent","fields","status"]}
                     model="model"
                     is_active="isActive"

@@ -10,7 +10,7 @@ const { TEXT, ACTIONS, FUNC,DROPDOWN } = dataTypes;
 export const ServiceData = [
   {
     headerId: "ID",
-    dataRef: "id",
+    dataRef: "user_id",
     dataType: TEXT,
   },
   {
