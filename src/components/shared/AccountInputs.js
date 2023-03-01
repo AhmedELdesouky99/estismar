@@ -146,7 +146,9 @@ useEffect(()=>{
       files_ids:files,
       type : "update",
       user:undefined,
-      files:undefined
+      files:undefined,
+      created_at:undefined,
+      updated_at:undefined,
     }).then((res)=>{
       if(res.data.success){
         swal({
