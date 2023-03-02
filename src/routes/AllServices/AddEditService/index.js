@@ -53,9 +53,9 @@ const AddEditService = () => {
       "executive_steps" : [], 
       "executive_result" : [],
   
-      "cost" :"", 
-      "tax_ratio" : "", 
-      "support_ratio" : "", 
+      "cost" :"1000", 
+      "tax_ratio" : "10", 
+      "support_ratio" : "50", 
       "cost_after_study" : false,
   
       "executive_time_type" : "", 
@@ -83,13 +83,11 @@ const AddEditService = () => {
   useEffect(()=>{
       if(id){
         client.get(`/service/${id}`).then(res=>{
-            console.log(res.data.data,"kk")
             const border= JSON.parse(res.data.data.service_border)
             const service_requirment=JSON.parse(res.data.data.service_requirment)
             const stages_of_delivery=JSON.parse(res.data.data.stages_of_delivery)
             const executive_steps=JSON.parse(res.data.data.executive_steps)
             const executive_result=JSON.parse(res.data.data.executive_result)
-            console.log(border,"s")
             setService({
               title:res.data.data.title,
               field_id:res.data.data.field_id,
@@ -141,7 +139,6 @@ const AddEditService = () => {
   })
  }
  const EditService=()=>{
-  console.log("karem")
   client.put(`service/${id}`,{
     ...Service,
     type : "update",
@@ -158,7 +155,6 @@ const AddEditService = () => {
     }
   })
  }
- console.log(Service,"Service")
   return (
     <div className="clients-wrapper">
       <Helmet>
