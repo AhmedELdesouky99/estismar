@@ -9,6 +9,8 @@ import { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import swal from "sweetalert";
 import FieldsDropDown from "Components/shared/FieldsDropDown";
+import AddIcon from "@material-ui/icons/Add";
+import CloseIcon from "@material-ui/icons/Close";
 
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin",
@@ -20,28 +22,36 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
   const [secondImage, setSecondImage] = useState();
   const [thirdImage, setThirdImage] = useState();
   const [forthImage, setForthImage] = useState();
-  const [data, setData] = useState();
+  const [certifications, setCertifications] = useState("");
+  const [positions, setPositions] = useState("");
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password: "123456",
+    password_confirmation: "123456",
+    files_ids: [],
+    ar_name: "",
+    en_name: "",
+    fields_id: [],
+    edu_certificates: [],
+    work_positions: [],
+  });
   const [files, setFiles] = useState([]);
+  const [fields, setFields] = useState([]);
+
   const history = useHistory();
   const { id } = useParams();
-
   useEffect(() => {
     if (advisorDetails) {
       const profile = advisorDetails?.files?.find(
         (file) => file.title == "profile"
       )?.path;
-      const firstImage = advisorDetails?.files?.find(
-        (file) => file.title == "السجل التجاري"
-      )?.path;
-      const secondImage = advisorDetails?.files?.find(
-        (file) => file.title == "الشهادة الضريبية"
-      )?.path;
-      const thirdImage = advisorDetails?.files?.find(
-        (file) => file.title == "عقد التأسيس"
-      )?.path;
-      const forthImage = advisorDetails?.files?.find(
-        (file) => file.title == "الشهادة البنكية"
-      )?.path;
+      const fields = advisorDetails.fields.map((field) => field.id);
+      const fieldsForLabel = advisorDetails.fields.map((field) => ({
+        label: field.name,
+        value: field.id,
+      }));
 
       setEnImage(profile ? "https://estithmar.arabia-it.net" + profile : null);
       setFirstImage(
@@ -56,13 +66,21 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
       setForthImage(
         forthImage ? "https://estithmar.arabia-it.net" + forthImage : null
       );
-
+      const { edu_certificates, work_positions } = JSON.parse(
+        advisorDetails.meta
+      );
       setData({
         ...advisorDetails,
         name: advisorDetails.user.name,
         email: advisorDetails.user.email,
         phone: advisorDetails.user.phone,
+        nationality: advisorDetails.nationality,
+        resident: advisorDetails.resident,
+        edu_certificates: edu_certificates,
+        work_positions: work_positions,
+        fields_id: fields,
       });
+      setFields(fieldsForLabel);
     }
   }, [advisorDetails]);
 
@@ -73,7 +91,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
     formdata.append("store_file", true);
     formdata.append("file", file);
     client
-      .post("/service-provider", formdata, {
+      .post("/advisor", formdata, {
         headers: {
           "Content-Type": "multipart/form-data; ",
         },
@@ -84,49 +102,10 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
         setEnImage("https://estithmar.arabia-it.net" + res.data.data.path);
       });
   };
-  const UploadFile = (file, name) => {
-    setLoader(true);
-    const formdata = new FormData();
-    formdata.append(
-      "title",
-      name == "first"
-        ? "السجل التجاري"
-        : "second"
-        ? "الشهادة الضريبية"
-        : "third"
-        ? "عقد التأسيس"
-        : "الشهادة البنكية"
-    );
-    formdata.append("store_file", true);
-    formdata.append("file", file);
-    client
-      .post("/service-provider", formdata, {
-        headers: {
-          "Content-Type": "multipart/form-data; ",
-        },
-      })
-      .then((res) => {
-        setLoader(false);
-        if (name == "first") {
-          setFirstImage("https://estithmar.arabia-it.net" + res.data.data.path);
-          setFiles([...files, res.data.data.id]);
-        } else if (name == "second") {
-          setSecondImage(
-            "https://estithmar.arabia-it.net" + res.data.data.path
-          );
-          setFiles([...files, res.data.data.id]);
-        } else if (name == "third") {
-          setThirdImage("https://estithmar.arabia-it.net" + res.data.data.path);
-          setFiles([...files, res.data.data.id]);
-        } else {
-          setForthImage("https://estithmar.arabia-it.net" + res.data.data.path);
-          setFiles([...files, res.data.data.id]);
-        }
-      });
-  };
+
   const AddServiceProvider = () => {
     client
-      .post("/service-provider", {
+      .post("/advisor", {
         ...data,
         files_ids: files,
         password: "123456",
@@ -136,12 +115,12 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
         if (res.data.success) {
           swal({
             title: "",
-            text: "تم اضافه مزود الخدمة بنجاح",
+            text: "تم اضافه   مستشار بنجاح",
             icon: "success",
           });
 
           setTimeout(() => {
-            history.push("/app/service-provider");
+            history.push("/app/advisors");
           }, 2000);
         } else {
         }
@@ -149,11 +128,12 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
   };
   const EditAssetsOwner = () => {
     client
-      .put(`service-provider/${id}`, {
+      .put(`advisor/${id}`, {
         ...data,
         user: undefined,
         created_at: undefined,
-        files: undefined,
+        files: undefined,   
+        fields: undefined,
         user_id: undefined,
         services: undefined,
         updated_at: undefined,
@@ -165,12 +145,12 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
           // swal("تم تعديل مزود الخدمة بنجاح", "success");
           swal({
             title: "",
-            text: "تم تعديل مزود الخدمة بنجاح",
+            text: "تم تعديل   مستشار بنجاح",
             icon: "success",
           });
 
           setTimeout(() => {
-            history.push("/app/service-provider");
+            history.push("/app/advisors");
           }, 2000);
         }
       });
@@ -285,6 +265,13 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 name="select"
                 type="text"
                 style={{ borderColor: "#D4B265" }}
+                value={data.ar_name}
+                onChange={(e) =>
+                  setData({
+                    ...data,
+                    ar_name: e.target.value,
+                  })
+                }
               />
             </FormGroup>
           </div>
@@ -298,10 +285,11 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 name="text"
                 type="text"
                 style={{ borderColor: "#D4B265" }}
+                value={data.en_name}
                 onChange={(e) => {
                   setData({
                     ...data,
-                    city: e.target.value,
+                    en_name: e.target.value,
                   });
                 }}
               />
@@ -319,11 +307,11 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 name="select"
                 type="text"
                 defaultValue={data?.district}
-                value={data?.district}
+                value={data?.resident}
                 onChange={(e) => {
                   setData({
                     ...data,
-                    district: e.target.value,
+                    resident: e.target.value,
                   });
                 }}
                 style={{ borderColor: "#D4B265" }}
@@ -340,12 +328,11 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 name="select"
                 type="text"
                 style={{ borderColor: "#D4B265" }}
-                defaultValue={data?.street}
-                value={data?.street}
+                value={data?.nationality}
                 onChange={(e) => {
                   setData({
                     ...data,
-                    street: e.target.value,
+                    nationality: e.target.value,
                   });
                 }}
               />
@@ -369,183 +356,283 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
               </Label>
               {/* <FieldsDropDown/> */}
               <FieldsDropDown
-              //   onChange={(sel) => {
-              //     setService({
-              //       ...Service,
-              //       field_id: sel.value,
-              //     });
-              //   }}
-              //   selectedItem={Service.field_id}
+                onChange={(sel) => {
+                  setData({
+                    ...data,
+                    fields_id: [...data.fields_id, sel.value],
+                  });
+                  setFields([...fields, sel]);
+                }}
+                selectedItem={data.fields_id}
               />
             </FormGroup>
           </div>
         </div>
-        <div
-          className="card mt-1 col-md-8"
-          style={{
-            borderColor: "#D4B265",
-            padding: "10px",
-            minHeight: "100px",
-          }}
-        ></div>
+        <div className="col-md-8">
+          <div
+            className="card mt-1 "
+            style={{
+              borderColor: "#D4B265",
+              padding: "10px",
+              minHeight: "100px",
+            }}
+          >
+            <div className="row" style={{ margin: "3px" }}>
+              {fields?.map((oneservice, index) => (
+                <div className="col-md-4 mt-2">
+                  <div
+                    className="d-flex"
+                    style={{
+                      background: "#CF4949",
+                      padding: "5px 10px",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <div style={{ color: "#FFFFFF" }}>{oneservice.label}</div>
+                    <div>
+                      <CloseIcon
+                        style={{
+                          width: "19px",
+                          height: "19px",
+                          borderRadius: "50px",
+                          background: "#fff",
+                          color: "#CF4949",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          const serviceRequirementList = [...data?.fields_id];
+                          const fieldsList = [...fields];
+                          const filterdFields = fieldsList.filter(
+                            (one, idx) => idx != index
+                          );
+                          const filterdService = serviceRequirementList.filter(
+                            (one, idx) => idx != index
+                          );
+                          setData({
+                            ...data,
+                            fields_id: filterdService,
+                          });
+                          setFields([...filterdFields]);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="row">
         <div className="col-12">
-         
-            <p
-              style={{ fontSize: "27px", color: "#D4B265", fontWeight: "bold" }}
-            >
-               الشهادات العلمية{" "}
-            </p>
+          <p className="title">الشهادات العلمية </p>
         </div>
-        
-       
-        
+      </div>
+      <div className="row required">
+        <div className="col-md-8">
+          <div className="row">
+            <div className="col-md-12">
+              <Label for="exampleEmail">
+                <FormattedMessage id={"الشهادات العلمية"} />
+              </Label>
+            </div>
+            <div className="col-md-10">
+              <FormGroup>
+                <Input
+                  id="exampleSelect"
+                  name="select"
+                  type="text"
+                  style={{ borderColor: "#D4B265" }}
+                  value={certifications}
+                  onChange={(e) => {
+                    setCertifications(e.target.value);
+                  }}
+                />
+              </FormGroup>
+            </div>
+            <div className="col-md-2">
+              <button
+                className="btn"
+                style={{
+                  color: "#fff",
+                  background: "#005D5E",
+                  maxHeight: "35px",
+                }}
+                disabled={!certifications.length}
+                onClick={() => {
+                  const edu_certificates = [...data?.edu_certificates];
+                  edu_certificates.push(certifications);
+                  setData({
+                    ...data,
+                    edu_certificates: edu_certificates,
+                  });
+                  setCertifications("");
+                }}
+              >
+                <AddIcon />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-8">
+          <div
+            className="card mt-1 "
+            style={{
+              borderColor: "#D4B265",
+              padding: "10px",
+              minHeight: "100px",
+            }}
+          >
+            <div className="row" style={{ margin: "3px" }}>
+              {data?.edu_certificates?.map((oneservice, index) => (
+                <div className="col-md-12 mt-2">
+                  <div
+                    className="d-flex"
+                    style={{
+                      background: "#CF4949",
+                      padding: "5px 10px",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <div style={{ color: "#FFFFFF" }}>{oneservice}</div>
+                    <div>
+                      <CloseIcon
+                        style={{
+                          width: "19px",
+                          height: "19px",
+                          borderRadius: "50px",
+                          background: "#fff",
+                          color: "#CF4949",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          const serviceRequirementList = [
+                            ...data?.edu_certificates,
+                          ];
+                          const filterdService = serviceRequirementList.filter(
+                            (one, idx) => idx != index
+                          );
+                          setData({
+                            ...data,
+                            edu_certificates: filterdService,
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-12">
+          <p className="title">المناصب الوظيفية </p>
+        </div>
       </div>
 
-      <div className="row profile">
-        <div className="col-12">
-          <p className="title">حسابات التواصل الإجتماعي</p>
-        </div>
-        <div className="col-md-4">
-          <div>
-            <FormGroup>
+      <div className="row required">
+        <div className="col-md-8">
+          <div className="row">
+            <div className="col-md-12">
               <Label for="exampleEmail">
-                <FormattedMessage id={"الموقع الالكتروني"} />
+                <FormattedMessage id={"المناصب الوظيفية"} />
               </Label>
-              <Input
-                style={{ borderColor: "#D4B265", direction: "ltr" }}
-                placeholder={"https://www."}
-                type="text"
-                defaultValue={data?.website_url}
-                value={data?.website_url}
-                onChange={(e) => {
+            </div>
+            <div className="col-md-10">
+              <FormGroup>
+                <Input
+                  id="exampleSelect"
+                  name="select"
+                  type="text"
+                  style={{ borderColor: "#D4B265" }}
+                  value={positions}
+                  onChange={(e) => {
+                    setPositions(e.target.value);
+                  }}
+                />
+              </FormGroup>
+            </div>
+            <div className="col-md-2">
+              <button
+                className="btn"
+                style={{
+                  color: "#fff",
+                  background: "#005D5E",
+                  maxHeight: "35px",
+                }}
+                disabled={!positions.length}
+                onClick={() => {
+                  const work_positions = [...data?.work_positions];
+                  work_positions.push(positions);
                   setData({
                     ...data,
-                    website_url: e.target.value,
+                    work_positions: work_positions,
                   });
+                  setPositions("");
                 }}
-              />
-            </FormGroup>
+              >
+                <AddIcon />
+              </button>
+            </div>
           </div>
         </div>
-        <div className="col-md-4">
-          <div>
-            <FormGroup>
-              <Label for="exampleEmail">
-                <FormattedMessage id={" واتس اب"} />
-              </Label>
-              <Input
-                style={{ borderColor: "#D4B265", direction: "ltr" }}
-                placeholder={"+966 56 464 5665"}
-                type="text"
-                defaultValue={data?.watsapp_nom}
-                value={data?.watsapp_nom}
-                onChange={(e) => {
-                  setData({
-                    ...data,
-                    watsapp_nom: e.target.value,
-                  });
-                }}
-              />
-            </FormGroup>
-          </div>
-        </div>
-      </div>
-      <div className="row profile">
-        <div className="col-md-4">
-          <div>
-            <FormGroup>
-              <Label for="exampleEmail">
-                <FormattedMessage id={"فيسبوك"} />
-              </Label>
-              <Input
-                style={{ borderColor: "#D4B265", direction: "ltr" }}
-                placeholder={"https://www.facebook.com/"}
-                type="text"
-                defaultValue={data?.facebook_url}
-                value={data?.facebook_url}
-                onChange={(e) => {
-                  setData({
-                    ...data,
-                    facebook_url: e.target.value,
-                  });
-                }}
-              />
-            </FormGroup>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div>
-            <FormGroup>
-              <Label for="exampleEmail">
-                <FormattedMessage id={" انستغرام"} />
-              </Label>
-              <Input
-                style={{ borderColor: "#D4B265", direction: "ltr" }}
-                placeholder={"https://www.instagram.com/"}
-                type="text"
-                defaultValue={data?.insta_url}
-                value={data?.insta_url}
-                onChange={(e) => {
-                  setData({
-                    ...data,
-                    insta_url: e.target.value,
-                  });
-                }}
-              />
-            </FormGroup>
-          </div>
-        </div>
-      </div>
-      <div className="row profile">
-        <div className="col-md-4">
-          <div>
-            <FormGroup>
-              <Label for="exampleEmail">
-                <FormattedMessage id={"تويتر"} />
-              </Label>
-              <Input
-                style={{ borderColor: "#D4B265", direction: "ltr" }}
-                placeholder={"https://www.twitter.com/"}
-                type="text"
-                defaultValue={data?.twitter_url}
-                value={data?.twitter_url}
-                onChange={(e) => {
-                  setData({
-                    ...data,
-                    twitter_url: e.target.value,
-                  });
-                }}
-              />
-            </FormGroup>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div>
-            <FormGroup>
-              <Label for="exampleEmail">
-                <FormattedMessage id={"سناب شات"} />
-              </Label>
-              <Input
-                style={{ borderColor: "#D4B265", direction: "ltr" }}
-                placeholder={"https://www.snapchat.com/add/"}
-                type="text"
-                defaultValue={data?.snap_url}
-                value={data?.snap_url}
-                onChange={(e) => {
-                  setData({
-                    ...data,
-                    snap_url: e.target.value,
-                  });
-                }}
-              />
-            </FormGroup>
+        <div className="col-md-8">
+          <div
+            className="card mt-1 "
+            style={{
+              borderColor: "#D4B265",
+              padding: "10px",
+              minHeight: "100px",
+            }}
+          >
+            <div className="row" style={{ margin: "3px" }}>
+              {data?.work_positions?.map((oneservice, index) => (
+                <div className="col-md-12 mt-2">
+                  <div
+                    className="d-flex"
+                    style={{
+                      background: "#CF4949",
+                      padding: "5px 10px",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <div style={{ color: "#FFFFFF" }}>{oneservice}</div>
+                    <div>
+                      <CloseIcon
+                        style={{
+                          width: "19px",
+                          height: "19px",
+                          borderRadius: "50px",
+                          background: "#fff",
+                          color: "#CF4949",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          const serviceRequirementList = [
+                            ...data?.work_positions,
+                          ];
+                          const filterdService = serviceRequirementList.filter(
+                            (one, idx) => idx != index
+                          );
+                          setData({
+                            ...data,
+                            work_positions: filterdService,
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-      <div className="row justify-content-center">
+      <div className="row justify-content-center mt-2">
         <div className="col-md-4">
           <button
             className="btn btn-block"

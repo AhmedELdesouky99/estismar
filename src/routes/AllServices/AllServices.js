@@ -37,11 +37,11 @@ export default function Services({inTabs}) {
         page,
         field_id:query.field_id ? query.field_id : undefined,
         service_provider_id: id && location.pathname.includes("service-provider") ? id : query.service_provider_id ? query.service_provider_id : undefined,
-        status: query.status ? query.status : undefined
+        status: query.status ? query.status : undefined,
+        support_ratio:query.support_ratio ? query.support_ratio : undefined
       }
     }).then(res=>setOwners(res.data.data))
 },[page,limit,query])
-console.log(location,"location")
   return (
     <div className="clients-wrapper">
      {
@@ -137,7 +137,7 @@ console.log(location,"location")
                 make="make"
                 submitbtnid="search.filter"
                
-                filters={ id ?  ["parent","status","fields","support"] : ["parent","status","fields","service_provider"]}
+                filters={ id ?  ["parent","status","fields","support"] : ["parent","status","fields","service_provider","support"]}
                 query={query}
                 setPage={setPage}
                 setQuery={setQuery}

@@ -15,6 +15,7 @@ module.exports = {
    "sidebar.agency": "وكالة",
    "day":"يوم",
    "month":"شهر",
+   "advisors":"المستشاريين",
    "year":"سنة",
    "sidebar.pages": "صفحات",
    "sidebar.home":"الرئيسية",

@@ -719,3 +719,10 @@ button.active{
 *{
   font-family: Light;
 }
+.MuiAppBar-colorPrimary{
+  background-color: #fff !important;
+  color: #707070 !important;
+}
+.MuiTabs-flexContainer{
+  justify-content: space-between;
+}
