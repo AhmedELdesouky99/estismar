@@ -302,7 +302,7 @@ export default {
 </svg>
 
          ,
-         "path": "/app/",
+         "path": "/app/advisors",
          "new_item": false,
          "child_routes": null
       },

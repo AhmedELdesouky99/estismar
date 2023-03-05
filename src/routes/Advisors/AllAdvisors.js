@@ -13,11 +13,11 @@ import { FiltersAndSearches } from "Components/FiltersAndSearches/FiltersAndSear
 import axios from "axios";
 import { Button } from "reactstrap";
 import { FormattedMessage } from "react-intl";
-import ServiceList from "./serviceList";
+import AdvisorList from "./advisorList";
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin",
 });
-export default function Services({inTabs}) {
+export default function Advisors({inTabs}) {
   const location = useLocation();
   const history = useHistory();
   const [page, setPage] = useState(1);
@@ -31,27 +31,25 @@ export default function Services({inTabs}) {
     client
     // .get(`/service?limit=${limit}&page=${page}`)
     // .then((res) => setOwners(res.data.data));
-    client.get(`/service`,{
+    client.get(`/advisor`,{
       params:{
         limit,
         page,
-        field_id:query.field_id ? query.field_id : undefined,
-        service_provider_id: id && location.pathname.includes("service-provider") ? id : query.service_provider_id ? query.service_provider_id : undefined,
+        name:query.name ? query.name : undefined,
         status: query.status ? query.status : undefined
       }
     }).then(res=>setOwners(res.data.data))
 },[page,limit,query])
-console.log(location,"location")
   return (
     <div className="clients-wrapper">
      {
       !inTabs ? 
           <>
                <Helmet>
-      <title>{"الخدمات"}</title>
+      <title>{"المستشاريين"}</title>
     </Helmet>
     <PageTitleBar
-      title={<IntlMessages id="الخدمات" />}
+      title={<IntlMessages id="المستشاريين" />}
       match={location}
       enableBreadCrumb
      
@@ -65,17 +63,15 @@ console.log(location,"location")
         
         <div className="row">
         <div className="col-lg-3 col-md-3">
-          <CustomCard color="#00A8FF1A" name={"اجمالي الخدمات"} />
+          <CustomCard color="#00A8FF1A" name={"المستشاريين"} />
         </div>
         <div className="col-lg-3 col-md-3">
-          <CustomCard color="#23D3811A" name="خدمات متاحة" />
+          <CustomCard color="#23D3811A" name="نشط" />
         </div>
         <div className="col-lg-3 col-md-3">
-          <CustomCard color="#EEB6561A" name="قيد الانتظار" />
+          <CustomCard color="#FF04041A" name="متوقف" />
         </div>
-        <div className="col-lg-3 col-md-3">
-          <CustomCard color="#FF04041A" name="خدمات متوقفة" />
-        </div>
+        
       </div>
         
         :
@@ -89,28 +85,10 @@ console.log(location,"location")
               !inTabs ? 
                 <>
                    <div className="row justify-content-between">
-              <div className="col-sm-12 col-md-6 mt-1">قائمة الخدمات</div>
+              <div className="col-sm-12 col-md-6 mt-1"> قائمة المستشاريين</div>
               <div className="col-sm-12 col-md-6 mt-1">
-                <div className="row">
-                  <div className="col-md-6">
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{
-                        background: "none",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                        color: "#D4B265",
-                        border: "1px solid #D4B265 ",
-                      }}
-                      className="mx-smt-15 btnAdd  mr-1 ml-1 border-0"
-                      onClick={() => history.push("/app/services/add")}
-                    >
-                      <span className="mr-1 ml-1">
-                        <FormattedMessage id={"إضافة تصنيف جديد"} />
-                      </span>
-                    </Button>
-                  </div>
+                <div className="row justify-content-center">
+                 
                   <div className="col-md-6">
                     <Button
                       variant="contained"
@@ -121,10 +99,10 @@ console.log(location,"location")
                         fontSize: "20px",
                       }}
                       className="mx-smt-15 btn  mr-1 ml-1 border-0"
-                      onClick={() => history.push("/app/services/add")}
+                      onClick={() => history.push("/app/advisors/add")}
                     >
                       <span className="mr-1 ml-1">
-                        <FormattedMessage id={"إضافة خدمة"} />
+                        <FormattedMessage id={"مستشار جديد"} />
                       </span>
                     </Button>
                   </div>
@@ -136,8 +114,9 @@ console.log(location,"location")
               <FiltersAndSearches
                 make="make"
                 submitbtnid="search.filter"
+                fields={[{ type: "search", name: "name",label:"المستشار",placeholder:"اسم المستشار"  }]}
                
-                filters={ id ?  ["parent","status","fields","support"] : ["parent","status","fields","service_provider"]}
+                filters={["status"]}
                 query={query}
                 setPage={setPage}
                 setQuery={setQuery}
@@ -164,7 +143,7 @@ console.log(location,"location")
        
         </RctCardContent>
       </RctCard>
-      <ServiceList
+      <AdvisorList
         loading={false}
         setPage={setPage}
         setLimit={setLimit}

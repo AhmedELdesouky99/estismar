@@ -21,6 +21,8 @@ import Dropzone from 'Routes/dropzone';
 import ServiceProviders from "Routes/service-providers"
 import OwnersAssets from "Routes/owner-assets"
 import AllServices from "Routes/AllServices"
+import AllAdvisors from "Routes/Advisors"
+
 
 // async component
 import {
@@ -134,5 +136,10 @@ export default [
    {
       path: 'services',
       component: AllServices
+   },
+   {
+      path:"advisors",
+      component:AllAdvisors
    }
+   
 ]

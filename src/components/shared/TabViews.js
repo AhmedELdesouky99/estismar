@@ -17,6 +17,9 @@ import api from 'Api';
 import IntlMessages from 'Util/IntlMessages';
 import OwnerProfile from './OwnersProfile';
 import ServiceProviderProfile from './ServiceProviderProfile';
+import AdvisorProfile from "./AdvisorProfile"
+import { Box } from '@material-ui/core';
+import Services from '../../routes/AllServices/AllServices';
 
 function TabContainer({ children, dir }) {
    return (
@@ -35,44 +38,16 @@ class TabViews extends Component {
       notifications: null
    };
 
-   componentDidMount() {
-      this.getMessages();
-      this.getNotificationTypes();
-      this.getNotifications();
-   }
+ 
 
    // get messages
-   getMessages() {
-      api.get('messages.js')
-         .then((response) => {
-            this.setState({ messages: response.data });
-         })
-         .catch(error => {
-            console.log(error);
-         })
-   }
+ 
 
    // get notification types
-   getNotificationTypes() {
-      api.get('notificationTypes.js')
-         .then((response) => {
-            this.setState({ notificationTypes: response.data });
-         })
-         .catch(error => {
-            console.log(error);
-         })
-   }
+
 
    // get notifications
-   getNotifications() {
-      api.get('notifications.js')
-         .then((response) => {
-            this.setState({ notifications: response.data });
-         })
-         .catch(error => {
-            console.log(error);
-         })
-   }
+
 
    handleChange = (event, value) => {
       this.setState({ value });
@@ -85,24 +60,31 @@ class TabViews extends Component {
    /**
     * Function to return notification name
     */
-   getNotificationName(notificationId) {
-      const { notificationTypes } = this.state;
-      if (notificationTypes) {
-         for (const notificationType of notificationTypes) {
-            if (notificationId === notificationType.id) {
-               return (
-                  <span className={`text-${notificationType.class} mr-5`}>
-                     <i className={`zmdi zmdi-${notificationType.icon}`}></i> {notificationType.Name}
-                  </span>
-               );
-            }
-         }
-      }
-   }
 
+   
    render() {
       const { theme } = this.props;
       const { messages, notifications } = this.state;
+console.log(this.state.value,"this.state.value")
+function TabPanel(props) {
+   const { children, value, index, ...other } = props;
+ 
+   return (
+     <div
+       role="tabpanel"
+       hidden={value !== index}
+       id={`simple-tabpanel-${index}`}
+       aria-labelledby={`simple-tab-${index}`}
+       {...other}
+     >
+       {value === index && (
+         <Box p={3}>
+           <Typography>{children}</Typography>
+         </Box>
+       )}
+     </div>
+   );
+ } 
       return (
          <Fragment>
             <AppBar position="static" color="default" className="mb-2">
@@ -113,31 +95,65 @@ class TabViews extends Component {
                   textColor="primary"
                   variant="fullWidth"
                >
+                 {
+                  this.props.serviceProvider ? 
+                  <>
                   <Tab label={<IntlMessages id="البروفايل" />} />
+                   <Tab label={<IntlMessages id="الخدمات" />} />
+                  <Tab label={<IntlMessages id="الباقات" />} />
+                  <Tab label={<IntlMessages id="الاستشارات" />} />
+                  <Tab label={<IntlMessages id="المحفظة" />} />
+                  <Tab label={<IntlMessages id="الفواتير" />} /> 
+                  </>
+                 
+                  : this.props.advisor ? 
+                  <>
+                   <Tab label={<IntlMessages id="البروفايل" />} />
+                  <Tab label={<IntlMessages id="الاستشارات" />} />
+                  <Tab label={<IntlMessages id="المحفظة" />} />
+                  <Tab label={<IntlMessages id="الفواتير" />} />
+                  </>
+                  
+                  :
+                 <>
+                <Tab label={<IntlMessages id="البروفايل" />} />
                   <Tab label={<IntlMessages id="الخدمات" />} />
                   <Tab label={<IntlMessages id="الباقات" />} />
                   <Tab label={<IntlMessages id="الاستشارات" />} />
                   <Tab label={<IntlMessages id="المحفظة" />} />
-                  <Tab label={<IntlMessages id="الفواتير" />} />
+                  <Tab label={<IntlMessages id="الفواتير" />} /> 
+                 </>
+                 }
                </Tabs>
             </AppBar>
             {/* <Scrollbars className="rct-scroll" autoHeight autoHeightMin={100} autoHeightMax={375} autoHide> */}
-               <SwipeableViews
+               {/* <SwipeableViews
                   axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                   index={this.state.value}
                   onChangeIndex={this.handleChangeIndex}>
+               
+               </SwipeableViews> */}
                   <div className="card mb-2 notification-box">
                      <TabContainer dir={theme.direction}>
+                       
+                        <TabPanel value={this.state.value} index={0}>
                         {
                            this.props.serviceProvider ? 
                            <ServiceProviderProfile providerDetails={this.props.providerDetails}/>
                            : 
+                           this.props.advisor ? 
+                           <AdvisorProfile advisorDetails={this.props.advisorDetails}/> 
+                           :
                         <OwnerProfile ownerDetails={this?.props?.ownerDetails}/> 
 
                         }
+                        </TabPanel>
+                        <TabPanel value={this.state.value} index={1}>
+                           <Services inTabs={true}/>
+                        </TabPanel>
+                        
                      </TabContainer>
                   </div>
-               </SwipeableViews>
             {/* </Scrollbars> */}
          </Fragment>
       );

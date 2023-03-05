@@ -19,6 +19,7 @@ import DropDownStatus from "../shared/DropDownStatus";
 import CustomSelect from "../shared/custom-select";
 import FieldsDropDown from "../shared/FieldsDropDown";
 import ServiceProviderDropDown from "../shared/ServiceProviderDropDown";
+import Select from "react-select";
 
 const trimFields = ["email", "nid"];
 
@@ -156,6 +157,27 @@ export function FiltersAndSearches({
             </FormGroup>
           </div>
         )}
+        {
+          filters?.includes("support") && (
+            <div className="col-md-2 mt-1">
+            <FormGroup>
+              <Label for="exampleEmail">
+                <FormattedMessage id={"الدعم"} />
+              </Label>
+              <Select
+              options={[
+                {label:"مدعوم",value:"1"},
+                {label:"غير مدعوم",value:"0"}
+            ]}
+              placeholder="عرض الكل"
+                onChange={(sel) => {
+                  return setcollectedQuery({ ...collectedQuery, support_ratio: sel.value });
+                }}
+              />
+            </FormGroup>
+          </div>
+          )
+        }
         <div
           className="mt-1 d-flex flex-row justify-content-end"
           style={{ alignSelf: "center" }}
