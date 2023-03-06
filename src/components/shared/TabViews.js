@@ -265,7 +265,7 @@ export default function TabsView(props) {
                          }
       </TabPanel>
       <TabPanel value={value} index={1}>
-      <Services inTabs={true}/>
+      {/* <Services inTabs={true}/> */}
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
