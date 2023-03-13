@@ -87,7 +87,7 @@ export default function Advisors({inTabs}) {
                    <div className="row justify-content-between">
               <div className="col-sm-12 col-md-6 mt-1"> قائمة المستشاريين</div>
               <div className="col-sm-12 col-md-6 mt-1">
-                <div className="row justify-content-center">
+                <div className="row justify-content-end">
                  
                   <div className="col-md-6">
                     <Button

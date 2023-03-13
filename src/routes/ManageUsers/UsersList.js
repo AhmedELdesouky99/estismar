@@ -7,7 +7,7 @@ import { Pagination } from "@material-ui/lab";
 import useSetState from "Hooks/useSetState";
 import RctCollapsibleCard from "Components/RctCollapsibleCard/RctCollapsibleCard";
 import CustomTable from "Components/shared/CustomTable";
-import { ServiceData } from "./ServiceData";
+import { UserData } from "./UserData";
 import StatusDropDown from "Components/shared/StatusDropDown"
 import PerPage from "Components/shared/PerPage";
 
@@ -16,44 +16,44 @@ const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin" 
  
 });
-function ServiceProvidersList({ allservices, loading, setPage, limit, setLimit,status }) {
+function UsersList({ allUsers, loading, setPage, limit, setLimit,status }) {
   const history = useHistory();
-  const [services, setServices] = useSetState({
+  const [Users, setUsers] = useSetState({
     collection: [],
     metadata: {},
   });
-  const { collection ,metadata} = services;
+  const { collection ,metadata} = Users;
   useEffect(() => {
    
-    setServices({
-      collection: allservices?.data,
+    setUsers({
+      collection: allUsers?.data,
     
       metadata: {
-        totalCount:allservices?.total,
-        currentPage:allservices?.current_page
+        totalCount:allUsers?.total,
+        currentPage:allUsers?.current_page
       }, 
-      // allservices?.allservices?.metadata,
+      // allUsers?.allUsers?.metadata,
     });
-  }, [allservices]);
+  }, [allUsers]);
 
   const handelDeleteBanner = (id) => {
-    const filteredService= services.collection.filter(service=>service.user_id != id)
-    setServices({
+    const filteredService= Users.collection.filter(service=>service.id != id)
+    setUsers({
       collection:filteredService,
-      metadata: allservices?.allservices?.metadata,
+      metadata: allUsers?.allUsers?.metadata,
     })
 
     client.delete(`/service-provider/${id}`).then((res)=>console.log(res,"res")).catch((err)=>console.log(err,"err"))
     
   };
 
-  const actions = ({ user_id }) => (
+  const actions = ({ id }) => (
     <div className="d-flex align-items-center" style={{ gap: "5px" }}>
       {/* Redirects to Car details */}
 
       
         <Tooltip title={ "common.edit"} placement="top">
-          <Link to={`service-provider/${user_id}`}>
+          <Link to={`users/${id}`}>
             <button className="border-0" style={{background:"#23D381",color:"#fff"}}>
             <i className=" ti-eye m-1"></i>
             </button>
@@ -66,25 +66,25 @@ function ServiceProvidersList({ allservices, loading, setPage, limit, setLimit,s
         <i
           style={{ cursor: "pointer" }}
           className=" ti-trash m-1"
-          onClick={() => handelDeleteBanner(user_id)}
+          onClick={() => handelDeleteBanner(id)}
         ></i>
         </button>
       </Tooltip>
     </div>
   );
   const dropdownActions =(record)=>(
-    <StatusDropDown  activationStatus={record.user.is_active} id={record.id} client={client} url={`service-provider/${record.user_id}`}/>
+    <StatusDropDown  activationStatus={record.is_active} id={record.id} client={client} url={`user/${record.id}`}/>
   )
   return (
     <Typography component="div" style={{ padding: "10px", marginTop: "20px" }}>
       <div>
         <RctCollapsibleCard fullBlock table>
           <CustomTable
-            tableData={ServiceData}
+            tableData={UserData}
             loading={loading}
             tableRecords={collection}
             actions={actions}
-            actionsArgs={["user_id"]}
+            actionsArgs={["id"]}
             dropdownActions={dropdownActions}
           />
         </RctCollapsibleCard>
@@ -113,13 +113,13 @@ function ServiceProvidersList({ allservices, loading, setPage, limit, setLimit,s
   );
 }
 
-ServiceProvidersList.propTypes = {
+UsersList.propTypes = {
   setPage: PropTypes.func,
   setLimit: PropTypes.func,
   refetch: PropTypes.func,
   loading: PropTypes.bool,
-  allservices: PropTypes.object,
+  allUsers: PropTypes.object,
   limit: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
-export default ServiceProvidersList;
+export default UsersList;

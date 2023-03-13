@@ -22,6 +22,7 @@ import ServiceProviders from "Routes/service-providers"
 import OwnersAssets from "Routes/owner-assets"
 import AllServices from "Routes/AllServices"
 import AllAdvisors from "Routes/Advisors"
+import ManageUsers from 'Routes/ManageUsers';
 
 
 // async component
@@ -85,10 +86,7 @@ export default [
       path: 'maps',
       component: Maps
    },
-   {
-      path: 'users',
-      component: Users
-   },
+   
    {
       path: 'ui-components',
       component: Components
@@ -138,8 +136,13 @@ export default [
       component: AllServices
    },
    {
-      path:"advisors",
-      component:AllAdvisors
+      path: 'advisors',
+      component: AllAdvisors
+   },
+   
+   {
+      path:"users",
+      component:ManageUsers
    }
    
 ]

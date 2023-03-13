@@ -34,33 +34,15 @@ function AdvisorList({ allowners, loading, setPage, limit, setLimit ,status}) {
   }, [allowners]);
 
   const handelDeleteBanner = (id) => {
-    console.log(id)
-    const filteredService= owners.collection.filter(service=>service.id != id)
+    const filteredService= owners.collection.filter(service=>service.user_id != id)
+    console.log(filteredService,"filteredService")
     setOwners({
       collection:filteredService,
       metadata:allowners?.allowners?.metadata,
     })
 
-    client.delete(`/advisors/${id}`).then((res)=>console.log(res,"res")).catch((err)=>console.log(err,"err"))
-    // swal({
-    //   title: formatMessage({ id: "are.u.sure.?" }),
-    //   text: formatMessage({ id: "u.want.delete.banner" }),
-    //   icon: "warning",
-    //   buttons: [formatMessage({ id: "cancel" }), formatMessage({ id: "delete" })],
-    //   dangerMode: true,
-    // }).then((willDelete) => {
-    //   if (willDelete) {
-    //     deleteBanner({
-    //       variables: {
-    //         id,
-    //       },
-    //     })
-    //       .then(() => {
-    //         refetch();
-    //         NotificationManager.success(<FormattedMessage id="bannerdeletedsuccessfully" />);
-    //       })
-    //   }
-    // });
+    client.delete(`/advisor/${id}`).then((res)=>console.log(res,"res")).catch((err)=>console.log(err,"err"))
+
   };
 
   const actions = ({ user_id }) => (
@@ -90,7 +72,7 @@ function AdvisorList({ allowners, loading, setPage, limit, setLimit ,status}) {
     </div>
   );
   const dropdownActions =(record)=>(
-    <StatusDropDown status={status} activationStatus={record.user.is_active} id={record.user_id} client={client} url={`advisor/${record.user_id}`}/>
+    <StatusDropDown status={status} activationStatus={record.user?.is_active} id={record.user_id} client={client} url={`advisor/${record.user_id}`}/>
   )
   return (
     <Typography component="div" style={{ padding: "10px", marginTop: "20px" }}>

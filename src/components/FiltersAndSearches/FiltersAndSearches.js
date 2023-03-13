@@ -35,6 +35,7 @@ export function FiltersAndSearches({
   mobile,
   mobileRef,
   setPage,
+  role,
   is_active,
   make,
   model,
@@ -82,7 +83,7 @@ export function FiltersAndSearches({
           .map((field) => {
             if (!field.name) return Alert("Please Provide a name");
             return (
-              <div className="col-sm-12 col-md-3 mt-1" key={field?.name}>
+              <div className={ role ? "col-sm-12 col-md-10 mt-1"  : "col-sm-12 col-md-3 mt-1"} key={field?.name}>
                 <FormGroup>
                   <Label for="exampleEmail">
                     <FormattedMessage id={field?.label} />
@@ -111,7 +112,7 @@ export function FiltersAndSearches({
             );
           })}
  
-        {filters.includes("fields") && (
+        {filters?.includes("fields") && (
           <div className="col-md-3 mt-1">
             <FormGroup>
               <Label for="exampleEmail">
@@ -126,7 +127,7 @@ export function FiltersAndSearches({
             </FormGroup>
           </div>
         )}
-        {filters.includes("service_provider") && (
+        {filters?.includes("service_provider") && (
           <div className="col-md-3 mt-1">
             <FormGroup>
               <Label for="exampleEmail">
@@ -203,7 +204,7 @@ export function FiltersAndSearches({
                 trimmedQuery[key] = typeof val === "string" ? val?.trim() : val;
               });
 
-              history.replace({ search: JSON.stringify(trimmedQuery) });
+              // history.replace({ search: JSON.stringify(trimmedQuery) });
               setPage(1);
               setQuery(trimmedQuery);
               // submitFilter(trimmedQuery)

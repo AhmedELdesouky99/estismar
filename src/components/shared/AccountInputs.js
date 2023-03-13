@@ -8,12 +8,19 @@ import FileUpload from "./FileUploader";
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import Swal from 'sweetalert'
+import Select, { components } from "react-select";
 
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin",
 });
 const AccountInputs = ({ownerDetails}) => {
   const [loader, setLoader] = useState(false);
+  const [loader1, setLoader1] = useState(false);
+  const [loader2, setLoader2] = useState(false);
+  const [loader3, setLoader3] = useState(false);
+  const [loader4, setLoader4] = useState(false);
+
+
   const [EnImage, setEnImage] = useState();
   const [firstImage,setFirstImage]=useState()
   const [secondImage,setSecondImage]=useState()
@@ -23,29 +30,7 @@ const AccountInputs = ({ownerDetails}) => {
   const [files,setFiles]=useState([])
   const history=useHistory()
   const {id} =useParams()
-  // {
-  //       name : "كريم",
-  //       email : "mostafa.husany@gmail.com",
-  //       password : "123456",
-  //       password_confirmation : "123456",
-  //       type : "update",
-  //       asset_name_ar : "الوقف الأول",
-  //       asset_name_en : "Asset One",
-  //       owner_name : "Mostafa Hazem",
-  //       owner_family : "Elsayed",
-  //       asset_nom : "0910291019",
-  //       export_date: "2023-02-07",
-  //       exported_by : "محكمة الاحوال الشخصية",
-  //       manager_name : "Mostafa Hazem",
-  //       civil_registry_nom : "1020102910",
-  //       asset_bank : "Al-Ahlely",
-  //       asset_type : "اسهم",
-  //       city  : "جدة",
-  //       district : "المنطقة الأولي",
-  //       street : "الشارع الأول",
-  //       building_nom : "12",
-  //       post_nom : "12421"
-  //   }
+
 useEffect(()=>{
     if(ownerDetails){
       const profile=ownerDetails?.files?.find(file=>file.title=="profile")?.path
@@ -88,7 +73,16 @@ useEffect(()=>{
       });
   };
   const UploadFile=(file,name)=>{
-    setLoader(true);
+    if(name=="first"){
+      setLoader1(true)
+    }else if(name=="second"){
+    setLoader2(true);
+    } else if(name=="third"){
+    setLoader3(true);
+    }
+    else{
+      setLoader4(true)
+    }
     const formdata = new FormData();
     formdata.append("title", name== "first" ? "صك الوقفية" : "second" ? "الشهادة الضريبية":"third" ?"عقد التأسيس" : "دورة عمل الوقف");
     formdata.append("store_file", true);
@@ -100,7 +94,18 @@ useEffect(()=>{
         },
       })
       .then((res) => {
-        setLoader(false);
+        if(name=="first"){
+          setLoader1(false)
+        }else if(name =="second"){
+        setLoader2(false);
+    
+        } else if(name=="third"){
+          setLoader3(false);
+      
+          }
+          else{
+            setLoader4(false)
+          }
         if(name == "first"){
         setFirstImage("https://estithmar.arabia-it.net" + res.data.data.path);
         setFiles([...files,res.data.data.id])
@@ -479,25 +484,32 @@ useEffect(()=>{
               <Label for="exampleEmail">
                 <FormattedMessage id={"مصرف الوقف"} />
               </Label>
-              <Input
-                id="exampleSelect"
-                name="select"
-                type="select"
-                style={{ borderColor: "#D4B265" }}
-                value={data?.asset_bank}
-                onChange={(e)=>{
-                  setData({
-                    ...data,
-                    asset_bank:e.target.value
-                  })
+              <Select options={
+                [
+                  {
+                    label:"البنك الاهلي ",
+                    value:"AhlyBank"
+                  }
+                ]
+              } 
+              value={
+                [
+                  {
+                    label:"البنك الاهلي ",
+                    value:"AhlyBank"
+                  }
+                ].find(option=>option.value== data?.asset_bank)
+
+              }
+              onChange={(sel)=>{
+                setData({
+                  ...data,
+                  asset_bank:sel.value
+                })
+            
+              }}
               
-                }}
-              >
-                <option></option>
-                <option value={"AhlyBank"} selected={data?.asset_bank}>البنك الاهلي </option>
-                
-              
-              </Input>
+              />
             </FormGroup>
           </div>
         </div>
@@ -505,24 +517,28 @@ useEffect(()=>{
           <div>
             <FormGroup>
               <Label for="exampleSelect">أعيان الوقف</Label>
-              <Input
-                id="exampleSelect"
-                name="select"
-                type="select"
-                style={{ borderColor: "#D4B265" }}
-                onChange={(e)=>{
-                    setData({
-                      ...data,
-                      asset_type:e.target.value
-                    })
-                }}
-                
-              >
-                <option></option>
-
-                <option value="اسهم" selected={data?.asset_type=="اسهم"}>اسهم</option>
-                
-              </Input>
+              <Select 
+              options={[
+                {
+                  label:"اسهم",
+                  value:"اسهم"
+                }
+              ]}
+              onChange={(sel)=>{
+                setData({
+                  ...data,
+                  asset_type:sel.value
+                })
+            }}
+              value={
+                [
+                  {
+                    label:"اسهم",
+                    value:"اسهم"
+                  }
+                ].find(option=>option.value == data?.asset_type)
+              }
+              />
             </FormGroup>
           </div>
         </div>
@@ -533,14 +549,11 @@ useEffect(()=>{
           <div>
             <FormGroup>
               <Label for="exampleSelect">الدولة</Label>
-              <Input
-                id="exampleSelect"
-                name="select"
-                type="select"
-                style={{ borderColor: "#D4B265" }}
-              >
-                <option selected>المملكة العربيه السعودية</option>
-              </Input>
+             
+              <Select 
+              options={[{label:"المملكة العربية السعودية",value:"المملكة العربية السعودية"}]}
+              value={{label:"المملكة العربية السعودية",value:"المملكة العربية السعودية"}}
+              />
             </FormGroup>
           </div>
         </div>
@@ -548,25 +561,55 @@ useEffect(()=>{
           <div>
             <FormGroup>
               <Label for="exampleSelect">المدينة</Label>
-              <Input
-                id="exampleSelect"
-                name="select"
-                type="select"
-                style={{ borderColor: "#D4B265"}}
-                  onChange={(e)=>{
-                    setData({
-                      ...data,
-                      city:e.target.value
-                    })
-              
-                }}
-              >
-                <option></option>
-                <option selected={data?.city =="الرياض"} value={"الرياض"}>الرياض</option>
-                <option value="جدة"  selected={data?.city =="جدة"}>جدة</option>
-                <option value="القسيم" selected={data?.city =="القسيم"}>القسيم</option>
-                <option value="مكة المكرمه" selected={data?.city =="مكة المكرمة"}>مكة المكرمه</option>
-              </Input>
+              <Select options={
+                [
+                  {
+                    label:"الرياض",
+                    value:"الرياض",
+                  },
+                  {
+                    label:"جدة",
+                    value:"جدة"
+                  },
+                  {
+                    label:"القسيم",
+                    value:"القسيم"
+                  },
+                  {
+                    label:"مكة المكرمه",
+                    value:"مكة المكرمه"
+                  }
+                ]
+              }
+              value={
+                [
+                  {
+                    label:"الرياض",
+                    value:"الرياض",
+                  },
+                  {
+                    label:"جدة",
+                    value:"جدة"
+                  },
+                  {
+                    label:"القسيم",
+                    value:"القسيم"
+                  },
+                  {
+                    label:"مكة المكرمه",
+                    value:"مكة المكرمه"
+                  }
+                ].find(city=>city.value == data?.city)
+              }
+              onChange={(sel)=>{
+                setData({
+                  ...data,
+                  city:sel.value
+                })
+          
+            }}
+              />
+
             </FormGroup>
           </div>
         </div>
@@ -687,7 +730,7 @@ useEffect(()=>{
        </div>
         <div className="col-md-4">
             <FileUpload 
-              loader={loader}
+              loader={loader1}
               image={firstImage}
               name="صك الوقفية"
               setImage={(file) => {
@@ -697,7 +740,7 @@ useEffect(()=>{
         </div>
         <div className="col-md-4">
             <FileUpload 
-           
+              loader={loader2}
               image={secondImage}
               name="الشهادة الضريبية"
               setImage={(file) => {
@@ -710,6 +753,7 @@ useEffect(()=>{
       <div className="row">
         <div className="col-md-4">
             <FileUpload 
+              loader={loader3}
             image={thirdImage}
             name={"عقد التأسيس"}
             setImage={(file) => {
@@ -719,6 +763,7 @@ useEffect(()=>{
         </div>
         <div className="col-md-4">
             <FileUpload 
+              loader={loader4}
              image={forthImage}
              name={"دورة عمل الوقف"}
              setImage={(file) => {

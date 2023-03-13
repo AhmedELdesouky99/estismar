@@ -7,7 +7,7 @@ import { Pagination } from "@material-ui/lab";
 import useSetState from "Hooks/useSetState";
 import RctCollapsibleCard from "Components/RctCollapsibleCard/RctCollapsibleCard";
 import CustomTable from "Components/shared/CustomTable";
-import { ServiceData } from "./ServiceData";
+import { RoleData } from "./RoleData";
 import StatusDropDown from "Components/shared/StatusDropDown"
 import PerPage from "Components/shared/PerPage";
 
@@ -16,44 +16,44 @@ const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin" 
  
 });
-function ServiceProvidersList({ allservices, loading, setPage, limit, setLimit,status }) {
+function RolesList({ allRoles, loading, setPage, limit, setLimit,status }) {
   const history = useHistory();
-  const [services, setServices] = useSetState({
+  const [Roles, setRoles] = useSetState({
     collection: [],
     metadata: {},
   });
-  const { collection ,metadata} = services;
+  const { collection ,metadata} = Roles;
   useEffect(() => {
    
-    setServices({
-      collection: allservices?.data,
+    setRoles({
+      collection: allRoles?.data,
     
       metadata: {
-        totalCount:allservices?.total,
-        currentPage:allservices?.current_page
+        totalCount:allRoles?.total,
+        currentPage:allRoles?.current_page
       }, 
-      // allservices?.allservices?.metadata,
+      // allRoles?.allRoles?.metadata,
     });
-  }, [allservices]);
+  }, [allRoles]);
 
   const handelDeleteBanner = (id) => {
-    const filteredService= services.collection.filter(service=>service.user_id != id)
-    setServices({
+    const filteredService= Roles.collection.filter(service=>service.id != id)
+    setRoles({
       collection:filteredService,
-      metadata: allservices?.allservices?.metadata,
+      metadata: allRoles?.allRoles?.metadata,
     })
 
     client.delete(`/service-provider/${id}`).then((res)=>console.log(res,"res")).catch((err)=>console.log(err,"err"))
     
   };
 
-  const actions = ({ user_id }) => (
+  const actions = ({ id }) => (
     <div className="d-flex align-items-center" style={{ gap: "5px" }}>
       {/* Redirects to Car details */}
 
       
         <Tooltip title={ "common.edit"} placement="top">
-          <Link to={`service-provider/${user_id}`}>
+          <Link to={`roles/${id}`}>
             <button className="border-0" style={{background:"#23D381",color:"#fff"}}>
             <i className=" ti-eye m-1"></i>
             </button>
@@ -66,25 +66,25 @@ function ServiceProvidersList({ allservices, loading, setPage, limit, setLimit,s
         <i
           style={{ cursor: "pointer" }}
           className=" ti-trash m-1"
-          onClick={() => handelDeleteBanner(user_id)}
+          onClick={() => handelDeleteBanner(id)}
         ></i>
         </button>
       </Tooltip>
     </div>
   );
   const dropdownActions =(record)=>(
-    <StatusDropDown  activationStatus={record.user.is_active} id={record.id} client={client} url={`service-provider/${record.user_id}`}/>
+    <StatusDropDown  activationStatus={record.is_active} id={record.id} client={client} url={`user/${record.id}`}/>
   )
   return (
     <Typography component="div" style={{ padding: "10px", marginTop: "20px" }}>
       <div>
         <RctCollapsibleCard fullBlock table>
           <CustomTable
-            tableData={ServiceData}
+            tableData={RoleData}
             loading={loading}
             tableRecords={collection}
             actions={actions}
-            actionsArgs={["user_id"]}
+            actionsArgs={["id"]}
             dropdownActions={dropdownActions}
           />
         </RctCollapsibleCard>
@@ -113,13 +113,13 @@ function ServiceProvidersList({ allservices, loading, setPage, limit, setLimit,s
   );
 }
 
-ServiceProvidersList.propTypes = {
+RolesList.propTypes = {
   setPage: PropTypes.func,
   setLimit: PropTypes.func,
   refetch: PropTypes.func,
   loading: PropTypes.bool,
-  allservices: PropTypes.object,
+  allRoles: PropTypes.object,
   limit: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
-export default ServiceProvidersList;
+export default RolesList;

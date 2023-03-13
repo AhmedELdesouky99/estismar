@@ -4,7 +4,7 @@ import { FormGroup, Label } from "reactstrap";
 import { FormattedMessage } from "react-intl";
 import Select from "react-select";
 
-const DropDownStatus = ({onChange}) => {
+const DropDownStatus = ({onChange,selectedItem}) => {
   const [options, setOptions] = useState([
     { label: "مفعل", value: 1 },
     { label: "قيد الانتظار", value: 0 },
@@ -27,8 +27,7 @@ const DropDownStatus = ({onChange}) => {
         options={options}
         placeholder="الحاله"
         onChange={onChange}
-
-       
+      value={options.find((optn) => +optn.value == +selectedItem)}       
       />
     </>
   );

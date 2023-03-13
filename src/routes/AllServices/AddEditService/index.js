@@ -107,14 +107,6 @@ const AddEditService = () => {
 
             })
             setRSelected(res.data.data.executive_time_type =="month" ? 2 : res.data.data.executive_time_type == "day" ? 1 : 3)
-            // {
-          
-            
-            //   support_ratio: 50,
-          
-           
-            
-            // }
         })
         
       }

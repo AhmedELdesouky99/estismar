@@ -6,6 +6,7 @@ import { Badge } from 'reactstrap';
 import { DropdownToggle, DropdownMenu, Dropdown } from 'reactstrap';
 import StatusDropDown from "Components/shared/StatusDropDown"
 const { TEXT, ACTIONS, FUNC,DROPDOWN } = dataTypes;
+import { Link, useHistory } from "react-router-dom";
 
 export const ServiceData = [
   {
@@ -15,8 +16,10 @@ export const ServiceData = [
   },
   {
     headerId: "مزودالخدمة",
-    dataType: TEXT,
+    dataType: FUNC,
     dataRef: "company_name_ar",
+    func: (record, locale) => <Link  style={{color:"#A5A5A5"}} to={`/app/service-provider/${record.user_id}`}>{ record.company_name_ar}</Link> ,
+
   },
   {
     headerId: "تاريخ الانضمام",

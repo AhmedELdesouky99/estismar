@@ -6,6 +6,7 @@ import { Badge } from 'reactstrap';
 import { DropdownToggle, DropdownMenu, Dropdown } from 'reactstrap';
 import StatusDropDown from "Components/shared/StatusDropDown"
 const { TEXT, ACTIONS, FUNC,DROPDOWN } = dataTypes;
+import { Link, useHistory } from "react-router-dom";
 
 export const AdvisorData = [
   {
@@ -16,7 +17,7 @@ export const AdvisorData = [
   {
     headerId: "المستشار",
     dataType: FUNC,
-    func: (record, locale) =>record.ar_name,
+    func: (record, locale) =><Link  style={{color:"#A5A5A5"}}to={`/app/advisors/${record.user_id}`} >{record.ar_name} </Link>,
     
   },
   {

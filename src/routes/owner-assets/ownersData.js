@@ -5,6 +5,7 @@ import moment from "moment";
 import { Badge } from 'reactstrap';
 import { DropdownToggle, DropdownMenu, Dropdown } from 'reactstrap';
 import StatusDropDown from "Components/shared/StatusDropDown"
+import { Link } from "react-router-dom";
 const { TEXT, ACTIONS, FUNC,DROPDOWN } = dataTypes;
 
 export const OwnersData = [
@@ -15,8 +16,8 @@ export const OwnersData = [
   },
   {
     headerId: "الأوقاف",
-    dataType: TEXT,
-    dataRef: "asset_name_ar",
+    dataType: FUNC,
+    func:(record)=> <Link  style={{color:"#A5A5A5"}} to={`/app/owners-assets/${record.user_id}`}>{ record.asset_name_ar}</Link> 
   },
   {
     headerId: "تاريخ الانضمام",
