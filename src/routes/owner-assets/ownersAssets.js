@@ -38,6 +38,7 @@ export default function OwnerAssets() {
         params:{
           limit,
           page,
+        
           name:query.name ? query.name : undefined,
           status: query.status ? query.status : undefined
         }
@@ -46,17 +47,6 @@ export default function OwnerAssets() {
      
   },[page,limit,query])
 
-  // const submitFilter=(query)=>{
-
-  //      client.get(`/asset-owner`,{
-  //       params: {
-  //         name:query.name ? query.name  : undefined,
-  //         status:query.status ? query.status : undefined,
-  //         limit,
-  //         page,
-  //       }
-  //      }).then(res=>setOwners(res.data.data))
-  // }
   return (
     <div className="clients-wrapper">
        <Helmet>

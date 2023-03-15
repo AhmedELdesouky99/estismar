@@ -83,18 +83,7 @@ export default function AddEditOwnersAssets() {
       <RctCard>
         <RctCardContent>
 
-          {/* <div className="row">
-          
-                  <FiltersAndSearches
-                    make="make"
-                    submitbtnid="search.filter"
-                    fields={[{ type: "search", name: "اسم الوقف" },{ type: "search", name: "الحاله" }]}
-                    filters={["parent"]}
-                    model="model"
-                    is_active="isActive"
-                    multi
-                  />
-                </div> */}
+     
         </RctCardContent>
       </RctCard>
       <TabViews serviceProvider={true} providerDetails={providerDetails}/>

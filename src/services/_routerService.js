@@ -23,6 +23,7 @@ import OwnersAssets from "Routes/owner-assets"
 import AllServices from "Routes/AllServices"
 import AllAdvisors from "Routes/Advisors"
 import ManageUsers from 'Routes/ManageUsers';
+import ManageOrders from 'Routes/orders';
 
 
 // async component
@@ -143,6 +144,10 @@ export default [
    {
       path:"users",
       component:ManageUsers
+   },
+   {
+      path:"orders",
+      component:ManageOrders
    }
    
 ]

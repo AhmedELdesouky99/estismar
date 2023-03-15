@@ -572,7 +572,7 @@ const AddEditService = () => {
             <RctCardContent>
               <div className="col-12">
                 <div className="d-flex">
-                  <p className="title">مدة التنفيذ</p>
+                  <p className="title" style={{position:"relative"}}>مدة التنفيذ</p>
                   <p
                     style={{
                       color: "#A5A5A5",

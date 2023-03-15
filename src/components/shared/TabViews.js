@@ -174,6 +174,7 @@ import OwnerProfile from './OwnersProfile';
 import ServiceProviderProfile from './ServiceProviderProfile';
 import AdvisorProfile from "./AdvisorProfile"
 import Services from '../../routes/AllServices/AllServices';
+import AssetsService from "../../routes/owner-assets/AssetsService"
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -239,14 +240,22 @@ export default function TabsView(props) {
               <Tab label="المراجعات" {...a11yProps(6)} />
               </Tabs>
             : 
-        
+            props.advisor ? 
             <Tabs value={value} onChange={handleChange} aria-label="simple tabs example"  style={{justifyContent:"space-between"}}>
             <Tab label="البروفايل" {...a11yProps(0)} />
             <Tab label="الاستشارات" {...a11yProps(1)} />
             <Tab label="المحفظة" {...a11yProps(2)} />
             <Tab label="الفواتير" {...a11yProps(3)} />
            </Tabs>
-          
+          :
+          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" style={{justifyContent:"space-between"}}>
+          <Tab label="البروفايل" {...a11yProps(0)} />
+          <Tab label="الخدمات" {...a11yProps(1)} />
+          <Tab label="باقات" {...a11yProps(2)} />
+          <Tab label="استشارات" {...a11yProps(3)} />
+          <Tab label="المحفظة" {...a11yProps(4)} />
+          <Tab label="الفواتير" {...a11yProps(5)} />
+          </Tabs>
 
          }
            
@@ -267,7 +276,10 @@ export default function TabsView(props) {
       <TabPanel value={value} index={1}>
         {
              props.serviceProvider ? 
-             <Services inTabs={true}/> : null
+             <Services inTabs={true}/> : 
+             props?.ownerDetails ? 
+             <AssetsService />
+             : null
         }
      
       </TabPanel>
