@@ -354,7 +354,7 @@ export default {
 </svg>
 
          ,
-         "path": "/app/",
+         "path": "/app/users",
          "new_item": false,
          "child_routes": null
       },
