@@ -176,8 +176,11 @@ import AdvisorProfile from "./AdvisorProfile"
 import Services from '../../routes/AllServices/AllServices';
 import AssetsService from "../../routes/owner-assets/AssetsService"
 import AllTeam from '../../routes/service-providers/AllTeam';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import {
+  ChangeRoute
+} from 'Actions';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -223,10 +226,12 @@ export default function TabsView(props) {
   const [value, setValue] = React.useState(0);
 const {user}=useSelector(state=>state.authUser.user)
 const {sidebar}=useSelector(state=>state)
+const dispatch=useDispatch()
 
   console.log(user,"user")
   // console.log(st,"statered")
   const handleChange = (event, newValue) => {
+    dispatch(ChangeRoute(newValue))
     setValue(newValue);
   };
 // useEffect(()=>{
@@ -235,7 +240,7 @@ const {sidebar}=useSelector(state=>state)
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{display:user ? "none" :""}}>
+      <AppBar position="static" style={{display:user.category =="service-provider" ? "none" :""}}>
      
 
          {
@@ -297,7 +302,7 @@ const {sidebar}=useSelector(state=>state)
         Item Three
       </TabPanel>
       <TabPanel value={sidebar.index} index={3}>
-        <AllTeam />
+        {/* <AllTeam /> */}
       </TabPanel>
     </div>
   );
