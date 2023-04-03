@@ -291,7 +291,7 @@ const ServiceProviderInputs = ({ providerDetails }) => {
                 type="select"
                 style={{ borderColor: "#D4B265" }}
               >
-                <option selected>المملطة العربيه السعودية</option>
+                <option selected>المملكة العربيه السعودية</option>
               </Input>
             </FormGroup>
           </div>
