@@ -520,7 +520,23 @@
     content: "";
     display: block;
     // transform: translateY(-33%);
+    right: 0;
     top: 44px;
+}
+.title-login{
+  color:#D4B265;
+  font-size: 30px;
+}
+.title-login::after{
+    position: absolute;
+    width: 65px;
+    height: 6px;
+    background: #005D5E;
+    content: "";
+    display: block;
+    // transform: translateY(-33%);
+    right: 0;
+    top: 45px;
 }
 .profile {
   label{
@@ -735,4 +751,19 @@ label{
 }
 tbody{
   color:#A5A5A5
+}
+.logo{
+  background-color: red;
+  // background-image: url('../../img/about-1.png');
+}
+#signup .css-2b097c-container{
+  direction: ltr;
+}
+#signup .css-g1d714-ValueContainer{
+  direction: rtl;
+}
+body{
+  overflow-x: hidden;
+  overflow-y: auto !important;
+  margin-bottom: 5px;
 }

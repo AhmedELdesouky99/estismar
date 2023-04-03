@@ -2,7 +2,7 @@
  * App.js Layout Start Here
  */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import { NotificationContainer } from 'react-notifications';
 
@@ -63,26 +63,31 @@ const InitialPath = ({ component: Component, authUser, ...rest }) =>
       render={props =>
          authUser
             ? <Component {...props} />
-            // : <Redirect
-            //    to={{
-            //       pathname: '/signin',
-            //       state: { from: props.location }
-            //    }}
-            // />
-            :<Component {...props} />
+            : <Redirect
+               to={{
+                  pathname: '/signin',
+                  state: { from: props.location }
+               }}
+            />
+            // :<Component {...props} />
          }
    />;
 
-class App extends Component {
-   render() {
-      const { location, match, user } = this.props;
-      if (location.pathname === '/') {
-         if (user === null) {
-            return (<Redirect to={'/app/owners-assets'} />);
-         } else {
-            return (<Redirect to={'/app/owners-assets'} />);
+const App = ({location, match })=> {
+   const {user} =useSelector((state)=>state.authUser)
+   console.log(user,"user")
+   if (location.pathname === '/') {
+      if (user === null) {
+         return (<Redirect to={'/app/owners-assets'} />);
+      } else {
+         if(user?.user?.category =="service-provider"){
+            return  (<Redirect to={`/app/service-provider/${user.user.id}`} />)
          }
+         return (<Redirect to={'/app/owners-assets'} />);
+         // console.log(user.user.category,"in app ")
+         // return (<Redirect to={'/app/owners-assets'} />);
       }
+   }
       return (
          <RctThemeProvider>
             <NotificationContainer />
@@ -114,12 +119,12 @@ class App extends Component {
          </RctThemeProvider>
       );
    }
-}
+
 
 // map state to props
-const mapStateToProps = ({ authUser }) => {
-   const { user } = authUser;
-   return { user };
-};
+// const mapStateToProps = ({ authUser }) => {
+//    const { user } = authUser;
+//    return { user };
+// };
 
-export default connect(mapStateToProps)(App);
+export default App;

@@ -14,6 +14,7 @@ import axios from "axios";
 import { Button } from "reactstrap";
 import { FormattedMessage } from "react-intl";
 import ServiceList from "./serviceList";
+import { useSelector } from "react-redux";
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin",
 });
@@ -26,6 +27,7 @@ export default function Services({inTabs}) {
   const [status, setStatus] = useState();
   const [query, setQuery] = useState({});
   const {id}=useParams()
+	const {user}=useSelector(state=>state.authUser.user)
   
   useEffect(()=>{
     client
@@ -36,7 +38,7 @@ export default function Services({inTabs}) {
         limit,
         page,
         field_id:query.field_id ? query.field_id : undefined,
-        service_provider_id: id && location.pathname.includes("service-provider") ? id : query.service_provider_id ? query.service_provider_id : undefined,
+        service_provider_id: id && location.pathname.includes("service-provider") ? id : user?.id ? user?.id :  query.service_provider_id ? query.service_provider_id : undefined,
         status: query.status ? query.status : undefined,
         support_ratio:query.support_ratio ? query.support_ratio : undefined
       }

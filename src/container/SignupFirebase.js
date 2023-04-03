@@ -1,16 +1,17 @@
 /**
  * Sign Up With Firebase
  */
+
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import { Link } from 'react-router-dom';
-import { Form, FormGroup, Input } from 'reactstrap';
+import { Link, useHistory } from 'react-router-dom';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import QueueAnim from 'rc-queue-anim';
-import { Fab } from '@material-ui/core';
+import { Fab } from "@material-ui/core";
+import { FormGroup, Label, Input, ButtonGroup, Button } from "reactstrap";
+import Select from "react-select";
 
 // components
 import { SessionSlider } from 'Components/Widgets';
@@ -24,162 +25,192 @@ import {
    signinUserWithFacebook,
    signinUserWithGoogle,
    signinUserWithGithub,
-   signinUserWithTwitter
+   signinUserWithTwitter,
+   HandelSignUp
 } from 'Actions';
 
-class SignupFirebase extends Component {
+import { useState } from 'react';
 
-   state = {
-      name: '',
-      email: '',
-      password: ''
-   }
+ const SignupFirebase =()=>  {
+const [user,setUser]=useState()
+const dispatch =useDispatch()
+const history=useHistory()
+   // state = {
+   //    name: '',
+   //    email: '',
+   //    password: ''
+   // }
 
 	/**
 	 * On User Signup
 	 */
-   onUserSignUp() {
-      const { email, password } = this.state;
-      if (email !== '' && password !== '') {
-         this.props.signupUserInFirebase({ email, password }, this.props.history);
-      }
-   }
-
-   render() {
-      const { name, email, password } = this.state;
-      const { loading } = this.props;
+   // onUserSignUp() {
+   //    const { email, password } = this.state;
+   //    if (email !== '' && password !== '') {
+   //       this.props.signupUserInFirebase({ email, password }, this.props.history);
+   //    }
+   // }
+   const logo=require('Assets/img/logo-waqf.png')
+  const handelClick=()=>{
+   dispatch(HandelSignUp(user,history))
+  } 
+  const {errors} =useSelector(state=>state.authUser)
+  console.log(errors,"state in redux ")
       return (
-         <QueueAnim type="bottom" duration={2000}>
-            <div className="rct-session-wrapper">
-               {loading &&
-                  <LinearProgress />
-               }
-               <AppBar position="static" className="session-header">
-                  <Toolbar>
-                     <div className="container">
-                        <div className="d-flex justify-content-between">
-                           <div className="session-logo">
-                              <Link to="/">
-                                 <img src={AppConfig.appLogo} alt="session-logo" width="110" height="35" />
-                              </Link>
-                           </div>
-                           <div>
-                              <Link to="/signin" className="mr-15 text-white">Already have an account?</Link>
-                              <Button
-                                 component={Link}
-                                 to="/signin"
-                                 variant="contained"
-                                 className="btn-light"
-                              >
-                                 Sign In
-										</Button>
-                           </div>
-                        </div>
-                     </div>
-                  </Toolbar>
-               </AppBar>
-               <div className="session-inner-wrapper">
-                  <div className="container">
-                     <div className="row row-eq-height">
-                        <div className="col-sm-7 col-md-7 col-lg-8">
-                           <div className="session-body text-center">
-                              <div className="session-head mb-15">
-                                 <h2>Get started with {AppConfig.brandName}</h2>
-                              </div>
-                              <Form>
-                                 <FormGroup className="has-wrapper">
-                                    <Input
-                                       type="text"
-                                       value={name}
-                                       name="user-name"
-                                       id="user-name"
-                                       className="has-input input-lg"
-                                       placeholder="Enter Your Name"
-                                       onChange={(e) => this.setState({ name: e.target.value })}
-                                    />
-                                    <span className="has-icon"><i className="ti-user"></i></span>
-                                 </FormGroup>
-                                 <FormGroup className="has-wrapper">
-                                    <Input
-                                       type="mail"
-                                       value={email}
-                                       name="user-mail"
-                                       id="user-mail"
-                                       className="has-input input-lg"
-                                       placeholder="Enter Email Address"
-                                       onChange={(e) => this.setState({ email: e.target.value })}
-                                    />
-                                    <span className="has-icon"><i className="ti-email"></i></span>
-                                 </FormGroup>
-                                 <FormGroup className="has-wrapper">
-                                    <Input
-                                       value={password}
-                                       type="Password"
-                                       name="user-pwd"
-                                       id="pwd"
-                                       className="has-input input-lg"
-                                       placeholder="Password"
-                                       onChange={(e) => this.setState({ password: e.target.value })}
-                                    />
-                                    <span className="has-icon"><i className="ti-lock"></i></span>
-                                 </FormGroup>
-                                 <FormGroup className="mb-15">
-                                    <Button
-                                       className="btn-info text-white btn-block w-100"
-                                       variant="contained"
-                                       size="large"
-                                       onClick={() => this.onUserSignUp()}>
-                                       Sign Up
-                            			</Button>
-                                 </FormGroup>
-                              </Form>
-                              <p className="mb-20">or sign in with</p>
-                              <Fab size="small" variant="round" className="btn-facebook mr-15 mb-20 text-white"
-                                 onClick={() => this.props.signinUserWithFacebook(this.props.history)}
-                              >
-                                 <i className="zmdi zmdi-facebook"></i>
-                              </Fab>
-                              <Fab size="small" variant="round" className="btn-google mr-15 mb-20 text-white"
-                                 onClick={() => this.props.signinUserWithGoogle(this.props.history)}
-                              >
-                                 <i className="zmdi zmdi-google"></i>
-                              </Fab>
-                              <Fab size="small" variant="round" className="btn-twitter mr-15 mb-20 text-white"
-                                 onClick={() => this.props.signinUserWithTwitter(this.props.history)}
-                              >
-                                 <i className="zmdi zmdi-twitter"></i>
-                              </Fab>
-                              <Fab size="small" variant="round" className="btn-instagram mr-15 mb-20 text-white"
-                                 onClick={() => this.props.signinUserWithGithub(this.props.history)}
-                              >
-                                 <i className="zmdi zmdi-github-alt"></i>
-                              </Fab>
-                              <p className="text-muted">By signing up you agree to {AppConfig.brandName}</p>
-                              <p><Link to="/terms-condition" className="text-muted">Terms of Service</Link></p>
-                           </div>
-                        </div>
-                        <div className="col-sm-5 col-md-5 col-lg-4">
-                           <SessionSlider />
-                        </div>
-                     </div>
-                  </div>
+         <div className='row' style={{height:"100vh" ,textAlign:"right"}}>
+         <div className='col-md-8 col-sm-12' style={{margin:"auto",direction:"rtl",paddingRight:"50px"}}>
+               <p className='title-login' style={{position:"relative"}}>
+               تسجيل مستخدم جديد
+               </p>
+               <div className='col-md-5 col-sm-12' id="signup"> 
+               <FormGroup>
+                 <Label for="exampleSelect">المستخدم الجديد</Label>
+                 {
+                  <Select options={[{label:"وقف",value:"asset-owner"},{label:"مزود خدمة",value:"service-provider"}]} 
+                  placeholder="نوع المستخدم"
+                  style={{direction:"ltr"}}
+                  onChange={(opt)=>{
+                     console.log(opt,"opt")
+                     setUser({
+                        ...user,
+                        category:opt.value
+                     })
+                  }}
+                  />
+                
+                 }
+               </FormGroup>
                </div>
-            </div>
-         </QueueAnim>
+               <div className='col-md-5 col-sm-12'> 
+               <p className='title' style={{position:"relative"}}>
+               معلومات الحساب
+               </p>
+               <FormGroup>
+                 <Label for="exampleSelect"> اسم المستخدم</Label>
+                 {
+                   <Input
+                   id="exampleSelect"
+                   name="select"
+                   type="text"
+                   placeholder='اسم المستخدم'
+                   style={{ borderColor: "#D4B265" }}
+                   onChange={(e)=>{
+                     setUser({
+                        ...user,
+                        name:e.target.value
+                     })
+                   }}
+                 />
+                
+                 }
+               </FormGroup>
+               </div>
+               <div className='col-md-5 col-sm-12' >
+               <FormGroup>
+                 <Label for="exampleSelect"> البريد الالكتروني</Label>
+                 {
+                   <Input
+                   id="exampleSelect"
+                   name="select"
+                   type="email"
+                   placeholder='البريد الالكتروني'
+                   style={{ borderColor: "#D4B265" }}
+                   onChange={(e)=>{
+                     setUser({
+                        ...user,
+                        email:e.target.value
+                     })
+                   }}
+                 />
+                
+                 }
+               </FormGroup>
+               </div>
+               <div className='col-md-5 col-sm-12'> 
+               <FormGroup>
+                 <Label for="exampleSelect">كلمة المرور</Label>
+                 {
+                   <Input
+                   id="exampleSelect"
+                   name="select"
+                   type="password"
+                   placeholder='كلمة المرور'
+                   style={{ borderColor: "#D4B265" }}
+                   onChange={(e)=>{
+                     setUser({
+                        ...user,
+                        password:e.target.value
+                     })
+                   }}
+                 />
+                
+                 }
+               </FormGroup>
+               </div>
+               <div className='col-md-5 col-sm-12'> 
+               <FormGroup>
+                 <Label for="exampleSelect">تأكيد كلمة المرور</Label>
+                 {
+                   <Input
+                   id="exampleSelect"
+                   name="select"
+                   type="password"
+                   placeholder='تأكيد كلمة المرور'
+                   style={{ borderColor: "#D4B265" }}
+                   onChange={(e)=>{
+                     setUser({
+                        ...user,
+                        password_confirmation:e.target.value
+                     })
+                   }}
+                 />
+                
+                 }
+               </FormGroup>
+               </div>
+               <div className='col-md-5 col-sm-12 '> 
+                  { 
+                  errors ? 
+                    Object.keys(errors)?.map((key,value)=>(
+                      <div className=''> 
+                        {errors[key]?.map(err=>(
+                        <div className='alert alert-danger'>
+                          {key} {err}
+                        </div>
+                        ))
+                        }
+                      </div>
+                    ))
+                    : null
+                  }
+               </div>
+             
+               <div className='col-md-5 col-sm-12' style={{gap:"30px"}}>
+                 <button onClick={()=>handelClick()} style={{border:"none",background:"#D4B265",color:"#fff",height:"48px",cursor:"pointer"}}>
+                 تسجيل   
+                 </button>
+               </div>
+               
+         </div>
+         <div className='col-md-4 col-sm-12 logo' style={{backgroundColor:"#005D5E"}}>
+               <img src={logo} className="m-auto"/>
+         </div>
+
+      </div>
       );
    }
-}
 
 // map state to props
-const mapStateToProps = ({ authUser }) => {
-   const { loading } = authUser;
-   return { loading };
-};
+// const mapStateToProps = ({ authUser }) => {
+//    const { loading } = authUser;
+//    return { loading };
+// };
 
-export default connect(mapStateToProps, {
-   signupUserInFirebase,
-   signinUserWithFacebook,
-   signinUserWithGoogle,
-   signinUserWithGithub,
-   signinUserWithTwitter
-})(SignupFirebase);
+// export default connect(mapStateToProps, {
+//    signupUserInFirebase,
+//    signinUserWithFacebook,
+//    signinUserWithGoogle,
+//    signinUserWithGithub,
+//    signinUserWithTwitter
+// })(SignupFirebase);
+export default SignupFirebase

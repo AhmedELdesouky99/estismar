@@ -18,6 +18,7 @@ import {
     TOGGLE_DARK_SIDENAV,
     AGENCY_TOGGLE_MENU,
 	 CHANGE_AGENCY_LAYOUT_BG,
+     TOGGLEINDEX,
 } from './types';
 
 /**
@@ -35,6 +36,9 @@ export const collapsedSidebarAction = (isCollapsed) => ({
 export const startUserTour = () => ({
     type: START_USER_TOUR
 });
+export const ChangeRoute =(index)=>{
+    return {type:TOGGLEINDEX ,payload:index}
+}
 
 /**
  * Redux Action To Stop User Tour

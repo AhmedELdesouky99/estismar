@@ -20,6 +20,7 @@ import CustomSelect from "../shared/custom-select";
 import FieldsDropDown from "../shared/FieldsDropDown";
 import ServiceProviderDropDown from "../shared/ServiceProviderDropDown";
 import Select from "react-select";
+import { useSelector } from "react-redux";
 
 const trimFields = ["email", "nid"];
 
@@ -74,7 +75,7 @@ export function FiltersAndSearches({
     setcollectedQuery(query);
     setQuery(query);
   }
-
+	const {user}=useSelector(state=>state.authUser.user)
   return (
     <form className="w-100" onSubmit={(e) => e.preventDefault()}>
       <div className="row grid-gap-10 w-100 m-0">
@@ -127,7 +128,7 @@ export function FiltersAndSearches({
             </FormGroup>
           </div>
         )}
-        {filters?.includes("service_provider") && (
+        {filters?.includes("service_provider")  && user?.category != "service-provider" && (
           <div className="col-md-3 mt-1">
             <FormGroup>
               <Label for="exampleEmail">

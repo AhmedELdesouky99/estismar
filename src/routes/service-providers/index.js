@@ -132,7 +132,6 @@ const ServiceProviders = ({ match }) => (
   
    <div className="Crm-wrapper">
       <Switch>
-        {console.log(match,"match")}
          {/* <Redirect exact from={`${match.url}/`} to={`${match.url}/`} /> */}
          <Route exact path={`${match.url}/`} component={ServiceProvidersComponent} />
          <Route exact path={`${match.url}/add`} component={AddEditServiceProvider} />

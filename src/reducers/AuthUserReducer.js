@@ -15,21 +15,22 @@ import {
  * initial auth user
  */
 const INIT_STATE = {
-    user: localStorage.getItem('user_id'),
-    loading: false
+    user: localStorage.getItem('user_id') ? JSON.parse(localStorage.getItem('user_id')) : null,
+    loading: false,
+    errors:null
 };
 
 export default (state = INIT_STATE, action) => {
     switch (action.type) {
 
         case LOGIN_USER:
-            return { ...state, loading: true };
+            return { ...state, loading: true ,user:action.payload};
 
         case LOGIN_USER_SUCCESS:
             return { ...state, loading: false, user: action.payload };
 
         case LOGIN_USER_FAILURE:
-            return { ...state, loading: false };
+            return { ...state, loading: false,errors:action.payload };
 
         case LOGOUT_USER:
             return { ...state, user: null };
@@ -41,7 +42,7 @@ export default (state = INIT_STATE, action) => {
             return { ...state, loading: false, user: action.payload };
 
         case SIGNUP_USER_FAILURE:
-            return { ...state, loading: false };
+            return { ...state, loading: false,errors:action.payload  };
 
         default: return { ...state };
     }

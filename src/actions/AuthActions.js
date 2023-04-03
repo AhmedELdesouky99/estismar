@@ -15,7 +15,7 @@ import {
    SIGNUP_USER_SUCCESS,
    SIGNUP_USER_FAILURE
 } from 'Actions/types';
-
+import axios from "axios"
 /**
  * Redux Action To Sigin User With Firebase
  */
@@ -34,7 +34,40 @@ export const signinUserInFirebase = (user, history) => (dispatch) => {
          NotificationManager.error(error.message);
       });
 }
+export const HandelSignin = (user,history) => (dispatch) => {
+   console.log(user ,"from actions ")
+   axios.post("https://estithmar.arabia-it.net/api/auth/login",{...user}
+  ).then(res=>{
+   if(res.status == 200){
+      console.log(res,"res")
+   localStorage.setItem("user_id",JSON.stringify(res.data.data))
+   localStorage.setItem("token",res.data.data.access_token)
+   dispatch({ type: LOGIN_USER_SUCCESS, payload: res.data.data });
+   history.push('/');
+   }
+  }).catch(res=>{
+   dispatch({ type: SIGNUP_USER_FAILURE ,payload:"البريد الالكتروني او كلمة المرور غير صحيح "});
 
+  })
+
+}
+export const HandelSignUp = (user,history) => (dispatch) => {
+   console.log(user ,"from actions ")
+   axios.post("https://estithmar.arabia-it.net/api/auth/register",{...user}
+  ).then(res=>{
+   if(!res.data.errors){
+   localStorage.setItem("user_id",JSON.stringify(res?.data?.data))
+   localStorage.setItem("token",res.data?.data?.access_token)
+   dispatch({ type: LOGIN_USER_SUCCESS, payload: res?.data?.data });
+   history.push('/');
+   }else{
+      console.log(res,"res in error ")
+      // NotificationManager.error("");
+      dispatch({ type: SIGNUP_USER_FAILURE ,payload:res.data.errors});
+   }
+  }).catch(err=>NotificationManager.error(err.message))
+
+}
 /**
  * Redux Action To Signout User From  Firebase
  */

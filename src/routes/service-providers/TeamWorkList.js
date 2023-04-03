@@ -7,68 +7,84 @@ import { Pagination } from "@material-ui/lab";
 import useSetState from "Hooks/useSetState";
 import RctCollapsibleCard from "Components/RctCollapsibleCard/RctCollapsibleCard";
 import CustomTable from "Components/shared/CustomTable";
-import { ServiceData } from "./serviceData";
+import { TeamData } from "./TeamData";
 import StatusDropDown from "Components/shared/StatusDropDown"
-import axios from "axios"
 import PerPage from "Components/shared/PerPage";
 
+import axios from "axios"
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin" 
  
 });
-function ServiceList({ allowners, loading, setPage, limit, setLimit ,status}) {
+function TeamWorkList({ allowners, loading, setPage, limit, setLimit,status }) {
   const history = useHistory();
-  const [owners, setOwners] = useSetState({
+  const [services, setServices] = useSetState({
     collection: [],
     metadata: {},
   });
-  const { collection ,metadata} = owners;
+  const { collection ,metadata} = services;
+  console.log(collection,"collection")
   useEffect(() => {
-    setOwners({
+    setServices({
       collection: allowners?.data,
+    
       metadata: {
         totalCount:allowners?.total,
         currentPage:allowners?.current_page
-      },
+      }, 
+      // allservices?.allservices?.metadata,
     });
   }, [allowners]);
 
   const handelDeleteBanner = (id) => {
-    const filteredOwner= owners.collection.filter(owner=>owner.id != id)
-    setOwners({
-      collection:filteredOwner,
+    const filteredService= services.collection.filter(service=>service.user_id != id)
+    setServices({
+      collection:filteredService,
       metadata: allowners?.allowners?.metadata,
     })
 
-    client.delete(`/asset-owner/${id}`).then((res)=>console.log(res,"res")).catch((err)=>console.log(err,"err"))
+    client.delete(`/service-provider/${id}`).then((res)=>console.log(res,"res")).catch((err)=>console.log(err,"err"))
     
   };
 
-  const actions = ({ id }) => (
+  const actions = ({ user_id }) => (
     <div className="d-flex align-items-center" style={{ gap: "5px" }}>
       {/* Redirects to Car details */}
+
+      
         <Tooltip title={ "common.edit"} placement="top">
-          <Link to={`/app/orders/${id}`}>
+          <Link to={`service-provider/${user_id}`}>
             <button className="border-0" style={{background:"#23D381",color:"#fff"}}>
             <i className=" ti-eye m-1"></i>
             </button>
           </Link>
         </Tooltip>
+      
+      <Tooltip title={"common.delete"} placement="top">
+      <button className="border-0" style={{background:"#CF4949",color:"#fff"}}>
+
+        <i
+          style={{ cursor: "pointer" }}
+          className=" ti-trash m-1"
+          onClick={() => handelDeleteBanner(user_id)}
+        ></i>
+        </button>
+      </Tooltip>
     </div>
   );
   const dropdownActions =(record)=>(
-    <StatusDropDown  activationStatus={record.status} id={record.id} client={client} url={`asset-owner/${record.id}`}/>
+    <StatusDropDown  activationStatus={record?.is_active} id={record?.id} client={client} url={`service-provider/${record?.user_id}`}/>
   )
   return (
     <Typography component="div" style={{ padding: "10px", marginTop: "20px" }}>
       <div>
         <RctCollapsibleCard fullBlock table>
           <CustomTable
-            tableData={ServiceData}
+            tableData={TeamData}
             loading={loading}
             tableRecords={collection}
             actions={actions}
-            actionsArgs={["id"]}
+            actionsArgs={["user_id"]}
             dropdownActions={dropdownActions}
           />
         </RctCollapsibleCard>
@@ -97,7 +113,7 @@ function ServiceList({ allowners, loading, setPage, limit, setLimit ,status}) {
   );
 }
 
-ServiceList.propTypes = {
+TeamWorkList.propTypes = {
   setPage: PropTypes.func,
   setLimit: PropTypes.func,
   refetch: PropTypes.func,
@@ -106,4 +122,4 @@ ServiceList.propTypes = {
   limit: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
-export default ServiceList;
+export default TeamWorkList;

@@ -18,6 +18,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import ServiceProviderDropDown from "../../../components/shared/ServiceProviderDropDown";
 import FieldsDropDown from "../../../components/shared/FieldsDropDown";
 import Select from "react-select";
+import { useSelector } from "react-redux";
 
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin",
@@ -30,6 +31,8 @@ const AddEditService = () => {
   const [rquiredOptions, setRequiredOptions] = useState([]);
   const { id } = useParams();
   const history=useHistory()
+	const {user}=useSelector(state=>state.authUser.user)
+console.log(user,"user redux ")
   const [Delivery, setDelivery] = useState({
     title:"",
     count: 10,
@@ -47,7 +50,7 @@ const AddEditService = () => {
     {
       "title" : "",
       "description" : "",
-      "provider_id" : "",
+      "provider_id" : user?.category == "service-provider" ? user?.id : "" ,
       "field_id" : "",
   
       "executive_steps" : [], 
@@ -91,7 +94,7 @@ const AddEditService = () => {
             setService({
               title:res.data.data.title,
               field_id:res.data.data.field_id,
-              provider_id:res.data.data.service_provider.user_id,
+              provider_id:user?.category == "service-provider"  ? user?.id :res.data.data.service_provider.user_id ,
               description:res.data.data.description,
               service_border:border,
               service_requirment:service_requirment,
@@ -111,6 +114,7 @@ const AddEditService = () => {
         
       }
   },[id])
+  
  const AddService=()=>{
   client
   .post("/service", {
@@ -166,7 +170,9 @@ const AddEditService = () => {
                 <div>
                   <FormGroup>
                     <Label for="exampleSelect">مزود الخدمة</Label>
-                    {
+                    { user?.category == "service-provider" ?  <p>
+                      {user?.name}
+                    </p>: 
                    
                       <ServiceProviderDropDown
                       onChange={(sel) => {

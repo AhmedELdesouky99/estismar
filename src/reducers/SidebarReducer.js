@@ -2,7 +2,7 @@
  * Sidebar Reducers
  */
 import update from 'react-addons-update';
-import { TOGGLE_MENU, AGENCY_TOGGLE_MENU } from 'Actions/types';
+import { TOGGLE_MENU, AGENCY_TOGGLE_MENU,TOGGLEINDEX } from 'Actions/types';
 
 // nav links
 import navLinks from 'Components/Sidebar/NavLinks';
@@ -11,6 +11,7 @@ import agencyNavLinks from 'Components/AgencyMenu/NavLinks';
 const INIT_STATE = {
 	sidebarMenus: navLinks,
 	agencySidebarMenu: agencyNavLinks,
+	index:0
 };
 
 export default (state = INIT_STATE, action) => {
@@ -111,6 +112,8 @@ export default (state = INIT_STATE, action) => {
 					}
 				}
 			});
+		case TOGGLEINDEX :
+			return { ...state,index: action.payload}
 		default:
 			return { ...state };
 	}

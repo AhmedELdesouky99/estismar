@@ -22,6 +22,8 @@ export const SEARCH_USERS = 'SEARCH_USERS';
 export const GET_RECENT_CHAT_USERS = 'GET_RECENT_CHAT_USERS';
 // Agency Sidebar
 export const AGENCY_TOGGLE_MENU = 'AGENCY_TOGGLE_MENU';
+export const TOGGLEINDEX = 'TOGGLEINDEX';
+
 export const CHANGE_AGENCY_LAYOUT_BG = 'CHANGE_AGENCY_LAYOUT_BG';
 // Mail App
 export const GET_EMAILS = 'GET_EMAILS';

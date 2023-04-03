@@ -175,6 +175,9 @@ import ServiceProviderProfile from './ServiceProviderProfile';
 import AdvisorProfile from "./AdvisorProfile"
 import Services from '../../routes/AllServices/AllServices';
 import AssetsService from "../../routes/owner-assets/AssetsService"
+import AllTeam from '../../routes/service-providers/AllTeam';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -218,19 +221,26 @@ const useStyles = makeStyles((theme) => ({
 export default function TabsView(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+const {user}=useSelector(state=>state.authUser.user)
+const {sidebar}=useSelector(state=>state)
 
+  console.log(user,"user")
+  // console.log(st,"statered")
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+// useEffect(()=>{
+
+// },[sidebar.index])
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" style={{display:user ? "none" :""}}>
      
 
          {
               props.serviceProvider ? 
-              <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" style={{justifyContent:"space-between"}}>
+              <Tabs value={sidebar.index} onChange={handleChange} aria-label="simple tabs example" style={{justifyContent:"space-between"}}>
               <Tab label="البروفايل" {...a11yProps(0)} />
               <Tab label="الخدمات" {...a11yProps(1)} />
               <Tab label="الباقات" {...a11yProps(2)} />
@@ -261,7 +271,7 @@ export default function TabsView(props) {
            
        
       </AppBar>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={sidebar.index} index={0}>
       {
                           props.serviceProvider ? 
                             <ServiceProviderProfile providerDetails={props.providerDetails}/>
@@ -273,7 +283,7 @@ export default function TabsView(props) {
 
                          }
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={sidebar.index} index={1}>
         {
              props.serviceProvider ? 
              <Services inTabs={true}/> : 
@@ -283,8 +293,11 @@ export default function TabsView(props) {
         }
      
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={sidebar.index} index={2}>
         Item Three
+      </TabPanel>
+      <TabPanel value={sidebar.index} index={3}>
+        <AllTeam />
       </TabPanel>
     </div>
   );
