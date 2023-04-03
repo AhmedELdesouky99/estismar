@@ -38,7 +38,7 @@ export default function Services({inTabs}) {
         limit,
         page,
         field_id:query.field_id ? query.field_id : undefined,
-        service_provider_id: id && location.pathname.includes("service-provider") ? id : user?.id ? user?.id :  query.service_provider_id ? query.service_provider_id : undefined,
+        service_provider_id: id && location.pathname.includes("service-provider") ? id : user?.category =="service-provider" ? user?.id :  query.service_provider_id ? query.service_provider_id : undefined,
         status: query.status ? query.status : undefined,
         support_ratio:query.support_ratio ? query.support_ratio : undefined
       }
