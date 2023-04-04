@@ -151,6 +151,7 @@ console.log(user,"user redux ")
     }
   })
  }
+ console.log(Service,"Service")
   return (
     <div className="clients-wrapper">
       <Helmet>
@@ -160,6 +161,7 @@ console.log(user,"user redux ")
         title={<IntlMessages id="الخدمات" />}
         match={location}
         enableBreadCrumb
+        lastElement={Service?.title || "اضافة خدمة"}
       />
 
       <div className="col-md-11">

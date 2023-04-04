@@ -138,7 +138,6 @@ const AllAdvisors = ({ match }) => (
   
    <div className="Crm-wrapper">
       <Switch>
-        {console.log(match,"match")}
          {/* <Redirect exact from={`${match.url}/`} to={`${match.url}/`} /> */}
          <Route exact path={`${match.url}/add`} component={AddEditAdvisor} />
          <Route exact path={`${match.url}/:id`} component={AddEditAdvisor} />

@@ -42,12 +42,13 @@ export default function AddEditOwnersAssets() {
   return (
     <div className="clients-wrapper">
        <Helmet>
-         <title>{"sidebar.الأوقاف"}</title>
+         <title>{"مزودي الخدمات"}</title>
        </Helmet>
        <PageTitleBar
-         title={<IntlMessages id="الأوقاف" />}
+         title={<IntlMessages id={"مزودي الخدمات"} />}
          match={location}
          enableBreadCrumb
+         lastElement={ providerDetails?.user?.name || "اضافة مزود خدمة" }
          // extraButtons={
          //   <>
          //     {userCan("branches.create") && (

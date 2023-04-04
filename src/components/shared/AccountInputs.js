@@ -242,7 +242,6 @@ useEffect(()=>{
             loader={loader}
             image={EnImage}
             setImage={(file) => {
-              // console.log(file,"file")
               uploadEnimage(file);
             }}
           />

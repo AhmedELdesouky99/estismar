@@ -34,7 +34,6 @@ function ServiceList({ allowners, loading, setPage, limit, setLimit ,status}) {
   }, [allowners]);
 
   const handelDeleteBanner = (id) => {
-    console.log(id)
     const filteredService= owners.collection.filter(service=>service.id != id)
     setOwners({
       collection:filteredService,

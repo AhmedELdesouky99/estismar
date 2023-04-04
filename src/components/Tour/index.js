@@ -15,62 +15,62 @@ class TourComponent extends Component {
     super(props);
     this.state = {
       steps: [
-        {
-          title: 'Quick Links',
-          text: 'Use this to quickly navigate to frequently used pages.',
-          textAlign: 'left',
-          selector: '.tour-step-1',
-          position: 'bottom',
-          isFixed: true
-        },
       //   {
-      //     title: 'Dynamic To do List',
-      //     text: 'Fully functional widget with working add, delete, refresh and cancel buttons.',
+      //     title: 'Quick Links',
+      //     text: 'Use this to quickly navigate to frequently used pages.',
       //     textAlign: 'left',
-      //     selector: '.tour-step-2',
+      //     selector: '.tour-step-1',
+      //     position: 'bottom',
+      //     isFixed: true
+      //   },
+      // //   {
+      // //     title: 'Dynamic To do List',
+      // //     text: 'Fully functional widget with working add, delete, refresh and cancel buttons.',
+      // //     textAlign: 'left',
+      // //     selector: '.tour-step-2',
+      // //     position: 'left',
+      // //     isFixed: true
+      // //   },
+      //   {
+      //     title: 'Summary',
+      //     text: 'Quickly become aquainted with your platform.',
+      //     textAlign: 'left',
+      //     selector: '.tour-step-3',
+      //     position: 'right',
+      //     isFixed: true
+      //   },
+      //   {
+      //     title: 'Upgrade Plan',
+      //     text: 'Upgrade to your preferred subscription plan.',
+      //     textAlign: 'left',
+      //     selector: '.tour-step-4',
+      //     position: 'bottom',
+      //     isFixed: true
+      //   },
+      //   {
+      //     title: 'Multi Languages',
+      //     text: 'Switch to your preferred language.',
+      //     textAlign: 'left',
+      //     selector: '.tour-step-5',
       //     position: 'left',
       //     isFixed: true
       //   },
-        {
-          title: 'Summary',
-          text: 'Quickly become aquainted with your platform.',
-          textAlign: 'left',
-          selector: '.tour-step-3',
-          position: 'right',
-          isFixed: true
-        },
-        {
-          title: 'Upgrade Plan',
-          text: 'Upgrade to your preferred subscription plan.',
-          textAlign: 'left',
-          selector: '.tour-step-4',
-          position: 'bottom',
-          isFixed: true
-        },
-        {
-          title: 'Multi Languages',
-          text: 'Switch to your preferred language.',
-          textAlign: 'left',
-          selector: '.tour-step-5',
-          position: 'left',
-          isFixed: true
-        },
-        {
-          title: 'Theme Options',
-          text: 'Customise your dashboard with theme settings.',
-          textAlign: 'left',
-          selector: '.tour-step-6',
-          position: 'left',
-          isFixed: true
-        },
-        {
-          title: 'Dynamic Breadcrumbs',
-          text: 'Dynamic breadcrumbs to go back to your required page.',
-          textAlign: 'left',
-          selector: '.tour-step-7',
-          position: 'left',
-          isFixed: true
-        }
+      //   {
+      //     title: 'Theme Options',
+      //     text: 'Customise your dashboard with theme settings.',
+      //     textAlign: 'left',
+      //     selector: '.tour-step-6',
+      //     position: 'left',
+      //     isFixed: true
+      //   },
+      //   {
+      //     title: 'Dynamic Breadcrumbs',
+      //     text: 'Dynamic breadcrumbs to go back to your required page.',
+      //     textAlign: 'left',
+      //     selector: '.tour-step-7',
+      //     position: 'left',
+      //     isFixed: true
+      //   }
       ],
       step: 0,
     };

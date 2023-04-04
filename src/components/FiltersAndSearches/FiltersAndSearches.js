@@ -251,6 +251,6 @@ FiltersAndSearches.propTypes = {
   multi: PropTypes.bool,
   model: PropTypes.string,
   make: PropTypes.string,
-  refetch: PropTypes.func.isRequired,
+  // refetch: PropTypes.func.isRequired,
   extraButtons: PropTypes.oneOfType([PropTypes.element, PropTypes.array]),
 };

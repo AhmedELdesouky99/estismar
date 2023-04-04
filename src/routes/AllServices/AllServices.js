@@ -53,10 +53,9 @@ export default function Services({inTabs}) {
       <title>{"الخدمات"}</title>
     </Helmet>
     <PageTitleBar
-      title={<IntlMessages id="الخدمات" />}
+      title={<IntlMessages id="services" />}
       match={location}
       enableBreadCrumb
-     
     />
           </>
       :

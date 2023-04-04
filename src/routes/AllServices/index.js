@@ -138,7 +138,6 @@ const AllServices = ({ match }) => (
   
    <div className="Crm-wrapper">
       <Switch>
-        {console.log(match,"match")}
          {/* <Redirect exact from={`${match.url}/`} to={`${match.url}/`} /> */}
          <Route exact path={`${match.url}/`} component={Services} />
          <Route exact path={`${match.url}/project-detail/:id`} component={AsyncProjectDetailComponent} />

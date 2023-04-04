@@ -228,8 +228,6 @@ const {user}=useSelector(state=>state.authUser.user)
 const {sidebar}=useSelector(state=>state)
 const dispatch=useDispatch()
 
-  console.log(user,"user")
-  // console.log(st,"statered")
   const handleChange = (event, newValue) => {
     dispatch(ChangeRoute(newValue))
     setValue(newValue);

@@ -723,8 +723,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
             image={forthImage}
             name={"الشهادة البنكية"}
             setImage={(file) => {
-              // console.log(file,"file")
-              //    setFirstImage
               UploadFile(file, "forth");
             }}
           />

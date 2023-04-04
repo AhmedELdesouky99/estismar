@@ -35,7 +35,6 @@ function AdvisorList({ allowners, loading, setPage, limit, setLimit ,status}) {
 
   const handelDeleteBanner = (id) => {
     const filteredService= owners.collection.filter(service=>service.user_id != id)
-    console.log(filteredService,"filteredService")
     setOwners({
       collection:filteredService,
       metadata:allowners?.allowners?.metadata,

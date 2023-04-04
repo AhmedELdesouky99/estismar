@@ -55,7 +55,6 @@ const history=useHistory()
    dispatch(HandelSignUp(user,history))
   } 
   const {errors} =useSelector(state=>state.authUser)
-  console.log(errors,"state in redux ")
       return (
          <div className='row' style={{height:"100vh" ,textAlign:"right"}}>
          <div className='col-md-8 col-sm-12' style={{margin:"auto",direction:"rtl",paddingRight:"50px"}}>
@@ -70,7 +69,6 @@ const history=useHistory()
                   placeholder="نوع المستخدم"
                   style={{direction:"ltr"}}
                   onChange={(opt)=>{
-                     console.log(opt,"opt")
                      setUser({
                         ...user,
                         category:opt.value

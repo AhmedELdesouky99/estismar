@@ -69,17 +69,16 @@ const ServiceProviderDropDown = ({
     const [options,setOptions]=useState([])
     const [pagination,setPagintation]=useState()
     const [page,setPage]=useState(1)
-console.log(selectedItem,"selectedItem")
     const incPage = () => setPage((pg) => pg + 1);
     const decPage = () => setPage((pg) => pg - 1);
     useEffect(()=>{
         client.get("/service-provider" ,{
           params:{
             page,
-            limit:10
+            limit:50
           }
         }).then((res)=>{
-            // console.log(res.data.data.data,"res.data.data.data")
+
           const Alloptions =res.data.data.data.map(field=>(
             
             {

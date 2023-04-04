@@ -42,12 +42,13 @@ export default function AddEditAdvisor() {
   return (
     <div className="clients-wrapper">
        <Helmet>
-         <title>{"sidebar.الأوقاف"}</title>
+         <title>{"المستشاريين"}</title>
        </Helmet>
        <PageTitleBar
-         title={<IntlMessages id="الأوقاف" />}
+         title={<IntlMessages id="المستشاريين" />}
          match={location}
          enableBreadCrumb
+         lastElement={advisorDetails?.ar_name|| "اضافة مستشار"}
          // extraButtons={
          //   <>
          //     {userCan("branches.create") && (

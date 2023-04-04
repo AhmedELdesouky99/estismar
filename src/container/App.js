@@ -75,7 +75,6 @@ const InitialPath = ({ component: Component, authUser, ...rest }) =>
 
 const App = ({location, match })=> {
    const {user} =useSelector((state)=>state.authUser)
-   console.log(user,"user")
    if (location.pathname === '/') {
       if (user === null) {
          return (<Redirect to={'/app/owners-assets'} />);
@@ -84,8 +83,6 @@ const App = ({location, match })=> {
             return  (<Redirect to={`/app/service-provider/${user.user.id}`} />)
          }
          return (<Redirect to={'/app/owners-assets'} />);
-         // console.log(user.user.category,"in app ")
-         // return (<Redirect to={'/app/owners-assets'} />);
       }
    }
       return (

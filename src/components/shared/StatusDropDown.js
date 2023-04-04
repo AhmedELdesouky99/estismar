@@ -18,11 +18,9 @@ useEffect(()=>{
       {name:"قيد الانتظار",id:0},
       {name:"مرفوض",id:-1},
   ].find(one=>one.id == props.activationStatus)
-  console.log(StatusDropDown,"StatusDropDown")
     setActiveStatus(activeStatus)
   }
 },[props.activationStatus])
-console.log(props,"prop")
 const changeStatus=(status)=>{
   setActiveStatus(status)
   props.client.put(`${props.url}`,{

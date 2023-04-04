@@ -48,6 +48,7 @@ export default function AddEditOwnersAssets() {
          title={<IntlMessages id={ id ?  ownerDetails?.user?.name:"اضافة وقف "}/>}
          match={location}
          enableBreadCrumb
+         lastElement= { id ? ownerDetails?.user?.name : "اضافة وقف "}
          // extraButtons={
          //   <>
          //     {userCan("branches.create") && (

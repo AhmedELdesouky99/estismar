@@ -33,7 +33,6 @@ class StockExchange extends Component {
 				this.setState({ loading: false, ratesData: response.data })
 			})
 			.catch(error => {
-				console.log(error);
 				this.setState({ loading: false })
 			})
 	}
