@@ -187,7 +187,7 @@ const handelClick=()=>{
          //       </div>
          //    </div>
          // </QueueAnim>
-         <div className='row' style={{height:"100vh" ,textAlign:"right"}}>
+         <div className='row' style={{height:"100vh" ,textAlign:"right",direction:"ltr"}}>
             <div className='col-md-8 col-sm-12' style={{margin:"auto",direction:"rtl",padding:"50px"}}>
                   <p className='title-login' style={{position:"relative"}}>
                   تسجيل دخول

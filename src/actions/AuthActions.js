@@ -79,6 +79,21 @@ export const logoutUserFromFirebase = () => (dispatch) => {
       })
 }
 
+export const LogOut = () => (dispatch) => {
+   // firebase.auth().signOut()
+   //    .then(() => {
+   //       dispatch({ type: LOGOUT_USER });
+   //       localStorage.removeItem('user_id');
+   //       NotificationManager.success('User Logout Successfully');
+   //    })
+   //    .catch((error) => {
+   //       NotificationManager.error(error.message);
+   //    })
+   dispatch({ type: LOGOUT_USER });
+         localStorage.removeItem('user_id');
+         NotificationManager.success('User Logout Successfully');
+
+}
 /**
  * Redux Action To Signup User In Firebase
  */

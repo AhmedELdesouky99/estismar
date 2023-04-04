@@ -22,6 +22,7 @@ import { getAppLayout } from "Helpers/helpers";
 
 // components
 import Notifications from './Notifications';
+import SignOut from "./SignOut"
 import ChatSidebar from './ChatSidebar';
 import DashboardOverlay from '../DashboardOverlay/DashboardOverlay';
 import LanguageProvider from './LanguageProvider';
@@ -114,7 +115,7 @@ class Header extends Component {
 										</Tooltip>
 									</li>
 								}
-								{/* {!horizontalMenu && <QuickLinks />} */}
+								{!horizontalMenu && <QuickLinks />}
 								{/* <li className="list-inline-item search-icon d-inline-block">
 									<IconButton mini="true" className="search-icon-btn" onClick={() => this.openMobileSearchForm()}>
 										<i className="zmdi zmdi-search"></i>
@@ -145,8 +146,10 @@ class Header extends Component {
 							</li>
 						} */}
 						<LanguageProvider />
-						{/* <Notifications />
-						<Cart /> */}
+						{/* {!horizontalMenu && <QuickLinks />} */}
+						{/* <Notifications /> */}
+						<SignOut />
+						{/* <Cart /> */}
 						{/* <li className="list-inline-item setting-icon">
 							<Tooltip title="Chat" placement="bottom">
 								<IconButton aria-label="settings" onClick={() => this.setState({ customizer: true })}>
