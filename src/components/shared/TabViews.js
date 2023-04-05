@@ -300,7 +300,7 @@ const dispatch=useDispatch()
         Item Three
       </TabPanel>
       <TabPanel value={sidebar.index} index={3}>
-        {/* <AllTeam /> */}
+        <AllTeam />
       </TabPanel>
     </div>
   );

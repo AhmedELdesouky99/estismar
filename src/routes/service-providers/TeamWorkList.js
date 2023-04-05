@@ -12,8 +12,13 @@ import StatusDropDown from "Components/shared/StatusDropDown"
 import PerPage from "Components/shared/PerPage";
 
 import axios from "axios"
+import { useSelector } from "react-redux";
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin" 
+ 
+});
+const client2 =axios.create({
+  baseURL: "https://estithmar.arabia-it.net/api" 
  
 });
 function TeamWorkList({ allowners, loading, setPage, limit, setLimit,status }) {
@@ -23,7 +28,8 @@ function TeamWorkList({ allowners, loading, setPage, limit, setLimit,status }) {
     metadata: {},
   });
   const { collection ,metadata} = services;
-  console.log(collection,"collection")
+  const { user } = useSelector((state) => state.authUser);
+
   useEffect(() => {
     setServices({
       collection: allowners?.data,
@@ -43,7 +49,15 @@ function TeamWorkList({ allowners, loading, setPage, limit, setLimit,status }) {
       metadata: allowners?.allowners?.metadata,
     })
 
-    client.delete(`/service-provider/${id}`).then((res)=>console.log(res,"res")).catch((err)=>console.log(err,"err"))
+    client2.delete(`/provider/user/${id}`,
+    {
+      params: {
+      
+        token: user.access_token ? user.access_token : undefined,
+       
+      },
+    }
+    ).then((res)=>console.log(res,"res")).catch((err)=>console.log(err,"err"))
     
   };
 

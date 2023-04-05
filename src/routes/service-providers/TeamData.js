@@ -17,7 +17,8 @@ export const TeamData = [
   {
     headerId: "اسم العضو",
     dataType: FUNC,
-    func:(record)=> <Link  style={{color:"#A5A5A5"}} to={`/app/orders/${record?.id}`}>{ record?.name}</Link> 
+    func:(record)=> record?.name
+    // <Link  style={{color:"#A5A5A5"}} to={`/app/orders/${record?.id}`}>{ record?.name}</Link> 
   },
   {
     headerId: "القسم /الادارة",

@@ -52,7 +52,6 @@ useEffect(()=>{
       page:pageSelect
     }
   }).then((res)=>{
-    console.log(res.data.data.data,"fields")
     const options =res.data.data.data.map(field=>(
       {
         label:field.name,

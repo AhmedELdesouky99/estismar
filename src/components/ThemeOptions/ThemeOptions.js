@@ -167,7 +167,7 @@ class ThemeOptions extends Component {
 					<Dropdown isOpen={this.state.themeOptionPanelOpen} toggle={() => this.toggleThemePanel()}>
 						<DropdownToggle className="bg-primary">
 							<Tooltip title="Theme Options" placement="left">
-								<i className="zmdi zmdi-settings font-2x tour-step-6 spin-icon"></i>
+								<i className="zmdi zmdi-settings font-2x spin-icon"></i>
 							</Tooltip>
 						</DropdownToggle>
 						<DropdownMenu>

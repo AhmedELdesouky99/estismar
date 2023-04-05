@@ -8,6 +8,7 @@ import IntlMessages from "Util/IntlMessages";
 
 import { RctCard, RctCardContent } from "Components/RctCard";
 import CustomCard from "Components/shared/CustomCard";
+import StatusDropDown from "Components/shared/StatusDropDown"
 
 import { FiltersAndSearches } from "Components/FiltersAndSearches/FiltersAndSearches";
 import axios from "axios"
@@ -15,6 +16,9 @@ import { Button } from "reactstrap";
 import { FormattedMessage } from "react-intl";
 import { NotificationV2 } from "../../../components/Widgets";
 import TabViews from "Components/shared/TabViews";
+import moment from 'moment';
+import SharedProfileInfo from "Components/shared/SharedProfileInfo";
+
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin" 
  
@@ -39,6 +43,8 @@ export default function AddEditOwnersAssets() {
     }
 
   },[id])
+  console.log(providerDetails,"providerDetails")
+ 
   return (
     <div className="clients-wrapper">
        <Helmet>
@@ -81,12 +87,7 @@ export default function AddEditOwnersAssets() {
        
       
       </div>
-      <RctCard>
-        <RctCardContent>
-
-     
-        </RctCardContent>
-      </RctCard>
+     <SharedProfileInfo providerDetails={providerDetails} />
       <TabViews serviceProvider={true} providerDetails={providerDetails}/>
     </div>
   );

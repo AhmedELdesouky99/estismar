@@ -48,7 +48,7 @@ const PageTitleBar = ({ title, match, enableBreadCrumb,lastElement=undefined }) 
             </div>
          } */}
          {enableBreadCrumb &&
-            <Breadcrumb className="mb-0 tour-step-7" tag="nav">
+            <Breadcrumb className="mb-0" tag="nav">
                {subPath?.map((sub, index) => {
                   return <BreadcrumbItem active={subPath.length === index + 1}
                      tag={subPath.length === index + 1 ? "span" : Link} key={index}

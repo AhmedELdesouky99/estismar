@@ -16,7 +16,7 @@ import { getAppLayout } from "Helpers/helpers";
 import IntlMessages from 'Util/IntlMessages';
 
 const QuickLinks = ({ location }) => (
-	<UncontrolledDropdown nav className="list-inline-item quciklink-dropdown tour-step-1">
+	<UncontrolledDropdown nav className="list-inline-item quciklink-dropdown">
 		<DropdownToggle nav className="header-icon p-0">
 			<Tooltip title="Quick Links" placement="bottom">
 				<i className="zmdi zmdi-apps"></i>

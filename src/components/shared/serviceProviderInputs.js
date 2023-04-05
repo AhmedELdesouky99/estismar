@@ -189,7 +189,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
               </Label>
               <Input
                 style={{ borderColor: "#D4B265" }}
-                placeholder={"اسم المستخدم"}
                 type="text"
                 defaultValue={data?.name}
                 onChange={(e) =>
@@ -208,7 +207,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
               </Label>
               <Input
                 style={{ borderColor: "#D4B265" }}
-                placeholder={"البريد الإلكتروني"}
                 type="email"
                 defaultValue={data?.email}
                 onChange={(e) =>
@@ -227,7 +225,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
               </Label>
               <Input
                 style={{ borderColor: "#D4B265" }}
-                placeholder={"رقم الجوال"}
                 type="text"
                 defaultValue={data?.phone}
                 onChange={(e) =>
@@ -438,7 +435,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
               </Label>
               <Input
                 style={{ borderColor: "#D4B265" }}
-                placeholder={"الاسم التجاري بالعربية"}
                 type="text"
                 defaultValue={data?.business_name_ar}
                 value={data?.business_name_ar}
@@ -460,7 +456,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
               </Label>
               <Input
                 style={{ borderColor: "#D4B265" }}
-                placeholder={"الاسم التجاري بالانجليزية"}
                 type="text"
                 defaultValue={data?.business_name_en}
                 value={data?.business_name_en}
@@ -484,7 +479,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
               </Label>
               <Input
                 style={{ borderColor: "#D4B265" }}
-                placeholder={"اسم الشركة بالعربية"}
                 type="text"
                 defaultValue={data?.company_name_ar}
                 value={data?.company_name_ar}
@@ -506,7 +500,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
               </Label>
               <Input
                 style={{ borderColor: "#D4B265" }}
-                placeholder={"اسم الشركة بالانجليزية"}
                 type="text"
                 defaultValue={data?.company_name_en}
                 value={data?.company_name_en}
@@ -530,7 +523,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
               </Label>
               <Input
                 style={{ borderColor: "#D4B265" }}
-                placeholder={" رقم السجل التجاري"}
                 type="text"
                 defaultValue={data?.tax_nom}
                 value={data?.tax_nom}
@@ -630,7 +622,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
                 type="text"
                 style={{ borderColor: "#D4B265" }}
                 defaultValue={data?.tax_cert_nom}
-                placeholder="رقم الشهادة الضريبية"
                 value={data?.tax_cert_nom}
                 onChange={(e) => {
                   setData({
@@ -741,7 +732,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
               </Label>
               <Input
                 style={{ borderColor: "#D4B265" ,direction:"ltr"}}
-                placeholder={"https://www."}
                 type="text"
                 defaultValue={data?.website_url}
                 value={data?.website_url}
@@ -763,7 +753,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
               </Label>
               <Input
                 style={{ borderColor: "#D4B265",direction:"ltr" }}
-                placeholder={"+966 56 464 5665"}
                 type="text"
                 defaultValue={data?.watsapp_nom}
                 value={data?.watsapp_nom}
@@ -787,7 +776,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
               </Label>
               <Input
                 style={{ borderColor: "#D4B265" ,direction:"ltr"}}
-                placeholder={"https://www.facebook.com/"}
                 type="text"
                 defaultValue={data?.facebook_url}
                 value={data?.facebook_url}
@@ -809,7 +797,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
               </Label>
               <Input
                 style={{ borderColor: "#D4B265",direction:"ltr" }}
-                placeholder={"https://www.instagram.com/"}
                 type="text"
                 defaultValue={data?.insta_url}
                 value={data?.insta_url}
@@ -833,7 +820,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
               </Label>
               <Input
                 style={{ borderColor: "#D4B265",direction:"ltr" }}
-                placeholder={"https://www.twitter.com/"}
                 type="text"
                 defaultValue={data?.twitter_url}
                 value={data?.twitter_url}
@@ -855,7 +841,6 @@ const ServiceProviderInputs = ({ providerDetails }) => {
               </Label>
               <Input
                 style={{ borderColor: "#D4B265" ,direction:"ltr"}}
-                placeholder={"https://www.snapchat.com/add/"}
                 type="text"
                 defaultValue={data?.snap_url}
                 value={data?.snap_url}

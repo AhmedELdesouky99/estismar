@@ -115,7 +115,7 @@ class Header extends Component {
 										</Tooltip>
 									</li>
 								}
-								{!horizontalMenu && <QuickLinks />}
+								{/* {!horizontalMenu && <QuickLinks />} */}
 								{/* <li className="list-inline-item search-icon d-inline-block">
 									<IconButton mini="true" className="search-icon-btn" onClick={() => this.openMobileSearchForm()}>
 										<i className="zmdi zmdi-search"></i>
