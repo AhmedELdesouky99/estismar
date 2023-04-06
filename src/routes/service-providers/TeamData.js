@@ -23,7 +23,7 @@ export const TeamData = [
   {
     headerId: "القسم /الادارة",
     dataType: FUNC,
-    func:(record)=> <Link  style={{color:"#A5A5A5"}} to={`/app/service-provider/${record?.service_provider?.user_id}`}>{ record?.service_provider?.company_name_ar}</Link> 
+    func:(record)=>record?.group_name
   },
   {
     headerId: "البريد الالكتروني",

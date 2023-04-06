@@ -30,6 +30,7 @@ export default function AllTeam() {
   const { id } = useParams();
   const { user } = useSelector((state) => state.authUser);
   const [AddPage, setAddPage] = useState();
+  const [TeamMemberId,setTeamMemberId]=useState()
   useEffect(() => {
     client
       .get(`/provider/user`, {
@@ -39,10 +40,12 @@ export default function AllTeam() {
           token: user.access_token ? user.access_token : undefined,
           name:query.name ? query.name : undefined,
           status: query.status ? query.status : undefined,
+          group_name:query.group_name ? query.group_name :undefined
         },
       })
       .then((res) => setOwners(res.data.data));
-  }, [page, limit, query]);
+  }, [page, limit, query,AddPage]);
+
   return (
     <div className="clients-wrapper">
       {!AddPage ? (
@@ -61,7 +64,13 @@ export default function AllTeam() {
                       fontSize: "20px",
                     }}
                     className="mx-smt-15 btn  mr-1 ml-1 border-0"
-                    onClick={() => setAddPage(true)}
+                    onClick={() =>
+                      {
+                        setTeamMemberId(null);
+                        setAddPage(true)
+                      }
+                      
+                      }
                   >
                     <span className="mr-1 ml-1">
                       <FormattedMessage id={"إضافة عضو جديد"} />
@@ -81,7 +90,13 @@ export default function AllTeam() {
                   type: "search",
                   name: "name",
                   label: "الاسم",
-                  placeholder: "إضافة عضو جديد",
+                  placeholder: "اكتب اسم العضو",
+                },
+                {
+                  type: "search",
+                  name: "group_name",
+                  label: "القسم /الادارة",
+                  placeholder: "اكتب  القسم",
                 },
               ]}
               query={query}
@@ -98,10 +113,12 @@ export default function AllTeam() {
             limit={limit}
             allowners={owners}
             status={status}
+            setAddPage={setAddPage} 
+            setTeamMemberId={setTeamMemberId}
           />
         </>
       ) : (
-        <AddEditTeamMember setAddPage={setAddPage} />
+        <AddEditTeamMember setAddPage={setAddPage} TeamMemberId={TeamMemberId} setTeamMemberId={setTeamMemberId}/>
       )}
     </div>
   );

@@ -110,7 +110,6 @@ export default function AddEditRole() {
          match={location}
          enableBreadCrumb
       />
-   
       <RctCard>
         <RctCardContent>
             <div className="row">

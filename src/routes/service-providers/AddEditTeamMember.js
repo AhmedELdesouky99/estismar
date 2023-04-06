@@ -17,10 +17,13 @@ import RolesDropDown from "Components/shared/RolesDropDown";
 import PermissionsDropDown from "Components/shared/PermissionsDropDown"
 import AddIcon from "@material-ui/icons/Add";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { useSelector } from "react-redux";
+import CloseIcon from "@material-ui/icons/Close";
+
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin",
+  baseURL: "https://estithmar.arabia-it.net/api",
 });
-export default function AddEditTeamMember({setAddPage}) {
+export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMemberId}) {
   const location = useLocation();
   const history = useHistory();
   const [page, setPage] = useState(1);
@@ -31,74 +34,76 @@ export default function AddEditTeamMember({setAddPage}) {
   const [limit, setLimit] = useState(10);
   const [ownerDetails, setOwnerDetails] = useState();
   const [status, setStatus] = useState();
-  const [permissions, setPermissions] = useState([]);
+  const [roles, setRoles] = useState([]);
+  const [errors,setErrors]=useState()
+  const { user } = useSelector((state) => state.authUser);
 
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
-    role: "",
+  const [userData, setUserData] = useState({
+   
+    name : "",
+    email : "",
+    password : "",
+    password_confirmation : "",
+    is_active : 1,
+    group_name: "",
+    phone:"",
   });
 
   useEffect(() => {
-    if (id) {
-      client.get(`/user/${id}`).then((res) => {
-        console.log(res.data.data, "res");
-        setUser({
+    if (TeamMemberId) {
+      client.get(`/provider/user/${TeamMemberId}`,
+      {
+        params:{
+          token:user.access_token 
+        }
+      }).then((res) => {
+        setUserData({
           email: res.data.data.email,
           is_active: res.data.data.is_active,
           name: res.data.data.name,
           phone: res.data.data.phone,
-          role: res.data.data.roles[0].id,
+          group_name:res.data.data.group_name
         });
-        setPermissions(res.data.data.roles[0].permissions);
-        // setUser({
-        //   title:res.data.data.title,
-        //   field_id:res.data.data.field_id,
-        //   provider_id:res.data.data.service_provider.user_id,
-        //   description:res.data.data.description,
-        //   service_border:border,
-        //   service_requirment:service_requirment,
-        //   executive_time:res.data.data.executive_time,
-        //   stages_of_delivery:stages_of_delivery,
-        //   cost:res.data.data.cost,
-        //   tax_ratio:res.data.data.tax_ratio,
-        //   cost_after_study:res.data.data.cost_after_study,
-        //   executive_time_type:res.data.data.executive_time_type,
-        //   executive_steps:executive_steps,
-        //   executive_result:executive_result,
-        //   support_ratio:res.data.data.support_ratio
-
-        // })
+        setRoles(res.data.data.roles);
       });
     }
-  }, [id]);
+  }, [TeamMemberId]);
   const AddUser = () => {
     client
-      .post("/user", {
-        ...user,
-        password_confirmation: user.password,
+      .post("/provider/user", {
+        ...userData,
+        password_confirmation: userData.password,
+        roles:roles,
+        token:  user.access_token ,
       })
       .then((res) => {
         if (res.data.success) {
+            console.log(res,"res")
           swal({
             title: "",
             text: " تم اضافه مستخدم بنجاح",
             icon: "success",
+            
           });
+          setAddPage(false)
+          setErrors(null)
+        }else{
+            setErrors(res.data.errors)
+            return
         }
       })
-      .then(() => {
-        setTimeout(() => {
-          history.push("/app/users");
-        }, 2000);
-      });
+    //   .then(() => {
+    //     setTimeout(() => {
+    //       history.push("/app/users");
+    //     }, 2000);
+    //   });
   };
   const EditUser = () => {
     client
-      .put(`user/${id}`, {
-        ...user,
+      .put(`/provider/user/${TeamMemberId}`, {
+        ...userData,
+        token:  user.access_token ,
+        roles:roles,
         type: "update",
       })
       .then((res) => {
@@ -108,9 +113,8 @@ export default function AddEditTeamMember({setAddPage}) {
             text: " تم تعديل المستخدم بنجاح",
             icon: "success",
           });
-          setTimeout(() => {
-            history.push("/app/users");
-          }, 2000);
+          setAddPage(false)
+          setErrors(null)
         }
       });
   };
@@ -118,7 +122,12 @@ export default function AddEditTeamMember({setAddPage}) {
     <div className="clients-wrapper">
       <div className="row">
         <div className="col-md-6 col-sm-12 mt-1">
-          <h4>إضافة عضو جديد</h4>
+          <h4>
+            {
+              TeamMemberId ? userData.name : 
+              "  إضافة عضو جديد"
+            }
+          </h4>
         </div>
         <div className="col-md-6 col-sm-12 mt-1">
             <div className="row justify-content-end m-0">
@@ -132,7 +141,8 @@ export default function AddEditTeamMember({setAddPage}) {
               width:"75px"
             }}
             onClick={() => {
-              setAddPage(false)
+              setAddPage(false);
+              setTeamMemberId(null);
             }}
           >
             {/* <AddIcon /> */}
@@ -151,12 +161,12 @@ export default function AddEditTeamMember({setAddPage}) {
             <Input
               id="exampleSelect"
               name="select"
-              value={user.name}
+              value={userData.name}
               type="text"
               style={{ borderColor: "#D4B265" }}
               onChange={(e) => {
-                setUser({
-                  ...user,
+                setUserData({
+                  ...userData,
                   name: e.target.value,
                 });
               }}
@@ -177,10 +187,10 @@ export default function AddEditTeamMember({setAddPage}) {
                   name="select"
                   type="text"
                   style={{ borderColor: "#D4B265" }}
-                  value={user.email}
+                  value={userData.email}
                   onChange={(e) => {
-                    setUser({
-                      ...user,
+                    setUserData({
+                      ...userData,
                       email: e.target.value,
                     });
                   }}
@@ -197,10 +207,10 @@ export default function AddEditTeamMember({setAddPage}) {
                   name="select"
                   type="text"
                   style={{ borderColor: "#D4B265" }}
-                  value={user.phone}
+                  value={userData.phone}
                   onChange={(e) => {
-                    setUser({
-                      ...user,
+                    setUserData({
+                      ...userData,
                       phone: e.target.value,
                     });
                   }}
@@ -219,10 +229,10 @@ export default function AddEditTeamMember({setAddPage}) {
                   <FormattedHTMLMessage id={"الحالة"} />
                 </Label>
                 <DropDownStatus
-                  selectedItem={user.is_active}
+                  selectedItem={userData.is_active}
                   onChange={(status) => {
-                    setUser({
-                      ...user,
+                    setUserData({
+                      ...userData,
                       is_active: status.value,
                     });
                   }}
@@ -239,10 +249,10 @@ export default function AddEditTeamMember({setAddPage}) {
                   name="select"
                   type="password"
                   style={{ borderColor: "#D4B265" }}
-                  value={user.password}
+                  value={userData.password}
                   onChange={(e) => {
-                    setUser({
-                      ...user,
+                    setUserData({
+                      ...userData,
                       password: e.target.value,
                     });
                   }}
@@ -253,12 +263,34 @@ export default function AddEditTeamMember({setAddPage}) {
         </div>
       </div>
       <div className="row">
+      <div className="col-md-11">
+              <FormGroup>
+                <Label for="exampleEmail">
+                  <FormattedHTMLMessage id={"القسم / الادارة"} />
+                </Label>
+                <Input
+                  id="exampleSelect"
+                  name="select"
+                  type="text"
+                  style={{ borderColor: "#D4B265" }}
+                  value={userData.group_name}
+                  onChange={(e) => {
+                    setUserData({
+                      ...userData,
+                      group_name: e.target.value,
+                    });
+                  }}
+                />
+              </FormGroup>
+            </div>
+      </div>
+      <div className="row">
         <div className="col-md-10">
           <FormGroup>
             <PermissionsDropDown
               onChange={(role) => {
                 console.log(role);
-                setPermission(role);
+                setPermission(role.label);
               }}
             />
           </FormGroup>
@@ -273,7 +305,7 @@ export default function AddEditTeamMember({setAddPage}) {
               maxHeight: "41px",
             }}
             onClick={() => {
-              setPermissions([...permissions, permission]);
+              setRoles([...roles, permission]);
             }}
           >
             <AddIcon />
@@ -282,36 +314,77 @@ export default function AddEditTeamMember({setAddPage}) {
       </div>
       <div className="row">
         <div className="col-md-11">
-          <div
-            className="card mt-2"
-            style={{ borderColor: "#D4B265", minHeight: "100px" }}
-          >
-            <div className="row" style={{ margin: "3px" }}>
-              {permissions?.map((permission, index) => (
-                <div className="col-md-3 mt-2">
-                  <div
-                    className="d-flex"
-                    style={{
-                      background: "#CF4949",
-                      padding: "5px 10px",
-                      justifyContent: "space-between",
-                    }}
+        <div
+                    className="card mt-2"
+                    style={{ borderColor: "#D4B265", minHeight: "100px" }}
                   >
-                    <div style={{ color: "#FFFFFF" }}>{permission?.label}</div>
+                    <div className="row" style={{ margin: "3px" }}>
+                      {roles?.map((permission, index) => (
+                        <div className="col-md-3 mt-2">
+                          <div
+                            className="d-flex"
+                            style={{
+                              background: "#CF4949",
+                              padding: "5px 10px",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <div style={{ color: "#FFFFFF" }}>
+                              {permission}
+                            </div>
+                            <div>
+                              <CloseIcon
+                                style={{
+                                  width: "19px",
+                                  height: "19px",
+                                  borderRadius: "50px",
+                                  background: "#fff",
+                                  color: "#CF4949",
+                                  cursor: "pointer",
+                                }}
+                                onClick={() => {
+                                  const serviceRequirementList = [
+                                    ...roles,
+                                  ];
+                                  const filterdService =
+                                    serviceRequirementList.filter(
+                                      (one, idx) => idx != index
+                                    );
+                                  
+                                    setRoles(filterdService);
+                                }}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
+      <div className='col-md-11 col-sm-12 mt-1'> 
+                  { 
+                  errors ? 
+                    Object.keys(errors)?.map((key,value)=>(
+                      <div className=''> 
+                        {errors[key]?.map(err=>(
+                        <div className='alert alert-danger'>
+                          {key} {err}
+                        </div>
+                        ))
+                        }
+                      </div>
+                    ))
+                    : null
+                  }
+               </div>
       <div className="row justify-content-end mt-3 mb-3">
         <div className="col-md-3 col-sm-12">
           <button
             className="btn btn-block"
             style={{ background: "#005D5E", color: "#fff", fontSize: "20px" }}
             onClick={() => {
-              id ? EditUser() : AddUser();
+              TeamMemberId  ? EditUser(): AddUser();
             }}
           >
             حفظ

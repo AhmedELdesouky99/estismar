@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   Dropdown,
   DropdownToggle,
@@ -11,6 +12,8 @@ function StatusDropDown(props) {
   const [activeStatus,setActiveStatus]=useState()
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const { user } = useSelector((state) => state.authUser);
+
 useEffect(()=>{
   if(props.activationStatus !=undefined){
     const activeStatus =  [
@@ -25,7 +28,8 @@ const changeStatus=(status)=>{
   setActiveStatus(status)
   props.client.put(`${props.url}`,{
     type : "activate",
-    activate_id:status.id
+    activate_id:status.id,
+    token:user.access_token
   }).then(res=>console.log(res,"res active"))
 }
   return (

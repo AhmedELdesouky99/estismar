@@ -21,7 +21,7 @@ const client2 =axios.create({
   baseURL: "https://estithmar.arabia-it.net/api" 
  
 });
-function TeamWorkList({ allowners, loading, setPage, limit, setLimit,status }) {
+function TeamWorkList({ allowners, loading, setPage, limit, setLimit,status,setAddPage,setTeamMemberId }) {
   const history = useHistory();
   const [services, setServices] = useSetState({
     collection: [],
@@ -43,7 +43,7 @@ function TeamWorkList({ allowners, loading, setPage, limit, setLimit,status }) {
   }, [allowners]);
 
   const handelDeleteBanner = (id) => {
-    const filteredService= services.collection.filter(service=>service.user_id != id)
+    const filteredService= services.collection.filter(service=>service.id != id)
     setServices({
       collection:filteredService,
       metadata: allowners?.allowners?.metadata,
@@ -61,17 +61,23 @@ function TeamWorkList({ allowners, loading, setPage, limit, setLimit,status }) {
     
   };
 
-  const actions = ({ user_id }) => (
+  const actions = ({ id }) => (
     <div className="d-flex align-items-center" style={{ gap: "5px" }}>
       {/* Redirects to Car details */}
 
       
         <Tooltip title={ "common.edit"} placement="top">
-          <Link to={`service-provider/${user_id}`}>
-            <button className="border-0" style={{background:"#23D381",color:"#fff"}}>
+          
+            <button className="border-0" style={{background:"#23D381",color:"#fff"}} onClick={()=>
+              {
+                setTeamMemberId(id);
+                setAddPage(true);
+                
+              }
+              }>
             <i className=" ti-eye m-1"></i>
             </button>
-          </Link>
+          
         </Tooltip>
       
       <Tooltip title={"common.delete"} placement="top">
@@ -80,14 +86,14 @@ function TeamWorkList({ allowners, loading, setPage, limit, setLimit,status }) {
         <i
           style={{ cursor: "pointer" }}
           className=" ti-trash m-1"
-          onClick={() => handelDeleteBanner(user_id)}
+          onClick={() => handelDeleteBanner(id)}
         ></i>
         </button>
       </Tooltip>
     </div>
   );
   const dropdownActions =(record)=>(
-    <StatusDropDown  activationStatus={record?.is_active} id={record?.id} client={client} url={`service-provider/${record?.user_id}`}/>
+    <StatusDropDown  activationStatus={record?.is_active} id={record?.id} client={client2} url={`/provider/user/${record?.id}`}/>
   )
   return (
     <Typography component="div" style={{ padding: "10px", marginTop: "20px" }}>
@@ -98,7 +104,7 @@ function TeamWorkList({ allowners, loading, setPage, limit, setLimit,status }) {
             loading={loading}
             tableRecords={collection}
             actions={actions}
-            actionsArgs={["user_id"]}
+            actionsArgs={["id"]}
             dropdownActions={dropdownActions}
           />
         </RctCollapsibleCard>
