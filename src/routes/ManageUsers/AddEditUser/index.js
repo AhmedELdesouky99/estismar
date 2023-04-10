@@ -208,7 +208,7 @@ export default function AddEidtUser() {
                    <div className="row">
                         <div className="col-md-6">
                         <FormGroup>
-                        <Label for="exampleEmail">
+                        <Label for="status">
                         <FormattedHTMLMessage id={"الحالة"} />
                         </Label>
                         <DropDownStatus
@@ -228,11 +228,11 @@ export default function AddEidtUser() {
                         <FormattedHTMLMessage id={"كلمة السر"} />
                         </Label>
                         <Input
-                        id="exampleSelect"
                         name="select"
                         type="password"
+                        autoCorrect="off"
+                          autoComplete="off"
                         style={{ borderColor: "#D4B265" }}
-                        value={user.password}
                         onChange={(e)=>{
                             setUser({
                                 ...user,
