@@ -102,7 +102,7 @@ export default function AllTeam() {
               query={query}
               setPage={setPage}
               setQuery={setQuery}
-              filters={["status", "service_provider"]}
+              filters={["status"]}
             />
           </div>
 

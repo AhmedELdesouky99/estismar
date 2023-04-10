@@ -33,11 +33,11 @@ export default function AddEidtUser() {
   const [permissions,setPermissions]=useState()
   const [user,setUser]=useState(
     {
-        name : "Mostafa Elhusany",
-        email : "mostafa.elhusany@gmail.com",
-        password : "123456",
-        password_confirmation : "123456",
-        role: 2
+        name : "",
+        email : "",
+        password : "",
+        password_confirmation : "",
+        role: 0
     }
   )
 
@@ -287,8 +287,8 @@ export default function AddEidtUser() {
                             }}
                           >
                             <div style={{ color: "#FFFFFF" }}>
-                              {permission?.name}
-                            </div>
+                              {permission?.display_name}
+                            </div>  
                     
                           </div>
                         </div>

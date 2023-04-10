@@ -81,7 +81,7 @@ const PermissionsDropDown = ({
         }).then((res)=>{
           const Alloptions =res.data.data.data.map(field=>(
             {
-              label:field.name,
+              label:field.display_name,
               value:field.id,
             }
           ))
