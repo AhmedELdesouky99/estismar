@@ -122,6 +122,7 @@ export default function AddEidtUser() {
          title={<IntlMessages id={"newUser"}/>}
          match={location}
          enableBreadCrumb
+         lastElement={id ? user.name : "مستخدم جديد"}
       />
    
       <RctCard>

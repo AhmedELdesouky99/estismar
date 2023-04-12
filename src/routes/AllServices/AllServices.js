@@ -105,7 +105,7 @@ export default function Services({inTabs}) {
                         border: "1px solid #D4B265 ",
                       }}
                       className="mx-smt-15 btnAdd  mr-1 ml-1 border-0"
-                      onClick={() => history.push("/app/services/add")}
+                      onClick={() => console.log("")}
                     >
                       <span className="mr-1 ml-1">
                         <FormattedMessage id={"إضافة تصنيف جديد"} />
@@ -148,7 +148,7 @@ export default function Services({inTabs}) {
                 </>
 
               
-              :
+              : 
               <div className="row">
               <FiltersAndSearches
                 make="make"

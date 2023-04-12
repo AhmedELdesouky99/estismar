@@ -7,7 +7,6 @@ import { DropdownToggle, DropdownMenu, Dropdown } from 'reactstrap';
 import StatusDropDown from "Components/shared/StatusDropDown"
 const { TEXT, ACTIONS, FUNC,DROPDOWN } = dataTypes;
 import { Link, useHistory } from "react-router-dom";
-
 export const ServiceData = [
   {
     headerId: "ID",
@@ -25,7 +24,7 @@ export const ServiceData = [
     headerId: "تاريخ الانضمام",
     dataRef: "logo",
     dataType: FUNC,
-    func: (record, locale) => record.created_at,
+    func: (record, locale) => moment(record?.created_at).locale("ar").format('DD MMM YYYY h:mm:ss a')
   },
   {
     headerId: "مجالات الخدمة",

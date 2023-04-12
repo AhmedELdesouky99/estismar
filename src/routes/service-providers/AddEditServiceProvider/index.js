@@ -54,7 +54,7 @@ export default function AddEditOwnersAssets() {
          title={<IntlMessages id={"مزودي الخدمات"} />}
          match={location}
          enableBreadCrumb
-         lastElement={ providerDetails?.user?.name || "اضافة مزود خدمة" }
+         lastElement={ id ? providerDetails?.company_name_ar : "اضافة مزود خدمة" }
          // extraButtons={
          //   <>
          //     {userCan("branches.create") && (

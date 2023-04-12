@@ -65,7 +65,7 @@ const history=useHistory()
                <FormGroup>
                  <Label for="exampleSelect">المستخدم الجديد</Label>
                  {
-                  <Select options={[{label:"وقف",value:"asset-owner"},{label:"مزود خدمة",value:"service-provider"}]} 
+                  <Select options={[{label:"مستشار",value:"advisor"},{label:"مزود خدمة",value:"service-provider"}]} 
                   placeholder="نوع المستخدم"
                   style={{direction:"ltr"}}
                   onChange={(opt)=>{
