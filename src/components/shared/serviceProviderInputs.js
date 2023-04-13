@@ -23,6 +23,7 @@ const ServiceProviderInputs = ({ providerDetails }) => {
   const [files, setFiles] = useState([]);
   const history = useHistory();
   const { id } = useParams();
+  const [errors,setErrors]=useState()
 
   useEffect(() => {
     if (providerDetails) {
@@ -143,7 +144,7 @@ const ServiceProviderInputs = ({ providerDetails }) => {
             history.push("/app/service-provider");
           }, 2000);
         }else{
-
+            setErrors(res.data.errors)
         }
       })
     
@@ -164,6 +165,7 @@ const ServiceProviderInputs = ({ providerDetails }) => {
       })
       .then((res) => {
         if (res.data.success) {
+          console.log(res.data,"response")
           // swal("تم تعديل مزود الخدمة بنجاح", "success");
           swal({
             title: "",
@@ -174,6 +176,9 @@ const ServiceProviderInputs = ({ providerDetails }) => {
           setTimeout(() => {
             history.push("/app/service-provider");
           }, 2000);
+        }else{
+          console.log(res,"res")
+          setErrors(res.data.errors)
         }
       });
   };
@@ -854,6 +859,22 @@ const ServiceProviderInputs = ({ providerDetails }) => {
             </FormGroup>
           </div>
         </div>
+      </div>
+      <div>
+      { 
+                  errors ? 
+                    Object.keys(errors)?.map((key,value)=>(
+                      <div className=''> 
+                        {errors[key]?.map(err=>(
+                        <div className='alert alert-danger'>
+                          {key}: {err}
+                        </div>
+                        ))
+                        }
+                      </div>
+                    ))
+                    : null
+                  }
       </div>
       <div className="row justify-content-center">
         <div className="col-md-4">
