@@ -39,16 +39,17 @@ export default function AddEditOwnersAssets() {
     }
 
   },[id])
+  console.log(ownerDetails,"ownerDetails")
   return (
     <div className="clients-wrapper">
        <Helmet>
-         <title>{ id ?  ownerDetails?.user?.name:"اضافة وقف "}</title>
+         <title>{ id ?   ownerDetails?.asset_name_ar:"اضافة وقف "}</title>
        </Helmet>
        <PageTitleBar
-         title={<IntlMessages id={ id ?  ownerDetails?.user?.name:"اضافة وقف "}/>}
+         title={<IntlMessages id={ id ?  ownerDetails?.asset_name_ar:"اضافة وقف "}/>}
          match={location}
          enableBreadCrumb
-         lastElement= { id ? ownerDetails?.user?.name : "اضافة وقف "}
+         lastElement= { id ?  ownerDetails?.asset_name_ar: "اضافة وقف "}
          // extraButtons={
          //   <>
          //     {userCan("branches.create") && (
