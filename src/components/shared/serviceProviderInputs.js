@@ -132,8 +132,6 @@ const toggle=()=>setModal(!modal)
       .post("/service-provider", {
         ...data,
         files_ids: files,
-        password: "123456",
-        password_confirmation: "123456",
       })
       .then((res) => {
         if (res.data.success) {
