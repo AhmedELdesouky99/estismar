@@ -40,7 +40,8 @@ export default function AllTeam() {
           token: user.access_token ? user.access_token : undefined,
           name:query.name ? query.name : undefined,
           status: query.status ? query.status : undefined,
-          group_name:query.group_name ? query.group_name :undefined
+          group_name:query.group_name ? query.group_name :undefined,
+          user_id:id
         },
       })
       .then((res) => setOwners(res.data.data));

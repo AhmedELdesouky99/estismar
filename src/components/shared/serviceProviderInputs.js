@@ -8,6 +8,8 @@ import FileUpload from "./FileUploader";
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import swal from "sweetalert";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { FormattedHTMLMessage } from "react-intl";
 
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin",
@@ -24,7 +26,8 @@ const ServiceProviderInputs = ({ providerDetails }) => {
   const history = useHistory();
   const { id } = useParams();
   const [errors,setErrors]=useState()
-
+const [modal,setModal]=useState()
+const toggle=()=>setModal(!modal)
   useEffect(() => {
     if (providerDetails) {
       const profile = providerDetails?.files?.find(
@@ -182,6 +185,9 @@ const ServiceProviderInputs = ({ providerDetails }) => {
         }
       });
   };
+  const SavePassword =()=>{
+
+  }
   return (
     <>
       <div className="row profile">
@@ -255,6 +261,7 @@ const ServiceProviderInputs = ({ providerDetails }) => {
             <button
               className="btn btn-block"
               style={{ background: "#D4B265", color: "#fff" }}
+              onClick={()=>toggle()}
             >
               تسجيل كلمة مرور جديدة
             </button>
@@ -888,6 +895,60 @@ const ServiceProviderInputs = ({ providerDetails }) => {
             حفظ
           </button>
         </div>
+        <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>تعيين كلمة مرور </ModalHeader>
+        <ModalBody>
+        <div className="col-md-12">
+                        <FormGroup>
+                        <Label for="exampleEmail">
+                        <FormattedHTMLMessage id={"كلمة السر"} />
+                        </Label>
+                        <Input
+                        name="select"
+                        type="password"
+                        autoCorrect="off"
+                          autoComplete="off"
+                        style={{ borderColor: "#D4B265" }}
+                        onChange={(e)=>{
+                            setData({
+                              ...data,
+                              password:e.target.value
+
+                            })
+                        }}
+                        />
+                    </FormGroup>
+                        </div>
+                        <div className="col-md-12">
+                        <FormGroup>
+                        <Label for="exampleEmail">
+                        <FormattedHTMLMessage id={" تاكيد كلمة السر "} />
+                        </Label>
+                        <Input
+                        name="select"
+                        type="password"
+                        autoCorrect="off"
+                          autoComplete="off"
+                        style={{ borderColor: "#D4B265" }}
+                        onChange={(e)=>{
+                          setData({
+                            ...data,
+                            password_confirmation:e.target.value
+                          })
+                        }}
+                        />
+                    </FormGroup>
+                        </div>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={SavePassword}>
+            حفظ
+          </Button>{' '}
+          {/* <Button color="secondary" onClick={toggle}>
+            Cancel
+          </Button> */}
+        </ModalFooter>
+      </Modal>
       </div>
     </>
   );
