@@ -184,7 +184,7 @@ const toggle=()=>setModal(!modal)
       });
   };
   const SavePassword =()=>{
-
+    toggle()
   }
   return (
     <>
