@@ -59,7 +59,7 @@ function OwnersList({ allowners, loading, setPage, limit, setLimit ,status}) {
           </Link>
         </Tooltip>
       
-      <Tooltip title={"common.delete"} placement="top">
+      {/* <Tooltip title={"common.delete"} placement="top">
       <button className="border-0" style={{background:"#CF4949",color:"#fff"}}>
 
         <i
@@ -68,7 +68,7 @@ function OwnersList({ allowners, loading, setPage, limit, setLimit ,status}) {
           onClick={() => handelDeleteBanner(user_id)}
         ></i>
         </button>
-      </Tooltip>
+      </Tooltip> */}
     </div>
   );
   const dropdownActions =(record)=>(

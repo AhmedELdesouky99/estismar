@@ -42,10 +42,7 @@ console.log(user,"user redux ")
     title: "",
     price: 0,
   });
-  const [serviceRequirements, setServiceRequirements] = useState({
-    id: 1,
-    title: "عقد التاسيس",
-  });
+  const [serviceRequirements, setServiceRequirements] = useState();
   const [Service, setService] = useState(
     {
       "title" : "",
@@ -842,7 +839,7 @@ console.log(user,"user redux ")
                       const serviceRequirementsList = [
                         ...Service?.service_requirment,
                       ];
-                      serviceRequirementsList.push(serviceRequirements);
+                      serviceRequirementsList.push(serviceRequirements.length ?serviceRequirements : [] );
                       setService({
                         ...Service,
                         service_requirment: serviceRequirementsList,

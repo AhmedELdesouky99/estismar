@@ -75,6 +75,8 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
         password_confirmation: userData.password,
         roles:roles,
         token:  user.access_token ,
+        group_id:id
+        
       })
       .then((res) => {
         if (res.data.success) {
