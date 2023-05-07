@@ -79,7 +79,7 @@ const App = ({location, match })=> {
       if (user === null) {
          return (<Redirect to={'/app/owners-assets'} />);
       } else {
-         if(user?.user?.category =="service-provider"){
+         if(user?.user?.category =="service-provider" || user?.user?.category =="provider-employee"){
             return  (<Redirect to={`/app/service-provider/${user.user.id}`} />)
          }
          return (<Redirect to={'/app/owners-assets'} />);

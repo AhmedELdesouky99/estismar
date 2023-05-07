@@ -32,7 +32,6 @@ const changeStatus=(status)=>{
     token:user.access_token
   }).then(res=>console.log(res,"res active"))
 }
-console.log(user.user.category,"user")
   return (
     <Dropdown isOpen={dropdownOpen} toggle={toggle} {...props}>
       <DropdownToggle disabled={user.user.category != "admin"} caret size="md" style={{background:activeStatus?.title == 

@@ -185,9 +185,9 @@ const NavMenuItem =({ menu, onToggleMenu })=>{
          },3000)
    }
       return (
-         <ListItem button component="li" style={{padding:  user.category  == "service-provider" ? "1rem 1rem" :"" }}>
+         <ListItem button component="li" style={{padding:  user.category  == "service-provider"  || user.category == "provider-employee" ? "1rem 1rem" :"" }}>
             {
-              user.category  == "service-provider" ? 
+              user.category  == "service-provider" || user.category == "provider-employee" ? 
              <div onClick={()=>handelClickItem(menu.index,menu.path)}>
               <span className="menu-icon">
               {

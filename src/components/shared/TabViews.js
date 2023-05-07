@@ -238,7 +238,7 @@ const dispatch=useDispatch()
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{display:user.category =="service-provider" ? "none" :""}}>
+      <AppBar position="static" style={{display:user.category =="service-provider"  || user.category =="provider-employee" ? "none" :""}}>
      
 
          {

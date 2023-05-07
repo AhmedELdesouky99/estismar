@@ -47,7 +47,7 @@ console.log(user,"user redux ")
     {
       "title" : "",
       "description" : "",
-      "provider_id" : user?.category == "service-provider" ? user?.id : "" ,
+      "provider_id" : user?.category == "service-provider"  || user?.category =="provider-employee"? user?.id : "" ,
       "field_id" : "",
   
       "executive_steps" : [], 
@@ -91,7 +91,7 @@ console.log(user,"user redux ")
             setService({
               title:res.data.data.title,
               field_id:res.data.data.field_id,
-              provider_id:user?.category == "service-provider"  ? user?.id :res.data.data.service_provider.user_id ,
+              provider_id:user?.category == "service-provider"  || user?.category =="provider-employee" ? user?.id :res.data.data.service_provider.user_id ,
               description:res.data.data.description,
               service_border:border,
               service_requirment:service_requirment,
@@ -148,7 +148,7 @@ console.log(user,"user redux ")
     }
   })
  }
- console.log(Service,"Service")
+ console.log(user,"Service")
   return (
     <div className="clients-wrapper">
       <Helmet>
@@ -169,8 +169,8 @@ console.log(user,"user redux ")
                 <div>
                   <FormGroup>
                     <Label for="exampleSelect">مزود الخدمة</Label>
-                    { user?.category == "service-provider" ?  <p>
-                      {user?.name}
+                    { user?.category == "service-provider"  || user?.category == "provider-employee" ?  <p>
+                      {user?.service_provider.company_name_ar}
                     </p>: 
                    
                       <ServiceProviderDropDown

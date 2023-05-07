@@ -353,7 +353,7 @@ const sidebarMenu=  [
 							{/* <IntlMessages id="sidebar.modules" /> */}
 							</ListSubheader>}
 					>
-						{ stateSelect?.authUser.user?.user.category !="admin" &&  stateSelect?.authUser.user?.user?.category == "service-provider" ? SidbarServiceProvider?.map((menu, key) => (
+						{ stateSelect?.authUser.user?.user.category !="admin" &&  (stateSelect?.authUser.user?.user?.category == "service-provider" || stateSelect?.authUser.user?.user?.category == "provider-employee") ? SidbarServiceProvider?.map((menu, key) => (
 							<NavMenuItem
 								menu={menu}
 								key={key}

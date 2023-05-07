@@ -78,11 +78,11 @@ const ServiceProviderDropDown = ({
             limit:50
           }
         }).then((res)=>{
-
+console.log(res.data.data.data,"s field ")
           const Alloptions =res.data.data.data.map(field=>(
             
             {
-              label:field.user.name,
+              label:field.company_name_ar,
               value:field.user_id
             }
           ))
