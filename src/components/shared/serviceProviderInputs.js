@@ -10,6 +10,7 @@ import { useHistory, useParams } from "react-router-dom";
 import swal from "sweetalert";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { FormattedHTMLMessage } from "react-intl";
+import FieldsDropDown from "./FieldsDropDown";
 
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin",
@@ -26,6 +27,8 @@ const ServiceProviderInputs = ({ providerDetails }) => {
   const history = useHistory();
   const { id } = useParams();
   const [errors,setErrors]=useState()
+  const [fields, setFields] = useState([]);
+
 const [modal,setModal]=useState()
 const toggle=()=>setModal(!modal)
   useEffect(() => {
@@ -652,27 +655,17 @@ const toggle=()=>setModal(!modal)
               <Label for="exampleEmail">
                 <FormattedMessage id={"المجالات"} />
               </Label>
-              <Input
-                id="exampleSelect"
-                name="select"
-                type="select"
-                style={{ borderColor: "#D4B265" }}
-                value={data?.asset_bank}
-                onChange={(e) => {
+              <FieldsDropDown
+                onChange={(sel) => {
                   setData({
                     ...data,
-                    asset_bank: e.target.value,
+                    fields_id: data?.fields_id ?  [...data?.fields_id, sel.value] : [sel.value],
                   });
+                  setFields([...fields, sel]);
                 }}
-              >
-                <option></option>
-                <option value={"مؤسسة فردية"} selected={data?.asset_bank == "مؤسسة فردية"}>
-                مؤسسة فردية{" "}
-                </option>
-                <option value={"مؤسسة جماعية"} selected={data?.asset_bank =="مؤسسة جماعية"}>
-                مؤسسة جماعية{" "}
-                </option>
-              </Input>
+                selectedItem={data?.fields_id}
+              />
+            
             </FormGroup>
           </div>
         </div>

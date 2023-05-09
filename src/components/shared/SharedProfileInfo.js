@@ -5,7 +5,7 @@ import StatusDropDown from "Components/shared/StatusDropDown"
 import { useHistory } from "react-router-dom";
 import NoImage from "../../assets/img/no-image.png";
 
-const SharedProfileInfo =({providerDetails})=>{
+const SharedProfileInfo =({providerDetails,isAssetOwner})=>{
     const profile = providerDetails?.files?.find(
         (file) => file.title == "profile"
       )?.path;
@@ -36,7 +36,8 @@ const SharedProfileInfo =({providerDetails})=>{
              </div>
               
             </div>
-            <div className="col-md-3 text-center">
+            {
+              isAssetOwner ? null : <div className="col-md-3 text-center">
               <p>
               الخدمات المباعة
               </p>
@@ -53,6 +54,8 @@ const SharedProfileInfo =({providerDetails})=>{
                 إضافة خدمة
             </button>
             </div>
+            }
+            
           </div>
         </RctCardContent>
       </RctCard>

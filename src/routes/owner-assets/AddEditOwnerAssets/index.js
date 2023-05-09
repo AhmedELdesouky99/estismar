@@ -15,6 +15,9 @@ import { Button } from "reactstrap";
 import { FormattedMessage } from "react-intl";
 import { NotificationV2 } from "../../../components/Widgets";
 import TabViews from "Components/shared/TabViews";
+
+import SharedProfileInfo from "Components/shared/SharedProfileInfo";
+
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin" 
  
@@ -84,23 +87,8 @@ export default function AddEditOwnersAssets() {
        
       
       </div>
-      <RctCard>
-        <RctCardContent>
-
-          {/* <div className="row">
-          
-                  <FiltersAndSearches
-                    make="make"
-                    submitbtnid="search.filter"
-                    fields={[{ type: "search", name: "اسم الوقف" },{ type: "search", name: "الحاله" }]}
-                    filters={["parent"]}
-                    model="model"
-                    is_active="isActive"
-                    multi
-                  />
-                </div> */}
-        </RctCardContent>
-      </RctCard>
+      <SharedProfileInfo providerDetails={ownerDetails} isAssetOwner={true}/>
+     
       <TabViews  ownerDetails={ownerDetails}/>
     </div>
   );
