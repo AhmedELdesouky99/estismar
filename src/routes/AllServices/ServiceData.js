@@ -30,7 +30,7 @@ export const ServiceData = [
     headerId: "تصنيف الخدمة",
     dataRef: "logo",
     dataType: FUNC,
-    func: (record, locale) => record.service_provider?.company_name_ar,
+    func: (record, locale) => record.field?.name,
   },
   {
     headerId: " تكلفة الخدمة",

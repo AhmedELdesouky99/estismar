@@ -72,10 +72,10 @@ console.log(user,"user redux ")
   }
   );
   useEffect(() => {
-    client.get("/required-files").then((res) => {
+    client.get("/service-requirment").then((res) => {
       const options = res.data.data?.map((one) => ({
         label: one.title,
-        value: one.id,
+        value:one.title,
       }));
       setRequiredOptions(options);
     });
@@ -84,7 +84,7 @@ console.log(user,"user redux ")
       if(id){
         client.get(`/service/${id}`).then(res=>{
             const border= JSON.parse(res.data.data.service_border)
-            const service_requirment=JSON.parse(res.data.data.service_requirment)
+            const service_requirment=res.data.data.service_requirment
             const stages_of_delivery=JSON.parse(res.data.data.stages_of_delivery)
             const executive_steps=JSON.parse(res.data.data.executive_steps)
             const executive_result=JSON.parse(res.data.data.executive_result)
@@ -134,6 +134,7 @@ console.log(user,"user redux ")
  const EditService=()=>{
   client.put(`service/${id}`,{
     ...Service,
+    service_requirment:Service.service_requirment.map((req)=>req.title),
     type : "update",
   }).then((res)=>{
     if(res.data.success){
@@ -819,6 +820,7 @@ console.log(user,"user redux ")
                   <Select
                     options={rquiredOptions}
                     onChange={(sel) => {
+                      console.group(sel,"sel")
                       setServiceRequirements({
                         title: sel.label,
                         id: sel.value,
@@ -839,7 +841,9 @@ console.log(user,"user redux ")
                       const serviceRequirementsList = [
                         ...Service?.service_requirment,
                       ];
-                      serviceRequirementsList.push(serviceRequirements.length ?serviceRequirements : [] );
+                      console.log(serviceRequirements,serviceRequirements.length,"serviceRequirements karem")
+                      serviceRequirementsList.push(serviceRequirements.title ?serviceRequirements : [] );
+
                       setService({
                         ...Service,
                         service_requirment: serviceRequirementsList,
@@ -866,7 +870,7 @@ console.log(user,"user redux ")
                             }}
                           >
                             <div style={{ color: "#FFFFFF" }}>
-                              {oneservice?.title}
+                              {oneservice.title}
                             </div>
                             <div>
                               <CloseIcon
