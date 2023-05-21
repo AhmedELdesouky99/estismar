@@ -244,7 +244,7 @@ export default {
          </g>
        </svg>
        ,
-         "path": "/app/",
+         "path": "/app/orders",
          "new_item": false,
          "child_routes": null
       },

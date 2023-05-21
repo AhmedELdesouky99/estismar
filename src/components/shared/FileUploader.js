@@ -75,26 +75,6 @@ function FileUpload({
                 {name}
               </p>
           </div>
-          {/* <span className="btn  default btn-file" style={{position:"absolute",bottom:"9px",right:"38%",background:"#00D0F1",color:"#fff",height:"35px"}}>
-              <span className="fileinput-new">
-                {" "}
-                <EditIcon/>
-              </span>
-
-              <input type="hidden" />
-              <input
-                name={titleId}
-                id={titleId}
-                type="file"
-                accept="image/jpeg, jpeg, png, image/png, gif, image/gif"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  console.log(e.target.files[0],"file")
-                   
-                  setImage(file)
-                }}
-              />
-            </span> */}
           <div className="fileinput-preview fileinput-exists thumbnail"> </div>
           <div>
           </div>

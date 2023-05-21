@@ -26,15 +26,23 @@ useEffect(()=>{
 },[props.activationStatus])
 const changeStatus=(status)=>{
   setActiveStatus(status)
-  props.client.put(`${props.url}`,{
-    type : "activate",
-    activate_id:status.id,
-    token:user.access_token
-  }).then(res=>console.log(res,"res active"))
+  if(props.inorder){
+    props.client.put(`${props.url}`,{
+      status:status.id,
+      // token:user.access_token
+    }).then(res=>console.log(res,"res active"))
+  }else{
+    props.client.put(`${props.url}`,{
+      type : "activate",
+      activate_id:status.id,
+      token:user.access_token
+    }).then(res=>console.log(res,"res active"))
+  }
+  
 }
   return (
     <Dropdown isOpen={dropdownOpen} toggle={toggle} {...props}>
-      <DropdownToggle disabled={user.user.category != "admin"} caret size="md" style={{background:activeStatus?.title == 
+      <DropdownToggle disabled={user.user.category != "admin" || props.notAllowed} caret size="md" style={{background:activeStatus?.title == 
 "قيد الانتظار" ?  "#EEB656":  "",border:"none",width:"fit-content"}}>
         {activeStatus?.name}
       </DropdownToggle>

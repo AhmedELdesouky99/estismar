@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 
 // intl messages
 import IntlMessages from 'Util/IntlMessages';
+import { useSelector } from 'react-redux';
 
 // get display string
 const getDisplayString = (sub,end,lastElement =undefined) => {
@@ -36,9 +37,11 @@ const getUrlString = (path, sub, index) => {
 };
 
 const PageTitleBar = ({ title, match, enableBreadCrumb,lastElement=undefined }) => {
+	const {user}=useSelector(state=>state.authUser.user)
+
    const path = match?.pathname?.substr(1);
    const subPath = path?.split('/');
-   console.log(subPath,"subpath")
+   console.log(user,"match")
    return (
       <div className="page-title d-flex justify-content-between align-items-center">
          {/* {title &&
@@ -50,8 +53,9 @@ const PageTitleBar = ({ title, match, enableBreadCrumb,lastElement=undefined }) 
          {enableBreadCrumb &&
             <Breadcrumb className="mb-0" tag="nav">
                {subPath?.map((sub, index) => {
+                  {console.log(sub,"kaki")}
                   return <BreadcrumbItem active={subPath.length === index + 1}
-                     tag={subPath.length === index + 1 ? "span" : Link} key={index}
+                     tag={ sub =="service-provider" && user.category !="admin" ?  "span":  subPath.length === index + 1   ? "span" : Link} key={index}
                      to={getUrlString(path, sub, index)}>{getDisplayString(sub,subPath.length === index + 1,lastElement)}</BreadcrumbItem>
                }
                )}

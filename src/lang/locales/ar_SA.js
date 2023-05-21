@@ -16,6 +16,7 @@ module.exports = {
    "users":"إدارة المستخدمين",
    "sidebar.adduser":"مستخدم جديد",
    "day":"يوم",
+   "orders":"الطلبات",
    "roles":"الصلاحيات",
    "sidebar.addrole":"اضافة صلاحية",
    "components.perpage.limit":"عرض",
