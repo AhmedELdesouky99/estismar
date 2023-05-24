@@ -16,7 +16,12 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import StatusDropDown from "Components/shared/StatusDropDown"
 import NoImage from "../../../assets/img/no-image.png"
-
+import UploadImage from "../../../assets/img/ic-upload.png"
+import { useRef } from 'react';
+import axios from "axios"
+const client = axios.create({
+  baseURL: "https://estithmar.arabia-it.net/api/admin",
+});
 const useRowStyles = makeStyles({
   root: {
     '& > *': {
@@ -40,27 +45,33 @@ function createData(name, calories, fat, carbs, protein, price) {
 }
 
 function Row(props) {
-  const { row } = props;
+  const { row ,serviceRequestId,setOrder} = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
   const [loader,setLoader]=useState()
   const [EnImage,setEnImage]=useState()
-  const uploadEnimage = (file) => {
+  const inputFile = useRef(null);
+  const uploadEnimage = (file,row) => {
+    console.log(row,"row")
     setLoader(true);
     const formdata = new FormData();
-    formdata.append("title", "profile");
-    formdata.append("store_file", true);
+    formdata.append("request_deliveries_id", row.id);
     formdata.append("file", file);
+    formdata.append("_method","PUT")
     client
-      .post("/advisor", formdata, {
+      .post(`/service-request/${serviceRequestId}`, formdata, {
         headers: {
           "Content-Type": "multipart/form-data; ",
         },
       })
       .then((res) => {
-        setLoader(false);
-        setFiles([...files, res.data.data.id]);
-        setEnImage("https://estithmar.arabia-it.net" + res.data.data.path);
+        console.log(res,"res")
+        client.get(`/service-request/${serviceRequestId}`).then(res=>{
+          setOrder(res.data.data)
+           
+        })
+        // setFiles([...files, res.data.data.id]);
+        // setEnImage("https://estithmar.arabia-it.net" + res.data.data.path);
       });
   };
   return (
@@ -74,9 +85,9 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.title}
         </TableCell>
-        <TableCell align="right">{row.count} {row[" count_type"]}</TableCell>
+        <TableCell align="right">{row.count || row.days_of_work} { row?.days_of_work  ? "يوم":row["count_type"]}</TableCell>
         <TableCell align="right">
-          <StatusDropDown />
+          {/* <StatusDropDown /> */}
         </TableCell>
       </TableRow>
       <TableRow>
@@ -110,10 +121,30 @@ function Row(props) {
                
               </div>
               <div className='d-flex justify-content-between'>
-                <div>
-              <img src={NoImage } style={{border:"1px solid #ccc"}} height={"100px"}  width={"182px"}/>
-
-              
+                <div className='mt-3'> 
+              <img src={row.file ? "https://estithmar.arabia-it.net" + row.file : NoImage } style={{border:"1px solid #ccc"}} height={"100px"}  width={"182px"}/>
+                </div>
+                <div style={{alignSelf:"end"}}>
+                  <button 
+                  onClick={()=>{
+                    inputFile.current.click()
+                  }}
+                  style={{marginTop:"10px",background:"#fff",borderColor:"#005D5E",color:"#005D5E",fontSize:"14px",padding:"4px 10px"}}> 
+                    <img src={UploadImage} style={{width:"19px"}}/>
+                   {" "}
+                    ارفاق ملفات
+                  </button>
+                  <input
+              style={{display:"none"}}
+                ref={inputFile}
+                type="file"
+                accept="image/jpeg, jpeg, png, image/png, gif, image/gif"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  uploadEnimage(file,row)
+                  // setImage(file)
+                }}
+              />
                 </div>
               </div>
               </div>
@@ -145,7 +176,7 @@ Row.propTypes = {
 
 
 
-export default function CollapsibleTable({Delivery}) {
+export default function CollapsibleTable({Delivery,serviceRequestId,setOrder}) {
   console.log(Delivery,"Delivery")
   return (
     <TableContainer component={Paper}>
@@ -163,7 +194,7 @@ export default function CollapsibleTable({Delivery}) {
         </TableHead>
         <TableBody>
           {Delivery.map((row) => (
-            <Row key={row.title} row={row} />
+            <Row key={row.title} row={row} serviceRequestId={serviceRequestId} setOrder={setOrder}/>
           ))}
         </TableBody>
       </Table>

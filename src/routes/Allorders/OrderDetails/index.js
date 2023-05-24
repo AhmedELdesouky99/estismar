@@ -5,6 +5,8 @@ import { Helmet } from "react-helmet";
 import PageTitleBar from "Components/PageTitleBar/PageTitleBar";
 // // intl messages
 import IntlMessages from "Util/IntlMessages";
+import PerPage from "Components/shared/PerPage";
+import { Pagination } from "@material-ui/lab";
 
 import { RctCard, RctCardContent } from "Components/RctCard";
 import { FormGroup, Label, Input, ButtonGroup, Button, Progress } from "reactstrap";
@@ -21,6 +23,7 @@ import Select from "react-select";
 import { useSelector } from "react-redux";
 import StatusDropDown from "Components/shared/StatusDropDown"
 import NoImage from "../../../assets/img/no-image.png";
+import noteImage from "../../../assets/img/ic-message.png"
 import CollapsibleTable from "./borderTable";
 import NoteModal from "./NoteModal";
 const client = axios.create({
@@ -32,6 +35,8 @@ const AddEditService = () => {
   const [steps, setSteps] = useState();
   const [result, setResult] = useState();
   const [rquiredOptions, setRequiredOptions] = useState([]);
+  const [limit,setLimit]=useState(10)
+  const [page,setPage]=useState(1)
   const { id } = useParams();
   const history=useHistory()
 	const {user}=useSelector(state=>state.authUser.user)
@@ -47,34 +52,7 @@ const AddEditService = () => {
     price: 0,
   });
   const [serviceRequirements, setServiceRequirements] = useState();
-  const [Service, setService] = useState(
-    {
-      "title" : "",
-      "description" : "",
-      "provider_id" : user?.category == "service-provider"  || user?.category =="provider-employee"? user?.id : "" ,
-      "field_id" : "",
-  
-      "executive_steps" : [], 
-      "executive_result" : [],
-  
-      "cost" :"1000", 
-      "tax_ratio" : "10", 
-      "support_ratio" : "50", 
-      "cost_after_study" : false,
-  
-      "executive_time_type" : "", 
-      "executive_time" : "", 
-      "stages_of_delivery" : [ 
-         
-      ], 
-      "service_requirment" : [
-        
-      ], 
-      "service_border" : [
-         
-      ]
-  }
-  );
+ 
   useEffect(() => {
     client.get("/service-requirment").then((res) => {
       const options = res.data.data?.map((one) => ({
@@ -86,36 +64,13 @@ const AddEditService = () => {
   }, []);
   useEffect(()=>{
       if(id){
-        client.get(`/service-request/${id}`).then(res=>{
+        client.get(`/service-request/${id}?page=${page}`).then(res=>{
           setOrder(res.data.data)
-            // const border= JSON.parse(res.data.data.service_border)
-            // const service_requirment=res.data.data.service_requirment
-            // const stages_of_delivery=JSON.parse(res.data.data.stages_of_delivery)
-            // const executive_steps=JSON.parse(res.data.data.executive_steps)
-            // const executive_result=JSON.parse(res.data.data.executive_result)
-            // setService({
-            //   title:res.data.data.title,
-            //   field_id:res.data.data.field_id,
-            //   provider_id:user?.category == "service-provider"  || user?.category =="provider-employee" ? user?.id :res.data.data.service_provider.user_id ,
-            //   description:res.data.data.description,
-            //   service_border:border,
-            //   service_requirment:service_requirment,
-            //   executive_time:res.data.data.executive_time,
-            //   stages_of_delivery:stages_of_delivery,
-            //   cost:res.data.data.cost,
-            //   tax_ratio:res.data.data.tax_ratio,
-            //   cost_after_study:res.data.data.cost_after_study,
-            //   executive_time_type:res.data.data.executive_time_type,
-            //   executive_steps:executive_steps,
-            //   executive_result:executive_result,
-            //   support_ratio:res.data.data.support_ratio
-
-            // })
-            // setRSelected(res.data.data.executive_time_type =="month" ? 2 : res.data.data.executive_time_type == "day" ? 1 : 3)
+           
         })
         
       }
-  },[id])
+  },[id,page])
   return (
     <div className="clients-wrapper">
       <Helmet>
@@ -231,7 +186,10 @@ const AddEditService = () => {
                  </h3>
               </div>
               <div className="mt-3 row">
-                   <CollapsibleTable  Delivery={order && !order.service_request_deliveries.length? JSON.parse(order?.service?.stages_of_delivery) :  order && order.service_request_deliveries.length ?order.service_request_deliveries :[]}/>
+                   <CollapsibleTable serviceRequestId={id} 
+                   setOrder={setOrder}
+                   Delivery={order && !order.service_request_deliveries.length? JSON.parse(order?.service?.stages_of_delivery) :  order && order.service_request_deliveries.length ?order.service_request_deliveries :[]}
+                   />
               </div>
               
             </RctCardContent>
@@ -389,7 +347,7 @@ const AddEditService = () => {
                     </span>
                     <span>
                       {" "}
-                      1000
+                      {order?.coast + order?.wakf_share_total}
                     </span>
                   </li>
                   <li className="order-list-item d-flex justify-content-between" >
@@ -398,7 +356,16 @@ const AddEditService = () => {
                     </span>
                     <span>
                       {" "}
-                      150
+                      {order?.tax_total}
+                    </span>
+                  </li>
+                  <li className="order-list-item d-flex justify-content-between">
+                    <span>
+                        الملحقات
+                    </span>
+                    <span>
+                      {" "}
+                      {order?.extra_total}
                     </span>
                   </li>
                   <li className="order-list-item d-flex justify-content-between"> 
@@ -407,25 +374,18 @@ const AddEditService = () => {
                     </span> 
                     <span>
                       {" "}
-                      1150
+                      {order?.total}
                     </span>
                   </li>
-                  <li className="order-list-item d-flex justify-content-between">
-                    <span>
-                    مقدار الدعم (50%)
-                    </span>
-                    <span>
-                      {" "}
-                      (575)
-                    </span>
-                  </li>
+                
                   <li className="order-list-item d-flex justify-content-between">
                     <span>
                     تكلفة نهائية للخدمة  
                     </span>
                     <span>
                       {" "}
-                      575
+                      {order?.total}
+                      
                     </span>
                   </li>
                 </ul>
@@ -439,14 +399,47 @@ const AddEditService = () => {
           <div className="col-md-12   col-sm-12"> 
           <RctCard>
           <RctCardContent>
-             <div>
+              <div>
                 <h3 className="title" style={{position:"relative"}}>
                 ملاحظات الطلب
                 </h3>
               </div>
+              <div>
+                <ul style={{listStyleType:"none"}}>
+                  {
+                    order?.service_request_note?.map((note)=>(
+                      <li>
+                       <div style={{color:"#005D5E"}}>
+                       <img src={noteImage} style={{width:"19px"}}/>
+                        {" "}
+                        {note.type}
+                       </div>
+                       <div style={{padding:"0px 20px",color:"#828282"}}>
+                        {note.content}
+                       </div>
+                      </li>
+                    ))
+                  }
+                </ul>
+         
+           
+
+              </div>
             </RctCardContent>
           </RctCard>
-            <div className="row justify-content-end mt-2 mb-2" style={{margin:"0px"}}>
+            <div className="row justify-content-between mt-2 mb-2" style={{margin:"0px"}}>
+              <div>
+              <>
+            <Pagination
+              count={Math.ceil(order?.service_request_note_count / limit)}
+              page={page}
+              onChange={(e, value) => {
+                setPage(value);
+           
+              }}
+            />
+            </>
+              </div>
                 <div>
                   <button onClick={()=>setIsOpen(!isopen)} className="btn" style={{background:"#D4B265",color:"#fff"}}> 
                   اضف ملاحظة  
@@ -517,7 +510,7 @@ const AddEditService = () => {
           </RctCard>
         </div>
         </div>
-        <NoteModal isopen={isopen}  setIsOpen={setIsOpen}/>
+        <NoteModal isopen={isopen}  setIsOpen={setIsOpen} serviceRequestId={id}/>
     </div>
   );
 };
