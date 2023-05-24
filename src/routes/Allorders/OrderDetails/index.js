@@ -413,6 +413,7 @@ const AddEditService = () => {
                        <img src={noteImage} style={{width:"19px"}}/>
                         {" "}
                         {note.type}
+                        {moment(order?.updated_at).locale("ar").format('DD MMM YYYY')}
                        </div>
                        <div style={{padding:"0px 20px",color:"#828282"}}>
                         {note.content}
@@ -510,7 +511,7 @@ const AddEditService = () => {
           </RctCard>
         </div>
         </div>
-        <NoteModal isopen={isopen}  setIsOpen={setIsOpen} serviceRequestId={id}/>
+        <NoteModal isopen={isopen}  setIsOpen={setIsOpen} serviceRequestId={id} setOrder={setOrder}/>
     </div>
   );
 };

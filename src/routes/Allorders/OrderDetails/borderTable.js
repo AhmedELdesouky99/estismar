@@ -104,7 +104,7 @@ function Row(props) {
                   حالة المرحلة
                 </p>
                 <div>
-                <StatusDropDown />
+                <StatusDropDown notAllowed={true} activationStatus={row?.provider_status} />
                 </div>
                 </div>
                 <div>
@@ -115,7 +115,7 @@ function Row(props) {
                   حالة المرحلة
                 </p>
                 <div>
-                <StatusDropDown />
+                <StatusDropDown notAllowed={true} activationStatus={row?.owner_status} />
                 </div>
                 </div>
                

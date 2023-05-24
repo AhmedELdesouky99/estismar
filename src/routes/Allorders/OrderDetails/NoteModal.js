@@ -7,7 +7,7 @@ import { NotificationManager } from 'react-notifications';
 const client = axios.create({
     baseURL: "https://estithmar.arabia-it.net/api/admin",
   });
-const NoteModal =({isopen,setIsOpen,serviceRequestId})=>{
+const NoteModal =({isopen,setIsOpen,serviceRequestId,setOrder})=>{
     const toggle=()=>setIsOpen(!isopen)
     const [data, setData] = useState(
         {
@@ -25,7 +25,12 @@ const NoteModal =({isopen,setIsOpen,serviceRequestId})=>{
             console.log(res,"res")
             if(!res.errors){
                 NotificationManager.success("تم تسجيل الملاحظة بنجاح")
+                client.get(`/service-request/${serviceRequestId}`).then(res=>{
+                  setOrder(res.data.data)
                 setIsOpen(!isopen)
+
+                   
+                })
             }else{
                 
             }
@@ -40,11 +45,14 @@ const NoteModal =({isopen,setIsOpen,serviceRequestId})=>{
                  <Label for="exampleSelect">نوع الملاحظة</Label>
                  {
                     <Select options={[
-                        {label:"استفسار",value:"استفسار"}
+                        {label:"استفسار",value:"استفسار"},
+                        {label:"شكوي",value:"شكوي"},
+                        {label:"مقترح",value:"مقترح"},
+
+
                     ]} 
                     placeholder="اختر نوع الملاحظة"
                     onChange={(sel)=>{
-                        console.log(sel,"sel")
                         setData({
                             ...data,
                             type:sel.value
