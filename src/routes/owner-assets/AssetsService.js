@@ -36,8 +36,8 @@ export default function AssetsService() {
         params:{
           limit,
           page,
-          owner_id:id,
-          provider_id:query.service_provider_id ? query.service_provider_id : undefined,
+          asset_owner_id:id,
+          service_provider_id:query.service_provider_id ? query.service_provider_id : undefined,
           status: query.status ? query.status : undefined
         }
       }).then(res=>setOwners(res.data.data))
