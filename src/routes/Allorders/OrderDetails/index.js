@@ -52,7 +52,7 @@ const AddEditService = () => {
     price: 0,
   });
   const [serviceRequirements, setServiceRequirements] = useState();
- 
+ console.log(user,"user order")
   useEffect(() => {
     client.get("/service-requirment").then((res) => {
       const options = res.data.data?.map((one) => ({
@@ -196,72 +196,75 @@ const AddEditService = () => {
           </RctCard>
         </div>
         <div className="row">
-          <div className="col-md-4 col-sm-12"> 
-          <RctCard>
-          <RctCardContent>
-          <div>
-                <h3 className="title" style={{position:"relative"}}>
-                مزود الخدمة
-                </h3>
-              </div>
-              <div className="d-flex" style={{gap:"10px"}} >
-              <img src={order?.service_provider?.files?.find(file=>file.title =="profile")?.path ? `https://estithmar.arabia-it.net${order?.service_provider?.files?.find(file=>file.title =="profile")?.path}`:  NoImage } style={{border:""}} height={"100px"}  width={"auto"}/>
-                  <span style={{alignSelf:"center"}}>
-                    {order?.service_provider?.company_name_ar}
-                  </span>
-              </div>
-              <dvi>
-                <ul style={{padding:"20px 0px ",listStyleType:"none"}}>
-                  <li className="order-list-item">
-                    <span>
-                    رقم الجوال
-                    </span>
-                    <span>
-                      {" "}
-                        {order?.service_provider?.user?.phone}
-                    </span>
-                  </li>
-                  <li className="order-list-item">
-                    <span>
-                    البريد الالكتروني
-                    </span>
-                    <span>
-                      {" "}
-                        {order?.service_provider?.user?.email}
-                    </span>
-                  </li>
-                  <li className="order-list-item"> 
-                    <span>
-                    الدولة
-                    </span> 
-                    <span>
-                      {" "}
-                        المملكة العربيه السعودية
-                    </span>
-                  </li>
-                  <li className="order-list-item">
-                    <span>
-                    المدينة
-                    </span>
-                    <span>
-                      {" "}
-                        {order?.service_provider?.city}
-                    </span>
-                  </li>
-                  <li className="order-list-item">
-                    <span>
-                    الحي  
-                    </span>
-                    <span>
-                      {" "}
-                        {order?.asset_owner?.district}
-                    </span>
-                  </li>
-                </ul>
-              </dvi>
-          </RctCardContent>
-          </RctCard>
-          </div>
+        {
+          user.category !="service-provider" && 
+                    <div className="col-md-4 col-sm-12"> 
+                    <RctCard>
+                    <RctCardContent>
+                    <div>
+                          <h3 className="title" style={{position:"relative"}}>
+                          مزود الخدمة
+                          </h3>
+                        </div>
+                        <div className="d-flex" style={{gap:"10px"}} >
+                        <img src={order?.service_provider?.files?.find(file=>file.title =="profile")?.path ? `https://estithmar.arabia-it.net${order?.service_provider?.files?.find(file=>file.title =="profile")?.path}`:  NoImage } style={{border:""}} height={"100px"}  width={"auto"}/>
+                            <span style={{alignSelf:"center"}}>
+                              {order?.service_provider?.company_name_ar}
+                            </span>
+                        </div>
+                        <dvi>
+                          <ul style={{padding:"20px 0px ",listStyleType:"none"}}>
+                            <li className="order-list-item">
+                              <span>
+                              رقم الجوال
+                              </span>
+                              <span>
+                                {" "}
+                                  {order?.service_provider?.user?.phone}
+                              </span>
+                            </li>
+                            <li className="order-list-item">
+                              <span>
+                              البريد الالكتروني
+                              </span>
+                              <span>
+                                {" "}
+                                  {order?.service_provider?.user?.email}
+                              </span>
+                            </li>
+                            <li className="order-list-item"> 
+                              <span>
+                              الدولة
+                              </span> 
+                              <span>
+                                {" "}
+                                  المملكة العربيه السعودية
+                              </span>
+                            </li>
+                            <li className="order-list-item">
+                              <span>
+                              المدينة
+                              </span>
+                              <span>
+                                {" "}
+                                  {order?.service_provider?.city}
+                              </span>
+                            </li>
+                            <li className="order-list-item">
+                              <span>
+                              الحي  
+                              </span>
+                              <span>
+                                {" "}
+                                  {order?.asset_owner?.district}
+                              </span>
+                            </li>
+                          </ul>
+                        </dvi>
+                    </RctCardContent>
+                    </RctCard>
+                    </div>
+        } 
           <div className="col-md-4 col-sm-12"> 
           <RctCard>
           <RctCardContent>

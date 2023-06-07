@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import axios from "axios";
 import {
   Dropdown,
   DropdownToggle,
@@ -13,7 +15,7 @@ function StatusDropDown(props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const { user } = useSelector((state) => state.authUser);
-
+const {id:orderId} =useParams()
 useEffect(()=>{
   if(props.activationStatus !=undefined){
     const activeStatus =  [
@@ -26,6 +28,21 @@ useEffect(()=>{
 },[props.activationStatus])
 const changeStatus=(status)=>{
   setActiveStatus(status)
+  if(props.inbordertable){
+    
+    const clientUrl=
+    axios.create({
+      baseURL: "https://estithmar.arabia-it.net/api/provider/",
+    });
+
+    clientUrl.put(`/request/${orderId}`,{
+      provider_status:status.id,
+      token:localStorage.getItem("token"),
+      request_deliveries_id : props.borderId,
+
+    }).then(res=>console.log(res,"res active"))
+    return
+  }
   if(props.inorder){
     props.client.put(`${props.url}`,{
       status:status.id,
@@ -42,7 +59,7 @@ const changeStatus=(status)=>{
 }
   return (
     <Dropdown isOpen={dropdownOpen} toggle={toggle} {...props}>
-      <DropdownToggle disabled={user.user.category != "admin" || props.notAllowed} caret size="md" style={{background:activeStatus?.title == 
+      <DropdownToggle disabled={(user.user.category != "admin" && !props.inbordertable) || props.notAllowed} caret size="md" style={{background:activeStatus?.title == 
 "قيد الانتظار" ?  "#EEB656":  "",border:"none",width:"fit-content"}}>
         {activeStatus?.name}
       </DropdownToggle>

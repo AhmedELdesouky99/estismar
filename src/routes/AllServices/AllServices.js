@@ -30,9 +30,22 @@ export default function Services({inTabs}) {
 	const {user}=useSelector(state=>state.authUser.user)
   
   useEffect(()=>{
-    client
-    // .get(`/service?limit=${limit}&page=${page}`)
-    // .then((res) => setOwners(res.data.data));
+   if(user.category =="service-provider"){
+    const clientUrl=
+    axios.create({
+      baseURL: "https://estithmar.arabia-it.net/api/provider",
+    });
+    clientUrl.get(`/service`,{
+      params:{
+        limit,
+        page,
+        token:localStorage.getItem("token"),
+        field_id:query.field_id ? query.field_id : undefined,
+        status: query.status ? query.status : undefined,
+        support_ratio:query.support_ratio ? query.support_ratio : undefined
+      }
+    }).then(res=>setOwners(res.data.data))
+   }else{
     client.get(`/service`,{
       params:{
         limit,
@@ -43,7 +56,10 @@ export default function Services({inTabs}) {
         support_ratio:query.support_ratio ? query.support_ratio : undefined
       }
     }).then(res=>setOwners(res.data.data))
+   }
+   
 },[page,limit,query])
+console.log(user,"user")
   return (
     <div className="clients-wrapper">
      {

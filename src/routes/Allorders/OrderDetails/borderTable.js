@@ -19,6 +19,7 @@ import NoImage from "../../../assets/img/no-image.png"
 import UploadImage from "../../../assets/img/ic-upload.png"
 import { useRef } from 'react';
 import axios from "axios"
+import { useSelector } from 'react-redux';
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin",
 });
@@ -51,6 +52,8 @@ function Row(props) {
   const [loader,setLoader]=useState()
   const [EnImage,setEnImage]=useState()
   const inputFile = useRef(null);
+	const {user}=useSelector(state=>state.authUser.user)
+
   const uploadEnimage = (file,row) => {
     console.log(row,"row")
     setLoader(true);
@@ -104,7 +107,7 @@ function Row(props) {
                   حالة المرحلة
                 </p>
                 <div>
-                <StatusDropDown notAllowed={true} activationStatus={row?.provider_status} />
+                <StatusDropDown borderId={row.id} inbordertable={true} notAllowed={user.category!="service-provider" ? true :false} activationStatus={row?.provider_status} />
                 </div>
                 </div>
                 <div>
@@ -120,33 +123,39 @@ function Row(props) {
                 </div>
                
               </div>
-              <div className='d-flex justify-content-between'>
-                <div className='mt-3'> 
-              <img src={row.file ? "https://estithmar.arabia-it.net" + row.file : NoImage } style={{border:"1px solid #ccc"}} height={"100px"}  width={"182px"}/>
-                </div>
-                <div style={{alignSelf:"end"}}>
-                  <button 
-                  onClick={()=>{
-                    inputFile.current.click()
-                  }}
-                  style={{marginTop:"10px",background:"#fff",borderColor:"#005D5E",color:"#005D5E",fontSize:"14px",padding:"4px 10px"}}> 
-                    <img src={UploadImage} style={{width:"19px"}}/>
-                   {" "}
-                    ارفاق ملفات
-                  </button>
-                  <input
-              style={{display:"none"}}
-                ref={inputFile}
-                type="file"
-                accept="image/jpeg, jpeg, png, image/png, gif, image/gif"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  uploadEnimage(file,row)
-                  // setImage(file)
-                }}
-              />
-                </div>
-              </div>
+              {
+                
+                              <div className='d-flex justify-content-between'>
+                              <div className='mt-3'> 
+                            <img src={row.file ? "https://estithmar.arabia-it.net" + row.file : NoImage } style={{border:"1px solid #ccc"}} height={"100px"}  width={"182px"}/>
+                              </div>
+                              <div style={{alignSelf:"end"}}>
+                                <button 
+                                onClick={()=>{
+                                    if(row.id){
+                                  inputFile.current.click()
+
+                                    }
+                                }}
+                                style={{marginTop:"10px",background:"#fff",borderColor:"#005D5E",color:"#005D5E",fontSize:"14px",padding:"4px 10px"}}> 
+                                  <img src={UploadImage} style={{width:"19px"}}/>
+                                 {" "}
+                                  ارفاق ملفات
+                                </button>
+                                <input
+                            style={{display:"none"}}
+                              ref={inputFile}
+                              type="file"
+                              accept="image/jpeg, jpeg, png, image/png, gif, image/gif"
+                              onChange={(e) => {
+                                const file = e.target.files[0];
+                                uploadEnimage(file,row)
+                                // setImage(file)
+                              }}
+                            />
+                              </div>
+                            </div>
+              }
               </div>
             </Box>
           </Collapse>

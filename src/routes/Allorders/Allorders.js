@@ -30,18 +30,32 @@ export default function Orders({inTabs}) {
 	const {user}=useSelector(state=>state.authUser.user)
   
   useEffect(()=>{
-    client
-    // .get(`/service?limit=${limit}&page=${page}`)
-    // .then((res) => setOwners(res.data.data));
-    client.get(`/service-request`,{
-      params:{
-        limit,
-        page,
-        service_provider_id: id && location.pathname.includes("service-provider") ? id : user?.category =="service-provider" || user?.category =="provider-employee" ? user?.id :  query.service_provider_id ? query.service_provider_id : undefined,
-        status: query.status ? query.status : undefined,
-      }
-    }).then(res=>setOwners(res.data.data))
+    console.log(user,"user")
+    if(user.category =="service-provider"){
+      const clienturl= axios.create({
+        baseURL: "https://estithmar.arabia-it.net/api",
+      });
+      clienturl.get(`/provider/request`,{
+        params:{
+          limit,
+          token:localStorage.getItem("token"),
+          page,
+          status: query.status ? query.status : undefined,
+        }
+      }).then(res=>setOwners(res.data.data))
+    }else{
+      client.get(`/service-request`,{
+        params:{
+          limit,
+          page,
+          service_provider_id: id && location.pathname.includes("service-provider") ? id : user?.category =="service-provider" || user?.category =="provider-employee" ? user?.id :  query.service_provider_id ? query.service_provider_id : undefined,
+          status: query.status ? query.status : undefined,
+        }
+      }).then(res=>setOwners(res.data.data))
+    }
+    
 },[page,limit,query])
+console.log(user,"user")
   return (
     <div className="clients-wrapper">
      {
