@@ -7,6 +7,7 @@ import PageTitleBar from "Components/PageTitleBar/PageTitleBar";
 import IntlMessages from "Util/IntlMessages";
 import PerPage from "Components/shared/PerPage";
 import { Pagination } from "@material-ui/lab";
+import Rating from '@material-ui/lab/Rating';
 
 import { RctCard, RctCardContent } from "Components/RctCard";
 import { FormGroup, Label, Input, ButtonGroup, Button, Progress } from "reactstrap";
@@ -333,6 +334,8 @@ const AddEditService = () => {
           </RctCard>
 
           </div>
+         {
+          user.category =="admin" ? 
           <div className="col-md-4 col-sm-12"> 
           <RctCard>
           <RctCardContent>
@@ -396,6 +399,72 @@ const AddEditService = () => {
           </RctCardContent>
           </RctCard>
           </div>
+          :    
+          <div className="col-md-8 col-sm-12">
+            <RctCard>
+          <RctCardContent>
+
+    <h3 Style={{
+      color: "#005D5E",
+      padding: "10px 0px",
+      borderBottom: "1px solid #eee",
+      marginBottom: "10px",
+    }}>
+    تقييم الوقف
+    </h3>
+    <div className="row">
+        <div className="col-md-8 col-sm-12">
+            <div className="row ">
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                    <p style={{color:"#9c9c9c"}}>
+                        سرعة التجاوب
+                    </p>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                    <Rating name="read-only" value={4} readOnly />
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                    <p style={{color:"#9c9c9c"}}>
+                        جودة الخدمات
+                    </p>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                    <Rating name="read-only" value={4} readOnly />
+
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                    <p style={{color:"#9c9c9c"}}>
+                        السعر
+                    </p>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                    <Rating name="read-only" value={4} readOnly />
+
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                    <p style={{color:"#9c9c9c"}}>
+                        مدى الاستفادة من الخدمة
+                    </p>
+
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                    <Rating name="read-only" value={4} readOnly />
+
+                </div>
+            </div>
+        </div>
+        <div className='text-center col-lg-4 col-md-4 col-sm-12' style={{ alignSelf: "center" }}>
+            <h4 style={{ color: "#005D5E" }}>
+                اجمالي التقييم
+            </h4>
+            <Rating  style={{margin:"auto"}} name="read-only" value={4} readOnly />
+
+        </div>
+    </div>
+          </RctCardContent>
+          </RctCard>
+          </div>
+         }
         </div>
         <div className="row">
         
