@@ -280,55 +280,64 @@ const AddEditService = () => {
                     {order?.asset_owner?.asset_name_ar}
                   </span>
               </div>
-              <dvi>
-                <ul style={{padding:"20px 0px ",listStyleType:"none"}}>
-                  <li className="order-list-item">
-                    <span>
-                    رقم الجوال
-                    </span>
-                    <span>
-                      {" "}
-                        {order?.asset_owner?.asset_nom}
-                    </span>
-                  </li>
-                  <li className="order-list-item">
-                    <span>
-                    البريد الالكتروني
-                    </span>
-                    <span>
-                      {" "}
-                        {order?.asset_owner?.user?.email}
-                    </span>
-                  </li>
-                  <li className="order-list-item">
-                    <span>
-                    الدولة
-                    </span>
-                    <span>
-                      {" "}
-                        المملكة العربيه السعودية
-                    </span>
-                  </li>
-                  <li className="order-list-item">
-                    <span>
-                    المدينة
-                    </span>
-                    <span>
-                      {" "}
-                        {order?.asset_owner?.city}
-                    </span>
-                  </li>
-                  <li className="order-list-item">
-                    <span>
-                    الحي  
-                    </span>
-                    <span>
-                      {" "}
-                        {order?.asset_owner?.district}
-                    </span>
-                  </li>
-                </ul>
-              </dvi>
+              {
+                user.category =="admin" ? 
+                            <dvi>
+                            <ul style={{padding:"20px 0px ",listStyleType:"none"}}>
+                              <li className="order-list-item">
+                                <span>
+                                رقم الجوال
+                                </span>
+                                <span>
+                                  {" "}
+                                    {order?.asset_owner?.asset_nom}
+                                </span>
+                              </li>
+                              <li className="order-list-item">
+                                <span>
+                                البريد الالكتروني
+                                </span>
+                                <span>
+                                  {" "}
+                                    {order?.asset_owner?.user?.email}
+                                </span>
+                              </li>
+                              <li className="order-list-item">
+                                <span>
+                                الدولة
+                                </span>
+                                <span>
+                                  {" "}
+                                    المملكة العربيه السعودية
+                                </span>
+                              </li>
+                              <li className="order-list-item">
+                                <span>
+                                المدينة
+                                </span>
+                                <span>
+                                  {" "}
+                                    {order?.asset_owner?.city}
+                                </span>
+                              </li>
+                              <li className="order-list-item">
+                                <span>
+                                الحي  
+                                </span>
+                                <span>
+                                  {" "}
+                                    {order?.asset_owner?.district}
+                                </span>
+                              </li>
+                            </ul>
+                          </dvi>
+                          : 
+                         <div className="text-center">
+                           <button className="w-50" style={{color:"#fff" ,background:"#005D5E",border:"none" ,padding:"6px"}} >
+                            طلب اجتماع
+                          </button>
+                         </div>
+              }
               
             </RctCardContent>
           </RctCard>
