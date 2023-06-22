@@ -66,9 +66,9 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
       setForthImage(
         forthImage ? "https://estithmar.arabia-it.net" + forthImage : null
       );
-      const { edu_certificates, work_positions } = JSON.parse(
+      const { edu_certificates, work_positions } =      advisorDetails.meta ? JSON.parse(
         advisorDetails.meta
-      );
+      ) : {}
       setData({
         ...advisorDetails,
         name: advisorDetails.user.name,
@@ -462,7 +462,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 disabled={!certifications.length}
                 onClick={() => {
                   const edu_certificates = [...data?.edu_certificates];
-                  edu_certificates.push(certifications);
+                  edu_certificates?.push(certifications);
                   setData({
                     ...data,
                     edu_certificates: edu_certificates,

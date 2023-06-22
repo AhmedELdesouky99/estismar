@@ -468,6 +468,7 @@ module.exports = {
    "widgets.follower": "Follower",
    "widgets.important": "Important",
    "widgets.private": "Private",
+   "Consulting":"Consulting",
    "widgets.openLeft": "Open Left",
    "widgets.openRight": "Open Right",
    "widgets.openTop": "Open Top",

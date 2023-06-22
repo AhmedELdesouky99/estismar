@@ -133,14 +133,23 @@ import {
    AsyncReportsComponent
 } from 'Components/AsyncComponent/AsyncComponent';
 import Advisors from "./AllAdvisors"
+import AllConsulting from "./AllConsults"
+import AddEditConsult from "./AddEditConsult"
 import AddEditAdvisor from "./AddEditAdvisor"
 const AllAdvisors = ({ match }) => (
   
    <div className="Crm-wrapper">
       <Switch>
          {/* <Redirect exact from={`${match.url}/`} to={`${match.url}/`} /> */}
+         <Route exact path={`${match.url}/Consulting`} component={AllConsulting} />
+
+         <Route exact path={`${match.url}/Consulting/add`} component={AddEditConsult} />
+         <Route exact path={`${match.url}/Consulting/:id`} component={AddEditConsult} />
+
          <Route exact path={`${match.url}/add`} component={AddEditAdvisor} />
+
          <Route exact path={`${match.url}/:id`} component={AddEditAdvisor} />
+
          <Route exact path={`${match.url}/`} component={Advisors} />
         
          

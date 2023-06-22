@@ -650,10 +650,28 @@ button.service-time{
   margin:5px;
   min-width: 70px;
 }
+button.schedual{
+  background: #E3E3E3 !important;
+  color:#A5A5A5;
+  margin:5px;
+  min-width: 70px;
+}
+.daysselect{
+  background: #E3E3E3 !important;
+  color:#A5A5A5;
+  margin:5px;
+  min-width: 70px;
+}
+
 button.active{
   background:#005D5E !important;
   margin:5px;
 
+}
+.daysselect.active{
+  background:#D4B265 !important;
+  margin:5px;
+  border: none;
 }
 .switch.on{
   background: #D4B265;

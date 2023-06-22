@@ -181,6 +181,7 @@ import { useEffect } from 'react';
 import {
   ChangeRoute
 } from 'Actions';
+import AllConsulting from '../../routes/Advisors/AllConsults';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -292,7 +293,7 @@ const dispatch=useDispatch()
              <Services inTabs={true}/> : 
              props?.ownerDetails ? 
              <AssetsService />
-             : null
+             : <AllConsulting  inTabs={true}/>
         }
      
       </TabPanel>

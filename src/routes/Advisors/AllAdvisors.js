@@ -106,6 +106,46 @@ export default function Advisors({inTabs}) {
                       </span>
                     </Button>
                   </div>
+                  {/* <div className="col-md-6">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      style={{
+                        color: "#005D5E",
+                        background:"#fff",
+                        border:"1px solid",
+                        borderColor:"005D5E",
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                      }}
+                      className="mx-smt-15 btn  mr-1 ml-1 border-0"
+                      onClick={() => history.push("/app/advisors/Consulting")}
+                    >
+                      <span className="mr-1 ml-1">
+                        <FormattedMessage id={"قائمة الاستشارات"} />
+                      </span>
+                    </Button>
+                  </div> */}
+                  <div className="col-md-6">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      style={{
+                        background: "none",
+                        color:"#005D5E",
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                        color: "#D4B265",
+                        border: "1px solid #005D5E ",
+                      }}
+                      className="mx-smt-15   mr-1 ml-1 "
+                      onClick={() => history.push("/app/advisors/Consulting")}
+                    >
+                      <span className="mr-1 ml-1">
+                        <FormattedMessage id={"قائمة الاستشارات"} />
+                      </span>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
