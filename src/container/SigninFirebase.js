@@ -42,7 +42,9 @@ const Signin =()=>{
 
       const [user,setUser] =useState({
          email:"",
-         password:""
+         password:"",
+         user_category : "dashboard",
+
       })
    // state = {
    //    email: 'demo@example.com',
