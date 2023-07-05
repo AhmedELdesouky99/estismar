@@ -99,7 +99,7 @@ return(
     </div>
     <RctCard withpadding>
         <RctCardContent>
-            <LogsTable service={order?.service} />
+            <LogsTable service={order?.service}  orderDetails={order}/>
         </RctCardContent>
     </RctCard>
     </>

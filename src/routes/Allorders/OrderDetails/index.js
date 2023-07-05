@@ -564,6 +564,21 @@ const AddEditService = () => {
                     </th>
                   </thead>
                   <tbody>
+                  {
+                        order?.logs?.map((log,index)=><tr>
+                            <td>{JSON.parse(log.meta).request_status == 1 ? "مفعل" : JSON.parse(log.meta).request_status == 0 ? "جاري العمل " : "مرفوض" }</td>
+                            <td>{JSON.parse(log.meta).log_type}</td>
+                            <td>{JSON.parse(log.meta).name}</td>
+                            <td>{JSON.parse(log.meta).category =="service-provider" ? "مزود خدمة " : "وقف" }</td>  
+                            <td>{
+                    moment(log.created_at).locale("ar").format('DD MMM YYYY h:mm:ss a')
+                            
+                            }</td>
+                            <td></td>
+
+
+                        </tr>)
+                    }
                     {/* <td>
                       {order?.service?.title}
                     </td>

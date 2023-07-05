@@ -2,7 +2,8 @@ import React from "react"
 import { FormattedMessage } from "react-intl"
 import { Alert } from "Constants/constants";
 
-const LogsTable=({withcheckbox,service})=>{
+const LogsTable=({withcheckbox,service,orderDetails})=>{
+  console.log(orderDetails,"orderDetails logss ")
     return(
         <>
         <p className="title m-0" style={{position:"relative"}}>
@@ -46,6 +47,22 @@ const LogsTable=({withcheckbox,service})=>{
         </thead>
 
         <tbody>
+        {/* {
+                        orderDetails?.logs?.map((log,index)=><tr>
+                            {console.log(JSON.parse(log.meta,"karem"))}
+                            <td>{JSON.parse(log.meta).request_status == 1 ? "مفعل" : JSON.parse(log.meta).request_status == 0 ? "جاري العمل " : "مرفوض" }</td>
+                            <td>{JSON.parse(log.meta).log_type}</td>
+                            <td>{JSON.parse(log.meta).name}</td>
+                            <td>{JSON.parse(log.meta).category =="service-provider" ? "مزود خدمة " : "وقف" }</td>  
+                            <td>{
+                    moment(log.created_at).locale("ar").format('DD MMM YYYY h:mm:ss a')
+                            
+                            }</td>
+                            <td></td>
+
+
+                        </tr>)
+                    } */}
           {/* { service && ["1"]?.map((record, idx) => (
             <tr key={JSON.stringify(idx)} data-testid={`data-tr-${idx}`}>
               {["title","field","executive_time","cost","support_ratio","is_active"]?.map((data, index) => (
