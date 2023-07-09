@@ -20,6 +20,9 @@ import UploadImage from "../../../assets/img/ic-upload.png"
 import { useRef } from 'react';
 import axios from "axios"
 import { useSelector } from 'react-redux';
+import moment from "moment"
+import GetAppIcon from '@material-ui/icons/GetApp';
+import DeleteIcon from '@material-ui/icons/Delete';
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin",
 });
@@ -53,6 +56,12 @@ function Row(props) {
   const [EnImage,setEnImage]=useState()
   const inputFile = useRef(null);
 	const {user}=useSelector(state=>state.authUser.user)
+  const client = user.category == "admin" ?axios.create({
+    baseURL: "https://estithmar.arabia-it.net/api/admin",
+  }) : 
+  axios.create({
+    baseURL: "https://estithmar.arabia-it.net/api",
+  })
 
   const uploadEnimage = (file,row) => {
     console.log(row,"row")
@@ -61,7 +70,8 @@ function Row(props) {
     formdata.append("request_deliveries_id", row.id);
     formdata.append("file", file);
     formdata.append("_method","PUT")
-    client
+    if(user.category == "admin"){
+      client
       .post(`/service-request/${serviceRequestId}`, formdata, {
         headers: {
           "Content-Type": "multipart/form-data; ",
@@ -73,10 +83,37 @@ function Row(props) {
           setOrder(res.data.data)
            
         })
-        // setFiles([...files, res.data.data.id]);
-        // setEnImage("https://estithmar.arabia-it.net" + res.data.data.path);
+      
       });
+    }else{
+    formdata.append("token", localStorage.getItem("token"));
+
+      client
+      .post(`/provider/request/${serviceRequestId}`, formdata, {
+        headers: {
+          "Content-Type": "multipart/form-data; ",
+        },
+      })
+      .then((res) => {
+        console.log(res,"res")
+        client.get(`/provider/request/${serviceRequestId}`).then(res=>{
+          setOrder(res.data.data)
+           
+        })
+      
+      });
+    }
   };
+  const DeleteFile=(id)=>{
+    client.delete(`/provider/request/${id}?delete_file=true&token=${localStorage.getItem("token")}`).then((res)=>{
+      client.get(`/provider/request/${serviceRequestId}?token=${localStorage.getItem("token")}`).then(res=>{
+        setOrder(res.data.data)
+        // dispatch(OrderDetailsAction(res.data.data))
+
+      })
+    })
+  
+  }
   return (
     <React.Fragment>
       <TableRow className={classes.root}>
@@ -123,12 +160,57 @@ function Row(props) {
                 </div>
                
               </div>
-              {
+              {<>
+                <div>
+                <table className="table table-hover w-100 mt-2 mb-2">
+             <thead>
+                 <th>
+                  ID
+                 </th>
+                 <th>
+                  الملف
+                 </th>
+                 <th>
+                 بواسطة
+                 </th>
+                 <th>
+                 التاريخ
+                 </th>
+                 <th>
+                 </th>
                 
-                              <div className='d-flex justify-content-between'>
-                              <div className='mt-3'> 
-                            <img src={row.file ? "https://estithmar.arabia-it.net" + row.file : NoImage } style={{border:"1px solid #ccc"}} height={"100px"}  width={"182px"}/>
-                              </div>
+               </thead>
+               <tbody>
+                 {
+                     row.request_delivery_files.map((file,index)=><tr>
+                         <td>{index +1}</td>
+                         <td>{file?.title}</td>
+                         <td>{file?.user?.name}</td>
+                         <td>{moment(file.created_at).locale("ar").format('DD MMM YYYY')}</td>
+                         <td className="d-flex justify-content-center" style={{gap:"10px"}}>
+                           <button className="btn btn-info"> 
+                           <a href={`https://estithmar.arabia-it.net${file.file}`} target="_blank" download={`https://estithmar.arabia-it.net${file.file}`}>
+                           <GetAppIcon  style={{color:"white"}}/>
+                           </a>
+                           </button>
+                           {
+                            user.category != "admin" && user.id == file.user.id ? 
+                            <button  onClick={()=>DeleteFile(file.id)} className="btn btn-danger"> 
+                            <DeleteIcon />
+                            </button> : null
+                           }
+                          
+                         </td>
+
+                     </tr>)
+                 }
+
+               </tbody>
+           </table>
+             </div>
+                
+                              <div className='d-flex justify-content-end'>
+                           
                               <div style={{alignSelf:"end"}}>
                                 <button 
                                 onClick={()=>{
@@ -155,6 +237,8 @@ function Row(props) {
                             />
                               </div>
                             </div>
+              </>
+
               }
               </div>
             </Box>

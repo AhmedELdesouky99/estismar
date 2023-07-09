@@ -27,9 +27,7 @@ import NoImage from "../../../assets/img/no-image.png";
 import noteImage from "../../../assets/img/ic-message.png"
 import CollapsibleTable from "./borderTable";
 import NoteModal from "./NoteModal";
-const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin",
-});
+
 
 const AddEditService = () => {
   const [rSelected, setRSelected] = useState(null);
@@ -41,6 +39,11 @@ const AddEditService = () => {
   const { id } = useParams();
   const history=useHistory()
 	const {user}=useSelector(state=>state.authUser.user)
+  const client = user.category == "admin" ? axios.create({
+    baseURL: "https://estithmar.arabia-it.net/api/admin",
+  }):  axios.create({
+    baseURL: "https://estithmar.arabia-it.net/api",
+  })
   const [order,setOrder]=useState()
   const[isopen,setIsOpen]=useState(false)
   const [Delivery, setDelivery] = useState({
@@ -64,12 +67,17 @@ const AddEditService = () => {
     });
   }, []);
   useEffect(()=>{
-      if(id){
+      if(id && user.category =="admin"){
         client.get(`/service-request/${id}?page=${page}`).then(res=>{
           setOrder(res.data.data)
            
         })
         
+      }else if(id && user.category !="admin"){
+        client.get(`/provider/request/${id}?token=${localStorage.getItem("token")}`).then(res=>{
+          setOrder(res.data.data)
+           
+        })
       }
   },[id,page])
   return (

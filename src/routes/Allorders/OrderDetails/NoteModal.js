@@ -3,12 +3,15 @@ import { Button, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHe
 import Select from "react-select";
 import axios from "axios"
 import { NotificationManager } from 'react-notifications';
+import { useSelector } from "react-redux";
 
 const client = axios.create({
     baseURL: "https://estithmar.arabia-it.net/api/admin",
   });
 const NoteModal =({isopen,setIsOpen,serviceRequestId,setOrder})=>{
     const toggle=()=>setIsOpen(!isopen)
+	const {user}=useSelector(state=>state.authUser.user)
+
     const [data, setData] = useState(
         {
           add_note : true,
@@ -18,11 +21,13 @@ const NoteModal =({isopen,setIsOpen,serviceRequestId,setOrder})=>{
         }
       );
     const addNote=()=>{
-        client
+
+      console.log(user,"user add note ")
+      if(user.category =="admin"){
+         client
         .put(`service-request/${serviceRequestId}`, {
             ...data
         }).then(res=>{
-            console.log(res,"res")
             if(!res.errors){
                 NotificationManager.success("تم تسجيل الملاحظة بنجاح")
                 client.get(`/service-request/${serviceRequestId}`).then(res=>{
@@ -35,6 +40,28 @@ const NoteModal =({isopen,setIsOpen,serviceRequestId,setOrder})=>{
                 
             }
         })
+      }else{
+        const client2 = axios.create({
+          baseURL: "https://estithmar.arabia-it.net/api/",
+        });
+         client2
+        .put(`provider/request/${serviceRequestId}?token=${localStorage.getItem("token")}`, {
+            ...data
+        }).then(res=>{
+            if(!res.errors){
+                NotificationManager.success("تم تسجيل الملاحظة بنجاح")
+                client.get(`/service-request/${serviceRequestId}`).then(res=>{
+                  setOrder(res.data.data)
+                setIsOpen(!isopen)
+
+                   
+                })
+            }else{
+                
+            }
+        })
+      }
+       
     }
     return(
         <Modal size="lg" id="modal-note" isOpen={isopen} toggle={toggle} style={{padding:"10px"}}>
