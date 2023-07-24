@@ -24,6 +24,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import FieldsDropDown from "../../components/shared/FieldsDropDown";
 import AdvisorsDropDown from "../../components/shared/advisorDropDown";
+import moment from "moment";
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin",
 });
@@ -38,50 +39,23 @@ const AddEditConsult = () => {
   const history=useHistory()
   const [activeTab,setActiveTab]=useState()
 	const {user}=useSelector(state=>state.authUser.user)
-  const [data,setData]=useState({})
+  const [specificDay,setSpecificDay]=useState()
+  const [advisorId,setAdvisorId]=useState()
+  const [daysOut,setDaysOut]=useState([])
+  const [data,setData]=useState({
+    schedule:{
+
+  }})
   
 const[days,setDays]=useState([])
-  const [Delivery, setDelivery] = useState({
-    title:"",
-    count: 10,
-    count_type: "day",
-  });
+
   const [serviceborder, setServiceBorder] = useState({
     title: "",
     price: 0,
   });
 const toggle=()=>setModal(!modal)
 
-  const [serviceRequirements, setServiceRequirements] = useState();
-  // const[rSelected,setRSelected]=useState()
-  const [Service, setService] = useState(
-    {
-      "title" : "",
-      "description" : "",
-      "provider_id" : user?.category == "service-provider"  || user?.category =="provider-employee"? user?.id : "" ,
-      "field_id" : "",
-  
-      "executive_steps" : [], 
-      "executive_result" : [],
-  
-      "cost" :"1000", 
-      "tax_ratio" : "10", 
-      "support_ratio" : "50", 
-      "cost_after_study" : false,
-  
-      "executive_time_type" : "", 
-      "executive_time" : "", 
-      "stages_of_delivery" : [ 
-         
-      ], 
-      "service_requirment" : [
-        
-      ], 
-      "service_border" : [
-         
-      ]
-  }
-  );
+
   useEffect(() => {
     client.get("/service-requirment").then((res) => {
       const options = res.data.data?.map((one) => ({
@@ -91,86 +65,7 @@ const toggle=()=>setModal(!modal)
       setRequiredOptions(options);
     });
   }, []);
-  useEffect(()=>{
-      if(id){
-        client.get(`/service/${id}`).then(res=>{
-            const border= JSON.parse(res.data.data.service_border)
-            const service_requirment=res.data.data.service_requirment
-            const stages_of_delivery=JSON.parse(res.data.data.stages_of_delivery)
-            const executive_steps=JSON.parse(res.data.data.executive_steps)
-            const executive_result=JSON.parse(res.data.data.executive_result)
-            setService({
-              title:res.data.data.title,
-              field_id:res.data.data.field_id,
-              provider_id:user?.category == "service-provider"  || user?.category =="provider-employee" ? user?.id :res.data.data.service_provider.user_id ,
-              description:res.data.data.description,
-              service_border:border,
-              service_requirment:service_requirment,
-              executive_time:res.data.data.executive_time,
-              stages_of_delivery:stages_of_delivery,
-              cost:res.data.data.cost,
-              tax_ratio:res.data.data.tax_ratio,
-              cost_after_study:res.data.data.cost_after_study,
-              executive_time_type:res.data.data.executive_time_type,
-              executive_steps:executive_steps,
-              executive_result:executive_result,
-              support_ratio:res.data.data.support_ratio
 
-            })
-            setRSelected(res.data.data.executive_time_type =="month" ? 2 : res.data.data.executive_time_type == "day" ? 1 : 3)
-        })
-        
-      }
-  },[id])
-  const useStyles = makeStyles((theme) => ({
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    textField: {
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
-      width: 200,
-    },
-  }));
-  
- const AddService=()=>{
-  client
-  .post("/service", {
-    ...Service,
-  }).then(res=>{
-    if(res.data.success){
-      
-      swal({
-        title: "",
-        text:" تم اضافه الخدمة بنجاح",
-        icon: "success",
-      });
-    }
-  }).then(()=>{
-    setTimeout(()=>{
-      history.push("/app/services")
-    },2000)
-  })
- }
- const EditService=()=>{
-  client.put(`service/${id}`,{
-    ...Service,
-    service_requirment:Service.service_requirment.map((req)=>req.title),
-    type : "update",
-  }).then((res)=>{
-    if(res.data.success){
-      swal({
-        title: "",
-        text:" تم تعديل الخدمة بنجاح",
-        icon: "success",
-      });
-      setTimeout(()=>{
-        history.push("/app/services")
-      },2000)
-    }
-  })
- }
  const EditConsult =()=>{
   
  }
@@ -178,9 +73,7 @@ const toggle=()=>setModal(!modal)
   client
   .post("/advisor-schedules", {
     ...data,
-    type: rSelected == 3 ? "custome" : rSelected == 1 ? "once" :"dialy",
-    days:rSelected ==3  || rSelected == 1? days :undefined,
-    advisor_id: user.category !="advisor" ? data.advisor_id : user.id
+    advisor_id: user.category !="advisor" ? data.advisor_id ? data.advisor_id: advisorId : user.id
 
 
   }).then(res=>{
@@ -198,7 +91,168 @@ const toggle=()=>setModal(!modal)
     },2000)
   })
  }
- console.log(user,"user in add  " )
+ const AddTime=()=>{
+  if(rSelected ==2){
+      const DataCopied =data 
+      const dailyArr=DataCopied?.schedule?.daily
+      if(!dailyArr){
+        DataCopied.schedule.daily=[
+          
+            {
+              "day"  : "Sun",
+              "times" : [DataCopied.time]
+          },
+          {
+              "day"  : "Mon",
+              "times" : [DataCopied.time]
+
+          },
+          {
+              "day"  : "Tue",
+              "times" : [DataCopied.time]
+
+          },
+          {
+              "day"  : "Wed",
+              "times" : [DataCopied.time]
+
+          },
+          {
+              "day"  : "Thu",
+              "times" : [DataCopied.time]
+
+          },
+          {
+              "day"  : "Fri",
+              "times" : [DataCopied.time]
+              
+          },
+          {
+            "day"  : "Sat",
+            "times" : [DataCopied.time]
+            
+        }
+          
+        ]
+        console.log(data,"data ofof")
+        // setData(
+        //   ...data,
+        //   DataCopied
+        // )
+        toggle()
+      }
+      else{
+        const arrmodify=dailyArr.map((dayone)=>({
+          "day"  : dayone.day,
+          times:[...dayone.times,DataCopied.time]
+        }))
+        DataCopied.schedule.daily=arrmodify
+        setData({
+          ...data,
+          DataCopied
+        })
+        toggle()
+        
+      }
+  }  else if(rSelected ==3){
+    const DataCopied =data 
+    const customearr=DataCopied?.schedule?.custome
+    if(customearr){
+      const arrmodify=customearr.map((dayone)=>({
+        "day"  : dayone.day,
+        times:[...dayone.times,DataCopied.time]
+      }))
+      DataCopied.schedule.custome=arrmodify
+      setData({
+        ...data,
+        DataCopied
+      })
+      toggle()
+    }else{
+      DataCopied.schedule.custome= days.map((day)=>({
+        "day"  : day,
+        times:[DataCopied.time]
+      }))
+      setData({
+        ...data,
+        DataCopied
+      })
+      toggle()
+    }
+    console.log(days,"days")
+  }else {
+    const DataCopied =data 
+    const oncearr=DataCopied?.schedule?.once
+    if(oncearr){
+      const arrmodify=oncearr.map((dayone)=>({
+        "day"  : dayone.day,
+        times:[...dayone.times,DataCopied.time]
+      }))
+      DataCopied.schedule.once=arrmodify
+      setData({
+        ...data,
+        DataCopied
+      })
+      toggle()
+    }else{
+      DataCopied.schedule.once= days.map((day)=>({
+        "day"  : day,
+        times:[DataCopied.time]
+      }))
+      setData({
+        ...data,
+        DataCopied
+      })
+      toggle()
+    }
+  }
+
+ }
+ const handelChangeAdvisor=(id)=>{
+  client.get(`/advisor-schedules?advisor_schedule=${id}`).then((res)=>{
+    setAdvisorId(id)
+    var alldays=[]
+    if(res.data?.data?.days?.daily?.length){
+      alldays=[...res.data.data.days.daily]
+    }
+    if(res.data?.data?.days?.once){
+      alldays=[...alldays,...res.data.data.days.once]
+    }
+    if(res.data?.data?.days?.custome){
+      alldays=[...alldays,...res.data.data.days.custome]
+
+    }
+    if(!res.data?.data?.days?.daily?.length && !res.data?.data?.days?.once  && !res.data?.data?.days?.custome){
+      setData({
+        schedule:{
+
+        }
+      })
+      setDaysOut([])
+      setActiveTab(null)
+      setSpecificDay([])
+      
+      return
+    }
+    // const alldays=[...res.data.data.days.daily,...res.data.data.days.once,...res.data.data.days.custome]
+    setDaysOut(alldays)
+    setData({
+      ...data,
+      schedule:res?.data?.data?.days,
+      cost:res?.data?.data?.cost,
+      nom_hours:res?.data?.data?. nom_hours,
+      advisor_id:id
+
+    })
+  })
+ }
+ useEffect(()=>{
+if( user.category =="advisor" ){
+  handelChangeAdvisor(user.id)
+
+}
+ },[user])
+ console.log(data,"data karem")
   return (
     <div className="clients-wrapper">
       <Helmet>
@@ -208,7 +262,7 @@ const toggle=()=>setModal(!modal)
         title={<IntlMessages id="الخدمات" />}
         match={location}
         enableBreadCrumb
-        lastElement={Service?.title || "اضافة استشارات"}
+        lastElement={"اضافة استشارات"}
       />
 
       <div className="col-md-12">
@@ -224,11 +278,10 @@ const toggle=()=>setModal(!modal)
                   <AdvisorsDropDown  
                   onChange={(sel) => {
                     console.log(sel,"karem mohamed ")
-                    setData({
-                      ...data,
-                      advisor_id: sel.value,
-                    });
+                    handelChangeAdvisor(sel.value)
+                 
                   }}
+
                   selectedItem={data?.advisor_id}
                  
                  
@@ -245,7 +298,7 @@ const toggle=()=>setModal(!modal)
             <FormGroup>
                     <Label for="exampleSelect"> مدة الاستشارة </Label>
                  <div className="d-flex" style={{gap:"10px"}}>
-                  <Input  onChange={(e)=>setData({...data,nom_hours:e.target.value})}/>
+                  <Input  value={data?.nom_hours ? data?.nom_hours : "" } onChange={(e)=>setData({...data,nom_hours:e.target.value})}/>
                 <span style={{alignSelf:"center"}}>
                  ساعه  
 
@@ -258,7 +311,7 @@ const toggle=()=>setModal(!modal)
             <FormGroup>
                     <Label for="exampleSelect">  تكلفة الاستشارة </Label>
                  <div className="d-flex" style={{gap:"10px"}}>
-                  <Input  onChange={(e)=>setData({...data,cost:e.target.value})} />
+                  <Input  value={data?.cost ? data?.cost : ""} onChange={(e)=>setData({...data,cost:e.target.value})} />
                 <span style={{alignSelf:"center",width:"-webkit-fill-available"}}>
                 ر.س / مدة الاستشارة
                 </span>
@@ -271,7 +324,7 @@ const toggle=()=>setModal(!modal)
           </div>
           <div>
             <p>
-             الأيام
+        الأيام
             </p>
             <div className="row">
             <div className="d-flex" style={{ columnGap: "10px" }}>
@@ -286,7 +339,14 @@ const toggle=()=>setModal(!modal)
                         outline
                         onClick={()=>{
                           setActiveTab(index)
+                          console.log(daysOut,"daysOut")
+                          
+                          const getDay=daysOut.filter((dayf)=>dayf.day == day)
+                          console.log(getDay,"getDay")
+                          setSpecificDay(getDay)
+                          
                         }}
+                        style={{zIndex: activeTab ==index ? 0 :"" }}
                         active={activeTab ==index}
                         // active={rSelected ==2  || (rSelected ==3 && days?.includes(day)) || (rSelected ==1 && days?.includes(day)) } 
                        
@@ -320,6 +380,51 @@ const toggle=()=>setModal(!modal)
           </RctCardContent>
               </RctCard>
         </div>
+        <div className="col-md-10">
+                  <div
+                    className="card mt-2"
+                    style={{ borderColor: "#D4B265", minHeight: "100px" }}
+                  >
+                    <div className="row" style={{ margin: "3px" }}>
+                      {
+                        specificDay?.map((oneday)=> oneday.times?.map((time, index) => (
+                          <div className="col-md-3 mt-2">
+                            <div
+                              className="d-flex"
+                              style={{
+                                background: "#CF4949",
+                                padding: "5px 10px",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <div style={{ color: "#FFFFFF" }}>
+                                {time} - {+time.split(":")[0] + +data.nom_hours +`:${time.split(":")[1]}` }
+                                {console.log(moment(time).add(1,"hours"),"ssss")}
+                              </div>
+                              <div>
+                                <CloseIcon
+                                  style={{
+                                    width: "19px",
+                                    height: "19px",
+                                    borderRadius: "50px",
+                                    background: "#fff",
+                                    color: "#CF4949",
+                                    cursor: "pointer",
+                                  }}
+                                  onClick={() => {
+                                  console.log(specificDay,"specificDay",data)
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        )))
+                      
+                      
+                      }
+                    </div>
+                  </div>
+                </div>
         <div className="row justify-content-center mt-3">
         <div className="col-md-3 mb-2 mt-2">
           <button
@@ -347,10 +452,16 @@ const toggle=()=>setModal(!modal)
                           name="time"
                           placeholder="time placeholder"
                           type="time"
-                          onChange={(e)=>setData({
-                            ...data,
-                            time:e.target.value
-                          })}
+                          onChange={(e)=>{
+                            var addMlSeconds = 60 * 60 * 1000;
+                            var newDateObj = new Date(addMlSeconds + e.target.value);
+                            console.log(newDateObj,"ssstime")
+                            setData({
+                              ...data,
+                              time:e.target.value
+                            })}
+                          }
+                          
                         />
                     </FormGroup>
                         </div>
@@ -427,6 +538,7 @@ const toggle=()=>setModal(!modal)
                   </ButtonGroup>
                  
               </div>
+          
                         </div>
                         <div className="alert alert-info " style={{lineHeight:"2"}}>
                             
@@ -468,7 +580,9 @@ const toggle=()=>setModal(!modal)
         <ModalFooter className="d-flex justify-content-center"> 
           <Button color="" onClick={()=>{
             console.log(data,"dataaa")
-             toggle()
+            //  toggle()
+
+             AddTime(data)
           }} className="w-50">
               إضافة   
           </Button>{' '}

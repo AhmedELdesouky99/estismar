@@ -461,7 +461,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 }}
                 disabled={!certifications.length}
                 onClick={() => {
-                  const edu_certificates = [...data?.edu_certificates];
+                  const edu_certificates = data?.edu_certificates ?  [...data?.edu_certificates] :[]
                   edu_certificates?.push(certifications);
                   setData({
                     ...data,
@@ -566,7 +566,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 }}
                 disabled={!positions.length}
                 onClick={() => {
-                  const work_positions = [...data?.work_positions];
+                  const work_positions = data?.work_positions ? [...data?.work_positions] :[];
                   work_positions.push(positions);
                   setData({
                     ...data,

@@ -13,7 +13,6 @@ import { useSelector } from 'react-redux';
 // get display string
 const getDisplayString = (sub,end,lastElement =undefined) => {
    const arr = sub.split("-");
-   console.log(arr,"arr")
    if (arr.length > 1) {
       return <IntlMessages id={`sidebar.${arr[0].charAt(0) + arr[0].slice(1) + arr[1].charAt(0) + arr[1].slice(1)}`} />
    } else if(end && lastElement ) {
@@ -22,7 +21,6 @@ const getDisplayString = (sub,end,lastElement =undefined) => {
       if(!end)
       return <IntlMessages id={`${sub.charAt(0) + sub.slice(1)}`} />
       else return <IntlMessages id={`${sub.charAt(0) + sub.slice(1)}`} />
-
    }
 
 };
@@ -41,7 +39,6 @@ const PageTitleBar = ({ title, match, enableBreadCrumb,lastElement=undefined }) 
 
    const path = match?.pathname?.substr(1);
    const subPath = path?.split('/');
-   console.log(user,"match")
    return (
       <div className="page-title d-flex justify-content-between align-items-center">
          {/* {title &&
@@ -53,7 +50,6 @@ const PageTitleBar = ({ title, match, enableBreadCrumb,lastElement=undefined }) 
          {enableBreadCrumb &&
             <Breadcrumb className="mb-0" tag="nav">
                {subPath?.map((sub, index) => {
-                  {console.log(sub,"kaki")}
                   return <BreadcrumbItem active={subPath.length === index + 1}
                      tag={ sub =="service-provider" && user.category !="admin" ?  "span":  subPath.length === index + 1   ? "span" : Link} key={index}
                      to={getUrlString(path, sub, index)}>{getDisplayString(sub,subPath.length === index + 1,lastElement)}</BreadcrumbItem>
