@@ -34,15 +34,28 @@ export default function AllConsulting({inTabs}) {
     client
     // .get(`/service?limit=${limit}&page=${page}`)
     // .then((res) => setOwners(res.data.data));
-    client.get(`/advisor-schedules`,{
-      params:{
-        limit,
-        page,
-        advisor_name  :query.name ? query.name : undefined,
-        advisor_id:user.category =="advisor" ? user.id: undefined,
-        status: query.status ? query.status : undefined
-      }
-    }).then(res=>setOwners(res.data.data))
+    if(id){
+      client.get(`/advisor/${id}`,{
+        params:{
+          limit,
+          page,
+          past:true,
+          status: query.status ? query.status : undefined
+        }
+      }).then(res=>setOwners(res.data.data))
+    }else{
+      client.get(`/advisor-schedules`,{
+        params:{
+          limit,
+          page,
+          advisor_name  :query.name ? query.name : undefined,
+          advisor_id:user.category =="advisor" ? user.id: id ? id :undefined,
+          status: query.status ? query.status : undefined
+        }
+      }).then(res=>setOwners(res.data.data))
+
+    }
+
 },[page,limit,query])
 console.log(user,"user")
   return (

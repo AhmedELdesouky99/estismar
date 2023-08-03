@@ -7,6 +7,8 @@ import { DropdownToggle, DropdownMenu, Dropdown } from 'reactstrap';
 import StatusDropDown from "Components/shared/StatusDropDown"
 const { TEXT, ACTIONS, FUNC,DROPDOWN } = dataTypes;
 import { Link, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+// const {user}=useSelector(state=>state.authUser.user)
 
 export const ConsultData = [
   {
@@ -23,7 +25,7 @@ export const ConsultData = [
   {
     headerId: "مجال الاستشارة",
     dataType: FUNC,
-    func: (record, locale) =>record.advisor.fields.map((field=>field.name)),
+    func: (record, locale) =>record?.advisor?.fields?.map((field=>field.name)),
     
   },
   {

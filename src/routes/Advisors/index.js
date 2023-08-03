@@ -136,6 +136,7 @@ import Advisors from "./AllAdvisors"
 import AllConsulting from "./AllConsults"
 import AddEditConsult from "./AddEditConsult"
 import AddEditAdvisor from "./AddEditAdvisor"
+import ConsultDetails from '../Allorders/OrderDetails/consultDetails';
 const AllAdvisors = ({ match }) => (
   
    <div className="Crm-wrapper">
@@ -144,7 +145,7 @@ const AllAdvisors = ({ match }) => (
          <Route exact path={`${match.url}/Consulting`} component={AllConsulting} />
 
          <Route exact path={`${match.url}/Consulting/add`} component={AddEditConsult} />
-         <Route exact path={`${match.url}/Consulting/:id`} component={AddEditConsult} />
+         <Route exact path={`${match.url}/Consulting/:id`} component={ConsultDetails} />
 
          <Route exact path={`${match.url}/add`} component={AddEditAdvisor} />
 

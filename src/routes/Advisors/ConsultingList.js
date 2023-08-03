@@ -8,11 +8,14 @@ import useSetState from "Hooks/useSetState";
 import RctCollapsibleCard from "Components/RctCollapsibleCard/RctCollapsibleCard";
 import CustomTable from "Components/shared/CustomTable";
 import { ConsultData } from "./ConsultData";
+import { ConsultData2 } from "./ConsultData2";
+
 
 import StatusDropDown from "Components/shared/StatusDropDown"
 import PerPage from "Components/shared/PerPage";
 
 import axios from "axios"
+import { useSelector } from "react-redux";
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin" 
  
@@ -33,6 +36,7 @@ function ConsultingList({ allowners, loading, setPage, limit, setLimit ,status})
       }, 
     });
   }, [allowners]);
+const {user}=useSelector(state=>state.authUser.user)
 
   const handelDeleteBanner = (id) => {
     const filteredService= owners.collection.filter(service=>service.id != id)
@@ -79,7 +83,7 @@ function ConsultingList({ allowners, loading, setPage, limit, setLimit ,status})
       <div>
         <RctCollapsibleCard fullBlock table>
           <CustomTable
-            tableData={ConsultData}
+            tableData={ user.category =="admin" ? ConsultData :ConsultData2 }
             loading={loading}
             tableRecords={collection}
             actions={actions}

@@ -39,7 +39,7 @@ function CustomTable({
     if (e.target.checked) {
       setAllChecked(true);
       const ids = [];
-      tableRecords.map((record) => ids.push(record.id));
+      tableRecords?.map((record) => ids.push(record.id));
       setCarIds(ids);
     } else {
       setAllChecked(false);
@@ -107,7 +107,7 @@ function CustomTable({
                     />
                   </td>
                 )}
-                {tableData.map((data, index) => (
+                {tableData?.map((data, index) => (
                   <>
                     <td key={JSON.stringify(index)} align={`${data?.align || ""}`}>
                       {CellData({

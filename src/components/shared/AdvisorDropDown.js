@@ -79,7 +79,7 @@ const AdvisorsDropDown = ({
             limit:10
           }
         }).then((res)=>{
-          const Alloptions =res.data.data.data.map(field=>(
+          const Alloptions =res.data?.data?.data?.map(field=>(
             {
               label:field.ar_name,
               value:field.user_id

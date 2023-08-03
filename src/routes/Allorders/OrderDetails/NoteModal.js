@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const client = axios.create({
     baseURL: "https://estithmar.arabia-it.net/api/admin",
   });
-const NoteModal =({isopen,setIsOpen,serviceRequestId,setOrder})=>{
+const NoteModal =({isopen,setIsOpen,serviceRequestId,setOrder,inConsult})=>{
     const toggle=()=>setIsOpen(!isopen)
 	const {user}=useSelector(state=>state.authUser.user)
 
@@ -21,8 +21,38 @@ const NoteModal =({isopen,setIsOpen,serviceRequestId,setOrder})=>{
         }
       );
     const addNote=()=>{
+      if(inConsult &&user.category =="admin"){
 
-      console.log(user,"user add note ")
+      }else if(inConsult  && user.category !="admin"){
+        
+const client2 = axios.create({
+  baseURL: "https://estithmar.arabia-it.net/api/",
+});
+client2.put(`advisor/advisor-schedules/${serviceRequestId}`, {
+            ...data,
+            token:localStorage.getItem("token")
+        }).then(res=>{
+            if(!res.errors){
+                NotificationManager.success("تم تسجيل الملاحظة بنجاح")
+                // client.get(`/service-request/${serviceRequestId}`).then(res=>{
+                //   setOrder(res.data.data)
+                // setIsOpen(!isopen)
+
+                   
+                // })
+
+                client.get(`/advisor-schedules/${serviceRequestId}`).then(res=>{
+                  setOrder(res.data.data)
+                setIsOpen(!isopen)
+
+                   
+                })
+            }else{
+                
+            }
+        })
+        return
+      }
       if(user.category =="admin"){
          client
         .put(`service-request/${serviceRequestId}`, {

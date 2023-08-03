@@ -182,7 +182,7 @@ function Row(props) {
                </thead>
                <tbody>
                  {
-                     row.request_delivery_files.map((file,index)=><tr>
+                     row?.request_delivery_files?.map((file,index)=><tr>
                          <td>{index +1}</td>
                          <td>{file?.title}</td>
                          <td>{file?.user?.name}</td>
@@ -286,7 +286,7 @@ export default function CollapsibleTable({Delivery,serviceRequestId,setOrder}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {Delivery.map((row) => (
+          {Delivery?.map((row) => (
             <Row key={row.title} row={row} serviceRequestId={serviceRequestId} setOrder={setOrder}/>
           ))}
         </TableBody>

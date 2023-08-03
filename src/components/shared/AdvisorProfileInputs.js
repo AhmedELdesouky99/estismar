@@ -47,8 +47,8 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
       const profile = advisorDetails?.files?.find(
         (file) => file.title == "profile"
       )?.path;
-      const fields = advisorDetails.fields.map((field) => field.id);
-      const fieldsForLabel = advisorDetails.fields.map((field) => ({
+      const fields = advisorDetails?.fields?.map((field) => field.id);
+      const fieldsForLabel = advisorDetails?.fields?.map((field) => ({
         label: field.name,
         value: field.id,
       }));
