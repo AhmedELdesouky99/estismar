@@ -216,7 +216,7 @@ console.log(user,"user redux ")
                       name="select"
                       type="text"
                       value={Service?.title}
-                      style={{ borderColor: "#D4B265" }}
+                      style={{ borderColor: "#7EA831" }}
                       onChange={(e)=>{
                         setService({
                           ...Service,
@@ -242,7 +242,7 @@ console.log(user,"user redux ")
                       <p
                         style={{
                           fontSize: "27px",
-                          color: "#D4B265",
+                          color: "#7EA831",
                           marginRight: "16px",
                         }}
                       >
@@ -264,7 +264,7 @@ console.log(user,"user redux ")
                         style={{
                           height: "90px",
                           resize: "none",
-                          borderColor: "#D4B265",
+                          borderColor: "#7EA831",
                         }}
                       />
                     </FormGroup>
@@ -277,7 +277,7 @@ console.log(user,"user redux ")
                         <p
                           style={{
                             fontSize: "27px",
-                            color: "#D4B265",
+                            color: "#7EA831",
                             marginRight: "16px",
                           }}
                         >
@@ -287,7 +287,7 @@ console.log(user,"user redux ")
                     </div>
                     <div className="col-md-10">
                       <Input
-                        style={{ borderColor: "#D4B265" }}
+                        style={{ borderColor: "#7EA831" }}
                         placeholder={"ادخل خطوات التنفيذ كل خطوة على حدا"}
                         type="text"
                         value={steps}
@@ -299,7 +299,7 @@ console.log(user,"user redux ")
                         className="btn"
                         style={{
                           color: "#fff",
-                          background: "#005D5E",
+                          background: "#150941",
                           maxHeight: "41px",
                         }}
                         onClick={() => {
@@ -319,7 +319,7 @@ console.log(user,"user redux ")
                       <div
                         className="card mt-3"
                         style={{
-                          borderColor: "#D4B265",
+                          borderColor: "#7EA831",
                           padding: "10px",
                           minHeight: "100px",
                         }}
@@ -376,7 +376,7 @@ console.log(user,"user redux ")
                         <p
                           style={{
                             fontSize: "27px",
-                            color: "#D4B265",
+                            color: "#7EA831",
                             marginRight: "16px",
                           }}
                         >
@@ -386,7 +386,7 @@ console.log(user,"user redux ")
                     </div>
                     <div className="col-md-10">
                       <Input
-                        style={{ borderColor: "#D4B265" }}
+                        style={{ borderColor: "#7EA831" }}
                         placeholder={
                           "ادخل مخرجات الخدمة/ مواصفات التسليمات كل على حدا"
                         }
@@ -400,7 +400,7 @@ console.log(user,"user redux ")
                         className="btn"
                         style={{
                           color: "#fff",
-                          background: "#005D5E",
+                          background: "#150941",
                           maxHeight: "35px",
                         }}
                         onClick={() => {
@@ -420,7 +420,7 @@ console.log(user,"user redux ")
                       <div
                         className="card mt-3"
                         style={{
-                          borderColor: "#D4B265",
+                          borderColor: "#7EA831",
                           padding: "10px",
                           minHeight: "100px",
                         }}
@@ -596,7 +596,7 @@ console.log(user,"user redux ")
               <div className="d-flex" style={{ columnGap: "10px" }}>
                 <div>
                   <ButtonGroup
-                    style={{ padding: "0px 10px", border: "1px solid #D4B265" }}
+                    style={{ padding: "0px 10px", border: "1px solid #7EA831" }}
                   >
                     <Button
                       className="service-time"
@@ -649,7 +649,7 @@ console.log(user,"user redux ")
               <div className="row mt-2">
                 <div className="col-md-3">
                   <Input
-                    style={{ borderColor: "#D4B265",color: "#D4B265"  }}
+                    style={{ borderColor: "#7EA831",color: "#7EA831"  }}
                     placeholder={"90"}
                     type="text"
                     onChange={(e) => {
@@ -673,7 +673,7 @@ console.log(user,"user redux ")
                     <p
                       style={{
                         fontSize: "27px",
-                        color: "#D4B265",
+                        color: "#7EA831",
                         marginRight: "16px",
                       }}
                     >
@@ -683,7 +683,7 @@ console.log(user,"user redux ")
                 </div>
                 <div className="col-md-6">
                   <Input
-                    style={{ borderColor: "#D4B265" }}
+                    style={{ borderColor: "#7EA831" }}
                     placeholder={
                       "ادخل مخرجات الخدمة/ مواصفات التسليمات كل على حدا"
                     }
@@ -698,7 +698,7 @@ console.log(user,"user redux ")
                 </div>
                 <div className="col-md-2">
                   <Input
-                    style={{ borderColor: "#D4B265" }}
+                    style={{ borderColor: "#7EA831" }}
                     placeholder={"المده الزمنية"}
                     type="text"
                     onChange={(e) => {
@@ -730,7 +730,7 @@ console.log(user,"user redux ")
                     className="btn"
                     style={{
                       color: "#fff",
-                      background: "#005D5E",
+                      background: "#150941",
                       maxHeight: "35px",
                     }}
                     onClick={() => {
@@ -749,7 +749,7 @@ console.log(user,"user redux ")
                 <div className="col-md-8">
                   <div
                     className="card mt-2"
-                    style={{ borderColor: "#D4B265", minHeight: "100px" }}
+                    style={{ borderColor: "#7EA831", minHeight: "100px" }}
                   >
                     <div className="row" style={{ margin: "3px" }}>
                       {Service?.stages_of_delivery?.map((oneservice, index) => (
@@ -834,7 +834,7 @@ console.log(user,"user redux ")
                     className="btn"
                     style={{
                       color: "#fff",
-                      background: "#005D5E",
+                      background: "#150941",
                       maxHeight: "35px",
                     }}
                     onClick={() => {
@@ -856,7 +856,7 @@ console.log(user,"user redux ")
                 <div className="col-md-10">
                   <div
                     className="card mt-2"
-                    style={{ borderColor: "#D4B265", minHeight: "100px" }}
+                    style={{ borderColor: "#7EA831", minHeight: "100px" }}
                   >
                     <div className="row" style={{ margin: "3px" }}>
                       {Service?.service_requirment?.map((oneservice, index) => (
@@ -911,7 +911,7 @@ console.log(user,"user redux ")
                 </div>
                 <div className="col-md-7">
                   <Input
-                    style={{ borderColor: "#D4B265" }}
+                    style={{ borderColor: "#7EA831" }}
                     placeholder={"الأمور التي خارج النطاق"}
                     type="text"
                     value={serviceborder.title ? serviceborder.title : ""}
@@ -926,7 +926,7 @@ console.log(user,"user redux ")
                 <div className="col-md-3 d-flex justify-content-between">
                   <div>
                     <Input
-                      style={{ borderColor: "#D4B265" }}
+                      style={{ borderColor: "#7EA831" }}
                       placeholder={"00"}
                       className="interval"
                       type="text"
@@ -948,7 +948,7 @@ console.log(user,"user redux ")
                     className="btn"
                     style={{
                       color: "#fff",
-                      background: "#005D5E",
+                      background: "#150941",
                       maxHeight: "35px",
                     }}
                     onClick={() => {
@@ -967,7 +967,7 @@ console.log(user,"user redux ")
                 <div className="col-md-10">
                   <div
                     className="card mt-2"
-                    style={{ borderColor: "#D4B265", minHeight: "100px" }}
+                    style={{ borderColor: "#7EA831", minHeight: "100px" }}
                   >
                     <div className="row" style={{ margin: "3px" }}>
                       {Service?.service_border?.map((oneservice, index) => (
@@ -1028,7 +1028,7 @@ console.log(user,"user redux ")
           <button
             className="btn btn-block"
            
-            style={{ background: "#005D5E", color: "#fff" ,fontSize:"20px"}}
+            style={{ background: "#150941", color: "#fff" ,fontSize:"20px"}}
             onClick={()=> id ? EditService(): AddService()}
           >
             حفظ

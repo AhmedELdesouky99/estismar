@@ -219,7 +219,7 @@ function Row(props) {
 
                                     }
                                 }}
-                                style={{marginTop:"10px",background:"#fff",borderColor:"#005D5E",color:"#005D5E",fontSize:"14px",padding:"4px 10px"}}> 
+                                style={{marginTop:"10px",background:"#fff",borderColor:"#150941",color:"#150941",fontSize:"14px",padding:"4px 10px"}}> 
                                   <img src={UploadImage} style={{width:"19px"}}/>
                                  {" "}
                                   ارفاق ملفات

@@ -178,7 +178,7 @@ useEffect(()=>{
                 <FormattedMessage id={"اسم المستخدم"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 placeholder={"اسم المستخدم"}
                 type="text"
                 defaultValue={data?.name}
@@ -195,7 +195,7 @@ useEffect(()=>{
                 <FormattedMessage id={"البريد الإلكتروني"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 placeholder={"البريد الإلكتروني"}
                 type="email"
                 defaultValue={data?.email}
@@ -212,7 +212,7 @@ useEffect(()=>{
                 <FormattedMessage id={" رقم الجوال"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 placeholder={"+966 56 464 5665"}
                 type="text"
                 defaultValue={data?.phone}
@@ -226,7 +226,7 @@ useEffect(()=>{
         </div>
         <div className="col-md-4" style={{ alignSelf: "center",fontSize:"20px", color:"#707070" }}>
           <div>
-            <span style={{color:"#005D5E",fontWeight:"bold"}}>تحديث كلمة المرور</span>
+            <span style={{color:"#150941",fontWeight:"bold"}}>تحديث كلمة المرور</span>
              من خلال الزر أدناه سيتم
             <br />
             إعادة توجيهك إلى صفحة جديدة ويجب اتباع
@@ -234,7 +234,7 @@ useEffect(()=>{
             التعليمات
           </div>
           <div>
-            <button className="btn btn-block" style={{background:"#D4B265" ,color:"#fff"}}>تسجيل كلمة مرور جديدة</button>
+            <button className="btn btn-block" style={{background:"#7EA831" ,color:"#fff"}}>تسجيل كلمة مرور جديدة</button>
           </div>
         </div>
         <div className="col-md-3" style={{ alignSelf: "center" }}>
@@ -255,7 +255,7 @@ useEffect(()=>{
         <label class="container">
   <input type="checkbox" />
   <span class="checkmark"></span>
-  <p style={{fontSize:"27px" ,color:"#D4B265" ,fontWeight:"bold"}}>تفاصيل الوقف</p>
+  <p style={{fontSize:"27px" ,color:"#7EA831" ,fontWeight:"bold"}}>تفاصيل الوقف</p>
 </label>
        </div>
         <div className="col-md-4">
@@ -265,7 +265,7 @@ useEffect(()=>{
                 <FormattedMessage id={"اسم الوقف بالعربيه"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 placeholder={"اسم الوقف بالعربيه"}
                 type="text"
                 defaultValue={data?.asset_name_ar}
@@ -289,7 +289,7 @@ useEffect(()=>{
                 <FormattedMessage id={"اسم الوقف بالانجليزية"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 placeholder={"اسم الوقف بالانجليزية"}
                 type="text"
                 defaultValue={data?.asset_name_en}
@@ -314,7 +314,7 @@ useEffect(()=>{
                 <FormattedMessage id={"صاحب الوقف"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 placeholder={"صاحب الوقف"}
                 type="text"
                 defaultValue={data?.owner_name}
@@ -338,7 +338,7 @@ useEffect(()=>{
                 <FormattedMessage id={" العائلة"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 placeholder={"العائلة"}
                 type="text"
                 defaultValue={data?.owner_family}
@@ -364,7 +364,7 @@ useEffect(()=>{
                 <FormattedMessage id={"رقم صك الوقفية"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 placeholder={"رقم صك الوقفية"}
                 type="text"
                 defaultValue={data?.asset_nom}
@@ -388,7 +388,7 @@ useEffect(()=>{
                 <Label for="exampleEmail">
                   <FormattedMessage id={"تاريخ الاصدار"} />
                 </Label>
-                <Input style={{ borderColor: "#D4B265" }} type="date" 
+                <Input style={{ borderColor: "#7EA831" }} type="date" 
                  defaultValue={data?.export_date}
                  value={data?.export_date}
                  onChange={(e)=>{
@@ -407,7 +407,7 @@ useEffect(()=>{
                   <FormattedMessage id={"مصدرها"} />
                 </Label>
                 <Input
-                  style={{ borderColor: "#D4B265" }}
+                  style={{ borderColor: "#7EA831" }}
                   placeholder={"مصدرها"}
                   type="text"
                   defaultValue={data?.exported_by}
@@ -434,7 +434,7 @@ useEffect(()=>{
                 <FormattedMessage id={"اسم ناظر الوقف"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 placeholder={"اسم ناظر الوقف"}
                 type="text"
                 defaultValue={data?.manager_name}
@@ -458,7 +458,7 @@ useEffect(()=>{
                 <FormattedMessage id={"رقم السجل المدني"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 placeholder={"رقم صك الوقفية"}
                 type="text"
                 defaultValue={data?.civil_registry_nom}
@@ -633,7 +633,7 @@ useEffect(()=>{
                    })
                 }}
                 
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
               />
                
             </FormGroup>
@@ -647,7 +647,7 @@ useEffect(()=>{
                 id="exampleSelect"
                 name="select"
                 type="text"
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 defaultValue={data?.street}
                 value={data?.street}
                 onChange={(e)=>{
@@ -675,7 +675,7 @@ useEffect(()=>{
                 id="exampleSelect"
                 name="select"
                 type="text"
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 defaultValue={data?.building_nom}
                 value={data?.building_nom}
                 onChange={(e)=>{
@@ -709,7 +709,7 @@ useEffect(()=>{
                    })
                 }}
                 
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
               />
                
             </FormGroup>
@@ -724,7 +724,7 @@ useEffect(()=>{
         <label class="container">
   <input type="checkbox" />
   <span class="checkmark"></span>
-  <p style={{fontSize:"27px" ,color:"#D4B265" ,fontWeight:"bold"}}>المستندات المرفقة  </p>
+  <p style={{fontSize:"27px" ,color:"#7EA831" ,fontWeight:"bold"}}>المستندات المرفقة  </p>
 </label>
        </div>
         <div className="col-md-4">
@@ -774,7 +774,7 @@ useEffect(()=>{
       </div>
       <div className="row justify-content-center">
         <div className="col-md-4">
-            <button className="btn btn-block" onClick={()=> ownerDetails ?  EditAssetsOwner(): AddAssetsOwner()} style={{background:"#005D5E",color:"#fff",fontSize:"20px"}}>
+            <button className="btn btn-block" onClick={()=> ownerDetails ?  EditAssetsOwner(): AddAssetsOwner()} style={{background:"#150941",color:"#fff",fontSize:"20px"}}>
             حفظ
             </button>
         </div>

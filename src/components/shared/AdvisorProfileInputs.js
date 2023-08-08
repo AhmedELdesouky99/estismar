@@ -166,7 +166,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 <FormattedMessage id={"اسم المستخدم"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 placeholder={"اسم المستخدم"}
                 type="text"
                 defaultValue={data?.name}
@@ -185,7 +185,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 <FormattedMessage id={"البريد الإلكتروني"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 placeholder={"البريد الإلكتروني"}
                 type="email"
                 defaultValue={data?.email}
@@ -204,7 +204,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 <FormattedMessage id={" رقم الجوال"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 placeholder={"رقم الجوال"}
                 type="text"
                 defaultValue={data?.phone}
@@ -223,7 +223,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
           style={{ alignSelf: "center", fontSize: "20px", color: "#707070" }}
         >
           <div>
-            <span style={{ color: "#005D5E", fontWeight: "bold" }}>
+            <span style={{ color: "#150941", fontWeight: "bold" }}>
               تحديث كلمة المرور
             </span>
             من خلال الزر أدناه سيتم
@@ -235,7 +235,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
           <div>
             <button
               className="btn btn-block"
-              style={{ background: "#D4B265", color: "#fff" }}
+              style={{ background: "#7EA831", color: "#fff" }}
             >
               تسجيل كلمة مرور جديدة
             </button>
@@ -264,7 +264,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 id="exampleSelect"
                 name="select"
                 type="text"
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 value={data.ar_name}
                 onChange={(e) =>
                   setData({
@@ -284,7 +284,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 id="exampleSelect"
                 name="text"
                 type="text"
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 value={data.en_name}
                 onChange={(e) => {
                   setData({
@@ -314,7 +314,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                     resident: e.target.value,
                   });
                 }}
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
               />
             </FormGroup>
           </div>
@@ -327,7 +327,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 id="exampleSelect"
                 name="select"
                 type="text"
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 value={data?.nationality}
                 onChange={(e) => {
                   setData({
@@ -372,7 +372,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
           <div
             className="card mt-1 "
             style={{
-              borderColor: "#D4B265",
+              borderColor: "#7EA831",
               padding: "10px",
               minHeight: "100px",
             }}
@@ -443,7 +443,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                   id="exampleSelect"
                   name="select"
                   type="text"
-                  style={{ borderColor: "#D4B265" }}
+                  style={{ borderColor: "#7EA831" }}
                   value={certifications}
                   onChange={(e) => {
                     setCertifications(e.target.value);
@@ -456,7 +456,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 className="btn"
                 style={{
                   color: "#fff",
-                  background: "#005D5E",
+                  background: "#150941",
                   maxHeight: "35px",
                 }}
                 disabled={!certifications.length}
@@ -479,7 +479,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
           <div
             className="card mt-1 "
             style={{
-              borderColor: "#D4B265",
+              borderColor: "#7EA831",
               padding: "10px",
               minHeight: "100px",
             }}
@@ -548,7 +548,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                   id="exampleSelect"
                   name="select"
                   type="text"
-                  style={{ borderColor: "#D4B265" }}
+                  style={{ borderColor: "#7EA831" }}
                   value={positions}
                   onChange={(e) => {
                     setPositions(e.target.value);
@@ -561,7 +561,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
                 className="btn"
                 style={{
                   color: "#fff",
-                  background: "#005D5E",
+                  background: "#150941",
                   maxHeight: "35px",
                 }}
                 disabled={!positions.length}
@@ -584,7 +584,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
           <div
             className="card mt-1 "
             style={{
-              borderColor: "#D4B265",
+              borderColor: "#7EA831",
               padding: "10px",
               minHeight: "100px",
             }}
@@ -639,7 +639,7 @@ const AdvisorProfileInputs = ({ advisorDetails }) => {
             onClick={() =>
               advisorDetails ? EditAssetsOwner() : AddServiceProvider()
             }
-            style={{ background: "#005D5E", color: "#fff", fontSize: "20px" }}
+            style={{ background: "#150941", color: "#fff", fontSize: "20px" }}
           >
             حفظ
           </button>

@@ -73,7 +73,7 @@ const Signin =()=>{
    // }
 
 
-   const logo=require('Assets/img/logo-waqf.png')
+   const logo=require('Assets/img/img-logo.png')
 const handelClick=()=>{
    dispatch(HandelSignin(user,history))
 }
@@ -203,7 +203,7 @@ const handelClick=()=>{
                       name="select"
                       type="email"
                       placeholder='البريد الالكتروني'
-                      style={{ borderColor: "#D4B265" }}
+                      style={{ borderColor: "#7EA831" }}
                       onChange={(e)=>{
                         setUser({
                            ...user,
@@ -224,7 +224,7 @@ const handelClick=()=>{
                       name="select"
                       type="password"
                       placeholder='كلمة المرور'
-                      style={{ borderColor: "#D4B265" }}
+                      style={{ borderColor: "#7EA831" }}
                       onChange={(e)=>{
                         setUser({
                            ...user,
@@ -241,7 +241,7 @@ const handelClick=()=>{
                         <p>
                         تذكرني
                         </p>
-                        <Link to="/" style={{color:"#005D5E"}}>
+                        <Link to="/" style={{color:"#150941"}}>
                         نسيت اسم المستخدم / كلمة المرور
                         </Link>
                      </div>
@@ -255,7 +255,7 @@ const handelClick=()=>{
                       
                     <button 
                     disabled={!user.password.length || !user.email.length}
-                    onClick={()=>handelClick()}style={{border:"none",background:"#D4B265",color:"#fff",height:"48px",cursor:"pointer"}}>
+                    onClick={()=>handelClick()}style={{border:"none",background:"#7EA831",color:"#fff",height:"48px",cursor:"pointer"}}>
                         دخول   
                     </button>
                     <hr style={{background:"#707070" ,margin:"20px"}}/>
@@ -264,12 +264,12 @@ const handelClick=()=>{
                    <span>
                    ليس لدي حساب؟ 
                    </span>
-                   <Link to="/signup" style={{color:"#005D5E"}}>
+                   <Link to="/signup" style={{color:"#150941"}}>
                    إنشاء حساب
                    </Link>
                   </div>
             </div>
-            <div className='col-md-4 col-sm-12 logo' style={{backgroundColor:"#005D5E"}}>
+            <div className='col-md-4 col-sm-12 logo' style={{backgroundColor:"#150941"}}>
                   <img src={logo} className="m-auto"/>
             </div>
 

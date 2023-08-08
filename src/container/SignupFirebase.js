@@ -91,7 +91,7 @@ const history=useHistory()
                    name="select"
                    type="text"
                    placeholder='اسم المستخدم'
-                   style={{ borderColor: "#D4B265" }}
+                   style={{ borderColor: "#7EA831" }}
                    onChange={(e)=>{
                      setUser({
                         ...user,
@@ -112,7 +112,7 @@ const history=useHistory()
                    name="select"
                    type="email"
                    placeholder='البريد الالكتروني'
-                   style={{ borderColor: "#D4B265" }}
+                   style={{ borderColor: "#7EA831" }}
                    onChange={(e)=>{
                      setUser({
                         ...user,
@@ -133,7 +133,7 @@ const history=useHistory()
                    name="select"
                    type="password"
                    placeholder='كلمة المرور'
-                   style={{ borderColor: "#D4B265" }}
+                   style={{ borderColor: "#7EA831" }}
                    onChange={(e)=>{
                      setUser({
                         ...user,
@@ -154,7 +154,7 @@ const history=useHistory()
                    name="select"
                    type="password"
                    placeholder='تأكيد كلمة المرور'
-                   style={{ borderColor: "#D4B265" }}
+                   style={{ borderColor: "#7EA831" }}
                    onChange={(e)=>{
                      setUser({
                         ...user,
@@ -184,13 +184,13 @@ const history=useHistory()
                </div>
              
                <div className='col-md-5 col-sm-12' style={{gap:"30px"}}>
-                 <button onClick={()=>handelClick()} style={{border:"none",background:"#D4B265",color:"#fff",height:"48px",cursor:"pointer"}}>
+                 <button onClick={()=>handelClick()} style={{border:"none",background:"#7EA831",color:"#fff",height:"48px",cursor:"pointer"}}>
                  تسجيل   
                  </button>
                </div>
                
          </div>
-         <div className='col-md-4 col-sm-12 logo' style={{backgroundColor:"#005D5E"}}>
+         <div className='col-md-4 col-sm-12 logo' style={{backgroundColor:"#150941"}}>
                <img src={logo} className="m-auto"/>
          </div>
 

@@ -145,7 +145,7 @@ export default function AddEidtUser() {
                         name="select"
                         value={user.name}
                         type="text"
-                        style={{ borderColor: "#D4B265" }}
+                        style={{ borderColor: "#7EA831" }}
                         onChange={(e)=>{
                             setUser({
                               ...user,
@@ -169,7 +169,7 @@ export default function AddEidtUser() {
                         id="exampleSelect"
                         name="select"
                         type="text"
-                        style={{ borderColor: "#D4B265" }}
+                        style={{ borderColor: "#7EA831" }}
                         value={user.email}
                         onChange={(e)=>{
                              setUser({
@@ -189,7 +189,7 @@ export default function AddEidtUser() {
                         id="exampleSelect"
                         name="select"
                         type="text"
-                        style={{ borderColor: "#D4B265" }}
+                        style={{ borderColor: "#7EA831" }}
                         value={user.phone}
                         onChange={(e)=>{
                             setUser({
@@ -233,7 +233,7 @@ export default function AddEidtUser() {
                         type="password"
                         autoCorrect="off"
                           autoComplete="off"
-                        style={{ borderColor: "#D4B265" }}
+                        style={{ borderColor: "#7EA831" }}
                         onChange={(e)=>{
                             setUser({
                                 ...user,
@@ -274,7 +274,7 @@ export default function AddEidtUser() {
                 <div className="col-md-11">
                 <div
                     className="card mt-2"
-                    style={{ borderColor: "#D4B265", minHeight: "100px" }}
+                    style={{ borderColor: "#7EA831", minHeight: "100px" }}
                   >
                     <div className="row" style={{ margin: "3px" }}>
                       {permissions?.map((permission, index) => (
@@ -307,7 +307,7 @@ export default function AddEidtUser() {
           <button
             className="btn btn-block"
            
-            style={{ background: "#005D5E", color: "#fff" ,fontSize:"20px"}}
+            style={{ background: "#150941", color: "#fff" ,fontSize:"20px"}}
             onClick={()=>{
                 id ? EditUser(): AddUser()
             }}

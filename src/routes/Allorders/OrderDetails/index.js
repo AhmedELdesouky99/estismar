@@ -341,7 +341,7 @@ const AddEditService = () => {
                           </dvi>
                           : 
                          <div className="text-center">
-                           <button className="w-50" style={{color:"#fff" ,background:"#005D5E",border:"none" ,padding:"6px"}} >
+                           <button className="w-50" style={{color:"#fff" ,background:"#150941",border:"none" ,padding:"6px"}} >
                             طلب اجتماع
                           </button>
                          </div>
@@ -422,7 +422,7 @@ const AddEditService = () => {
           <RctCardContent>
 
     <h3 Style={{
-      color: "#005D5E",
+      color: "#150941",
       padding: "10px 0px",
       borderBottom: "1px solid #eee",
       marginBottom: "10px",
@@ -471,7 +471,7 @@ const AddEditService = () => {
             </div>
         </div>
         <div className='text-center col-lg-4 col-md-4 col-sm-12' style={{ alignSelf: "center" }}>
-            <h4 style={{ color: "#005D5E" }}>
+            <h4 style={{ color: "#150941" }}>
                 اجمالي التقييم
             </h4>
             <Rating  style={{margin:"auto"}} name="read-only" value={4} readOnly />
@@ -498,7 +498,7 @@ const AddEditService = () => {
                   {
                     order?.service_request_note?.map((note)=>(
                       <li>
-                       <div style={{color:"#005D5E"}}>
+                       <div style={{color:"#150941"}}>
                        <img src={noteImage} style={{width:"19px"}}/>
                         {" "}
                         {note.type}
@@ -531,7 +531,7 @@ const AddEditService = () => {
             </>
               </div>
                 <div>
-                  <button onClick={()=>setIsOpen(!isopen)} className="btn" style={{background:"#D4B265",color:"#fff"}}> 
+                  <button onClick={()=>setIsOpen(!isopen)} className="btn" style={{background:"#7EA831",color:"#fff"}}> 
                   اضف ملاحظة  
                   </button>
                 </div>

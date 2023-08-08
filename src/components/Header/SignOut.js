@@ -22,11 +22,11 @@ dispatch(LogOut())
 }
   return (
    <Dropdown nav className="list-inline-item language-dropdown" isOpen={dropdownOpen} toggle={toggle} style={{marginLeft:"10px"}}>
-   <DropdownToggle caret nav className="header-icon language-icon" style={{width:"fit-content",border:"none",boxShadow:"none",color:"#D4B265"}}>
+   <DropdownToggle caret nav className="header-icon language-icon" style={{width:"fit-content",border:"none",boxShadow:"none",color:"#7EA831"}}>
    {/* <Tooltip title="Languages" placement="bottom"> */}
 						<img src={require(`Assets/img/ic-user.png`)} className="mr-10" width="21" height="21" alt="lang-icon" />
 					{/* </Tooltip> */}
-      <span style={{color:"#005D5E"}}>
+      <span style={{color:"#150941"}}>
       {user.name}
       </span>
    </DropdownToggle>

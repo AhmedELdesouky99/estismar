@@ -200,7 +200,7 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={"اسم المستخدم"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 type="text"
                 defaultValue={data?.name}
                 onChange={(e) =>
@@ -218,7 +218,7 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={"البريد الإلكتروني"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 type="email"
                 defaultValue={data?.email}
                 onChange={(e) =>
@@ -236,7 +236,7 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={" رقم الجوال"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 type="text"
                 defaultValue={data?.phone}
                 onChange={(e) =>
@@ -251,7 +251,7 @@ const toggle=()=>setModal(!modal)
         </div>
         <div className="col-md-4" style={{ alignSelf: "center",fontSize:"20px", color:"#707070" }}>
           <div>
-          <span style={{color:"#005D5E",fontWeight:"bold"}}>تحديث كلمة المرور</span>
+          <span style={{color:"#150941",fontWeight:"bold"}}>تحديث كلمة المرور</span>
                من خلال الزر أدناه سيتم
             <br />
             إعادة توجيهك إلى صفحة جديدة ويجب اتباع
@@ -261,7 +261,7 @@ const toggle=()=>setModal(!modal)
           <div>
             <button
               className="btn btn-block"
-              style={{ background: "#D4B265", color: "#fff" }}
+              style={{ background: "#7EA831", color: "#fff" }}
               onClick={()=>toggle()}
             >
               تسجيل كلمة مرور جديدة
@@ -288,7 +288,7 @@ const toggle=()=>setModal(!modal)
         <label class="container">
   <input type="checkbox" />
   <span class="checkmark"></span>
-  <p style={{fontSize:"27px" ,color:"#D4B265" ,fontWeight:"bold"}}>العنوان التجاري</p>
+  <p style={{fontSize:"27px" ,color:"#7EA831" ,fontWeight:"bold"}}>العنوان التجاري</p>
 </label>
        </div>
         <div className="col-md-4">
@@ -299,7 +299,7 @@ const toggle=()=>setModal(!modal)
                 id="exampleSelect"
                 name="select"
                 type="select"
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
               >
                 <option selected>المملكة العربيه السعودية</option>
               </Input>
@@ -314,7 +314,7 @@ const toggle=()=>setModal(!modal)
                 id="exampleSelect"
                 name="select"
                 type="select"
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 onChange={(e) => {
                   setData({
                     ...data,
@@ -360,7 +360,7 @@ const toggle=()=>setModal(!modal)
                     district: e.target.value,
                   });
                 }}
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
               />
             </FormGroup>
           </div>
@@ -373,7 +373,7 @@ const toggle=()=>setModal(!modal)
                 id="exampleSelect"
                 name="select"
                 type="text"
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 defaultValue={data?.street}
                 value={data?.street}
                 onChange={(e) => {
@@ -396,7 +396,7 @@ const toggle=()=>setModal(!modal)
                 id="exampleSelect"
                 name="select"
                 type="text"
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 defaultValue={data?.building_nom}
                 value={data?.building_nom}
                 onChange={(e) => {
@@ -425,7 +425,7 @@ const toggle=()=>setModal(!modal)
                     post_nom: e.target.value,
                   });
                 }}
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
               />
             </FormGroup>
           </div>
@@ -437,7 +437,7 @@ const toggle=()=>setModal(!modal)
         <label class="container">
   <input type="checkbox" />
   <span class="checkmark"></span>
-  <p style={{fontSize:"27px" ,color:"#D4B265" ,fontWeight:"bold"}}>تفاصيل النشاط</p>
+  <p style={{fontSize:"27px" ,color:"#7EA831" ,fontWeight:"bold"}}>تفاصيل النشاط</p>
 </label>
        </div>
       <div className="col-md-4">
@@ -447,7 +447,7 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={"الاسم التجاري بالعربية"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 type="text"
                 defaultValue={data?.business_name_ar}
                 value={data?.business_name_ar}
@@ -468,7 +468,7 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={"الاسم التجاري بالانجليزية"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 type="text"
                 defaultValue={data?.business_name_en}
                 value={data?.business_name_en}
@@ -491,7 +491,7 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={"اسم الشركة بالعربية"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 type="text"
                 defaultValue={data?.company_name_ar}
                 value={data?.company_name_ar}
@@ -512,7 +512,7 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={"اسم الشركة بالانجليزية"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 type="text"
                 defaultValue={data?.company_name_en}
                 value={data?.company_name_en}
@@ -535,7 +535,7 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={"رقم السجل التجاري"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 type="text"
                 defaultValue={data?.tax_nom}
                 value={data?.tax_nom}
@@ -557,7 +557,7 @@ const toggle=()=>setModal(!modal)
                   <FormattedMessage id={"تاريخ الاصدار"} />
                 </Label>
                 <Input
-                  style={{ borderColor: "#D4B265" }}
+                  style={{ borderColor: "#7EA831" }}
                   type="date"
                   defaultValue={data?.export_date}
                   value={data?.export_date}
@@ -576,7 +576,7 @@ const toggle=()=>setModal(!modal)
                   <FormattedMessage id={"تاريخ الإنتهاء"} />
                 </Label>
                 <Input
-                  style={{ borderColor: "#D4B265" }}
+                  style={{ borderColor: "#7EA831" }}
                   type="date"
                   defaultValue={data?.expire_date}
                   value={data?.expire_date}
@@ -605,7 +605,7 @@ const toggle=()=>setModal(!modal)
                 id="exampleSelect"
                 name="select"
                 type="select"
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 value={data?.law_type}
                 onChange={(e) => {
                   setData({
@@ -633,7 +633,7 @@ const toggle=()=>setModal(!modal)
                 id="exampleSelect"
                 name="select"
                 type="text"
-                style={{ borderColor: "#D4B265" }}
+                style={{ borderColor: "#7EA831" }}
                 defaultValue={data?.tax_cert_nom}
                 value={data?.tax_cert_nom}
                 onChange={(e) => {
@@ -678,7 +678,7 @@ const toggle=()=>setModal(!modal)
       <label class="container">
 <input type="checkbox" />
 <span class="checkmark"></span>
-<p style={{fontSize:"27px" ,color:"#D4B265" ,fontWeight:"bold"}}>المستندات المرفقة  </p>
+<p style={{fontSize:"27px" ,color:"#7EA831" ,fontWeight:"bold"}}>المستندات المرفقة  </p>
 </label>
      </div>
         <div className="col-md-4">
@@ -734,7 +734,7 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={"الموقع الالكتروني"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" ,direction:"ltr"}}
+                style={{ borderColor: "#7EA831" ,direction:"ltr"}}
                 type="text"
                 defaultValue={data?.website_url}
                 value={data?.website_url}
@@ -755,7 +755,7 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={" واتس اب"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265",direction:"ltr" }}
+                style={{ borderColor: "#7EA831",direction:"ltr" }}
                 type="text"
                 defaultValue={data?.watsapp_nom}
                 value={data?.watsapp_nom}
@@ -778,7 +778,7 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={"فيسبوك"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" ,direction:"ltr"}}
+                style={{ borderColor: "#7EA831" ,direction:"ltr"}}
                 type="text"
                 defaultValue={data?.facebook_url}
                 value={data?.facebook_url}
@@ -799,7 +799,7 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={" انستغرام"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265",direction:"ltr" }}
+                style={{ borderColor: "#7EA831",direction:"ltr" }}
                 type="text"
                 defaultValue={data?.insta_url}
                 value={data?.insta_url}
@@ -822,7 +822,7 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={"تويتر"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265",direction:"ltr" }}
+                style={{ borderColor: "#7EA831",direction:"ltr" }}
                 type="text"
                 defaultValue={data?.twitter_url}
                 value={data?.twitter_url}
@@ -843,7 +843,7 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={"سناب شات"} />
               </Label>
               <Input
-                style={{ borderColor: "#D4B265" ,direction:"ltr"}}
+                style={{ borderColor: "#7EA831" ,direction:"ltr"}}
                 type="text"
                 defaultValue={data?.snap_url}
                 value={data?.snap_url}
@@ -881,7 +881,7 @@ const toggle=()=>setModal(!modal)
             onClick={() =>
               providerDetails ? EditAssetsOwner() : AddServiceProvider()
             }
-            style={{ background: "#005D5E", color: "#fff" ,fontSize:"20px"}}
+            style={{ background: "#150941", color: "#fff" ,fontSize:"20px"}}
           >
             حفظ
           </button>
@@ -899,7 +899,7 @@ const toggle=()=>setModal(!modal)
                         type="password"
                         autoCorrect="off"
                           autoComplete="off"
-                        style={{ borderColor: "#D4B265" }}
+                        style={{ borderColor: "#7EA831" }}
                         onChange={(e)=>{
                             setData({
                               ...data,
@@ -920,7 +920,7 @@ const toggle=()=>setModal(!modal)
                         type="password"
                         autoCorrect="off"
                           autoComplete="off"
-                        style={{ borderColor: "#D4B265" }}
+                        style={{ borderColor: "#7EA831" }}
                         onChange={(e)=>{
                           setData({
                             ...data,

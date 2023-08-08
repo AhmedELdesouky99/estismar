@@ -128,7 +128,7 @@ client2.put(`advisor/advisor-schedules/${serviceRequestId}`, {
                    name="select"
                    type="text"
                    placeholder='عنوان الملاحظة'
-                   style={{ borderColor: "#D4B265" }}
+                   style={{ borderColor: "#7EA831" }}
                    onChange={(e)=>{
                     setData({
                         ...data,
@@ -148,7 +148,7 @@ client2.put(`advisor/advisor-schedules/${serviceRequestId}`, {
                    id="exampleText"
                    name="text"
                    type="textarea"
-                   style={{ borderColor: "#D4B265" }}
+                   style={{ borderColor: "#7EA831" }}
                    onChange={(e)=>{
                     setData({
                             ...data,
@@ -164,10 +164,10 @@ client2.put(`advisor/advisor-schedules/${serviceRequestId}`, {
            
         </ModalBody>
         <ModalFooter style={{justifyContent:"center"}}>
-          <Button onClick={()=>addNote()} className="w-50" style={{color:"#fff",background:"#005D5E"}}>
+          <Button onClick={()=>addNote()} className="w-50" style={{color:"#fff",background:"#150941"}}>
           ارسال
           </Button>{' '}
-          <Button className="w-50" onClick={()=>setIsOpen(!isopen)} style={{color:"#fff",background:"#005D5E"}} >
+          <Button className="w-50" onClick={()=>setIsOpen(!isopen)} style={{color:"#fff",background:"#150941"}} >
           الغاء
           </Button>{' '}
           {/* <Button color="secondary" onClick={toggle}>

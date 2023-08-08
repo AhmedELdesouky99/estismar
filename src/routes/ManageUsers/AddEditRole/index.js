@@ -130,7 +130,7 @@ export default function AddEditRole() {
                         name="select"
                         value={role.name}
                         type="text"
-                        style={{ borderColor: "#D4B265" }}
+                        style={{ borderColor: "#7EA831" }}
                         onChange={(e)=>{
                             setRole({
                               ...role,
@@ -153,7 +153,7 @@ export default function AddEditRole() {
                         name="select"
                         value={role.description}
                         type="textarea"
-                        style={{ borderColor: "#D4B265" ,resize:"none",minHeight:"140px"}}
+                        style={{ borderColor: "#7EA831" ,resize:"none",minHeight:"140px"}}
                         onChange={(e)=>{
                             setRole({
                               ...role,
@@ -193,7 +193,7 @@ export default function AddEditRole() {
                         className="btn"
                         style={{
                           color: "#fff",
-                          background: "#005D5E",
+                          background: "#150941",
                           maxHeight: "41px",
                         }}
                       onClick={()=>{
@@ -212,7 +212,7 @@ export default function AddEditRole() {
                 <div className="col-md-11">
                 <div
                     className="card mt-2"
-                    style={{ borderColor: "#D4B265", minHeight: "100px" }}
+                    style={{ borderColor: "#7EA831", minHeight: "100px" }}
                   >
                     <div className="row" style={{ margin: "3px" }}>
                       {permissions?.map((permission, index) => (
@@ -262,7 +262,7 @@ export default function AddEditRole() {
           <button
             className="btn btn-block"
            
-            style={{ background: "#005D5E", color: "#fff" ,fontSize:"20px"}}
+            style={{ background: "#150941", color: "#fff" ,fontSize:"20px"}}
             onClick={()=>{
                 id ? EditRole(): AddRole()
             }}

@@ -58,7 +58,8 @@ class Sidebar extends Component {
 			<Fragment>
 				<div
 					className={classNames('rct-sidebar', { 'background-none': !enableSidebarBackgroundImage })}
-					style={{ backgroundImage: enableSidebarBackgroundImage ? `url(${selectedSidebarImage})` : 'none' }}
+					// style={{ backgroundImage: enableSidebarBackgroundImage ? `url(${selectedSidebarImage})` : 'none' }}
+					style={{background:"#150941"}}
 				>
 					<div className={classNames("rct-sidebar-content", { "sidebar-overlay-dark": isDarkSidenav, 'sidebar-overlay-light': !isDarkSidenav })}>
 						<div className="site-logo">

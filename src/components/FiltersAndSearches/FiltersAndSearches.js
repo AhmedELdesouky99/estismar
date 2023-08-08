@@ -90,7 +90,7 @@ export function FiltersAndSearches({
                     <FormattedMessage id={field?.label} />
                   </Label>
                   <Input
-                    style={{ borderColor: "#D4B265" }}
+                    style={{ borderColor: "#7EA831" }}
                     id={field?.name}
                     name={
                       field?.placeholder || (
@@ -188,7 +188,7 @@ export function FiltersAndSearches({
             variant="contained"
             color="primary"
             style={{
-              background: "#D4B265",
+              background: "#7EA831",
               width: "200px",
               fontWeight: "bold",
             }}

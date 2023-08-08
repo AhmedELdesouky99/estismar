@@ -60,7 +60,7 @@ export default function AllTeam() {
                     variant="contained"
                     color="primary"
                     style={{
-                      background: "#005D5E",
+                      background: "#150941",
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}

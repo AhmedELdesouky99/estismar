@@ -137,7 +137,7 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
             className="btn"
             style={{
               color: "#fff",
-              background: "#005D5E",
+              background: "#150941",
               maxHeight: "41px",
               maxWidth:"75px",
               width:"75px"
@@ -165,7 +165,7 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
               name="select"
               value={userData.name}
               type="text"
-              style={{ borderColor: "#D4B265" }}
+              style={{ borderColor: "#7EA831" }}
               onChange={(e) => {
                 setUserData({
                   ...userData,
@@ -188,7 +188,7 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
                   id="exampleSelect"
                   name="select"
                   type="text"
-                  style={{ borderColor: "#D4B265" }}
+                  style={{ borderColor: "#7EA831" }}
                   value={userData.email}
                   onChange={(e) => {
                     setUserData({
@@ -208,7 +208,7 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
                   id="exampleSelect"
                   name="select"
                   type="text"
-                  style={{ borderColor: "#D4B265" }}
+                  style={{ borderColor: "#7EA831" }}
                   value={userData.phone}
                   onChange={(e) => {
                     setUserData({
@@ -250,7 +250,7 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
                   id="exampleSelect"
                   name="select"
                   type="password"
-                  style={{ borderColor: "#D4B265" }}
+                  style={{ borderColor: "#7EA831" }}
                   value={userData.password}
                   onChange={(e) => {
                     setUserData({
@@ -274,7 +274,7 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
                   id="exampleSelect"
                   name="select"
                   type="text"
-                  style={{ borderColor: "#D4B265" }}
+                  style={{ borderColor: "#7EA831" }}
                   value={userData.group_name}
                   onChange={(e) => {
                     setUserData({
@@ -303,7 +303,7 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
             className="btn"
             style={{
               color: "#fff",
-              background: "#005D5E",
+              background: "#150941",
               maxHeight: "41px",
             }}
             onClick={() => {
@@ -318,7 +318,7 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
         <div className="col-md-11">
         <div
                     className="card mt-2"
-                    style={{ borderColor: "#D4B265", minHeight: "100px" }}
+                    style={{ borderColor: "#7EA831", minHeight: "100px" }}
                   >
                     <div className="row" style={{ margin: "3px" }}>
                       {roles?.map((permission, index) => (
@@ -384,7 +384,7 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
         <div className="col-md-3 col-sm-12">
           <button
             className="btn btn-block"
-            style={{ background: "#005D5E", color: "#fff", fontSize: "20px" }}
+            style={{ background: "#150941", color: "#fff", fontSize: "20px" }}
             onClick={() => {
               TeamMemberId  ? EditUser(): AddUser();
             }}

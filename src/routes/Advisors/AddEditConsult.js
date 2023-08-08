@@ -362,7 +362,7 @@ if( user.category =="advisor" ){
                     className="btn"
                     style={{
                       color: "#fff",
-                      background: "#005D5E",
+                      background: "#150941",
                       maxHeight: "35px",
                       alignSelf:"center"
                     }}
@@ -383,7 +383,7 @@ if( user.category =="advisor" ){
         <div className="col-md-10">
                   <div
                     className="card mt-2"
-                    style={{ borderColor: "#D4B265", minHeight: "100px" }}
+                    style={{ borderColor: "#7EA831", minHeight: "100px" }}
                   >
                     <div className="row" style={{ margin: "3px" }}>
                       {
@@ -471,7 +471,7 @@ if( user.category =="advisor" ){
                           </Label>
                         <div>
                   <ButtonGroup
-                    style={{ padding: "0px 10px", border: "1px solid #D4B265",gap:"10px"}}
+                    style={{ padding: "0px 10px", border: "1px solid #7EA831",gap:"10px"}}
                   >
                     <Button
                       className="service-time"

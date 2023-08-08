@@ -49,7 +49,7 @@ const SharedProfileInfo =({providerDetails,isAssetOwner})=>{
                 onClick={() =>
                  history.push("/app/services/add")
                 }
-              style={{ background: "#005D5E", color: "#fff" ,fontSize:"15px",minWidth:"100px",width:"fit-content",margin:"auto"}}
+              style={{ background: "#150941", color: "#fff" ,fontSize:"15px",minWidth:"100px",width:"fit-content",margin:"auto"}}
              >
                 إضافة خدمة
             </button>

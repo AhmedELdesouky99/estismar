@@ -491,10 +491,10 @@
   }
 }
 .PrivateTabIndicator-colorPrimary-2 {
-  background-color: #D4B265 !important;
+  background-color: #7EA831 !important;
 }
 .MuiTab-textColorPrimary.Mui-selected{
-  color:#D4B265 !important
+  color:#7EA831 !important
 }
 .btn-file > input {
   position: absolute;
@@ -510,7 +510,7 @@
   direction: ltr;
 }
 .title{
-  color:#005D5E;
+  color:#150941;
 }
 .title::after{
     position: absolute;
@@ -524,14 +524,14 @@
     top: 44px;
 }
 .title-login{
-  color:#D4B265;
+  color:#7EA831;
   font-size: 30px;
 }
 .title-login::after{
     position: absolute;
     width: 65px;
     height: 6px;
-    background: #005D5E;
+    background: #150941;
     content: "";
     display: block;
     // transform: translateY(-33%);
@@ -540,7 +540,7 @@
 }
 .profile {
   label{
-    color: #005D5E;
+    color: #150941;
   }
   ::placeholder {
       color: #A5A5A5;
@@ -577,12 +577,12 @@
   top: 10px;
   height: 15px;
   width: 15px;
-  background-color:#005D5E;
+  background-color:#150941;
 }
 
 /* On mouse-over, add a grey background color */
 .container:hover input ~ .checkmark {
-  background-color: #005D5E;
+  background-color: #150941;
 }
 
 /* When the checkbox is checked, add a blue background */
@@ -616,7 +616,7 @@
 }
 .required{
   label{
-    color: #005D5E;
+    color: #150941;
     font-size: 14px;
   }
   label::after{
@@ -624,10 +624,10 @@
     color: red;
   }
   ::placeholder{
-    color:#005D5E !important;
+    color:#150941 !important;
   }
  input{
-   color:#005D5E ;
+   color:#150941 ;
  }
  label.container::after{
   content: "";
@@ -641,7 +641,7 @@
   font-weight: bold;
 }
 .btnAdd{
-  border: 1px solid #D4B265 !important;
+  border: 1px solid #7EA831 !important;
 }
 
 button.service-time{
@@ -664,23 +664,23 @@ button.schedual{
 }
 
 button.active{
-  background:#005D5E !important;
+  background:#150941 !important;
   margin:5px;
 
 }
 .daysselect.active{
-  background:#D4B265 !important;
+  background:#7EA831 !important;
   margin:5px;
   border: none;
 }
 .switch.on{
-  background: #D4B265;
+  background: #7EA831;
 }
 .interval::placeholder{
-  color:#D4B265;
+  color:#7EA831;
 }
 .PrivateTabIndicator-colorPrimary-6{
-  background-color: #D4B265 !important;
+  background-color: #7EA831 !important;
 }
 
 .MuiPaginationItem-root{
@@ -688,7 +688,7 @@ button.active{
 
 }
 .MuiPaginationItem-page.Mui-selected{
-  background-color: #005D5E !important;
+  background-color: #150941 !important;
   color: #fff !important;
 }
 
@@ -702,9 +702,8 @@ button.active{
 // 	font-size: 1rem !important;
 // 	font-weight: 400 !important;
 // 	line-height: 2 !important;
-// 	color: #005D5E !important;
+// 	color: #150941 !important;
 // 	background-color: #fff !important;
-// 	border: 0.0625rem solid#D4B265 !important;
 // }
 // .MuiInput-underline:before{
 // 	border-bottom: none !important;
@@ -714,10 +713,8 @@ button.active{
 // }
 // .MuiSelect-icon{
 // 	top: inherit !important;
-// 	color: #D4B265 !important;
 // 	left: 10px !important;
 // 	right: auto !important;
-// 	border-right: 1px solid #D4B265 !important;
 // }
 // .MuiSvgIcon-root{
 // 	width: 1.5em !important;
@@ -727,28 +724,28 @@ button.active{
 	border-bottom: none !important;
 }
 .css-yk16xz-control{
-  border-color: #D4B265 !important;
+  border-color: #7EA831 !important;
 }
 .css-1pahdxg-control:focus{
-  border-color: #D4B265 !important;
-  box-shadow: 0 0 0 1px #D4B265 !important;
+  border-color: #7EA831 !important;
+  box-shadow: 0 0 0 1px #7EA831 !important;
 }
 .css-1pahdxg-control:focus{
-  border-color: #D4B265 !important;
-  box-shadow: 0 0 0 1px #D4B265 !important;
+  border-color: #7EA831 !important;
+  box-shadow: 0 0 0 1px #7EA831 !important;
 }
 .css-1pahdxg-control{
-  border-color: #D4B265 !important;
-  box-shadow: 0 0 0 1px #D4B265 !important;
+  border-color: #7EA831 !important;
+  box-shadow: 0 0 0 1px #7EA831 !important;
 }
 .css-1okebmr-indicatorSeparator{
   margin-top: 0px !important;
   margin-bottom: 0px !important;
-  background-color: #D4B265 !important;
+  background-color: #7EA831 !important;
 
 }
 .css-tlfecz-indicatorContainer{
-  color: #D4B265 !important;
+  color: #7EA831 !important;
 }
 *{
   font-family: Light;
@@ -761,7 +758,7 @@ button.active{
   justify-content: space-between;
 }
 label{
-  color: #005D5E !important;
+  color: #150941 !important;
   font-size: 13px;
 }
 .css-1okebmr-indicatorSeparator{

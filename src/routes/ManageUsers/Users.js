@@ -86,8 +86,8 @@ export default function Users() {
                         background: "none",
                         fontWeight: "bold",
                         fontSize: "20px",
-                        color: "#D4B265",
-                        border: "1px solid #D4B265 ",
+                        color: "#7EA831",
+                        border: "1px solid #7EA831 ",
                       }}
                       className="mx-smt-15 btnAdd  mr-1 ml-1 border-0"
                       onClick={() => history.push("/app/users/roles")}
@@ -101,7 +101,7 @@ export default function Users() {
             <Button
             variant="contained"
             color="primary"
-            style={{background:"#005D5E",fontWeight:"bold",fontSize:"20px"}}
+            style={{background:"#150941",fontWeight:"bold",fontSize:"20px"}}
             className="mx-smt-15 btn  mr-1 ml-1 border-0"
             onClick={()=>history.push("/app/users/add-user")}
           

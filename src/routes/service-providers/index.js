@@ -79,7 +79,6 @@
 //             <Button
 //             variant="contained"
 //             color="primary"
-//             style={{background:"#D4B265",width:"200px",fontWeight:"bold",fontSize:"20px"}}
 //             className="mx-smt-15 btn  mr-1 ml-1 border-0"
 //             onClick={()=>history.push("/app/owners-assets/add")}
           

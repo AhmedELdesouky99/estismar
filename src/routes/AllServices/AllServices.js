@@ -117,8 +117,8 @@ console.log(user,"user")
                         background: "none",
                         fontWeight: "bold",
                         fontSize: "20px",
-                        color: "#D4B265",
-                        border: "1px solid #D4B265 ",
+                        color: "#7EA831",
+                        border: "1px solid #7EA831 ",
                       }}
                       className="mx-smt-15 btnAdd  mr-1 ml-1 border-0"
                       onClick={() => console.log("")}
@@ -133,7 +133,7 @@ console.log(user,"user")
                       variant="contained"
                       color="primary"
                       style={{
-                        background: "#005D5E",
+                        background: "#150941",
                         fontWeight: "bold",
                         fontSize: "20px",
                       }}

@@ -112,11 +112,11 @@ console.log(user,"user")
                       color="primary"
                       style={{
                         background: "none",
-                        color:"#005D5E",
+                        color:"#150941",
                         fontWeight: "bold",
                         fontSize: "20px",
-                        color: "#D4B265",
-                        border: "1px solid #005D5E ",
+                        color: "#7EA831",
+                        border: "1px solid #150941 ",
                       }}
                       className="mx-smt-15   mr-1 ml-1 "
                       onClick={() => history.push("/app/advisors")}
@@ -131,7 +131,7 @@ console.log(user,"user")
                       variant="contained"
                       color="primary"
                       style={{
-                        background: "#005D5E",
+                        background: "#150941",
                         fontWeight: "bold",
                         fontSize: "20px",
                       }}
@@ -174,11 +174,11 @@ console.log(user,"user")
                       color="primary"
                       style={{
                         background: "none",
-                        color:"#005D5E",
+                        color:"#150941",
                         fontWeight: "bold",
                         fontSize: "20px",
-                        color: "#D4B265",
-                        border: "1px solid #005D5E ",
+                        color: "#7EA831",
+                        border: "1px solid #150941 ",
                       }}
                       className="mx-smt-15   mr-1 ml-1 "
                       onClick={() => history.push("/app/advisors")}
@@ -193,7 +193,7 @@ console.log(user,"user")
                       variant="contained"
                       color="primary"
                       style={{
-                        background: "#005D5E",
+                        background: "#150941",
                         fontWeight: "bold",
                         fontSize: "20px",
                       }}
