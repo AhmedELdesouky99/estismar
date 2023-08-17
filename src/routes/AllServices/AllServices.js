@@ -147,7 +147,7 @@ console.log(user,"user")
                   </div>
                 </div>
               </div>
-            </div>
+                   </div>
             <hr />
             <div className="row">
               <FiltersAndSearches

@@ -182,6 +182,8 @@ import {
   ChangeRoute
 } from 'Actions';
 import AllConsulting from '../../routes/Advisors/AllConsults';
+import WalletTransactions from './WalletTransactions';
+import InvoiceTable from './InvoicesTable';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -305,6 +307,17 @@ const dispatch=useDispatch()
           props.serviceProvider ? <AllTeam /> : null
         }
       </TabPanel>
+      <TabPanel value={sidebar.index} index={4}>
+        {
+          <WalletTransactions ServiceProvider={props?.providerDetails} />
+        }
+      </TabPanel>
+      <TabPanel value={sidebar.index} index={5}>
+        {
+          <InvoiceTable ServiceProvider={props?.providerDetails} />
+        }
+      </TabPanel>
+      
     </div>
   );
 }
