@@ -21,10 +21,13 @@ return(
                         fontSize: "20px",
                       }}
                       className="mx-smt-15 btn  mr-1 ml-1 border-0"
-                      onClick={() => history.push("/app/services/add")}
+                      // onClick={() => }
                     >
                       <span className="mr-1 ml-1">
-                        <FormattedMessage id={"إضافة خدمة"} />
+                        {
+                        ">"
+
+                        }
                       </span>
                     </Button>
                   </div>
@@ -34,10 +37,14 @@ return(
                    <div className="row justify-content-between mt-3">
                     <div>
                         <h2>
-                    اجمالي ارباح المنصة
+                    اجمالي ارباح 
 
                         </h2>
                         <h5 className="text-center">
+                          {
+                            
+    ServiceProvider?.user?.wallet?.valid_balance
+                          }
 
                         </h5>
                     </div>

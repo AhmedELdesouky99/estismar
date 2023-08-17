@@ -6,9 +6,7 @@ const InvoiceTable =({ServiceProvider})=>{
    console.log(ServiceProvider?.user?.invoices,"ServiceProvider")
 return(
     <div>
-        <h4>
-        karem
-        </h4>
+       
         <table className="table table-hover ">
             <thead>
                 <th>
