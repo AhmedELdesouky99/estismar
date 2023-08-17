@@ -42,7 +42,7 @@ return(
                         </span>
                     </div>
                     <div>
-                        <StatusDropDown activationStatus={order?.status}/>
+                        <StatusDropDown activationStatus={order?.status} inbordertable/>
                     </div>
 
                 </div>
