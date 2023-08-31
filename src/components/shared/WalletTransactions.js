@@ -1,8 +1,13 @@
 import React, { useEffect }  from "react"
 import { FormattedMessage } from "react-intl";
+import { useSelector } from "react-redux";
 import { FormGroup, Label, Input, ButtonGroup, Button } from "reactstrap";
+import PullRequest from "./PullRequest";
+import { useState } from "react";
 
 const WalletTransactions =({ServiceProvider})=>{
+	const {user}=useSelector(state=>state.authUser.user)
+  const [isopen,setIsOpen]=useState(false)
    console.log(ServiceProvider?.user?.wallet?.valid_balance,"ServiceProvider")
 return(
     <div>
@@ -58,22 +63,26 @@ return(
     ServiceProvider?.user?.wallet?.valid_balance
 }
                     </h5>
-                    <div className="col-md-12 p-0">
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{
-                        background: "#7EA831",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                      }}
-                      className="mx-smt-15 btn  mr-1 ml-1 border-0"
-                    >
-                      <span className="mr-1 ml-1">
-                        <FormattedMessage id={"سحب"} />
-                      </span>
-                    </Button>
-                  </div>
+                  {
+                    user?.category != "admin" && 
+                      <div className="col-md-12 p-0">
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        style={{
+                          background: "#7EA831",
+                          fontWeight: "bold",
+                          fontSize: "20px",
+                        }}
+                        className="mx-smt-15 btn  mr-1 ml-1 border-0"
+                        onClick={()=>setIsOpen(!isopen)}
+                      >
+                        <span className="mr-1 ml-1">
+                          <FormattedMessage id={"سحب"} />
+                        </span>
+                      </Button>
+                    </div>
+                  }
                     </div>
                     </div>
         <h4>
@@ -102,68 +111,11 @@ return(
     
             </thead>
             <tbody>
-                {/* {
-                    InVoicesArr?.data?.length  ?
-                    InVoicesArr.data?.map((Invoice) => (
-                            <tr>
-                                <td>
-                                    {Invoice.id}
-                                </td>
-                                <td>
-    
-                                    {
-                                        // JSON.parse(transaction.meta)?.service?.title
-                                        Invoice?.code
-    
-    
-                                    }
-                                </td>
-                                <td>
-    
-                                    {
-                                        // JSON.parse(transaction.meta)?.service?.field?.name
-    
-                                    }
-                                </td>
-                                <td>
-    
-                                    {
-                                        Invoice?.service_name
-    
-                                        // transaction?.transaction_amount
-                                    }
-                                </td>
-                                <td>
-    
-                                    {
-                                        Invoice?.cost
-    
-                                        // moment(transaction?.created_at).locale("ar").format('DD MMM YYYY h:mm:ss a')
-    
-                                    }
-                                </td>
-                                <td>
-    
-                                    {
-                                        <button onClick={()=>{
-                                            setInvoicedDetails(Invoice)
-                                          }} className="border-0 w-100" style={{background:"#23D381",color:"#fff"}}>
-                                          <i className=" ti-eye m-1"></i>
-                                          <EyeOutlined />
-                              
-                                          </button>
-    
-                                    }
-                                </td>
-                            </tr>
-    
-    
-                        ))
-                        : null
-                } */}
+                
             </tbody>
          
             </table>
+            <PullRequest isopen={isopen}  setIsOpen={setIsOpen}  />
     </div>
 )
 }

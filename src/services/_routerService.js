@@ -23,6 +23,7 @@ import OwnersAssets from "Routes/owner-assets"
 import AllServices from "Routes/AllServices"
 import AllAdvisors from "Routes/Advisors"
 import AllOrders from 'Routes/Allorders';
+import Wallet from "Routes/Wallet";
 import ManageUsers from 'Routes/ManageUsers';
 import ManageOrders from 'Routes/orders';
 
@@ -149,6 +150,10 @@ export default [
    {
       path:"orders",
       component:AllOrders
+   },
+   {
+      path:"wallet",
+      component:Wallet
    }
    
 ]

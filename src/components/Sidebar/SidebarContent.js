@@ -299,7 +299,7 @@ const sidebarMenu=  [
 			   </g>
 			 </svg>
 			   ,
-			   "path": "/app/",
+			   "path": `/app/service-provider/${stateSelect?.authUser.user?.user?.id}`,
 			   "new_item": false,
 			   "child_routes": null
 			},
@@ -390,7 +390,7 @@ const sidebarMenu=  [
 			   </g>
 			 </svg>
 			   ,
-			   "path": "/app/",
+			   "path": "/app/wallet",
 			   "new_item": false,
 			   "child_routes": null
 			},

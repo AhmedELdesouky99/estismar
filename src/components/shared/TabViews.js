@@ -300,11 +300,13 @@ const dispatch=useDispatch()
      
       </TabPanel>
       <TabPanel value={sidebar.index} index={2}>
-        Item Three
+      {
+          <WalletTransactions ServiceProvider={props?.providerDetails} />
+        }
       </TabPanel>
       <TabPanel value={sidebar.index} index={3}>
         {
-          props.serviceProvider ? <AllTeam /> : null
+          props.serviceProvider ? <AllTeam /> :    props.advisor  ?   <InvoiceTable ServiceProvider={props?.providerDetails} advisorDetails={props.advisorDetails}/> :null
         }
       </TabPanel>
       <TabPanel value={sidebar.index} index={4}>

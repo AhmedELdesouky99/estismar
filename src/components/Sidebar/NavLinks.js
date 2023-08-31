@@ -337,7 +337,7 @@ export default {
        
 
          ,
-         "path": "/app/",
+         "path": "/app/wallet",
          "new_item": false,
          "child_routes": null
       },
