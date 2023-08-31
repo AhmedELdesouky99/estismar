@@ -264,7 +264,7 @@ const ConsultDetails = () => {
                                         </Col>
                                         <Col lg={2} md={2} sm={12} xs={12}>
                                         <Button 
-                                        onClick={()=>goToZoomLink(order?.link)}
+                                        onClick={()=>goToZoomLink(`${order?.link}?token=${localStorage.getItem("token")}`)}
                                         size="large" style={{background:"none",borderColor:"#A5A5A5",padding:"0px 30px",borderRadius:"0px"}}>
                                             
                                         <VideocamIcon style={{fontSize:"25px",color:"#A5A5A5",margin:"-9px",}}/>

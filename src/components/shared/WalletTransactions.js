@@ -4,11 +4,24 @@ import { useSelector } from "react-redux";
 import { FormGroup, Label, Input, ButtonGroup, Button } from "reactstrap";
 import PullRequest from "./PullRequest";
 import { useState } from "react";
-
-const WalletTransactions =({ServiceProvider})=>{
+import axios from "axios"
+const client = axios.create({
+  baseURL: "https://estithmar.arabia-it.net/api/",
+});
+const WalletTransactions =({ServiceProvider,advisorDetails})=>{
 	const {user}=useSelector(state=>state.authUser.user)
   const [isopen,setIsOpen]=useState(false)
-   console.log(ServiceProvider?.user?.wallet?.valid_balance,"ServiceProvider")
+  const [Transactions,setTransactions]=useState()
+   console.log(advisorDetails,"advisorDetails",ServiceProvider)
+   useEffect(()=>{
+    client.post(`auth/wallet-chrages`,{
+     
+       token:localStorage.getItem("token")
+    }).then(res=>{
+      console.log(res.data.data,"data platform")
+      setTransactions(res?.data.data)
+    })
+   },[])
 return(
     <div>
          <div className="row justify-content-between">
@@ -48,7 +61,7 @@ return(
                         <h5 className="text-center">
                           {
                             
-    ServiceProvider?.user?.wallet?.valid_balance
+    ServiceProvider?.user?.wallet?.valid_balance ? ServiceProvider?.user?.wallet?.valid_balance : advisorDetails?.user?.wallet?.valid_balance
                           }
 
                         </h5>
@@ -60,7 +73,7 @@ return(
                         </h2>
                     <h5 className="text-center">
 {
-    ServiceProvider?.user?.wallet?.valid_balance
+    ServiceProvider?.user?.wallet?.valid_balance ?ServiceProvider?.user?.wallet?.valid_balance :advisorDetails?.user?.wallet?.valid_balance
 }
                     </h5>
                   {
@@ -111,7 +124,37 @@ return(
     
             </thead>
             <tbody>
-                
+                {
+                  Transactions?.map((oneTrans)=>(
+                    <tr>
+                      <td>
+                        {oneTrans?.id}
+                      </td>
+                      <td></td>
+                      <td>
+                        {
+                          oneTrans.created_at
+                        }
+                      </td>
+                      <td>
+                        {
+                          oneTrans?.bank_account
+                        }
+                      </td>
+                      <td>
+                        {
+                          oneTrans?.amount
+                        }
+                      </td>
+                      <td>
+                        {
+                          oneTrans?.status
+                        }
+                      </td>
+
+                    </tr>
+                  ))
+                }
             </tbody>
          
             </table>

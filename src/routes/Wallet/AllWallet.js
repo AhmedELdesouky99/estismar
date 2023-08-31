@@ -47,6 +47,7 @@ export default function Wallet({inTabs}) {
   const {id}=useParams()
   const [customerBalance,SetCustomerBalance]=useState()
   const [platform,setPlatform]=useState()
+  const [PlatFormIncom,setPlatformIncom]=useState()
 	const {user}=useSelector(state=>state.authUser.user)
   
   useEffect(()=>{
@@ -110,7 +111,7 @@ useEffect(()=>{
         }
       }).then(res=>{
         console.log(res.data.data,"data platform")
-        setPlatformData(res.data.data.query_result)
+        setPlatformData(res.data.data)
       })
     
 },[pagePlatformBalance,limitPlatformBalance,query])
@@ -230,7 +231,43 @@ const changeStatus=()=>{
                   </div>
                 </div>
                 </div>
-
+                {
+                  platform && 
+                  <div className="row justify-content-between w-100 mt-4 text-center">
+                          <div className="col-md-4">
+                            <p>
+                            ارباح الخدمات
+                            </p>
+                            <p>
+                              {
+                                PlatformData?.service_profit
+                              }
+                            </p>
+                          </div>
+                          <div className="col-md-4">
+                            <p>
+                            ارباح استشارات
+                            </p>
+                            <p>
+                              {
+                                PlatformData?.advise_profit
+                              }
+                            </p>
+                          </div>
+                          <div className="col-md-4">
+                            <p>
+                            اجمالي ارباح المنصة
+                            </p>
+                            <p>
+                            {
+                                PlatformData?.advise_profit +  PlatformData?.service_profit
+                              }
+                            </p>
+                          </div>
+                        
+                      </div>
+                }
+                      
             </div>
             {
                 customerBalance ?
@@ -252,7 +289,7 @@ const changeStatus=()=>{
                 setPage={setPagePlatformBalance}
                 setLimit={setLimitPlatformrBalance}
                 limit={limitPlatformBalance}
-                allowners={PlatformData}
+                allowners={PlatformData.query_result}
                 status={status}
                 
                 

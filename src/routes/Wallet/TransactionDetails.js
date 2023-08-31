@@ -124,7 +124,7 @@ console.log(user,"user redux ")
         title={<IntlMessages id="الخدمات" />}
         match={location}
         enableBreadCrumb
-        lastElement={Service?.title || "اضافة خدمة"}
+        lastElement={"معاملة"}
       />
 
       <div className="col-md-11">
@@ -470,7 +470,7 @@ console.log(user,"user redux ")
                 </div>
               <div className="col-md-3">
                 {
-                  info?.transaction_type =="bank_transfer" ? 
+                  info?.methods =="bank-transfer" && info?.transaction_type =="deposit" ? 
                   <img src={"https://estithmar.arabia-it.net"+info?.transfear_document?.path} className="w-100" />
 :null
                 }

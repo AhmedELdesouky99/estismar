@@ -301,7 +301,7 @@ const dispatch=useDispatch()
       </TabPanel>
       <TabPanel value={sidebar.index} index={2}>
       {
-          <WalletTransactions ServiceProvider={props?.providerDetails} />
+          <WalletTransactions ServiceProvider={props?.providerDetails} advisorDetails={props.advisorDetails} />
         }
       </TabPanel>
       <TabPanel value={sidebar.index} index={3}>
@@ -311,7 +311,7 @@ const dispatch=useDispatch()
       </TabPanel>
       <TabPanel value={sidebar.index} index={4}>
         {
-          <WalletTransactions ServiceProvider={props?.providerDetails} />
+          <WalletTransactions ServiceProvider={props?.providerDetails}  advisorDetails={props.advisorDetails} />
         }
       </TabPanel>
       <TabPanel value={sidebar.index} index={5}>

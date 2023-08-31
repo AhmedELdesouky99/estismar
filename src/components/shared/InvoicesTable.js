@@ -254,7 +254,33 @@ const InvoiceTable = ({ ServiceProvider,advisorDetails }) => {
                       </td>
                     </tr>
                   ))
-                : null}
+                : advisorDetails?.user.invoices &&  advisorDetails?.user?.invoices?.length ? 
+            
+                advisorDetails?.user?.invoices?.map((invoice) => (
+                    <tr>
+                      <td>{invoice.id}</td>
+                      <td>{invoice.code}</td>
+                      <td>{invoice.created_at}</td>
+                      <td>{JSON.parse(invoice.meta).service?.title}</td>
+                      <td>{invoice.cost}</td>
+                      <td>
+                        <Tooltip title={"common.edit"} placement="top">
+                          <button
+                            className="border-0"
+                            style={{ background: "#23D381", color: "#fff" }}
+                            onClick={()=>{
+                                console.log(invoice,"invoice details")
+                                SetInvoiceDetails(invoice)
+                            }}
+                          >
+                            <i className=" ti-eye m-1"></i>
+                          </button>
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  )):null
+            
+            }
               {/* {
                         InVoicesArr?.data?.length  ?
                         InVoicesArr.data?.map((Invoice) => (
