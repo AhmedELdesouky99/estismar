@@ -180,6 +180,49 @@ export function FiltersAndSearches({
           </div>
           )
         }
+        {
+          filters.includes("userCategory") && (
+            <div className="col-md-2 mt-1">
+            <FormGroup>
+              <Label for="exampleEmail">
+                <FormattedMessage id={"نوع الحساب"} />
+              </Label>
+              <Select
+              options={[
+                {label:"مستشار",value:"advisor"},
+                {label:"وقف",value:"asset-owner"},
+                {label:"مزود خدمة",value:"service-provider"}
+
+            ]}
+              placeholder="عرض الكل"
+                onChange={(sel) => {
+                  return setcollectedQuery({ ...collectedQuery, user_category: sel.value });
+                }}
+              />
+            </FormGroup>
+          </div>
+          )
+        }
+         {filters?.includes("Transstatus") && (
+          <div className="col-md-2 mt-1">
+            <FormGroup>
+              <Label for="exampleEmail">
+                <FormattedMessage id={"االحالة"} />
+              </Label>
+              <Select
+              options={[
+                {label:"مدفوع",value:"paid"},
+                {label:"عير مدفوع",value:"failed"}
+
+            ]}
+              placeholder="عرض الكل"
+                onChange={(sel) => {
+                  return setcollectedQuery({ ...collectedQuery, status: sel.value });
+                }}
+              />
+            </FormGroup>
+          </div>
+        )}
         <div
           className="mt-1 d-flex flex-row justify-content-end"
           style={{ alignSelf: "center" }}

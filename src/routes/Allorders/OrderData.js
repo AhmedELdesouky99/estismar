@@ -17,7 +17,7 @@ export const OrderData = [
   {
     headerId: "اسم الخدمة",
     dataType: FUNC,
-    func: (record, locale) => record.service.title,
+    func: (record, locale) => record?.service?.title,
     
   },
  

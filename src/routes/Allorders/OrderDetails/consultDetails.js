@@ -73,8 +73,7 @@ const ConsultDetails = () => {
   }, []);
   useEffect(()=>{
       if(id && user.category =="admin"){
-        client.get(`
-        /advisor-schedules/${id}`).then(res=>{
+        client.get(`/advisor-schedules/${id}`).then(res=>{
           setOrder(res.data.data)
            
         })

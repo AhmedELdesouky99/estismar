@@ -24,8 +24,10 @@ import AllServices from "Routes/AllServices"
 import AllAdvisors from "Routes/Advisors"
 import AllOrders from 'Routes/Allorders';
 import Wallet from "Routes/Wallet";
+import invoices from "Routes/Invoices"
 import ManageUsers from 'Routes/ManageUsers';
 import ManageOrders from 'Routes/orders';
+import WakfLibrary from "Routes/WakfLibrary"
 
 
 // async component
@@ -154,6 +156,18 @@ export default [
    {
       path:"wallet",
       component:Wallet
-   }
+   },
+   {
+      path:"invoices",
+      component:invoices
+   },
+   {
+      path:"orders",
+      component:ManageOrders
+   },
    
+   {
+      path:"posts",
+      component:WakfLibrary
+   }
 ]

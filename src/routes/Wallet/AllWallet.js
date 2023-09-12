@@ -18,6 +18,9 @@ import PendingWalletList from "./PendingWalletLis";
 import AllWalletTransactions from "./AllWalletTransactionsList";
 import CustomerBalanceList from "./CustomersBalanceList";
 import PlatformBalanceList from "./PlatformBalanceList";
+import Select from "react-select";
+import MyWallet from "./MyWallet";
+
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin",
 });
@@ -48,41 +51,31 @@ export default function Wallet({inTabs}) {
   const [customerBalance,SetCustomerBalance]=useState()
   const [platform,setPlatform]=useState()
   const [PlatFormIncom,setPlatformIncom]=useState()
+  const[userCategory,SetUserCategory]=useState()
+  const [transType,setTransType]=useState()
 	const {user}=useSelector(state=>state.authUser.user)
   
   useEffect(()=>{
-    console.log(user,"user")
-    if(user.category =="service-provider"){
-      const clienturl= axios.create({
-        baseURL: "https://estithmar.arabia-it.net/api",
-      });
-      clienturl.get(`/provider/request`,{
-        params:{
-          limit,
-          token:localStorage.getItem("token"),
-          page,
-          status: query.status ? query.status : undefined,
-        }
-      }).then(res=>setOwners(res.data.data))
-    }else{
-      client.get(`/wallet?pending_requests=true`,{
-        params:{
-          limit,
-          page,
-        }
-      }).then(res=>{
-        console.log(res.data.data,"data adata ")
-        setOwners(res.data.data)
-      })
-    }
-    
-},[page,limit,query])
+    client.get(`/wallet?pending_requests=true`,{
+      params:{
+        limit,
+        page,
+        user_category:userCategory,
+        transaction_type:transType
+      }
+    }).then(res=>{
+      console.log(res.data.data,"data adata ")
+      setOwners(res.data.data)
+    })
+},[page,limit,query,userCategory,transType])
 useEffect(()=>{
     console.log(user,"user")
       client.get(`/wallet?wallet_charges=true`,{
         params:{
           limit:limitTransactions,
           page:pageTransactions,
+          user_category:query.user_category,
+          status:query.status
         }
       }).then(res=>{
         console.log(res.data.data,"data adata ")
@@ -108,6 +101,8 @@ useEffect(()=>{
         params:{
           limit:limitCustomerBalance,
           page:pageCustomerBalance,
+          user_category: platform ? query.user_category :undefined
+
         }
       }).then(res=>{
         console.log(res.data.data,"data platform")
@@ -161,8 +156,72 @@ const changeStatus=()=>{
 
       }
  
-      <RctCard>
+   {
+    user.category =="admin" ? 
+    <>
+       <RctCard>
         <RctCardContent>
+          <div className="row justify-content-between">
+            <div className="col-md-6">
+            <h3>
+          تاكيد معاملات
+          </h3>
+
+            </div>
+            <div className="col-md-6">
+            <div className="row justify-content-end"> 
+              <div className="col-md-4">
+              <Select
+                options={[
+                  {
+                    label:"مستشار",
+                    value:"advisor"
+                  },
+                  {
+                    label:"وقف",
+                    value:"asset-owner"
+                  }
+                ]}
+                placeholder="اختر نوع الحساب"
+                onChange={(select)=>{
+                    console.log(select,"select")
+                    SetUserCategory(select.value)
+                }}
+            />
+              </div>
+              <div className="col-md-4">
+              <Select
+                options={[
+                  {
+                    label:"سحب" ,
+                    value:"withdraw"
+                  },
+                  {
+                    label:"ايداع" ,
+                    value:"deposit"
+                  }
+                ]}
+                placeholder="اختر نوع المعاملة"
+                onChange={(select)=>{
+                  console.log(select,"select")
+                  setTransType(select.value)
+              }}
+            />
+              </div>
+            </div>
+              {/* <FiltersAndSearches 
+              
+              submitbtnid="search.filter"
+             
+              filters={  ["service_provider","support"]}
+              query={query}
+              setPage={setPage}
+              setQuery={setQuery}
+              
+              /> */}
+            </div>
+          </div>
+         
         <PendingWalletList
         loading={false}
         setPage={setPage}
@@ -231,6 +290,7 @@ const changeStatus=()=>{
                   </div>
                 </div>
                 </div>
+            
                 {
                   platform && 
                   <div className="row justify-content-between w-100 mt-4 text-center">
@@ -269,6 +329,18 @@ const changeStatus=()=>{
                 }
                       
             </div>
+            <div className="row w-100">
+                  <FiltersAndSearches 
+                    make="make"
+                    submitbtnid="search.filter"
+                   
+                    filters={ !customerBalance && !platform ? ["userCategory","TransactionType","Transstatus"]: ["userCategory"]}
+                    query={query}
+                    setPage={setPage}
+                    setQuery={setQuery}
+                  
+                  />
+                </div>
             {
                 customerBalance ?
                <CustomerBalanceList 
@@ -309,6 +381,11 @@ const changeStatus=()=>{
        
         </RctCardContent>
       </RctCard>
+    </>
+    
+    
+    : <MyWallet />
+   }
     </div>
   );
 }

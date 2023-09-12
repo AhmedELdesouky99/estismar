@@ -194,7 +194,7 @@ const sidebarMenu=  [
 <path id="Path_22587" data-name="Path 22587" d="M163.072,338.3h-1.381a.691.691,0,1,0,0,1.381h1.381a.691.691,0,1,0,0-1.381Zm3.8,1.381h1.381a.691.691,0,1,0,0-1.381H166.87a.691.691,0,1,0,0,1.381Zm11.319-2.127-1.252.584a.691.691,0,1,0,.584,1.252l1.252-.584a.691.691,0,0,0-.584-1.252Z" transform="translate(-150.893 -317.459)" fill="#fff"/>
 </svg>
 	   ,
-	   "path": "/app/",
+	   "path": "/app/posts",
 	   "new_item": false,
 	   "child_routes": null
 	},
@@ -415,7 +415,7 @@ const sidebarMenu=  [
 			 </svg>
 		
 			   ,
-			   "path": `/app/service-provider/${stateSelect?.authUser.user?.user?.id}`,
+			   "path": `/app/invoices`,
 			   "new_item": false,
 			   "child_routes": null
 			},

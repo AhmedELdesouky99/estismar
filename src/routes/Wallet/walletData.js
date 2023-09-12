@@ -31,7 +31,7 @@ export const WalletData = [
     headerId: "نوع المعاملة",
     dataRef: "logo",
     dataType: FUNC,
-    func: (record, locale) => record.methods
+    func: (record, locale) => record.transaction_type
     ,
   },
   {
