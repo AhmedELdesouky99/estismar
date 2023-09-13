@@ -794,3 +794,14 @@ body{
 .ant-tabs-nav-list{
   gap:30px !important;
 }
+
+.ant-tabs-tab .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color:#7EA831 !important;
+
+}
+:where(.css-dev-only-do-not-override-18iikkb).ant-tabs .ant-tabs-ink-bar{
+  background: #7EA831 !important;
+}
+:where(.css-dev-only-do-not-override-18iikkb).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+  color: #7EA831!important
+}

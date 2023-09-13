@@ -21,6 +21,7 @@ import FieldsDropDown from "../shared/FieldsDropDown";
 import ServiceProviderDropDown from "../shared/ServiceProviderDropDown";
 import Select from "react-select";
 import { useSelector } from "react-redux";
+import DropDownStatus1 from "../shared/DropDownStatus1";
 
 const trimFields = ["email", "nid"];
 
@@ -150,6 +151,23 @@ export function FiltersAndSearches({
                 <FormattedMessage id={"االحالة"} />
               </Label>
               <DropDownStatus
+                valueAttribute="id"
+                selectedStatus={collectedQuery?.status}
+                onChange={(status) => {
+                  return setcollectedQuery({ ...collectedQuery, status: status.value == 0 ? "0" :status.value });
+                }}
+              />
+            </FormGroup>
+          </div>
+        )}
+        
+        {filters?.includes("status1") && (
+          <div className="col-md-2 mt-1">
+            <FormGroup>
+              <Label for="exampleEmail">
+                <FormattedMessage id={"االحالة"} />
+              </Label>
+              <DropDownStatus1
                 valueAttribute="id"
                 selectedStatus={collectedQuery?.status}
                 onChange={(status) => {

@@ -11,6 +11,7 @@ import {
    AsyncReportsComponent
 } from 'Components/AsyncComponent/AsyncComponent';
 import WakfTabs from './WakfTabs';
+import AddEditPost from './AddEditPost';
 
 const WakfLibrary = ({ match }) => (
   
@@ -18,7 +19,9 @@ const WakfLibrary = ({ match }) => (
       <Switch>
          {/* <Redirect exact from={`${match.url}/`} to={`${match.url}/`} /> */}
          <Route exact path={`${match.url}/`} component={WakfTabs} />
-         {/* <Route exact path={`${match.url}/:id`} component={OrderDetails} /> */}
+         <Route exact path={`${match.url}/:id`} component={AddEditPost} />
+         <Route exact path={`${match.url}/add`} component={AddEditPost} />
+
 
 
          

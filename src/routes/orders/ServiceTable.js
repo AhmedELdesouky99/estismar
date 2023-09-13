@@ -52,7 +52,7 @@ const ServiceTable=({withcheckbox,service})=>{
               {["title","field","executive_time","cost","support_ratio","is_active"]?.map((data, index) => (
                 <>
                   <td key={JSON.stringify(index)} align={`${data?.align || ""}`}>
-                   { data == "executive_time" ? <> {service[data]}  <FormattedMessage id={service["executive_time_type"]} /> </>: data == "field" ? service[data].name : data == "is_active" ?  <StatusDropDown  activationStatus={service[data]}/>: service[data]}
+                   { data == "executive_time" ? <> {service[data]}  <FormattedMessage id={service["executive_time_type"]} /> </>: data == "field" ? service[data]?.name : data == "is_active" ?  <StatusDropDown  activationStatus={service[data]}/>: service[data]}
                   </td>
                 </>
               ))}

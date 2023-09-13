@@ -11,19 +11,19 @@ const { TEXT, ACTIONS, FUNC,DROPDOWN } = dataTypes;
 export const PostsData = [
   {
     headerId: "ID",
-    dataRef: "user_id",
+    dataRef: "id",
     dataType: TEXT,
   },
   {
     headerId: "العنوان (ar)",
     dataType: FUNC,
-    func:(record)=> <Link  style={{color:"#A5A5A5"}} to={`/app/owners-assets/${record.user_id}`}>{ record.asset_name_ar}</Link> 
+    func:(record)=> record.title 
   },
   {
     headerId: "التصنيفات الموضوعية",
     dataRef: "logo",
     dataType: FUNC,
-    func: (record, locale) => record.created_at,
+    func: (record, locale) => record.category,
   },
   {
     headerId:  "تاريخ النشر",
@@ -35,15 +35,16 @@ export const PostsData = [
     headerId: " الصفحة الرئيسية",
     dataRef: "logo",
     dataType: FUNC,
-    func: (record, locale) => record.created_at,
+    func: (record, locale) => record.is_main_page =="0" ? "لا" :"نعم",
   },
   
-
   {
-    headerId: "الحالة",
-    dataType: DROPDOWN,
-
+    headerId: " الصفحة الرئيسية",
+    dataRef: "logo",
+    dataType: FUNC,
+    func: (record, locale) => record.is_active =="0" ? "متوقف" :"منشور",
   },
+
  
   { headerId: "common.actions", dataType: ACTIONS },
 ];

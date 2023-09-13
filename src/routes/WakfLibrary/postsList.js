@@ -41,17 +41,17 @@ function PostsList({ allowners, loading, setPage, limit, setLimit ,status}) {
       metadata: allowners?.allowners?.metadata,
     })
 
-    client.delete(`/asset-owner/${id}`).then((res)=>console.log(res,"res")).catch((err)=>console.log(err,"err"))
+    client.delete(`/posts/${id}`).then((res)=>console.log(res,"res")).catch((err)=>console.log(err,"err"))
     
   };
 
-  const actions = ({ user_id }) => (
+  const actions = ({ id }) => (
     <div className="d-flex align-items-center" style={{ gap: "5px" }}>
       {/* Redirects to Car details */}
 
       
         <Tooltip title={ "common.edit"} placement="top">
-          <Link to={`/app/owners-assets/${user_id}`}>
+          <Link to={`/app/posts/${id}`}>
             <button className="border-0" style={{background:"#23D381",color:"#fff"}}>
             <i className=" ti-eye m-1"></i>
 
@@ -59,16 +59,16 @@ function PostsList({ allowners, loading, setPage, limit, setLimit ,status}) {
           </Link>
         </Tooltip>
       
-      {/* <Tooltip title={"common.delete"} placement="top">
+      <Tooltip title={"common.delete"} placement="top">
       <button className="border-0" style={{background:"#CF4949",color:"#fff"}}>
 
         <i
           style={{ cursor: "pointer" }}
           className=" ti-trash m-1"
-          onClick={() => handelDeleteBanner(user_id)}
+          onClick={() => handelDeleteBanner(id)}
         ></i>
         </button>
-      </Tooltip> */}
+      </Tooltip>
     </div>
   );
   const dropdownActions =(record)=>(
@@ -83,7 +83,7 @@ function PostsList({ allowners, loading, setPage, limit, setLimit ,status}) {
             loading={loading}
             tableRecords={collection}
             actions={actions}
-            actionsArgs={["user_id"]}
+            actionsArgs={["id"]}
             dropdownActions={dropdownActions}
           />
         </RctCollapsibleCard>

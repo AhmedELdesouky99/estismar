@@ -47,7 +47,7 @@ function ImageUpload({
         <div className="fileinput fileinput-new">
           <div className="card" style={{position:"relative"}} >
             {!loader ? (
-              <img width="100%" src={loading ? NoImage : image || NoImage} alt={titleId || ""} />
+              <img width="100%" src={loading ? NoImage : image || NoImage} alt={titleId || ""} style={{maxHeight:"200px"}}/>
             ) : (
               <CircularProgress />
             )}

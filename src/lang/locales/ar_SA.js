@@ -393,6 +393,7 @@ module.exports = {
    "components.passwordPrompt": "كلمة المرور موجه",
    "sidebar.mange_reports":" إدارة التقارير",
    "sidebar.wakf_library":"مكتبة الوقف",
+   "posts":"مقالات",
    "sidebar.mange_users":"إدارة المستخدمين",
    "components.warning": "تحذير",
    "components.customIcon": "أيقونة مخصصة",
