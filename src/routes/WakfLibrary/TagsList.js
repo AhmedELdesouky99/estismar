@@ -11,6 +11,8 @@ import { TagsData } from "./TagsData";
 import StatusDropDown from "Components/shared/StatusDropDown"
 import axios from "axios"
 import PerPage from "Components/shared/PerPage";
+import TagModal from "./TagModal";
+import { useState } from "react";
 
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin" 
@@ -22,6 +24,8 @@ function TagsList({ allowners, loading, setPage, limit, setLimit ,status}) {
     collection: [],
     metadata: {},
   });
+  const [tagId,setTagId]=useState()
+  const [isopen,setIsOpen]=useState(false)
   const { collection ,metadata} = owners;
   useEffect(() => {
     console.log(allowners,"allowners")
@@ -51,11 +55,14 @@ function TagsList({ allowners, loading, setPage, limit, setLimit ,status}) {
 
       
         <Tooltip title={ "common.edit"} placement="top">
-          <Link to={`/app/posts/${id}`}>
-            <button className="border-0" style={{background:"#23D381",color:"#fff"}}>
+          
+            <button onClick={()=>{
+              setTagId(id)
+              setIsOpen(true)
+            }} className="border-0" style={{background:"#23D381",color:"#fff"}}>
             <i className=" ti-eye m-1"></i>
             </button>
-          </Link>
+          
         </Tooltip>
       
       <Tooltip title={"common.delete"} placement="top">
@@ -106,6 +113,8 @@ function TagsList({ allowners, loading, setPage, limit, setLimit ,status}) {
           </>
         )}
       </div>
+      <TagModal setIsOpen={setIsOpen} isopen={isopen} tagId={tagId}/>
+
     </Typography>
   );
 }

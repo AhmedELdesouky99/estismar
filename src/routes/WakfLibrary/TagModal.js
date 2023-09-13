@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Button, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
 import Select from "react-select";
 import axios from "axios"
@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const client = axios.create({
     baseURL: "https://estithmar.arabia-it.net/api/admin",
   });
-const TagModal =({isopen,setIsOpen,serviceRequestId,setOrder,inConsult})=>{
+const TagModal =({isopen,setIsOpen,serviceRequestId,setOrder,inConsult,tagId})=>{
     const toggle=()=>setIsOpen(!isopen)
 	const {user}=useSelector(state=>state.authUser.user)
     const history=useHistory()
@@ -40,7 +40,7 @@ const AddTag=()=>{
       })
 }
 const editTag=()=>{
-    client.post(`/tags/${id}`,{
+    client.put(`/tags/${tagId}`,{
         ...data,
       
       }).then(res=>{
@@ -59,6 +59,24 @@ const editTag=()=>{
         },2000)
       })
 }
+useEffect(()=>{
+    if(tagId){
+        client.get(`/tags/${tagId}`,{
+      
+        }).then((res)=>{
+          console.log(res.data.data,"karem")
+          setData({
+            ...data,
+          title:res.data.data.title,
+          is_active:res.data.data.is_active
+
+        })
+        
+
+         
+        })   
+    }
+},[tagId])
     return(
         <Modal size="lg" id="modal-note" isOpen={isopen} toggle={toggle} style={{padding:"10px"}}>
         <ModalHeader toggle={toggle}>  أضف تصنيف جديد </ModalHeader>
@@ -68,6 +86,7 @@ const editTag=()=>{
                  <Label for="exampleSelect">اسم التصنيف</Label>
                  {
                     <Input type="text" 
+                    value={data?.title}
                     onChange={(e)=>{
                         setData({
                             ...data,
@@ -87,6 +106,14 @@ const editTag=()=>{
                    name="select"
                    type="text"
                    placeholder='الحاله'
+                   value={
+                    [
+                        {label:"منشور",value:1},
+                        {
+                            label:"غير منشور",value:0
+                        }
+                      ].find((val)=>val.value== data.is_active)
+                   }
                    style={{ borderColor: "#7EA831" }}
                   options={[
                     {label:"منشور",value:1},
@@ -110,7 +137,7 @@ const editTag=()=>{
            
         </ModalBody>
         <ModalFooter style={{justifyContent:"center"}}>
-          <Button className="w-50" onClick={()=>AddTag()} style={{color:"#fff",background:"#7EA831"}}>
+          <Button className="w-50" onClick={()=> tagId ? editTag() :AddTag()} style={{color:"#fff",background:"#7EA831"}}>
           حفظ
           </Button>{' '}
           <Button className="w-50" onClick={()=>setIsOpen(!isopen)} style={{color:"#fff",background:"#150941"}} >
