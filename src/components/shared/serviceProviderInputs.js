@@ -28,11 +28,13 @@ const ServiceProviderInputs = ({ providerDetails }) => {
   const { id } = useParams();
   const [errors,setErrors]=useState()
   const [fields, setFields] = useState([]);
+	const {user}=useSelector(state=>state.authUser.user)
 
 const [modal,setModal]=useState()
 const toggle=()=>setModal(!modal)
   useEffect(() => {
     if (providerDetails) {
+      console.log(providerDetails,"providerDetails")
       const profile = providerDetails?.files?.find(
         (file) => file.title == "profile"
       )?.path;
@@ -67,7 +69,8 @@ const toggle=()=>setModal(!modal)
         ...providerDetails,
         name: providerDetails.user.name,
         email: providerDetails.user.email,
-        phone:providerDetails.user.phone
+        phone:providerDetails.user.phone,
+        fields_id:providerDetails?.fields?.map((field)=>field.id)
       });
     }
   }, [providerDetails]);
@@ -143,10 +146,12 @@ const toggle=()=>setModal(!modal)
             text:"تم اضافه مزود الخدمة بنجاح",
             icon: "success",
           });
-        
+        if(user.category=="admin"){
           setTimeout(() => {
             history.push("/app/service-provider");
           }, 2000);
+        }
+        
         }else{
             setErrors(res.data.errors)
         }
@@ -176,10 +181,12 @@ const toggle=()=>setModal(!modal)
             text: "تم تعديل مزود الخدمة بنجاح",
             icon: "success",
           });
-
-          setTimeout(() => {
-            history.push("/app/service-provider");
-          }, 2000);
+          if(user.category=="admin"){
+            setTimeout(() => {
+              history.push("/app/service-provider");
+            }, 2000);
+          }
+      
         }else{
           console.log(res,"res")
           setErrors(res.data.errors)
@@ -578,6 +585,7 @@ const toggle=()=>setModal(!modal)
                 <Input
                   style={{ borderColor: "#7EA831" }}
                   type="date"
+                  min={data?.export_date}
                   defaultValue={data?.expire_date}
                   value={data?.expire_date}
                   onChange={(e) => {
@@ -656,14 +664,16 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={"المجالات"} />
               </Label>
               <FieldsDropDown
+              multi={true}
                 onChange={(sel) => {
+                  console.log(sel)
                   setData({
                     ...data,
-                    fields_id: data?.fields_id ?  [...data?.fields_id, sel.value] : [sel.value],
+                    fields_id: [sel.value],
                   });
                   setFields([...fields, sel]);
                 }}
-                selectedItem={data?.fields_id}
+                selectedItem={data?.fields_id[0]}
               />
             
             </FormGroup>

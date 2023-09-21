@@ -34,8 +34,8 @@ const AddEditService = () => {
 	const {user}=useSelector(state=>state.authUser.user)
 console.log(user,"user redux ")
   const [Delivery, setDelivery] = useState({
-    title:"",
-    count: 10,
+    title:null,
+    count: null,
     count_type: "day",
   });
   const [serviceborder, setServiceBorder] = useState({
@@ -54,7 +54,7 @@ console.log(user,"user redux ")
       "executive_result" : [],
   
       "cost" :"1000", 
-      "tax_ratio" : "10", 
+      "tax_ratio" : "150", 
       "support_ratio" : "50", 
       "cost_after_study" : false,
   
@@ -149,7 +149,7 @@ console.log(user,"user redux ")
     }
   })
  }
- console.log(user,"Service")
+ console.log(Delivery,"Delivery")
   return (
     <div className="clients-wrapper">
       <Helmet>
@@ -650,7 +650,6 @@ console.log(user,"user redux ")
                 <div className="col-md-3">
                   <Input
                     style={{ borderColor: "#7EA831",color: "#7EA831"  }}
-                    placeholder={"90"}
                     type="text"
                     onChange={(e) => {
                       setService({
@@ -688,6 +687,7 @@ console.log(user,"user redux ")
                       "ادخل مخرجات الخدمة/ مواصفات التسليمات كل على حدا"
                     }
                     type="text"
+                    value={Delivery.title || ""}
                     onChange={(e) => {
                       setDelivery({
                         ...Delivery,
@@ -701,6 +701,7 @@ console.log(user,"user redux ")
                     style={{ borderColor: "#7EA831" }}
                     placeholder={"المده الزمنية"}
                     type="text"
+                    value={Delivery.count || ""}
                     onChange={(e) => {
                       setDelivery({
                         ...Delivery,
@@ -734,13 +735,21 @@ console.log(user,"user redux ")
                       maxHeight: "35px",
                     }}
                     onClick={() => {
-                      const DeliveryStage = [...Service?.stages_of_delivery];
-                      DeliveryStage.push(Delivery);
-                      setDelivery({});
-                      setService({
-                        ...Service,
-                        stages_of_delivery: DeliveryStage,
-                      });
+                      if(Delivery.count && Delivery.title){
+                        const DeliveryStage = [...Service?.stages_of_delivery];
+                        DeliveryStage.push(Delivery);
+                        setDelivery({
+                          count_type:"day",
+                          title:null,
+                          count:null
+                          
+                        });
+                        setService({
+                          ...Service,
+                          stages_of_delivery: DeliveryStage,
+                        });
+                      }
+                   
                     }}
                   >
                     <AddIcon />

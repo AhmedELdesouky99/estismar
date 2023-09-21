@@ -23,7 +23,7 @@ export const OwnersData = [
     headerId: "تاريخ الانضمام",
     dataRef: "logo",
     dataType: FUNC,
-    func: (record, locale) => record.created_at,
+    func: (record, locale) => moment(record?.created_at).locale("ar").format('DD MMM YYYY h:mm:ss a')
   },
 
   {

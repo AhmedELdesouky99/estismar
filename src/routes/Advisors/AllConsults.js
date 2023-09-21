@@ -106,43 +106,51 @@ console.log(user,"user")
               <div className="col-sm-12 col-md-6 mt-1">  قائمة الاستشارات</div>
               <div className="col-sm-12 col-md-6 mt-1">
                 <div className="row justify-content-end">
-                <div className="col-md-6">
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{
-                        background: "none",
-                        color:"#150941",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                        color: "#7EA831",
-                        border: "1px solid #150941 ",
-                      }}
-                      className="mx-smt-15   mr-1 ml-1 "
-                      onClick={() => history.push("/app/advisors")}
-                    >
-                      <span className="mr-1 ml-1">
-                        <FormattedMessage id={"قائمة المستشاريين"} />
-                      </span>
-                    </Button>
-                  </div>
+            {
+              user.category =="admin" ? 
+              <div className="col-md-6">
+              <Button
+                variant="contained"
+                color="primary"
+                style={{
+                  background: "none",
+                  color:"#150941",
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  color: "#7EA831",
+                  border: "1px solid #150941 ",
+                }}
+                className="mx-smt-15   mr-1 ml-1 "
+                onClick={() => history.push("/app/advisors")}
+              >
+                <span className="mr-1 ml-1">
+                  <FormattedMessage id={"قائمة المستشاريين"} />
+                </span>
+              </Button>
+            </div>
+            : null
+            }
+                {
+                  user.is_active ?
                   <div className="col-md-6">
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{
-                        background: "#150941",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                      }}
-                      className="mx-smt-15 btn  mr-1 ml-1 border-0"
-                      onClick={() => history.push("/app/advisors/Consulting/add")}
-                    >
-                      <span className="mr-1 ml-1">
-                        <FormattedMessage id={"استشارة جديدة"} />
-                      </span>
-                    </Button>
-                  </div>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    style={{
+                      background: "#150941",
+                      fontWeight: "bold",
+                      fontSize: "20px",
+                    }}
+                    className="mx-smt-15 btn  mr-1 ml-1 border-0"
+                    onClick={() => history.push("/app/advisors/Consulting/add")}
+                  >
+                    <span className="mr-1 ml-1">
+                      <FormattedMessage id={"استشارة جديدة"} />
+                    </span>
+                  </Button>
+                </div> 
+                : null
+                }
                   
                 </div>
               </div>

@@ -108,8 +108,10 @@ console.log(user,"user")
                    <div className="row justify-content-between">
               <div className="col-sm-12 col-md-6 mt-1">قائمة الخدمات</div>
               <div className="col-sm-12 col-md-6 mt-1">
-                <div className="row">
-                  <div className="col-md-6">
+                <div className="row justify-content-end">
+                  {
+                    user.category =="admin" ? 
+                    <div className="col-md-6">
                     <Button
                       variant="contained"
                       color="primary"
@@ -128,6 +130,8 @@ console.log(user,"user")
                       </span>
                     </Button>
                   </div>
+                  : null
+                  }
                   <div className="col-md-6">
                     <Button
                       variant="contained"

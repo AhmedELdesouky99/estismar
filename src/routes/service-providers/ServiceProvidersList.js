@@ -12,6 +12,7 @@ import StatusDropDown from "Components/shared/StatusDropDown"
 import PerPage from "Components/shared/PerPage";
 
 import axios from "axios"
+import { useSelector } from "react-redux";
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin" 
  
@@ -22,6 +23,8 @@ function ServiceProvidersList({ allservices, loading, setPage, limit, setLimit,s
     collection: [],
     metadata: {},
   });
+	const {user}=useSelector(state=>state.authUser.user)
+
   const { collection ,metadata} = services;
   useEffect(() => {
    
@@ -60,7 +63,8 @@ function ServiceProvidersList({ allservices, loading, setPage, limit, setLimit,s
           </Link>
         </Tooltip>
       
-      <Tooltip title={"common.delete"} placement="top">
+    {
+      user.category=="admin" ?   <Tooltip title={"common.delete"} placement="top">
       <button className="border-0" style={{background:"#CF4949",color:"#fff"}}>
 
         <i
@@ -69,7 +73,8 @@ function ServiceProvidersList({ allservices, loading, setPage, limit, setLimit,s
           onClick={() => handelDeleteBanner(user_id)}
         ></i>
         </button>
-      </Tooltip>
+      </Tooltip>: null
+    }
     </div>
   );
   const dropdownActions =(record)=>(

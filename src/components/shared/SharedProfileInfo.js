@@ -10,6 +10,7 @@ const SharedProfileInfo =({providerDetails,isAssetOwner})=>{
         (file) => file.title == "profile"
       )?.path;
       let history=useHistory()
+      console.log(providerDetails,"providerDetails")
     return(
         <RctCard>
         <RctCardContent>
@@ -22,7 +23,7 @@ const SharedProfileInfo =({providerDetails,isAssetOwner})=>{
               <div>
                 <p>
                   {
-                    providerDetails?.company_name_ar
+                    providerDetails?.company_name_ar  || providerDetails?.asset_name_ar
                   }
                 </p>
                 <p>
@@ -49,6 +50,7 @@ const SharedProfileInfo =({providerDetails,isAssetOwner})=>{
                 onClick={() =>
                  history.push("/app/services/add")
                 }
+                disabled={!providerDetails?.user?.is_active}
               style={{ background: "#150941", color: "#fff" ,fontSize:"15px",minWidth:"100px",width:"fit-content",margin:"auto"}}
              >
                 إضافة خدمة
