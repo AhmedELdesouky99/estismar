@@ -11,6 +11,7 @@ import swal from "sweetalert";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { FormattedHTMLMessage } from "react-intl";
 import FieldsDropDown from "./FieldsDropDown";
+import { useSelector } from "react-redux";
 
 const client = axios.create({
   baseURL: "https://estithmar.arabia-it.net/api/admin",
@@ -664,16 +665,17 @@ const toggle=()=>setModal(!modal)
                 <FormattedMessage id={"المجالات"} />
               </Label>
               <FieldsDropDown
+              inadd={true}
               multi={true}
                 onChange={(sel) => {
                   console.log(sel)
                   setData({
                     ...data,
-                    fields_id: [sel.value],
+                    fields_id: sel.map((one)=>one.value),
                   });
                   setFields([...fields, sel]);
                 }}
-                selectedItem={data?.fields_id[0]}
+                selectedItem={data?.fields_id}
               />
             
             </FormGroup>

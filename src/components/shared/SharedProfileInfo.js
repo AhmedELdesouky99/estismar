@@ -4,8 +4,14 @@ import moment from 'moment';
 import StatusDropDown from "Components/shared/StatusDropDown"
 import { useHistory } from "react-router-dom";
 import NoImage from "../../assets/img/no-image.png";
-
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import axios from "axios"
+const client = axios.create({
+  baseURL: "https://estithmar.arabia-it.net/api/admin" 
+ 
+});
 const SharedProfileInfo =({providerDetails,isAssetOwner})=>{
+  const{id}=useParams()
     const profile = providerDetails?.files?.find(
         (file) => file.title == "profile"
       )?.path;
@@ -32,7 +38,7 @@ const SharedProfileInfo =({providerDetails,isAssetOwner})=>{
                     
                   }
                 </p>
-                <StatusDropDown  activationStatus={providerDetails?.user?.is_active}/>
+                <StatusDropDown  activationStatus={providerDetails?.user?.is_active} client={client} url={`service-provider/${id}`}/>
               </div>
              </div>
               

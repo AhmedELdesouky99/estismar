@@ -55,20 +55,7 @@ export default function AddEditOwnersAssets() {
          match={location}
          enableBreadCrumb
          lastElement={ id ? providerDetails?.company_name_ar : "اضافة مزود خدمة" }
-         // extraButtons={
-         //   <>
-         //     {userCan("branches.create") && (
-         //       <Button
-         //         variant="contained"
-         //         color="primary"
-         //         className="mx-sm-15 btn btn-success"
-         //         onClick={() => history.push("ServiceProviders/add")}
-         //       >
-         //         <IntlMessages id="create.new.something" values={{ something: messages?.banner }} />
-         //       </Button>
-         //     )}
-         //   </>
-        // }
+         
       />
       <div className="row">
         <div className="col-lg-3 col-md-3">

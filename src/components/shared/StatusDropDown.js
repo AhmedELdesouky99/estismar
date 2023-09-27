@@ -8,6 +8,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
+import { profileStatus } from './constants';
 
 function StatusDropDown(props) {
   // status={status} activationStatus
@@ -18,11 +19,7 @@ function StatusDropDown(props) {
 const {id:orderId} =useParams()
 useEffect(()=>{
   if(props.activationStatus !=undefined){
-    const activeStatus =  [
-      {name:"مفعل",id:1},
-      {name:"قيد الانتظار",id:0},
-      {name:"مرفوض",id:-1},
-  ].find(one=>one.id == props.activationStatus)
+    const activeStatus =  profileStatus.find(one=>one.id == props.activationStatus)
     setActiveStatus(activeStatus)
   }
 },[props.activationStatus])
@@ -59,17 +56,12 @@ const changeStatus=(status)=>{
 }
   return (
     <Dropdown isOpen={dropdownOpen} toggle={toggle} {...props}>
-      <DropdownToggle disabled={(user.user.category != "admin" && !props.inbordertable) || props.notAllowed} caret size="md" style={{background:activeStatus?.title == 
-"قيد الانتظار" ?  "#EEB656":  "",border:"none",width:"fit-content"}}>
+      <DropdownToggle disabled={(user.user.category != "admin" && !props.inbordertable) || props.notAllowed} caret size="md" style={{background:activeStatus?.color,border:"none",width:"fit-content"}}>
         {activeStatus?.name}
       </DropdownToggle>
       <DropdownMenu>
         {
-           [
-            {name:"مفعل",id:1},
-            {name:"قيد الانتظار",id:0},
-            {name:"مرفوض",id:-1},
-        ].map((onestatus)=>(
+         profileStatus.map((onestatus)=>(
             <DropdownItem onClick={()=>changeStatus(onestatus)}>{onestatus.name}</DropdownItem>
            ))
         }     

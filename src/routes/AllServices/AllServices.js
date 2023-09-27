@@ -50,7 +50,7 @@ export default function Services({inTabs}) {
       params:{
         limit,
         page,
-        field_id:query.field_id ? query.field_id : undefined,
+        field_id:query.field_id ==-1 ? undefined:  query?.field_id ,
         service_provider_id: id && location.pathname.includes("service-provider") ? id : user?.category =="service-provider" || user?.category =="provider-employee" ? user?.id :  query.service_provider_id ? query.service_provider_id : undefined,
         status: query.status ? query.status : undefined,
         support_ratio:query.support_ratio ? query.support_ratio : undefined

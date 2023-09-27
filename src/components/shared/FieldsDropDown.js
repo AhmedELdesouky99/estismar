@@ -64,6 +64,8 @@ const FieldsDropDown = ({
   fetchingData,
   onChange,
   selectedItem,
+  multi,
+  inadd,
   ...props
 }) => {
     const [options,setOptions]=useState([])
@@ -85,7 +87,13 @@ const FieldsDropDown = ({
               value:field.id
             }
           ))
-          setOptions(Alloptions)
+          if(inadd){
+            setOptions([...Alloptions])
+
+          }else{
+            setOptions([{label:"الكل",value:-1},...Alloptions])
+
+          }
           setPagintation({
               last_page:res.data.data?.last_page,
               currentPage:res.data.data?.current_page
@@ -98,11 +106,12 @@ const FieldsDropDown = ({
     <div>
       <Select
         className="dropdown-select"
+        isMulti={multi}
         options={options}
         pagination={pagination}
         components={{ Menu, Option }}
         placeholder={"اختر مجال الخدمات"}
-      value={options.find((optn) => +optn.value == +selectedItem)}
+      value={ multi ? options.filter((optn) => selectedItem?.includes(+optn.value)) : options.find((optn) => +optn.value == +selectedItem)}
 
         fetchingData={fetchingData}
         nextPage={() => incPage()}

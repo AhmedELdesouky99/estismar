@@ -30,6 +30,7 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
 
   const { id } = useParams();
   const[permission,setPermission]=useState()
+  const[permissionId,setPermissionId]=useState([])
 
   const [limit, setLimit] = useState(10);
   const [ownerDetails, setOwnerDetails] = useState();
@@ -292,8 +293,9 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
             <PermissionsDropDown
               onChange={(role) => {
                 console.log(role);
-                setPermission(role.label);
+                setPermission(role);
               }}
+              permission={permissionId}
             />
           </FormGroup>
         </div>
@@ -307,7 +309,12 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
               maxHeight: "41px",
             }}
             onClick={() => {
-              setRoles([...roles, permission]);
+              if(permissionId.includes(permission.value)){
+                return
+              }
+              setRoles([...roles, permission.label]);
+              setPermissionId([...permissionId,permission.value])
+r
             }}
           >
             <AddIcon />
@@ -348,6 +355,8 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
                                   const serviceRequirementList = [
                                     ...roles,
                                   ];
+                                  const filterpermissioneids=permissionId.filter((one,idx)=> index !=idx)
+                                  setPermissionId(filterpermissioneids)
                                   const filterdService =
                                     serviceRequirementList.filter(
                                       (one, idx) => idx != index

@@ -64,6 +64,7 @@ const PermissionsDropDown = ({
   fetchingData,
   onChange,
   selectedItem,
+  permission,
   ...props
 }) => {
     const [options,setOptions]=useState([])
@@ -94,11 +95,12 @@ const PermissionsDropDown = ({
       
         
       },[page])
+      console.log(permission,"permissionId")
   return (
     <div>
       <Select
         className="dropdown-select"
-        options={options}
+        options={options.filter((one)=>!permission?.includes(one.value))}
         pagination={pagination}
         components={{ Menu, Option }}
         placeholder={"اختر  صلاحية"}
