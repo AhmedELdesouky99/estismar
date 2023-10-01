@@ -53,13 +53,14 @@ console.log(user,"user redux ")
       "executive_steps" : [], 
       "executive_result" : [],
   
-      "cost" :"1000", 
-      "tax_ratio" : "150", 
-      "support_ratio" : "50", 
+      "cost" :1000, 
+      "tax_ratio" : 150, 
+      "support_ratio" : null, 
       "cost_after_study" : false,
   
       "executive_time_type" : "", 
       "executive_time" : "", 
+      wakf_custome_share_ratio:0,
       "stages_of_delivery" : [ 
          
       ], 
@@ -103,7 +104,8 @@ console.log(user,"user redux ")
               executive_time_type:res.data.data.executive_time_type,
               executive_steps:executive_steps,
               executive_result:executive_result,
-              support_ratio:res.data.data.support_ratio
+              support_ratio:res.data.data.support_ratio,
+              wakf_custome_share_ratio:data.data.wakf_custome_share_ratio
 
             })
             setRSelected(res.data.data.executive_time_type =="month" ? 2 : res.data.data.executive_time_type == "day" ? 1 : 3)
@@ -507,7 +509,6 @@ console.log(user,"user redux ")
                           style={{
                             borderColor: "#A5A5A5",
                             width: "90%",
-                            background: "#E3E3E3",
                           }}
                           className="interval "
                           type="text"
@@ -521,10 +522,50 @@ console.log(user,"user redux ")
                           }}
                         />
                       </div>
-                      <div>
+                      <div style={{alignSelf:"center"}}>
                         <span style={{ color: "#9C9C9C" }}>ر.س</span>
                       </div>
                     </div>
+               </div>
+               { 
+                <div>
+                <div className="col-md-12">
+                       <Label for="exampleSelect" style={{color:"#A5A5A5"}}> + رسوم المنصة</Label>
+                     </div>
+                     <div className="col-md-12 d-flex mb-3">
+                       <div>
+                         <Input
+                           style={{
+                             borderColor: "#A5A5A5",
+                             width: "90%",
+                           }}
+                          disabled={user.category !="admin" }
+                           className="interval "
+                           type="text"
+                           value={Service?.wakf_custome_share_ratio}
+                           onChange={(e) => {
+                             setService({
+                               ...Service,
+                               wakf_custome_share_ratio: +e.target.value,
+                             });
+                           }}
+                         />
+                       </div>
+                       <div style={{alignSelf:"center"}}>
+                         <span style={{ color: "#9C9C9C" }}>%</span>
+                       </div>
+                     </div>
+                </div>
+               }
+               <div className="col-12">
+                <p style={{fontSize:"25px"}}>
+                   {
+                    `
+                    اجمالي التكلفة 
+                    ${(Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost}
+                    `
+                   }
+                </p>
                </div>
                <div style={{padding:"10px 0px ",borderBottom:"1px solid #ccc"}}>
                <div className="col-md-12">
@@ -551,17 +592,68 @@ console.log(user,"user redux ")
                           }}
                         />
                       </div>
-                      <div>
+                      <div style={{alignSelf:"center"}}> 
                         <span style={{ color: "#9C9C9C" }}>ر.س</span>
                       </div>
                     </div>
                </div>
-               <div className="text-center" style={{color:"#A5A5A5",padding:"10px",borderBottom:"1px dashed #D3B166"}}>
+               <div className="text-center" style={{color:"#150941",padding:"10px",borderBottom:"1px dashed #D3B166"}}>
                <p style={{fontSize:"25px"}}>
                التكلفة شاملة الضريبة
                </p>
-               <span style={{fontSize:"25px"}}>
-                {Service?.cost + Service?.tax_ratio}
+               <span style={{fontSize:"25px",color:"#7EA831"}}>
+                {((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) + Service?.tax_ratio}
+                
+               </span>
+               <span style={{fontSize:"12px"}}>
+                ر.س
+               </span>
+               </div>
+              {
+                
+
+               <div style={{padding:"10px 0px ",borderBottom:"1px dashed #ccc"}}>
+                
+                <div className="col-md-12">
+                <Label for="exampleSelect" style={{color:"#150941",fontSize:"14px"}}> 
+               
+                مقدار الدعم
+                </Label>
+              </div>
+                    <div className="col-md-12 d-flex">
+                      <div >
+                        <Input
+                          style={{
+                            borderColor: "#A5A5A5",
+                            width: "90%",
+                          
+                          }}
+                          disabled={user.category !="admin" }
+                          className="interval "
+                          type="text"
+                          value={Service?.support_ratio}
+                          onChange={(e) => {
+                            setService({
+                              ...Service,
+                              support_ratio: +e.target.value,
+                            });
+                          }}
+                        />
+                      </div>
+                      <div style={{alignSelf:"center"}}>
+                        <span style={{ color: "#9C9C9C" }}>%</span>
+                      </div>
+                    </div>
+               </div>
+              }
+
+               <div className="text-center" style={{color:"#150941",padding:"10px",borderBottom:"1px dashed #D3B166"}}>
+               <p style={{fontSize:"25px"}}>
+               تكلفة نهائية للخدمة
+               </p>
+               <span style={{fontSize:"25px",color:"#7EA831"}}>
+                {(((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) + Service?.tax_ratio)- ((((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) + Service?.tax_ratio) * Service?.support_ratio/100) }
+
                </span>
                <span style={{fontSize:"12px"}}>
                 ر.س
