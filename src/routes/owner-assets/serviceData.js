@@ -17,7 +17,7 @@ export const ServiceData = [
   {
     headerId: "الخدمة",
     dataType: FUNC,
-    func:(record)=> <Link  style={{color:"#A5A5A5"}} to={`/app/orders/${record.id}`}>{ record.service.title}</Link> 
+    func:(record)=> <Link  style={{color:"#A5A5A5"}} to={`/app/orders/${record.id}`}>{ record?.service?.title}</Link> 
   },
   {
     headerId: "مزود الخدمة",

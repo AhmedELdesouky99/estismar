@@ -173,7 +173,7 @@ const history=useHistory()
                       <div className=''> 
                         {errors[key]?.map(err=>(
                         <div className='alert alert-danger'>
-                          {key} {err}
+                           {err}
                         </div>
                         ))
                         }

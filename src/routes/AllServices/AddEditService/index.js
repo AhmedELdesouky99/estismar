@@ -583,7 +583,7 @@ console.log(user,"user redux ")
                           }}
                           className="interval "
                           type="text"
-                          value={Service?.tax_ratio}
+                          value={((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) *.15}
                           onChange={(e) => {
                             setService({
                               ...Service,
@@ -602,7 +602,7 @@ console.log(user,"user redux ")
                التكلفة شاملة الضريبة
                </p>
                <span style={{fontSize:"25px",color:"#7EA831"}}>
-                {((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) + Service?.tax_ratio}
+                {((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) + ((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) *.15}
                 
                </span>
                <span style={{fontSize:"12px"}}>
@@ -652,7 +652,8 @@ console.log(user,"user redux ")
                تكلفة نهائية للخدمة
                </p>
                <span style={{fontSize:"25px",color:"#7EA831"}}>
-                {(((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) + Service?.tax_ratio)- ((((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) + Service?.tax_ratio) * Service?.support_ratio/100) }
+                {/* {(((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) + Service?.tax_ratio)- ((((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) + Service?.tax_ratio) * Service?.support_ratio/100) } */}
+                {(((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) + ((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) *.15) - ((((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) + ((Service.cost * Service?.wakf_custome_share_ratio/100)+ Service.cost) *.15) *Service?.support_ratio/100)}
 
                </span>
                <span style={{fontSize:"12px"}}>
