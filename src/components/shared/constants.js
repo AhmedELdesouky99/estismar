@@ -15,3 +15,9 @@ export const inborderStatusForProvider=[
     {name:"مكتمل",id:2, color:"#31CE77"},
 
 ]
+export const inorderWakfStatus=[
+    {name:"مكتمل",id:2, color:"#31CE77"},
+    {name:"غير مكتمل",id:3, color:"#FF0404"},
+
+
+]

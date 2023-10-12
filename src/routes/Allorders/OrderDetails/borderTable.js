@@ -155,7 +155,7 @@ function Row(props) {
                   حالة المرحلة
                 </p>
                 <div>
-                <StatusDropDown  notAllowed={true} activationStatus={row?.owner_status} />
+                <StatusDropDown inWakfStatus={true} notAllowed={true} activationStatus={row?.owner_status} />
                 </div>
                 </div>
                

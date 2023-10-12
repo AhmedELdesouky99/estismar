@@ -8,7 +8,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
-import { profileStatus,orderStatus,inborderStatusForProvider } from './constants';
+import { profileStatus,orderStatus,inborderStatusForProvider,inorderWakfStatus } from './constants';
 
 function StatusDropDown(props) {
   // status={status} activationStatus
@@ -19,7 +19,7 @@ function StatusDropDown(props) {
 const {id:orderId} =useParams()
 useEffect(()=>{
   if(props.activationStatus !=undefined){
-    const activeStatus =props.inbordertable && props.forServiceProvider ? inborderStatusForProvider.find(one=>one.id == props.activationStatus) : props.inorder ?  orderStatus.find(one=>one.id == props.activationStatus): profileStatus.find(one=>one.id == props.activationStatus)
+    const activeStatus =props.inWakfStatus ?  inorderWakfStatus.find(one=>one.id == props.activationStatus): props.inbordertable && props.forServiceProvider ? inborderStatusForProvider.find(one=>one.id == props.activationStatus) : props.inorder ?  orderStatus.find(one=>one.id == props.activationStatus): profileStatus.find(one=>one.id == props.activationStatus)
     setActiveStatus(activeStatus)
   }
 },[props.activationStatus])
@@ -60,7 +60,13 @@ const changeStatus=(status)=>{
         {activeStatus?.name}
       </DropdownToggle>
       <DropdownMenu>
-        {props.inbordertable && props.forServiceProvider  ? 
+        {
+        props.inWakfStatus ? 
+        inorderWakfStatus.map((onestatus)=>(
+          <DropdownItem onClick={()=>changeStatus(onestatus)}>{onestatus.name}</DropdownItem>
+         ))
+        : 
+        props.inbordertable && props.forServiceProvider  ? 
         
         inborderStatusForProvider.map((onestatus)=>(
           <DropdownItem onClick={()=>changeStatus(onestatus)}>{onestatus.name}</DropdownItem>
