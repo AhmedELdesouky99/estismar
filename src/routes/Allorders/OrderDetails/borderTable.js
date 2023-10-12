@@ -96,7 +96,7 @@ function Row(props) {
       })
       .then((res) => {
         console.log(res,"res")
-        client.get(`/provider/request/${serviceRequestId}`).then(res=>{
+        client.get(`/provider/request/${serviceRequestId}?token=${localStorage.getItem("token")}`).then(res=>{
           setOrder(res.data.data)
            
         })
@@ -144,7 +144,7 @@ function Row(props) {
                   حالة المرحلة
                 </p>
                 <div>
-                <StatusDropDown borderId={row.id} inbordertable={true} notAllowed={user.category!="service-provider" ? true :false} activationStatus={row?.provider_status} />
+                <StatusDropDown borderId={row.id} forServiceProvider={true} inbordertable={true} notAllowed={user.category!="service-provider" ? true :false} activationStatus={row?.provider_status} />
                 </div>
                 </div>
                 <div>
@@ -155,7 +155,7 @@ function Row(props) {
                   حالة المرحلة
                 </p>
                 <div>
-                <StatusDropDown notAllowed={true} activationStatus={row?.owner_status} />
+                <StatusDropDown  notAllowed={true} activationStatus={row?.owner_status} />
                 </div>
                 </div>
                

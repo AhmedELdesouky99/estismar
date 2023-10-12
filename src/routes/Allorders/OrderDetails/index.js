@@ -115,7 +115,7 @@ const AddEditService = () => {
                   </span>
                 </div>
                 <div>
-    <StatusDropDown inorder={true}  activationStatus={order?.status} id={order?.id} client={client} url={`service-request/${order?.id}`}/>
+    <StatusDropDown inorder={true}  activationStatus={order?.status} id={order?.id} client={client} url={`admin/service-request/${order?.id}`}/>
                 </div>
               </div>
               <div className="row mt-2">
@@ -177,7 +177,7 @@ const AddEditService = () => {
                     </td>
                     <td>
     <StatusDropDown notAllowed={true} activationStatus={order?.service?.is_active}  client={client}  url={`service-request/${order?.id}`} />
-
+s
                     </td>
 
                   </tbody>
@@ -547,7 +547,8 @@ const AddEditService = () => {
              
             <div>
                 <h3 className="title" style={{position:"relative"}}>
-                سجل تحديثات الطلب                </h3>
+                سجل تحديثات الطلب        
+                        </h3>
               </div>
               <div className="mt-3 row">
               <table className="table table-hover w-100">

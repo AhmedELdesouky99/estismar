@@ -138,8 +138,7 @@ const ManageOrders = ({ match }) => (
    <div className="Crm-wrapper">
       <Switch>
         {console.log(match,"match")}
-         {/* <Redirect exact from={`${match.url}/`} to={`${match.url}/`} /> */}
-         {/* <Route exact path={`${match.url}/`} component={AllOrders} /> */}
+        
          <Route exact path={`${match.url}/:id`} component={OrderDetails} />
 
 

@@ -89,7 +89,7 @@ function ServiceList({ allowners, loading, setPage, limit, setLimit ,status}) {
     </div>
   );
   const dropdownActions =(record)=>(
-    <StatusDropDown status={status} activationStatus={record.is_active} id={record.id} client={client} url={`service/${record.id}`}/>
+    <StatusDropDown forService={true} status={status} activationStatus={record.is_active} id={record.id} client={client} url={`service/${record.id}`}/>
   )
   return (
     <Typography component="div" style={{ padding: "10px", marginTop: "20px" }}>

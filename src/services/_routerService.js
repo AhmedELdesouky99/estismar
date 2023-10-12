@@ -161,10 +161,10 @@ export default [
       path:"invoices",
       component:invoices
    },
-   {
-      path:"orders",
-      component:ManageOrders
-   },
+   // {
+   //    path:"orders",
+   //    component:ManageOrders
+   // },
    
    {
       path:"posts",

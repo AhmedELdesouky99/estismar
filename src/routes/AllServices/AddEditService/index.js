@@ -105,7 +105,7 @@ console.log(user,"user redux ")
               executive_steps:executive_steps,
               executive_result:executive_result,
               support_ratio:res.data.data.support_ratio,
-              wakf_custome_share_ratio:data.data.wakf_custome_share_ratio
+              wakf_custome_share_ratio:res.data.data.wakf_custome_share_ratio
 
             })
             setRSelected(res.data.data.executive_time_type =="month" ? 2 : res.data.data.executive_time_type == "day" ? 1 : 3)
