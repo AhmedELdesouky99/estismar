@@ -20,7 +20,7 @@ const AppConfig = {
       icon: 'ar',
    },
    enableUserTour: process.env.NODE_ENV === 'production' ? true : false,  // Enable / Disable User Tour
-   copyRightText: "حقوق النشر 2023 تعود لـ شركة استثمار المستقبل المحدودة 〈وقف الأوقاف〉",      // Copy Right Text
+   copyRightText: "منصة الوقف النامي هي أحد منتجات شركة فَرادة .. جميع الحقوق محفوظة لموقع الوقف النامي © 2023",      // Copy Right Text
    // light theme colors
    themeColors: {
       'primary': '#5D92F4',

@@ -241,9 +241,9 @@ const handelClick=()=>{
                         <p>
                         تذكرني
                         </p>
-                        <Link to="/" style={{color:"#150941"}}>
+                        {/* <Link to="/" style={{color:"#150941"}}>
                         نسيت اسم المستخدم / كلمة المرور
-                        </Link>
+                        </Link> */}
                      </div>
                   </div>
                   {

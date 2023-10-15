@@ -57,7 +57,7 @@ export default function AddEditOwnersAssets() {
          lastElement={ id ? providerDetails?.company_name_ar : "اضافة مزود خدمة" }
          
       />
-      <div className="row">
+      {/* <div className="row">
         <div className="col-lg-3 col-md-3">
           <CustomCard color="#00A8FF1A" name={"الخدمات المعروضة"}/>
         </div>
@@ -73,7 +73,7 @@ export default function AddEditOwnersAssets() {
         
        
       
-      </div>
+      </div> */}
      <SharedProfileInfo providerDetails={providerDetails} />
       <TabViews serviceProvider={true} providerDetails={providerDetails}/>
     </div>

@@ -145,7 +145,9 @@ class Header extends Component {
 								</Tooltip>
 							</li>
 						} */}
-						<LanguageProvider />
+						
+						{/* language provider */}
+						{/* <LanguageProvider /> */}
 						{/* {!horizontalMenu && <QuickLinks />} */}
 						{/* <Notifications /> */}
 						<SignOut />

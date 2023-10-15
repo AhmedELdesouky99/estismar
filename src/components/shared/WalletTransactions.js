@@ -12,7 +12,7 @@ const WalletTransactions =({ServiceProvider,advisorDetails})=>{
 	const {user}=useSelector(state=>state.authUser.user)
   const [isopen,setIsOpen]=useState(false)
   const [Transactions,setTransactions]=useState()
-   console.log(advisorDetails,"advisorDetails",ServiceProvider)
+   console.log(user,"user kaik")
    useEffect(()=>{
     client.post(`auth/wallet-chrages`,{
      
@@ -28,27 +28,29 @@ return(
               <div className="col-sm-12 col-md-6 mt-1"> المحفظة</div>
               <div className="col-sm-12 col-md-6 mt-1">
                 <div className="row justify-content-end mt-3">
-               
-                  <div className="col-md-6">
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{
-                        background: "#150941",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                      }}
-                      className="mx-smt-15 btn  mr-1 ml-1 border-0"
-                      // onClick={() => }
-                    >
-                      <span className="mr-1 ml-1">
-                        {
-                        ">"
+               { user.category !="admin" ?  null:
+                   <div className="col-md-6">
+                   <Button
+                     variant="contained"
+                     color="primary"
+                     style={{
+                       background: "#150941",
+                       fontWeight: "bold",
+                       fontSize: "20px",
+                     }}
+                     className="mx-smt-15 btn  mr-1 ml-1 border-0"
+                     // onClick={() => }
+                   >
+                     <span className="mr-1 ml-1">
+                       {
+                       ">"
 
-                        }
-                      </span>
-                    </Button>
-                  </div>
+                       }
+                     </span>
+                   </Button>
+                 </div>
+               }
+                 
                 </div>
               </div>
                    </div>

@@ -50,7 +50,8 @@ const history=useHistory()
    //       this.props.signupUserInFirebase({ email, password }, this.props.history);
    //    }
    // }
-   const logo=require('Assets/img/logo-waqf.png')
+   const logo=require('Assets/img/img-logo.png')
+
   const handelClick=()=>{
    dispatch(HandelSignUp(user,history))
   } 
