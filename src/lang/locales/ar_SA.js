@@ -385,6 +385,7 @@ module.exports = {
    "sidebar.service-provider":"مزودي الخدمات",
    "components.completeStep": "خطوة كاملة",
    "sidebar.questions":"الاسئلة الشائعة",
+   "staticpages":"الصفحات الثابتة",
    "components.withHtml": "مع هتمل",
    "common.actions":" ",
    "components.prompt": "مستعجل",

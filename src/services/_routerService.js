@@ -37,6 +37,7 @@ import {
    AsyncMailComponent,
    AsyncTodoComponent,
 } from 'Components/AsyncComponent/AsyncComponent';
+import StaticPages from '../routes/staticpages';
 
 export default [
    {
@@ -160,6 +161,10 @@ export default [
    {
       path:"invoices",
       component:invoices
+   },
+   {
+      path:"staticpages",
+      component:StaticPages
    },
    // {
    //    path:"orders",
