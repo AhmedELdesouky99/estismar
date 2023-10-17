@@ -21,6 +21,7 @@ import Swal from "sweetalert";
 import Select, { components } from "react-select";
 import { Editor } from "@tinymce/tinymce-react";
 import ImageUpload from "../../components/shared/ImageUpload";
+import { FormControlLabel, Switch } from "@material-ui/core";
 const client = axios.create({
     baseURL: "https://estithmar.arabia-it.net/api/admin",
   });
@@ -36,9 +37,7 @@ const [data,setData]=useState({
     title:"",
     content:"",
     category:"posts",
-    files_ids:[],
     order:"",
-    tags:[],
     is_main_page:0,
     is_active:0
 
@@ -48,24 +47,7 @@ const [data,setData]=useState({
       console.log(editorRef.current.getContent(), "kako");
     }
   };
-  const uploadEnimage = (file) => {
-    setLoader(true);
-    const formdata = new FormData();
-    formdata.append("title", "Main Image");
-    formdata.append("store_file", true);
-    formdata.append("file", file);
-    client
-      .post("/posts", formdata, {
-        headers: {
-          "Content-Type": "multipart/form-data; ",
-        },
-      })
-      .then((res) => {
-        setLoader(false);
-        setFiles([res.data.data.id]);
-        setEnImage("https://estithmar.arabia-it.net" + res.data.data.path);
-      });
-  };
+ 
 
   const AddPost=()=>{
     client.post("/posts",{
@@ -77,46 +59,34 @@ const [data,setData]=useState({
         
           swal({
             title: "",
-            text:" تم اضافه مقالة بنجاح",
+            text:" تم اضافه صفحة ثابتة  بنجاح",
             icon: "success",
           });
         }
       }).then(()=>{
         setTimeout(()=>{
-          history.push("/app/posts")
+          history.push("/app/staticpages")
         },2000)
       })
   }
-  useEffect(()=>{
-    client.get("/tags",{
-      
-      }).then((res)=>{
-        console.log(res.data.data.data,"res")
-        setCategories(res.data.data.data.map((category)=>(
-            {
-                label:category.title,
-                value:category.id
-            }
-        )))
-      })
-  },[])
+
   useEffect(()=>{
         if(id){
-            client.get(`/posts/${id}`,{
+            client.get(`/static-page/${id}`,{
       
             }).then((res)=>{
               console.log(res.data.data,"karem")
               setData({
                 ...data,
                 content:res.data.data.content,
-                is_active:res.data.data.is_active,
+                is_main_page:res.data.data.is_main_page,
+                is_invoice_page:res.data.data.is_invoice_page,
                 title:res.data.data.title,
-                tags:res.data.data.tags.map((tag)=>tag.id)  ,
+                page_path:res.data.data.page_path,
                 order: res.data.data.order,
 
             })
-            setFiles([res.data.data.files[0].id])
-        setEnImage("https://estithmar.arabia-it.net" + res.data.data.files[0].path);
+     
 
              
             })   
@@ -124,22 +94,22 @@ const [data,setData]=useState({
   },[id])
   const EditPost=()=>{
     console.log(editorRef.current)
-    client.put(`/posts/${id}`,{
+    client.put(`/static-page/${id}`,{
         ...data,
-        files_ids:files,
+       
         content:editorRef?.current?.getContent() || editorRef.current
       }).then(res=>{
         if(res.data.success){
         
           swal({
             title: "",
-            text:" تم اضافه مقالة بنجاح",
+            text:" تم اضافه الصفحة  بنجاح",
             icon: "success",
           });
         }
       }).then(()=>{
         setTimeout(()=>{
-          history.push("/app/posts")
+          history.push("/app/staticpages")
         },2000)
       })
   }
@@ -161,7 +131,7 @@ const [data,setData]=useState({
         <div className="col-md-6">
           <FormGroup>
             <Label for="exampleEmail">
-              <FormattedMessage id={" عنوان المقالة"} />
+              <FormattedMessage id={" عنوان الصفحة"} />
             </Label>
             <Input
               style={{ borderColor: "#7EA831" }}
@@ -180,6 +150,42 @@ const [data,setData]=useState({
           
       
 
+        </div>
+        <div className="col-md-3">
+        <FormControlLabel
+        control={
+          <Switch
+          checked={data.is_main_page}
+
+          onChange={(e)=>{
+            setData({
+              ...data,
+              is_main_page:e.target.checked
+          })
+          }}
+            name="checkedB"
+            color="primary"
+          />
+        }
+        label="القائمة الرئيسية"
+      />
+        </div>
+        <div className="col-md-3">
+        <FormControlLabel
+        control={
+          <Switch 
+          onChange={(e)=>{
+            setData({
+              ...data,
+              is_main_page:e.target.checked
+          })
+          }}
+            name="checkedB"
+            color="primary"
+          />
+        }
+        label=" قائمة الفوتر"
+      />
         </div>
         <div className="col-md-10 mt-5">
         <>
@@ -271,38 +277,24 @@ const [data,setData]=useState({
               <Label for="exampleEmail">
                 <FormattedMessage id={"رابط الصفحة"} />
               </Label>
-              <Select
-                placeholder=""
-                value={
-                    [
-                        {
-                          label: "نعم",
-                          value: "1",
-                        },
-                        {
-                          label: "لا",
-                          value: "0",
-                        },
-                      ].find((main)=>main.value == data.is_main_page)
-                    }
-                options={[
-                  {
-                    label: "نعم",
-                    value: "1",
-                  },
-                  {
-                    label: "لا",
-                    value: "0",
-                  },
-                ]}
-                onChange={(sel) => {
-                  console.log(sel, "sel");
-                  setData({
+              <Input
+              style={{ borderColor: "#7EA831",textAlign:"left" }}
+              placeholder={"رابط الصفحة"}
+              type="text"
+              value={data.page_path}
+              onChange={(e)=>{
+                setData({
                     ...data,
-                    is_main_page:sel.value
-                  })
-                }}
-              />
+                    page_path:e.target.value
+                })
+              }}
+            />
+           
+            </div>
+            <div className="col-md-1" style={{alignSelf:"end"}}>
+            <span>
+            https://www.waqfnami.com
+            </span>
             </div>
           </div>
           <div className="row mt-4 mb-3 justify-content-center">

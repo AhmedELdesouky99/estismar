@@ -15,7 +15,7 @@ import { Button } from "reactstrap";
 import { FormattedMessage } from "react-intl";
 import StaticPagesList from "./StaticPagesList";
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/" 
+  baseURL: "https://estithmar.arabia-it.net/api/admin" 
  
 });
 export default function StaticPagesComponent() {
@@ -31,9 +31,7 @@ export default function StaticPagesComponent() {
   useEffect(()=>{
    
   
-      client.post(`auth/invoices`,{
-      token:localStorage.getItem("token")
-      }).then(res=>{
+      client.get(`/static-page?limit=${limit}&page=${page}`).then(res=>{
         console.log(res.data.data)
         setOwners(res.data.data)
       })

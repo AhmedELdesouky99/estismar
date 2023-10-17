@@ -36,7 +36,15 @@ function StaticPagesList({ allowners, loading, setPage, limit, setLimit ,status}
     });
   }, [allowners]);
 
+  const handelDeletitem=(id)=>{
+    const filteredService= owners.collection.filter(service=>service.id != id)
+    setOwners({
+      collection:filteredService,
+      metadata:allowners?.allowners?.metadata,
+    })
 
+    client.delete(`/static-page/${id}`).then((res)=>console.log(res,"res")).catch((err)=>console.log(err,"err"))
+  }
 
   const actions = ({ id }) => (
     <div className="d-flex align-items-center" style={{ gap: "5px" }}>
@@ -44,13 +52,23 @@ function StaticPagesList({ allowners, loading, setPage, limit, setLimit ,status}
 
       
         <Tooltip title={ "common.edit"} placement="top">
-          <Link to={`/app/invoices/${id}`}>
+          <Link to={`/app/staticpages/${id}`}>
           <button className="border-0" style={{background:"#23D381",color:"#fff"}}>
             <i className=" ti-eye m-1"></i>
 
             </button>
           </Link>
         </Tooltip>
+        <Tooltip title={"common.delete"} placement="top">
+      <button className="border-0" style={{background:"#CF4949",color:"#fff"}}>
+
+        <i
+          style={{ cursor: "pointer" }}
+          className=" ti-trash m-1"
+          onClick={() => handelDeletitem(id)}
+        ></i>
+        </button>
+      </Tooltip>
     </div>
   );
   const dropdownActions =(record)=>(
