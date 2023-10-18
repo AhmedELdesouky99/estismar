@@ -42,6 +42,7 @@ const [data,setData]=useState({
     is_active:0
 
 })
+const [errors,setErrors]=useState()
   const log = () => {
     if (editorRef.current) {
       console.log(editorRef.current.getContent(), "kako");
@@ -50,9 +51,8 @@ const [data,setData]=useState({
  
 
   const AddPost=()=>{
-    client.post("/posts",{
+    client.post("/static-page",{
         ...data,
-        files_ids:files,
         content:editorRef.current.getContent()
       }).then(res=>{
         if(res.data.success){
@@ -62,11 +62,15 @@ const [data,setData]=useState({
             text:" تم اضافه صفحة ثابتة  بنجاح",
             icon: "success",
           });
+          setTimeout(()=>{
+            history.push("/app/staticpages")
+          },2000)
+        }else{
+          console.log(res.data.errors,"errors")
+          setErrors(res.data.errors)
         }
-      }).then(()=>{
-        setTimeout(()=>{
-          history.push("/app/staticpages")
-        },2000)
+      }).catch((err)=>{
+        console.log(err)
       })
   }
 
@@ -93,6 +97,7 @@ const [data,setData]=useState({
         }
   },[id])
   const EditPost=()=>{
+    alert("s")
     console.log(editorRef.current)
     client.put(`/static-page/${id}`,{
         ...data,
@@ -113,6 +118,7 @@ const [data,setData]=useState({
         },2000)
       })
   }
+  console.log(id,"kakoii")
   return (
     <div className="clients-wrapper">
       <Helmet>
@@ -297,6 +303,22 @@ const [data,setData]=useState({
             </span>
             </div>
           </div>
+          <div className='col-md-5 col-sm-12 mt-2'> 
+                  { 
+                  errors ? 
+                    Object.keys(errors)?.map((key,value)=>(
+                      <div className=''> 
+                        {errors[key]?.map(err=>(
+                        <div className='alert alert-danger'>
+                           {err}
+                        </div>
+                        ))
+                        }
+                      </div>
+                    ))
+                    : null
+                  }
+               </div>
           <div className="row mt-4 mb-3 justify-content-center">
                 <div className="col-md-3">
                 <button  onClick={()=> id ? EditPost(): AddPost() } className="btn btn-block"  style={{background:"#7EA831",color:"#fff",fontSize:"20px"}}>

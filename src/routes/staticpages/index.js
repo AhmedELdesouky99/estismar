@@ -21,7 +21,10 @@ const StaticPages = ({ match }) => (
       <Switch>
          {/* <Redirect exact from={`${match.url}/`} to={`${match.url}/`} /> */}
          <Route exact path={`${match.url}/`} component={StaticPagesComponent} />
+         <Route exact path={`${match.url}/add`} component={AddEditStaticPage} />
+
          <Route exact path={`${match.url}/:id`} component={AddEditStaticPage} />
+
 
 
          
