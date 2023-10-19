@@ -36,11 +36,11 @@ const history=useHistory()
 const [data,setData]=useState({
     title:"",
     content:"",
+    page_path:"",
     category:"posts",
-    order:"",
     is_main_page:0,
-    is_active:0
-
+    is_invoice_page:0,
+    is_published:0,
 })
 const [errors,setErrors]=useState()
   const log = () => {
@@ -87,7 +87,7 @@ const [errors,setErrors]=useState()
                 is_invoice_page:res.data.data.is_invoice_page,
                 title:res.data.data.title,
                 page_path:res.data.data.page_path,
-                order: res.data.data.order,
+                is_published:res.data.data.is_published
 
             })
      
@@ -97,7 +97,6 @@ const [errors,setErrors]=useState()
         }
   },[id])
   const EditPost=()=>{
-    alert("s")
     console.log(editorRef.current)
     client.put(`/static-page/${id}`,{
         ...data,
@@ -118,7 +117,6 @@ const [errors,setErrors]=useState()
         },2000)
       })
   }
-  console.log(id,"kakoii")
   return (
     <div className="clients-wrapper">
       <Helmet>
@@ -268,13 +266,13 @@ const [errors,setErrors]=useState()
                           label: "غير منشور",
                           value: "0",
                         },
-                      ].find((status)=>status.value == data.is_active )
+                      ].find((status)=>status.value == data.is_published )
                    }
                 onChange={(sel) => {
                   console.log(sel, "sel");
                   setData({
                     ...data,
-                    is_active:sel.value
+                    is_published:sel.value
                   })
                 }}
               />
@@ -327,7 +325,7 @@ const [errors,setErrors]=useState()
               
                 </div>
                 <div className="col-md-3">
-                <button onClick={()=>history.push("/app/posts")} className="btn btn-block"  style={{background:"#150941",color:"#fff",fontSize:"20px"}}>
+                <button onClick={()=>history.push("/app/staticpages")} className="btn btn-block"  style={{background:"#150941",color:"#fff",fontSize:"20px"}}>
                 الغاء
                 </button>
                 </div>
