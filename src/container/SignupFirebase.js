@@ -9,7 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { Link, useHistory } from 'react-router-dom';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import QueueAnim from 'rc-queue-anim';
-import { Fab } from "@material-ui/core";
+import { Checkbox, Fab, FormControlLabel } from "@material-ui/core";
 import { FormGroup, Label, Input, ButtonGroup, Button } from "reactstrap";
 import Select from "react-select";
 
@@ -30,10 +30,12 @@ import {
 } from 'Actions';
 
 import { useState } from 'react';
+import PrivacyPolicy from './privacyPolicy';
 
  const SignupFirebase =()=>  {
 const [user,setUser]=useState()
 const dispatch =useDispatch()
+const [isopen,setIsOpen]=useState(false)
 const history=useHistory()
    // state = {
    //    name: '',
@@ -167,6 +169,31 @@ const history=useHistory()
                  }
                </FormGroup>
                </div>
+               <div>
+               <FormControlLabel control={<Checkbox name="checkedC" onChange={(e)=>{
+                console.log(e.target.checked,"e")
+                setUser({
+                  ...user,
+                  confirm_policy:e.target.checked
+                })
+               }}/>}/>
+               <span style={{padding:"10px",color:"#A5A5A5"}}>
+               اقر بأني إطلعت على 
+               {"  "}
+               <span onClick={()=>setIsOpen(true)} style={{color:"#150941",cursor:"pointer"}}>
+               شروط الاستخدام 
+
+               </span>
+               {"  "}
+               <span onClick={()=>setIsOpen(true)} style={{color:"#150941",cursor:"pointer"}}>
+               و سياسة الخصوصية
+
+               </span>
+               {"  "}
+                و أوافق عليها
+               </span>
+               
+               </div>
                <div className='col-md-5 col-sm-12 '> 
                   { 
                   errors ? 
@@ -194,7 +221,7 @@ const history=useHistory()
          <div className='col-md-4 col-sm-12 logo' style={{backgroundColor:"#150941"}}>
                <img src={logo} className="m-auto"/>
          </div>
-
+      <PrivacyPolicy setIsOpen={setIsOpen} isopen={isopen}/>
       </div>
       );
    }
