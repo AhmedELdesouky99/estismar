@@ -45,12 +45,12 @@ const SharedProfileInfo =({providerDetails,isAssetOwner})=>{
             </div>
             {
               isAssetOwner ? null : <div className="col-md-3 text-center">
-              <p>
+              {/* <p>
               الخدمات المباعة
               </p>
               <p>
                 14
-              </p>
+              </p> */}
               <button
                 className="btn btn-block"
                 onClick={() =>
