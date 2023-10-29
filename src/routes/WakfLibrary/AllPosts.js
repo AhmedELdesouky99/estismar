@@ -17,7 +17,7 @@ import { FormattedMessage } from "react-intl";
 import TagModal from "./TagModal";
 import TagsList from "./TagsList";
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin" 
+  baseURL: "https://admin.waqfnami.com/api/admin" 
  
 });
 export default function AllPosts() {

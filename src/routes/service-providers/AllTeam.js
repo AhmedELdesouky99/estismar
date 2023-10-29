@@ -17,7 +17,7 @@ import TeamWorkList from "./TeamWorkList";
 import { useSelector } from "react-redux";
 import AddEditTeamMember from "./AddEditTeamMember";
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/",
+  baseURL: "https://admin.waqfnami.com/api/",
 });
 export default function AllTeam() {
   const location = useLocation();

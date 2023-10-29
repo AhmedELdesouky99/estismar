@@ -14,7 +14,7 @@ import PerPage from "Components/shared/PerPage";
 import axios from "axios"
 import { useSelector } from "react-redux";
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin" 
+  baseURL: "https://admin.waqfnami.com/api/admin" 
  
 });
 function ServiceProvidersList({ allservices, loading, setPage, limit, setLimit,status }) {

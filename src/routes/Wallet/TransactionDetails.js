@@ -22,7 +22,7 @@ import ServiceProviderDropDown from "../../components/shared/ServiceProviderDrop
 import moment from "moment";
 
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin",
+  baseURL: "https://admin.waqfnami.com/api/admin",
 });
 
 const TransactionDetails = () => {
@@ -138,13 +138,13 @@ console.log(user,"user redux ")
               <div className="row">
               <div className="col-md-3">
                   <img src={
-                      info?.user?.category =="asset-owner" ? "https://estithmar.arabia-it.net/" + info?.user?.asset_owner_files?.[0]?.path
+                      info?.user?.category =="asset-owner" ? "https://admin.waqfnami.com/" + info?.user?.asset_owner_files?.[0]?.path
                       :  info?.user?.category == "service-provider" ? 
                       
-                      "https://estithmar.arabia-it.net/" + info?.user?.service_provider_files?.[0]?.path
+                      "https://admin.waqfnami.com/" + info?.user?.service_provider_files?.[0]?.path
                       
                       : 
-                      "https://estithmar.arabia-it.net/" + info?.user?.advisor_files?.[0].path
+                      "https://admin.waqfnami.com/" + info?.user?.advisor_files?.[0].path
 
                   } 
                   className="w-100"

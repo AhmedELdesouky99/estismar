@@ -16,7 +16,7 @@ import IntlMessages from "Util/IntlMessages";
 import axios from "axios"
 import { Helmet } from "react-helmet";
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin" 
+  baseURL: "https://admin.waqfnami.com/api/admin" 
  
 });
 function AllMyInvoices({ allowners, loading, setPage, limit, setLimit ,status}) {

@@ -23,7 +23,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import ImageUpload from "../../components/shared/ImageUpload";
 import { FormControlLabel, Switch } from "@material-ui/core";
 const client = axios.create({
-    baseURL: "https://estithmar.arabia-it.net/api/admin",
+    baseURL: "https://admin.waqfnami.com/api/admin",
   });
 const AddEditStaticPage = () => {
   const editorRef = useRef(null);

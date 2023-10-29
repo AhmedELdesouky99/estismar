@@ -14,7 +14,7 @@ import FieldsDropDown from "./FieldsDropDown";
 import { useSelector } from "react-redux";
 
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin",
+  baseURL: "https://admin.waqfnami.com/api/admin",
 });
 const ServiceProviderInputs = ({ providerDetails }) => {
   const [loader, setLoader] = useState(false);
@@ -160,7 +160,8 @@ const toggle=()=>setModal(!modal)
     
   };
   const EditAssetsOwner = () => {
-    
+    alert("s")
+    console.log(data,"data")
     client
       .put(`service-provider/${id}`, {
         ...data,
@@ -238,7 +239,7 @@ const toggle=()=>setModal(!modal)
               />
             </FormGroup>
           </div>
-          <div>
+          <div className="required">
             <FormGroup>
               <Label for="exampleEmail">
                 <FormattedMessage id={" رقم الجوال"} />
@@ -321,7 +322,7 @@ const toggle=()=>setModal(!modal)
               <Input
                 id="exampleSelect"
                 name="select"
-                type="select"
+                type="text"
                 style={{ borderColor: "#7EA831" }}
                 onChange={(e) => {
                   setData({
@@ -329,30 +330,14 @@ const toggle=()=>setModal(!modal)
                     city: e.target.value,
                   });
                 }}
-              >
-                <option></option>
-                <option selected={data?.city == "الرياض"} value={"الرياض"}>
-                  الرياض
-                </option>
-                <option value="جدة" selected={data?.city == "جدة"}>
-                  جدة
-                </option>
-                <option value="القسيم" selected={data?.city == "القسيم"}>
-                  القسيم
-                </option>
-                <option
-                  value="مكة المكرمه"
-                  selected={data?.city == "مكة المكرمة"}
-                >
-                  مكة المكرمه
-                </option>
-              </Input>
+                 />
+                
             </FormGroup>
           </div>
         </div>
       </div>
       <div className="row">
-        <div className="col-md-4">
+        {/* <div className="col-md-4">
           <div>
             <FormGroup>
               <Label for="exampleSelect">الحي</Label>
@@ -372,8 +357,8 @@ const toggle=()=>setModal(!modal)
               />
             </FormGroup>
           </div>
-        </div>
-        <div className="col-md-4">
+        </div> */}
+        {/* <div className="col-md-4">
           <div>
             <FormGroup>
               <Label for="exampleSelect">الشارع</Label>
@@ -393,7 +378,7 @@ const toggle=()=>setModal(!modal)
               />
             </FormGroup>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="row">
         <div className="col-md-4">
@@ -448,7 +433,7 @@ const toggle=()=>setModal(!modal)
   <p style={{fontSize:"27px" ,color:"#7EA831" ,fontWeight:"bold"}}>تفاصيل النشاط</p>
 </label>
        </div>
-      <div className="col-md-4">
+      {/* <div className="col-md-4">
           <div>
             <FormGroup>
               <Label for="exampleEmail">
@@ -468,8 +453,8 @@ const toggle=()=>setModal(!modal)
               />
             </FormGroup>
           </div>
-        </div>
-        <div className="col-md-4">
+        </div> */}
+        {/* <div className="col-md-4">
           <div>
             <FormGroup>
               <Label for="exampleEmail">
@@ -489,7 +474,7 @@ const toggle=()=>setModal(!modal)
               />
             </FormGroup>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="row required">
       <div className="col-md-4">
@@ -513,7 +498,7 @@ const toggle=()=>setModal(!modal)
             </FormGroup>
           </div>
         </div>
-        <div className="col-md-4">
+        {/* <div className="col-md-4">
           <div>
             <FormGroup>
               <Label for="exampleEmail">
@@ -533,9 +518,7 @@ const toggle=()=>setModal(!modal)
               />
             </FormGroup>
           </div>
-        </div>
-      </div>
-      <div className="row required">
+        </div> */}
         <div className="col-md-4">
           <div>
             <FormGroup>
@@ -557,6 +540,39 @@ const toggle=()=>setModal(!modal)
             </FormGroup>
           </div>
         </div>
+      </div>
+      <div className="row required">
+      <div className="col-md-4">
+          <div>
+            <FormGroup>
+              <Label for="exampleEmail">
+                <FormattedMessage id={"نوع الكيان القانوني"} />
+              </Label>
+              <Input
+                id="exampleSelect"
+                name="select"
+                type="select"
+                style={{ borderColor: "#7EA831" }}
+                value={data?.law_type}
+                onChange={(e) => {
+                  setData({
+                    ...data,
+                    law_type: e.target.value,
+                  });
+                }}
+              >
+                <option></option>
+                <option value={"مؤسسة فردية"} selected={data?.law_type == "مؤسسة فردية"}>
+                مؤسسة فردية{" "}
+                </option>
+                <option value={"مؤسسة جماعية"} selected={data?.law_type =="مؤسسة جماعية"}>
+                مؤسسة جماعية{" "}
+                </option>
+              </Input>
+            </FormGroup>
+          </div>
+        </div>
+        
         <div className="col-md-4">
           <div className="row">
             <div className="col-md-6">
@@ -604,36 +620,7 @@ const toggle=()=>setModal(!modal)
       </div>
 
       <div className="row required">
-        <div className="col-md-4">
-          <div>
-            <FormGroup>
-              <Label for="exampleEmail">
-                <FormattedMessage id={"نوع الكيان القانوني"} />
-              </Label>
-              <Input
-                id="exampleSelect"
-                name="select"
-                type="select"
-                style={{ borderColor: "#7EA831" }}
-                value={data?.law_type}
-                onChange={(e) => {
-                  setData({
-                    ...data,
-                    law_type: e.target.value,
-                  });
-                }}
-              >
-                <option></option>
-                <option value={"مؤسسة فردية"} selected={data?.law_type == "مؤسسة فردية"}>
-                مؤسسة فردية{" "}
-                </option>
-                <option value={"مؤسسة جماعية"} selected={data?.law_type =="مؤسسة جماعية"}>
-                مؤسسة جماعية{" "}
-                </option>
-              </Input>
-            </FormGroup>
-          </div>
-        </div>
+     
         <div className="col-md-4">
           <div>
             <FormGroup>
@@ -656,9 +643,7 @@ const toggle=()=>setModal(!modal)
             </FormGroup>
           </div>
         </div>
-      </div>
-      <div className="row required">
-      <div className="col-md-8">
+        <div className="col-md-4">
           <div>
             <FormGroup>
               <Label for="exampleEmail">
@@ -681,6 +666,9 @@ const toggle=()=>setModal(!modal)
             </FormGroup>
           </div>
         </div>
+      </div>
+      <div className="row required">
+   
 
       </div>
 
@@ -734,7 +722,7 @@ const toggle=()=>setModal(!modal)
           />
         </div>
       </div>
-
+{/* 
       <div className="row profile">
     <div className="col-12">
     <p className="title">حسابات التواصل الإجتماعي</p>
@@ -781,8 +769,8 @@ const toggle=()=>setModal(!modal)
             </FormGroup>
           </div>
         </div>
-      </div>
-      <div className="row profile">
+      </div> */}
+      {/* <div className="row profile">
         <div className="col-md-4">
           <div>
             <FormGroup>
@@ -825,8 +813,8 @@ const toggle=()=>setModal(!modal)
             </FormGroup>
           </div>
         </div>
-      </div>
-      <div className="row profile">
+      </div> */}
+      {/* <div className="row profile">
         <div className="col-md-4">
           <div>
             <FormGroup>
@@ -869,7 +857,7 @@ const toggle=()=>setModal(!modal)
             </FormGroup>
           </div>
         </div>
-      </div>
+      </div> */}
       <div>
       { 
                   errors ? 

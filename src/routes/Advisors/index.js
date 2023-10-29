@@ -16,7 +16,7 @@
 // import { Button } from "reactstrap";
 // import { FormattedMessage } from "react-intl";
 // const client = axios.create({
-//   baseURL: "https://estithmar.arabia-it.net/api/admin" 
+//   baseURL: "https://admin.waqfnami.com/api/admin" 
  
 // });
 // export default function ServiceProviders() {

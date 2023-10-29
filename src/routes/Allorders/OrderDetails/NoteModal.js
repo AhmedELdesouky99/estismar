@@ -6,7 +6,7 @@ import { NotificationManager } from 'react-notifications';
 import { useSelector } from "react-redux";
 
 const client = axios.create({
-    baseURL: "https://estithmar.arabia-it.net/api/admin",
+    baseURL: "https://admin.waqfnami.com/api/admin",
   });
 const NoteModal =({isopen,setIsOpen,serviceRequestId,setOrder,inConsult})=>{
     const toggle=()=>setIsOpen(!isopen)
@@ -26,7 +26,7 @@ const NoteModal =({isopen,setIsOpen,serviceRequestId,setOrder,inConsult})=>{
       }else if(inConsult  && user.category !="admin"){
         
 const client2 = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/",
+  baseURL: "https://admin.waqfnami.com/api/",
 });
 client2.put(`advisor/advisor-schedules/${serviceRequestId}`, {
             ...data,
@@ -72,7 +72,7 @@ client2.put(`advisor/advisor-schedules/${serviceRequestId}`, {
         })
       }else{
         const client2 = axios.create({
-          baseURL: "https://estithmar.arabia-it.net/api/",
+          baseURL: "https://admin.waqfnami.com/api/",
         });
          client2
         .put(`provider/request/${serviceRequestId}?token=${localStorage.getItem("token")}`, {

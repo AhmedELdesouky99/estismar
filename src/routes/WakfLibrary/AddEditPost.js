@@ -23,7 +23,7 @@ import Select, { components } from "react-select";
 import { Editor } from "@tinymce/tinymce-react";
 import ImageUpload from "../../components/shared/ImageUpload";
 const client = axios.create({
-    baseURL: "https://estithmar.arabia-it.net/api/admin",
+    baseURL: "https://admin.waqfnami.com/api/admin",
   });
 const AddEditPost = () => {
   const editorRef = useRef(null);

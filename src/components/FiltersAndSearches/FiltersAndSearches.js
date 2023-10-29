@@ -178,7 +178,7 @@ export function FiltersAndSearches({
           </div>
         )}
         {
-          filters?.includes("support") && (
+          filters?.includes("support") && user.category!="service-provider" && (
             <div className="col-md-2 mt-1">
             <FormGroup>
               <Label for="exampleEmail">

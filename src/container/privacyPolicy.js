@@ -6,7 +6,7 @@ import { NotificationManager } from 'react-notifications';
 import { useSelector } from "react-redux";
 
 const client = axios.create({
-    baseURL: "https://estithmar.arabia-it.net/api",
+    baseURL: "https://admin.waqfnami.com/api",
   });
 const PrivacyPolicy =({isopen,setIsOpen,serviceRequestId,setOrder,inConsult})=>{
     const toggle=()=>setIsOpen(!isopen)

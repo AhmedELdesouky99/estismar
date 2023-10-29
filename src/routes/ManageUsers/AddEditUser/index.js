@@ -17,7 +17,7 @@ import DropDownStatus from "Components/shared/DropDownStatus"
 import RolesDropDown from "Components/shared/RolesDropDown"
 
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin" 
+  baseURL: "https://admin.waqfnami.com/api/admin" 
  
 });
 export default function AddEidtUser() {

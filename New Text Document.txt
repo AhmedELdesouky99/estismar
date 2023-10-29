@@ -1,0 +1,843 @@
+import React, { useEffect, useState } from "react";
+import { HomeLayout } from "../../Containers";
+import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
+import styled from "styled-components";
+import moment from "moment";
+
+// import AudioPlayer from "react-modular-audio-player";
+
+import Breadcrumb from "react-bootstrap/Breadcrumb";
+import { Collapse, Col, Nav, Row, Button } from "react-bootstrap";
+import app1 from "../../assets/images/app1.png";
+import appgallery from "../../assets/images/appgallery.png";
+import appstore from "../../assets/images/appstore.png";
+import volum from "../../assets/images/volum.svg";
+import { Link, useHistory, useParams } from "react-router-dom";
+import CategoryTree from "./CategoryTree";
+import facebook from "../../assets/images/facebook.svg";
+import pausebtn from "../../assets/images/pausebtn.svg";
+import twitter from "../../assets/images/twitter.svg";
+import stripHtml from "../../Helper/stripHtml";
+import calender from "../../assets/images/calendar-interface-symbol-tool.png";
+import eye from "../../assets/images/eye.png";
+import error from "../../assets/images/error.png";
+import shareIcon from "../../assets/images/share.png";
+import ModalComponent from "../../components/ModalComponent";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import {
+  EmailShareButton,
+  FacebookIcon,
+  FacebookShareButton,
+  HatenaShareButton,
+  InstapaperShareButton,
+  LineShareButton,
+  LinkedinShareButton,
+  LivejournalShareButton,
+  MailruShareButton,
+  OKShareButton,
+  PinterestShareButton,
+  PocketShareButton,
+  RedditShareButton,
+  TelegramShareButton,
+  TumblrShareButton,
+  TwitterShareButton,
+  ViberShareButton,
+  VKShareButton,
+  WhatsappShareButton,
+  WorkplaceShareButton,
+} from "react-share";
+import ShareModal from "../../components/ShareModal";
+import { useRef } from "react";
+import download from "../../assets/images/download.svg";
+import Tooltip from "@mui/material/Tooltip";
+import printImage from "../../assets/images/print.svg";
+import print from "print-js";
+const HEADER = styled.div`
+  button {
+    width: fit-content;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+  .breadcrumb-item + .breadcrumb-item::before {
+    color: #d29e5b;
+    content: var(--bs-breadcrumb-divider, "/");
+  }
+  .active:before {
+    content: "" !important;
+  }
+  .breadcrumb-item,
+  breadcrumb-item a {
+    color: #d29e5b !important;
+    font-family: "DroidArabicKufiRegular";
+  }
+  a {
+    color: #d29e5b;
+    text-decoration: none;
+  }
+  h4 {
+    color: #614d3c;
+    font-family: "DroidArabicKufiRegular";
+  }
+`;
+const DIV = styled.div`
+  padding: 35px;
+`;
+const CONTENT = styled.div`
+#songPlay{
+  position:absolute;
+  left: 14px;
+  top: 11px;
+  display:none;
+}
+.songPlay{
+  position:absolute;
+  left: 14px;
+  top: 11px;
+  width:32px;
+  height:32px;
+  color:#D29E5B; 
+
+}
+audio::-webkit-media-controls-panel {
+  border-radius:0px;
+}
+audio::-webkit-media-controls-panel {
+  color:#fff;
+}
+audio::-webkit-media-controls-volume-slider {
+  background-color:red ;
+  border-radius: 25px;
+  display:none;
+  padding-left: 8px;
+  padding-right: 8px;
+  color:green;
+}
+audio::-webkit-media-controls-play-button{
+  background-color:#D29E5B;
+  visibility:hidden;
+}
+
+
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-current-time-display {
+  color: #D29E5B;
+}
+audio::-webkit-media-controls-mute-button {
+  border-radius: 50%;
+  color:#fff;
+}
+.audio-player-two {
+  filter: invert(100%);
+  background-color: #9d9c9c;
+  padding: 0.2rem;
+  border-radius: 5px; }
+
+.audio-player-two img {
+  background-color: #bd7a00;
+  border-radius: 1rem;
+  z-index: 2; }
+
+input[type=range].invert-blue-grey {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 5px 0; }
+input[type=range].invert-blue-grey:focus {
+  outline: none; }
+input[type=range].invert-blue-grey::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  background: #000000;
+  border-radius: 0px;
+  border: 0px solid #000000; }
+input[type=range].invert-blue-grey::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 1px solid #000000;
+  height: 11px;
+  width: 11px;
+  border-radius: 50px;
+  background: #bd7a00;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -5px; }
+input[type=range].invert-blue-grey::-webkit-slider-thumb:hover {
+  background: black; }
+input[type=range].invert-blue-grey:focus::-webkit-slider-runnable-track {
+  background: #000000; }
+input[type=range].invert-blue-grey::-moz-range-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  background: #000000;
+  border-radius: 0px;
+  border: 0px solid #000000; }
+input[type=range].invert-blue-grey::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 1px solid #000000;
+  height: 11px;
+  width: 11px;
+  border-radius: 50px;
+  background: #bd7a00;
+  cursor: pointer; }
+input[type=range].invert-blue-grey::-moz-range-thumb:hover {
+  background: black; }
+input[type=range].invert-blue-grey::-ms-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent; }
+input[type=range].invert-blue-grey::-ms-fill-lower {
+  background: #d71e1e;
+  border: 0px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d; }
+input[type=range].invert-blue-grey::-ms-fill-upper {
+  background: #000000;
+  border: 0px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d; }
+input[type=range].invert-blue-grey::-ms-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 100px solid #bd1313 !important;
+  height: 11px;
+  width: 11px;
+  border-radius: 50px;
+  background: #bd7a00;
+  cursor: pointer;
+  height: 1px; }
+input[type=range].invert-blue-grey::-ms-thumb:hover {
+  background: black; }
+input[type=range].invert-blue-grey:focus::-ms-fill-lower {
+  background: #000000; }
+input[type=range].invert-blue-grey:focus::-ms-fill-upper {
+  background: #000000; }
+
+.views img{
+  max-width:15px;
+}
+.views span{
+  color:#8E8E93;
+  font-family: 'DroidArabicKufiRegular';
+}
+}
+ul{
+  padding:0px
+}
+.title{
+  color:#614D3C;
+  font-weight:bold;
+  font-family: 'Droid Arabic Naskh';
+}
+.list-group-item{
+  border:none;
+  border-bottom:1px solid #fff;
+  background:#F4E7D6;
+  color:#8E8E93;
+}
+#example-collapse-text{
+  padding:0px;
+}
+.card-header{
+  background:#F4E7D6;
+  color:#614D3C; 
+  font-family:'DroidArabicKufiRegular';
+}
+.content{
+  font-family: "Droid Arabic Naskh";
+}
+.title-content{
+  border-bottom:1px dashed #ccc;
+}
+background:#fff;
+.title h2{
+  color:#D5A376;
+  text-align:center;
+}
+
+h5{
+  color:#D5A376;
+}
+.app-description{
+    color:#3B3128;
+}
+.app-title{
+    color:#D5A376;
+}
+.rightSide-p{
+  text-align:center;
+  font-weight:bold;
+  color:#614D3C;
+}
+.nav-item{
+  background:#e8e8e8;
+  
+  border-radius:0px;
+  a{
+    color:#8E8E93;
+  }
+  .nav-link.active {
+    background: #d29e5b;
+  }
+}
+.lessonTitle {
+  text-decoration:none;
+  color:#614D3C;
+  font-weight:bold;
+
+}
+#elements{
+  border-bottom:1px dashed #ccc;
+  padding:10px 15px ;
+}
+#elements:hover{
+  cursor:pointer;
+}
+#elements.active{
+  color:#D29E5B;
+}
+`;
+const LEFTCARD = styled.div`
+  .nav-item {
+    background: #e8e8e8;
+    max-width: 200px;
+    margin: 4px;
+    border-radius: 10px;
+    a {
+      color: #333333;
+    }
+    .nav-link.active {
+      background: #d29e5b;
+    }
+  }
+`;
+const LessonDetails = () => {
+  const { t, i18n } = useTranslation();
+  const audioRef = useRef(null);
+
+  const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(false);
+  const [share, setShare] = useState(false);
+  const [ActiveClass, setActiveClass] = useState(0);
+  const [times, setTimes] = useState([]);
+  const [titles, setTitles] = useState([]);
+
+  const { sectionTitle, id, audioTitle } = useParams();
+  const history = useHistory();
+  const [sectioDetails, setSectionDetails] = useState();
+  const [lessons, setLessons] = useState();
+  const [lessonDetails, setLessonDetails] = useState();
+  const [audioFilesState, setAudioFiles] = useState([{}]);
+
+  let iconStyle = { width: "fit-content" },
+    rearrangedPlayer = [
+      {
+        className: "tier-top",
+        style: { padding: "5px 0" },
+        innerComponents: [
+          {
+            type: "play",
+            style: iconStyle,
+          },
+
+          {
+            type: "volume",
+          },
+        ],
+      },
+      {
+        className: "tier-bottom",
+        innerComponents: [
+          {
+            type: "time",
+            style: iconStyle,
+          },
+          {
+            type: "seek",
+          },
+        ],
+      },
+    ];
+
+  const [noOfDataObj, setNoOfDataObj] = useState(1);
+  const [dataOfContentInArray, setdataOfContentInArray] = useState();
+  let allDataOfConent;
+  useEffect(() => {
+    const res = fetch(
+      `${apiurl}/lessons/audios/show/${id}/0/1?getManySectionsWithAllParent=audio_library`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setLessonDetails(data.data);
+        setAudioFiles([
+          {
+            src: data.data.certificate_url,
+            title: "Hey Jude",
+            artist: "The Beatles",
+          },
+        ]);
+      });
+  }, []);
+
+  let arrOfDevided = [];
+  const dataDevider = () => {
+    if (lessonDetails && lessonDetails.objective.text_display ) {
+      let ourD = lessonDetails.objective.content[i18n.language];
+      let x = ourD.split('<div class="mat-parts">');
+
+      x.map((el) => {
+        arrOfDevided.push(el);
+      });
+      setdataOfContentInArray(arrOfDevided);
+    }
+  };
+  useEffect(() => {
+    dataDevider();
+  }, [lessonDetails]);
+
+  const downloadFile = (file) => {
+    var link = document.getElementById("download");
+    link.href =
+      "https://binothaimeen.net/upload/uploadbin/othaimeen_A/alqawaed_alhesan/alqawaed_alhesan_othaimeen_A_01.mp3";
+    link.setAttribute("download");
+    link.click();
+  };
+  function downloadResource(url) {
+    var filename = url.split("\\").pop().split("/").pop();
+    fetch(url, {
+      headers:{
+        "Content-Type": "application/json",
+      }
+    })
+      .then((response) => response.blob())
+      .then((blob) => {
+        let blobUrl = window.URL.createObjectURL(blob);
+        downloadBlob(blobUrl, filename);
+      })
+      .catch((e) => console.error(e));
+  }
+  function downloadBlob(blob, filename) {
+    var a = document.createElement("a");
+    a.download = filename;
+    a.href = blob;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  //  Cutting the Fatwah
+
+  let quesPrepare, ansPrepare;
+  let showFatwa = false;
+
+  if (lessonDetails) {
+    console.log(lessonDetails.objective.content.ar,"lessonDetails.objective.content.ar")
+    // let spliting = lessonDetails.objective.content.ar
+    //   .split(`<div></div>`)
+    //   .filter((d) =>
+    //     d.includes(
+    //       `<div className="mat-parts-title"></div>` ||
+    //         d.includes(`<div className="mat-parts-time">`)
+    //     )
+    //   );
+
+    // let spliting2 = lessonDetails.objective.content.ar
+    //   .split("</div>")
+    //   .filter((d) => d.search(d.search(`<div className="mat-parts-time">`)));
+// alert("s")
+    let theTarget = lessonDetails.objective.content.ar;
+    let theTar = theTarget.split("</p>");
+
+    let xPushInnerHTML;
+    for (let i = 3; i < theTarget.length; i++) {
+      let doesntHave;
+      if (!theTarget.split("</p>")[i]) {
+        doesntHave = true;
+      }
+      if (!doesntHave) {
+        xPushInnerHTML += theTarget.split("</p>")[i] + "</p>";
+      }
+    }
+
+    let xFilterd, xFilterd2;
+    if (xPushInnerHTML) {
+      xFilterd = xPushInnerHTML.replace("undefined", "");
+      xFilterd2 = xFilterd.replace(/&nbsp;/g, "");
+    }
+
+
+    quesPrepare = theTarget.split("</p>")[1] + "</p>";
+    // ansPrepare = theTarget.split("</p>")[3] + "</p>";
+    ansPrepare = xFilterd2;
+    let checkerZero, checkerTwo;
+    checkerZero = theTarget.split("</p>")[0];
+    checkerTwo = theTarget.split("</p>")[2];
+
+    if (checkerZero && checkerTwo) {
+      if (checkerZero.includes("سؤال") && checkerTwo.includes("جواب")) {
+        showFatwa = true;
+      } else {
+      }
+    }
+  }
+  let elementsTitle = document.getElementsByClassName("mat-parts-title");
+  let elementTime = document.getElementsByClassName("mat-parts-time");
+  let soundtimes = [...elementTime].map((e) => e.innerHTML);
+  localStorage.setItem("times", soundtimes);
+  const getItems = () => {
+    return [...elementsTitle].map((e) => e.innerHTML);
+  };
+  const TimeTrack = (index) => {
+    document.getElementById("track").currentTime =
+      +localStorage.getItem("times").split(",")[index].split(":")[0] * 60 * 60 +
+      +localStorage.getItem("times").split(",")[index].split(":")[1] * 60 +
+      +localStorage.getItem("times").split(",")[index].split(":")[2];
+    audioRef.current.play();
+    document.getElementById("playArrow").style.display = "none";
+    document.getElementById("songPlay").style.display = "block";
+  };
+
+  const CreateBreadCrumb=(lessonDetails,last=undefined)=>{
+   if(lessonDetails ){
+    return(<>
+     {lessonDetails?.all_parent ? CreateBreadCrumb(lessonDetails.all_parent) : null}
+      <Breadcrumb.Item  href={ lessonDetails.all_parent ?  `/ar/voice_library/${lessonDetails.all_parent.title?.[i18n.language]}/${lessonDetails?.title?.[i18n.language]}/lesson/${lessonDetails?.id}`: `/ar/voice_library/${lessonDetails?.title?.[i18n.language]}/${lessonDetails.id}`} >
+      {lessonDetails?.title?.[i18n.language]}
+     
+    </Breadcrumb.Item>
+    </>
+    
+    )
+   }
+
+  }
+  return (
+    <HomeLayout>
+      <Helmet>
+        <title>
+          {i18n.t("navbar.home")} - {i18n.t("main_title")}
+        </title>
+      </Helmet>
+      <DIV>
+        <div className="container">
+          <HEADER>
+     
+            { lessonDetails ? 
+               <Breadcrumb>
+               <Breadcrumb.Item href="#"></Breadcrumb.Item>
+               <Breadcrumb.Item href={`/${i18n.language}`}>
+                 الرئيسية
+               </Breadcrumb.Item>
+ 
+               {
+               CreateBreadCrumb(lessonDetails?.many_sections?.[0],"last")
+               }
+               <Breadcrumb.Item active>{audioTitle}</Breadcrumb.Item>
+ 
+               </Breadcrumb>
+               : null
+            }
+             
+
+            
+{/*             
+            {
+              lessonDetails && lessonDetails?.many_sections?.[0]?.title?.[`${i18n.language}`]
+            } */}
+            <div className="row justify-content-end">
+              <Tooltip title="تنزيل">
+                <a
+           
+                  href={`${apiurl2}/api/download-audio/${lessonDetails?.id}`}
+                  target="_blank"
+                  style={{width:"fit-content",padding:"0px"}}
+                >
+                  <img src={download} style={{ width: "40px" }} />
+                </a>
+              </Tooltip>
+              <Tooltip title="طباعة">
+                <button
+                  onClick={() => {
+                    window.print()
+                  }}
+                  style={{padding:"0px"}}
+                >
+                  <img src={printImage} style={{ width: "40px" }} />
+                </button>
+              </Tooltip>
+              <Tooltip title="الابلاغ عن خطا">
+
+              <button onClick={() => setShow(true)}
+                  style={{padding:"0px"}}
+              
+              >
+                <img src={error} style={{ width: "40px" }} />
+              </button>
+              </Tooltip>
+              <Tooltip title="مشاركة">
+
+              <button onClick={() => setShare(!share)}
+                  style={{padding:"0px"}}
+              
+              >
+                <img src={shareIcon} style={{ width: "40px" }} />
+              </button>
+              </Tooltip>
+            </div>
+          </HEADER>
+          <Row id="p-print" className="justify-content-between lessons-details-fatwa">
+            <Col xl={12} lg={12} md={12} sm={12}>
+              {lessonDetails && (
+                <CONTENT className="shadow p-3 mb-2 bg-white rounded mt-3">
+                  <div className="container">
+                    <Row>
+                      <Col
+                        lg={12}
+                        className="align-self-center"
+                        style={{ textAlign: "justify" }}
+                      >
+                        <Row>
+                          <Col xl={12}>
+                            <p className="title">
+                              {lessonDetails.title?.[`${i18n.language}`]}
+                            </p>
+                            <div className="row views mb-2 lesson-etails-of-fatwah">
+                             
+                              <div className=" col-xl-4 col-lg-4 col-md-6 col-sm-6 item views">
+                                <img src={eye} />
+                                {"  "}
+                                <span className="span-views">
+                                  {lessonDetails.views}
+                                </span>
+                              </div>
+                            </div>
+                            {lessonDetails.certificate_url != null &&
+                            lessonDetails.certificate_url.length ? (
+                              <div style={{ position: "relative" }}>
+                                <audio
+                                  className="invert-blue-grey w-100"
+                                  id="track"
+                                  ref={audioRef}
+                                  controls
+                                >
+                                  {/* <source src="horse.ogg" type="audio/ogg" /> */}
+                                  <source
+                                    src={ lessonDetails.certificate_url.includes("https") ?  lessonDetails.certificate_url 
+                                  
+                                  : lessonDetails.certificate_url.includes("/storage") ? 
+                                  `${apiurl2}${lessonDetails.certificate_url }` :
+                                  `${apiurl2}/storage/${lessonDetails.certificate_url }`
+                                  }
+                                    type="audio/mpeg"
+                                    id="song"
+                                  />
+                                </audio>
+                                <div id="songPlay">
+                                  <img
+                                    src={pausebtn}
+                                    style={{ width: "25px" }}
+                                    onClick={() => {
+                                      audioRef.current.pause();
+                                      document.getElementById(
+                                        "playArrow"
+                                      ).style.display = "block";
+                                      document.getElementById(
+                                        "songPlay"
+                                      ).style.display = "none";
+                                    }}
+                                  />
+                                </div>
+                                <PlayArrowIcon
+                                  id="playArrow"
+                                  className="playbtn songPlay"
+                                  onClick={() => {
+                                    audioRef.current.play();
+                                    document.getElementById(
+                                      "playArrow"
+                                    ).style.display = "none";
+                                    document.getElementById(
+                                      "songPlay"
+                                    ).style.display = "block";
+                                  }}
+                                />
+
+                                {/* <audio src=""/> */}
+                              </div>
+                            ) : null}
+
+                            {showFatwa && lessonDetails ? (
+                              <>
+                                {/* Case of Fatwah */}
+                                <p
+                                  dir="rtl"
+                                  style={{
+                                    textAlign: " justify;",
+                                    fontFamily: "Droid Arabic Naskh",
+                                    lineHeight: "2.2",
+                                    marginBottom: "0rem",
+                                    marginTop: "1rem",
+                                  }}
+                                >
+                                  <span className="sidetitle">السؤال:</span>
+                                </p>
+                                {/* // 2  */}
+                                <div
+                                  className="fatwah-ques-cont"
+                                  style={{
+                                    textAlign: " justify;",
+                                    fontFamily: "Droid Arabic Naskh",
+                                    lineHeight: "2.2",
+                                    backgroundColor: "#D29E5B",
+                                    borderRadius: "10px",
+                                    padding: ".75rem",
+                                    color: "white",
+                                    marginBottom: "1rem",
+                                  }}
+                                  dangerouslySetInnerHTML={{
+                                    __html: quesPrepare,
+                                  }}
+                                ></div>
+
+                                {/* // 3 */}
+                                <p
+                                  dir="rtl"
+                                  style={{
+                                    textAlign: " justify;",
+                                    fontFamily: "Droid Arabic Naskh",
+                                    lineHeight: "2.2",
+                                    marginBottom: "0rem",
+                                  }}
+                                >
+                                  <span className="sidetitle">الجواب:</span>
+                                </p>
+                                {/* // 4 */}
+
+                                <div
+                                  className="fatwah-ans-cont"
+                                  style={{
+                                    textAlign: " justify;",
+                                    fontFamily: "Droid Arabic Naskh",
+                                    lineHeight: "2.2",
+                                  }}
+                                  dangerouslySetInnerHTML={{
+                                    __html: ansPrepare,
+                                  }}
+                                ></div>
+
+                                {/* End of Case Of Fatwah */}
+                              </>
+                            ) : !elementsTitle.length ? (
+                              <>
+                              {
+                                 lessonDetails?.objective?.text_display && 
+                                 <p
+                                 id="p-print sssss"
+                                 style={{
+                                   fontFamily: "Droid Arabic Naskh",
+                                   lineHeight: "2.2",
+                                 }}
+                                 dangerouslySetInnerHTML={{
+                                   __html:
+                                     lessonDetails.objective.content[
+                                       `${i18n.language}`
+                                     ],
+                                 }}
+                               ></p>
+                              }
+                               
+
+                                {/* End of General Case */}
+                              </>
+                            ) : (
+                              <div className="card">
+                                <div className="card-header ">
+                                  عناصر المادة :
+                                </div>
+                                <div className="row justify-content-around content bootstrap-content">
+                                 
+
+
+                                  {getItems().map((item, index) => {
+                                   
+                                    let filterdReadyItem = stripHtml(item)
+                                    return (
+                                      <div
+                                        className="accordion-item"
+                                        key={index}
+                                        id={index}
+                                      >
+                                        <h2
+                                          className="accordion-header"
+                                          id="flush-headingOne"
+                                        >
+                                          <button
+                                            style={{ cursor: "pointer" }}
+                                            className="accordion-button collapsed"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target={`#flush-collapseOne-${index}`}
+                                            aria-expanded="false"
+                                            aria-controls="flush-collapseOne"
+                                            onClick={() => TimeTrack(index)}
+                                          >
+                                            {filterdReadyItem}
+                                          </button>
+                                        </h2>
+                                        <div
+                                          id={`flush-collapseOne-${index}`}
+                                          className="accordion-collapse collapse"
+                                          aria-labelledby="flush-headingOne"
+                                          data-bs-parent="#accordionFlushExample"
+                                        >
+                                          <div
+                                            className="accordion-body"
+                                            dangerouslySetInnerHTML={{
+                                              __html:
+                                                dataOfContentInArray[index + 1],
+                                            }}
+                                          ></div>
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+
+    
+                                </div>
+                              </div>
+                            )}
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                  </div>
+                </CONTENT>
+              )}
+            </Col>
+            {/* <Col xl={4} lg={5} md={12} sm={12}>
+       <CategoryTree />
+        </Col> */}
+          </Row>
+        </div>
+      </DIV>
+      <ModalComponent show={show} setShow={setShow} />
+      <ShareModal
+        share={share}
+        setShare={setShare}
+        sharedComponent={lessonDetails?.certificate_url}
+        title={lessonDetails?.title?.[`${i18n.language}`]}
+      />
+    </HomeLayout>
+  );
+};
+
+export default LessonDetails;

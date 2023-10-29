@@ -16,7 +16,7 @@ import { FormattedMessage } from "react-intl";
 import OrderList from "./orderList";
 import { useSelector } from "react-redux";
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin",
+  baseURL: "https://admin.waqfnami.com/api/admin",
 });
 export default function Orders({inTabs}) {
   const location = useLocation();
@@ -33,7 +33,7 @@ export default function Orders({inTabs}) {
     console.log(user,"user")
     if(user.category =="service-provider"){
       const clienturl= axios.create({
-        baseURL: "https://estithmar.arabia-it.net/api",
+        baseURL: "https://admin.waqfnami.com/api",
       });
       clienturl.get(`/provider/request`,{
         params:{
@@ -105,7 +105,9 @@ console.log(user,"user")
               <div className="col-sm-12 col-md-6 mt-1">قائمة الطلبات</div>
             </div>
             <hr />
-            <div className="row">
+            {
+              user.category=="admin" ?  
+              <div className="row">
               <FiltersAndSearches
                 make="make"
                 submitbtnid="search.filter"
@@ -117,6 +119,9 @@ console.log(user,"user")
               
               />
             </div>
+              : null
+            }
+          
                 </>
 
               

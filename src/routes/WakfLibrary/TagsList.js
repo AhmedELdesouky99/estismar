@@ -15,7 +15,7 @@ import TagModal from "./TagModal";
 import { useState } from "react";
 
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin" 
+  baseURL: "https://admin.waqfnami.com/api/admin" 
  
 });
 function TagsList({ allowners, loading, setPage, limit, setLimit ,status}) {

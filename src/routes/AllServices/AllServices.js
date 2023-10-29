@@ -16,7 +16,7 @@ import { FormattedMessage } from "react-intl";
 import ServiceList from "./serviceList";
 import { useSelector } from "react-redux";
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin",
+  baseURL: "https://admin.waqfnami.com/api/admin",
 });
 export default function Services({inTabs}) {
   const location = useLocation();
@@ -33,7 +33,7 @@ export default function Services({inTabs}) {
    if(user.category =="service-provider"){
     const clientUrl=
     axios.create({
-      baseURL: "https://estithmar.arabia-it.net/api/provider",
+      baseURL: "https://admin.waqfnami.com/api/provider",
     });
     clientUrl.get(`/service`,{
       params:{

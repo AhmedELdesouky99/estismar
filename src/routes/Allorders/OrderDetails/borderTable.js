@@ -24,7 +24,7 @@ import moment from "moment"
 import GetAppIcon from '@material-ui/icons/GetApp';
 import DeleteIcon from '@material-ui/icons/Delete';
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin",
+  baseURL: "https://admin.waqfnami.com/api/admin",
 });
 const useRowStyles = makeStyles({
   root: {
@@ -57,10 +57,10 @@ function Row(props) {
   const inputFile = useRef(null);
 	const {user}=useSelector(state=>state.authUser.user)
   const client = user.category == "admin" ?axios.create({
-    baseURL: "https://estithmar.arabia-it.net/api/admin",
+    baseURL: "https://admin.waqfnami.com/api/admin",
   }) : 
   axios.create({
-    baseURL: "https://estithmar.arabia-it.net/api",
+    baseURL: "https://admin.waqfnami.com/api",
   })
 
   const uploadEnimage = (file,row) => {

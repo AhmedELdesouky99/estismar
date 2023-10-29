@@ -14,11 +14,11 @@ import PerPage from "Components/shared/PerPage";
 import axios from "axios"
 import { useSelector } from "react-redux";
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin" 
+  baseURL: "https://admin.waqfnami.com/api/admin" 
  
 });
 const client2 =axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api" 
+  baseURL: "https://admin.waqfnami.com/api" 
  
 });
 function TeamWorkList({ allowners, loading, setPage, limit, setLimit,status,setAddPage,setTeamMemberId }) {

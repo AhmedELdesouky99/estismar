@@ -29,7 +29,7 @@ const changeStatus=(status)=>{
     
     const clientUrl=
     axios.create({
-      baseURL: "https://estithmar.arabia-it.net/api/provider/",
+      baseURL: "https://admin.waqfnami.com/api/provider/",
     });
 
     clientUrl.put(`/request/${orderId}`,{

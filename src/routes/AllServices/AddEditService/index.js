@@ -21,7 +21,7 @@ import Select from "react-select";
 import { useSelector } from "react-redux";
 
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin",
+  baseURL: "https://admin.waqfnami.com/api/admin",
 });
 
 const AddEditService = () => {
@@ -53,8 +53,8 @@ console.log(user,"user redux ")
       "executive_steps" : [], 
       "executive_result" : [],
   
-      "cost" :1000, 
-      "tax_ratio" : 150, 
+      "cost" :0, 
+      "tax_ratio" : 0, 
       "support_ratio" : null, 
       "cost_after_study" : false,
   
@@ -167,7 +167,7 @@ console.log(user,"user redux ")
       <div className="col-md-11">
         <RctCard>
           <RctCardContent>
-            <div className="row">
+            <div className="row required">
               <div className="col-md-4">
                 <div>
                   <FormGroup>
@@ -233,7 +233,7 @@ console.log(user,"user redux ")
           </RctCardContent>
         </RctCard>
         <div className="col-md-12">
-          <div className="row">
+          <div className="row required">
             <div className="col-md-8">
               <RctCard>
                 <RctCardContent>
@@ -242,6 +242,7 @@ console.log(user,"user redux ")
                       <input type="checkbox" />
                       <span class="checkmark" style={{ right: "0px" }}></span>
                       <p
+                      className="header-title"
                         style={{
                           fontSize: "27px",
                           color: "#7EA831",
@@ -277,6 +278,7 @@ console.log(user,"user redux ")
                         <input type="checkbox" />
                         <span class="checkmark" style={{ right: "0px" }}></span>
                         <p
+                        className="header-title"
                           style={{
                             fontSize: "27px",
                             color: "#7EA831",
@@ -376,6 +378,8 @@ console.log(user,"user redux ")
                         <input type="checkbox" />
                         <span class="checkmark" style={{ right: "0px" }}></span>
                         <p
+                        className="header-title"
+
                           style={{
                             fontSize: "27px",
                             color: "#7EA831",
@@ -483,21 +487,23 @@ console.log(user,"user redux ")
                 <RctCardContent>
                   <div className="col-12">
                     <p className="title">بيانات التكلفة</p>
-                    <div>
-                      <Switch
-                        inputProps={{ "aria-label": "primary checkbox" }}
-                        checked={Service?.cost_after_study}
-                        onChange={(e)=>{
-                          setService({
-                            ...Service,
-                            cost_after_study:e.target.checked
-                          })
-                        }}
-                      />
-                      <span style={{ color: "#707070" }}>
-                        التكلفة بعد دراسة الطلب
-                      </span>
-                    </div>
+                   {
+                    user.category !="service-provider" &&  <div>
+                    <Switch
+                      inputProps={{ "aria-label": "primary checkbox" }}
+                      checked={Service?.cost_after_study}
+                      onChange={(e)=>{
+                        setService({
+                          ...Service,
+                          cost_after_study:e.target.checked
+                        })
+                      }}
+                    />
+                    <span style={{ color: "#707070" }}>
+                      التكلفة بعد دراسة الطلب
+                    </span>
+                  </div>
+                   }
                   
                <div>
                <div className="col-md-12">
@@ -680,7 +686,7 @@ console.log(user,"user redux ")
                     }}
                   >
                     اختر الوحدة الزمنية المناسبة لك لتحديد مدة تنفيذ الخدمة سواء
-                    بالساعة أو اليوم أو الشهر
+                      باليوم أو الشهر
                   </p>
                 </div>
               </div>
@@ -719,20 +725,7 @@ console.log(user,"user redux ")
                     >
                       شهر
                     </Button>
-                    <Button
-                      className="service-time"
-                      outline
-                      onClick={() => {
-                        setRSelected(3);
-                        setService({
-                          ...Service,
-                          executive_time_type: "year",
-                        });
-                      }}
-                      active={rSelected === 3}
-                    >
-                      سنة
-                    </Button>
+                   
                   </ButtonGroup>
                 </div>
                 <div style={{ alignSelf: "center" }}>
@@ -754,15 +747,16 @@ console.log(user,"user redux ")
                   />
                 </div>
                 <span style={{ color: "#9C9C9C" }}>
-                  {rSelected == 1 ? "يوم" : rSelected == 2 ? "شهر" : "سنة"}
+                  {rSelected == 1 ? "يوم" : rSelected == 2 ? "شهر" : ""}
                 </span>
               </div>
-              <div className="row">
+              <div className="row required">
                 <div className="col-12">
                   <label class="container">
                     <input type="checkbox" />
                     <span class="checkmark" style={{ right: "0px" }}></span>
                     <p
+                        className="header-title"
                       style={{
                         fontSize: "27px",
                         color: "#7EA831",
@@ -913,9 +907,13 @@ console.log(user,"user redux ")
                   </div>
                 </div>
               </div>
-              <div className="row">
+              <div className="row required">
                 <div className="col-md-12">
-                  <p className="title"> متطلبات الخدمة</p>
+
+                 <div className="row">
+                 <p className="title"> متطلبات الخدمة</p>
+                  <span style={{marginTop:"-30px",alignSelf:"center",color:"red" }}>*</span>
+                 </div>
                 </div>
                 <div className="col-md-10">
                   {/* "service_requirment" */}
@@ -1009,7 +1007,11 @@ console.log(user,"user redux ")
               </div>
               <div className="row">
                 <div className="col-md-12">
-                  <p className="title"> حدود النطاق </p>
+                 <div className="row">
+                 <p className="title">خدمات ذات علاقة</p>
+                  <span style={{marginTop:"-30px",alignSelf:"center",color:"red" }}>*</span>
+                 </div>
+
                 </div>
                 <div className="col-md-7">
                   <Input

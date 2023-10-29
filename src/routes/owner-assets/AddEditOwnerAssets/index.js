@@ -19,7 +19,7 @@ import TabViews from "Components/shared/TabViews";
 import SharedProfileInfo from "Components/shared/SharedProfileInfo";
 
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin" 
+  baseURL: "https://admin.waqfnami.com/api/admin" 
  
 });
 export default function AddEditOwnersAssets() {

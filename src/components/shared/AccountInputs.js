@@ -11,7 +11,7 @@ import Swal from 'sweetalert'
 import Select, { components } from "react-select";
 
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin",
+  baseURL: "https://admin.waqfnami.com/api/admin",
 });
 const AccountInputs = ({ownerDetails}) => {
   const [loader, setLoader] = useState(false);

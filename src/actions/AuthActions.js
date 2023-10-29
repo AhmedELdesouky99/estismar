@@ -35,7 +35,7 @@ export const signinUserInFirebase = (user, history) => (dispatch) => {
       });
 }
 export const HandelSignin = (user,history) => (dispatch) => {
-   axios.post("https://estithmar.arabia-it.net/api/auth/login",{...user}
+   axios.post("https://admin.waqfnami.com/api/auth/login",{...user}
   ).then(res=>{
    if(res.status == 200){
    localStorage.setItem("user_id",JSON.stringify(res.data.data))
@@ -50,7 +50,7 @@ export const HandelSignin = (user,history) => (dispatch) => {
 
 }
 export const HandelSignUp = (user,history) => (dispatch) => {
-   axios.post("https://estithmar.arabia-it.net/api/auth/register",{...user}
+   axios.post("https://admin.waqfnami.com/api/auth/register",{...user}
   ).then(res=>{
    if(!res.data.errors){
    localStorage.setItem("user_id",JSON.stringify(res?.data?.data))

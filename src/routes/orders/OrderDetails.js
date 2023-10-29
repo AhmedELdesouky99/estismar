@@ -10,7 +10,7 @@ import StagesTable from "./StagesTable";
 import ProfileContent from "./ProfileContent";
 import LogsTable from "./LogsTable";
 const client = axios.create({
-    baseURL: "https://estithmar.arabia-it.net/api/admin" 
+    baseURL: "https://admin.waqfnami.com/api/admin" 
    
   });
 const OrderDetails =()=>{

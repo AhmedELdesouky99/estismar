@@ -623,6 +623,10 @@
     content:"*";
     color: red;
   }
+  .header-title::after{
+    content:"*";
+    color: red;
+  }
   ::placeholder{
     color:#150941 !important;
   }

@@ -21,7 +21,7 @@ import { useSelector } from "react-redux";
 import CloseIcon from "@material-ui/icons/Close";
 
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api",
+  baseURL: "https://admin.waqfnami.com/api",
 });
 export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMemberId}) {
   const location = useLocation();
@@ -155,7 +155,7 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
         </div>
       </div>
     <hr />
-      <div className="row">
+      <div className="row required">
         <div className="col-md-11">
           <FormGroup>
             <Label for="exampleEmail">
@@ -179,7 +179,7 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
       </div>
       <div className="row">
         <div className="col-md-11">
-          <div className="row">
+          <div className="row required">
             <div className="col-md-6">
               <FormGroup>
                 <Label for="exampleEmail">
@@ -223,7 +223,7 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
           </div>
         </div>
       </div>
-      <div className="row">
+      <div className="row" >
         <div className="col-md-11">
           <div className="row">
             <div className="col-md-6">
@@ -242,7 +242,7 @@ export default function AddEditTeamMember({setAddPage,TeamMemberId,setTeamMember
                 />
               </FormGroup>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-6 required">
               <FormGroup>
                 <Label for="exampleEmail">
                   <FormattedHTMLMessage id={"كلمة السر"} />

@@ -40,9 +40,9 @@ const AddEditService = () => {
   const history=useHistory()
 	const {user}=useSelector(state=>state.authUser.user)
   const client = user.category == "admin" ? axios.create({
-    baseURL: "https://estithmar.arabia-it.net/api/admin",
+    baseURL: "https://admin.waqfnami.com/api/admin",
   }):  axios.create({
-    baseURL: "https://estithmar.arabia-it.net/api",
+    baseURL: "https://admin.waqfnami.com/api",
   })
   const [order,setOrder]=useState()
   const[isopen,setIsOpen]=useState(false)

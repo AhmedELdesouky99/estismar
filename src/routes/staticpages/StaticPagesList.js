@@ -16,7 +16,7 @@ import axios from "axios"
 import { Helmet } from "react-helmet";
 import { StaticPagesData } from "./StaticPagesData";
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin" 
+  baseURL: "https://admin.waqfnami.com/api/admin" 
  
 });
 function StaticPagesList({ allowners, loading, setPage, limit, setLimit ,status}) {

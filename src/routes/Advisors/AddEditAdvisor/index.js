@@ -16,7 +16,7 @@ import { FormattedMessage } from "react-intl";
 import { NotificationV2 } from "../../../components/Widgets";
 import TabViews from "Components/shared/TabViews";
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin" 
+  baseURL: "https://admin.waqfnami.com/api/admin" 
  
 });
 export default function AddEditAdvisor() {

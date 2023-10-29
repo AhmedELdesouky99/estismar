@@ -22,7 +22,7 @@ import Select from "react-select";
 import MyWallet from "./MyWallet";
 
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin",
+  baseURL: "https://admin.waqfnami.com/api/admin",
 });
 export default function Wallet({inTabs}) {
   const location = useLocation();

@@ -12,7 +12,7 @@ import PageTitleBar from "Components/PageTitleBar/PageTitleBar";
 import IntlMessages from "Util/IntlMessages";
 
 const client = axios.create({
-    baseURL: "https://estithmar.arabia-it.net/api/" 
+    baseURL: "https://admin.waqfnami.com/api/" 
    
   });
 const MyInvoiceDetails =()=>{

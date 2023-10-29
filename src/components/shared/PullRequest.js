@@ -6,7 +6,7 @@ import { NotificationManager } from 'react-notifications';
 import { useSelector } from "react-redux";
 
 const client = axios.create({
-    baseURL: "https://estithmar.arabia-it.net/api/admin",
+    baseURL: "https://admin.waqfnami.com/api/admin",
   });
 const PullRequest =({isopen,setIsOpen,serviceRequestId,setOrder,inConsult})=>{
     const toggle=()=>setIsOpen(!isopen)
@@ -26,7 +26,7 @@ const PullRequest =({isopen,setIsOpen,serviceRequestId,setOrder,inConsult})=>{
       }else if(user.category !="admin"){
         
 const client2 = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/auth/",
+  baseURL: "https://admin.waqfnami.com/api/auth/",
 });
 client2.post(`withdraw-request`, {
             ...data,
@@ -63,7 +63,7 @@ client2.post(`withdraw-request`, {
         })
       }else{
         const client2 = axios.create({
-          baseURL: "https://estithmar.arabia-it.net/api/",
+          baseURL: "https://admin.waqfnami.com/api/",
         });
          client2
         .put(`provider/request/${serviceRequestId}?token=${localStorage.getItem("token")}`, {

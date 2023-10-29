@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const client = axios.create({
-    baseURL: "https://estithmar.arabia-it.net/api/admin",
+    baseURL: "https://admin.waqfnami.com/api/admin",
   });
 const TagModal =({isopen,setIsOpen,serviceRequestId,setOrder,inConsult,tagId})=>{
     const toggle=()=>setIsOpen(!isopen)

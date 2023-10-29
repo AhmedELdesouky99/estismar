@@ -17,7 +17,7 @@ import AdvisorList from "./advisorList";
 import ConsultingList from "./ConsultingList";
 import { useSelector } from "react-redux";
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin",
+  baseURL: "https://admin.waqfnami.com/api/admin",
 });
 export default function AllConsulting({inTabs}) {
   const location = useLocation();

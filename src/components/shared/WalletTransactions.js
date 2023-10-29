@@ -6,7 +6,7 @@ import PullRequest from "./PullRequest";
 import { useState } from "react";
 import axios from "axios"
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/",
+  baseURL: "https://admin.waqfnami.com/api/",
 });
 const WalletTransactions =({ServiceProvider,advisorDetails})=>{
 	const {user}=useSelector(state=>state.authUser.user)
@@ -56,10 +56,12 @@ return(
                    </div>
                    <div className="row justify-content-between mt-3">
                     <div>
-                        <h2>
-                    اجمالي ارباح 
-
-                        </h2>
+                      {
+                        user.category=="admin" ?   <h2>
+                        اجمالي ارباح 
+    
+                            </h2> : null
+                      }
                         <h5 className="text-center">
                           {
                             

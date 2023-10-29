@@ -17,7 +17,7 @@ import { Button } from "reactstrap";
 import axios from "axios"
 
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin" 
+  baseURL: "https://admin.waqfnami.com/api/admin" 
  
 });
 export default function Users() {

@@ -13,7 +13,7 @@ import axios from "axios"
 import PerPage from "Components/shared/PerPage";
 
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin" 
+  baseURL: "https://admin.waqfnami.com/api/admin" 
  
 });
 function OwnersList({ allowners, loading, setPage, limit, setLimit ,status}) {

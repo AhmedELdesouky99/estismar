@@ -6,17 +6,20 @@ import { useHistory } from "react-router-dom";
 import NoImage from "../../assets/img/no-image.png";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios"
+import { useSelector } from "react-redux";
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin" 
+  baseURL: "https://admin.waqfnami.com/api/admin" 
  
 });
 const SharedProfileInfo =({providerDetails,isAssetOwner})=>{
   const{id}=useParams()
+  const { user } = useSelector((state) => state.authUser.user);
+
     const profile = providerDetails?.files?.find(
         (file) => file.title == "profile"
       )?.path;
       let history=useHistory()
-      console.log(providerDetails,"providerDetails")
+      console.log(providerDetails,"providerDetails",user,"karem")
     return(
         <RctCard>
         <RctCardContent>
@@ -51,7 +54,8 @@ const SharedProfileInfo =({providerDetails,isAssetOwner})=>{
               <p>
                 14
               </p> */}
-              <button
+              { user.category =="admin" ?
+                <button
                 className="btn btn-block"
                 onClick={() =>
                  history.push("/app/services/add")
@@ -61,6 +65,8 @@ const SharedProfileInfo =({providerDetails,isAssetOwner})=>{
              >
                 إضافة خدمة
             </button>
+            :null
+              }
             </div>
             }
             

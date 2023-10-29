@@ -26,7 +26,7 @@ import FieldsDropDown from "../../components/shared/FieldsDropDown";
 import AdvisorsDropDown from "../../components/shared/advisorDropDown";
 import moment from "moment";
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/admin",
+  baseURL: "https://admin.waqfnami.com/api/admin",
 });
 
 const AddEditConsult = () => {

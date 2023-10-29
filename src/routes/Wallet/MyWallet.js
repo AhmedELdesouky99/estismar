@@ -8,7 +8,7 @@ import { Button } from "reactstrap";
 import { FormattedMessage } from "react-intl";
 
 const client = axios.create({
-    baseURL: "https://estithmar.arabia-it.net/api/",
+    baseURL: "https://admin.waqfnami.com/api/",
   });
 const MyWallet=()=>{
     const [page,setPage]=useState(1)

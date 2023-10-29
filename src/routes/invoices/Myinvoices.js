@@ -15,7 +15,7 @@ import { Button } from "reactstrap";
 import { FormattedMessage } from "react-intl";
 import AllMyInvoices from "./AllMyInvoices";
 const client = axios.create({
-  baseURL: "https://estithmar.arabia-it.net/api/" 
+  baseURL: "https://admin.waqfnami.com/api/" 
  
 });
 export default function MyInvoices() {
