@@ -22,6 +22,27 @@ import Swal from "sweetalert";
 import Select, { components } from "react-select";
 import { Editor } from "@tinymce/tinymce-react";
 import ImageUpload from "../../components/shared/ImageUpload";
+import TinyEditor from "./TinyEditor";
+
+  // importing the plugin js.
+  // import '@tinymce/plugins/advlist';
+  // import '@tinymce/plugins/autolink';
+  // import '@tinymce/plugins/link';
+  // import '@tinymce/plugins/image';
+  // import '@tinymce/plugins/lists';
+  // import '@tinymce/plugins/charmap';
+  // // import 'tinymce/plugins/hr';
+  // import '@tinymce/plugins/anchor';
+  // import '@tinymce/plugins/searchreplace';
+  // import '@tinymce/plugins/wordcount';
+  // import '@tinymce/plugins/code';
+  // import '@tinymce/plugins/fullscreen';
+  // import '@tinymce/plugins/insertdatetime';
+  // import '@tinymce/plugins/media';
+  // import '@tinymce/plugins/nonbreaking';
+  // import '@tinymce/plugins/table';
+  // import '@tinymce/plugins/template';
+  // import '@tinymce/plugins/help';
 const client = axios.create({
     baseURL: "https://admin.waqfnami.com/api/admin",
   });
@@ -109,15 +130,15 @@ const [data,setData]=useState({
               console.log(res.data.data,"karem")
               setData({
                 ...data,
-                content:res.data.data.content,
-                is_active:res.data.data.is_active,
-                title:res.data.data.title,
-                tags:res.data.data.tags.map((tag)=>tag.id)  ,
-                order: res.data.data.order,
+                content:res?.data?.data?.content,
+                is_active:res?.data?.data?.is_active,
+                title:res?.data?.data?.title,
+                tags:res?.data?.data?.tags.map((tag)=>tag.id)  ,
+                order: res?.data?.data?.order,
 
             })
-            setFiles([res.data.data.files[0].id])
-        setEnImage("https://estithmar.arabia-it.net" + res.data.data.files[0].path);
+            setFiles([res?.data?.data?.files[0]?.id])
+        setEnImage("https://estithmar.arabia-it.net" + res?.data?.data?.files[0]?.path);
 
              
             })   
@@ -234,13 +255,16 @@ const [data,setData]=useState({
         </div>
         <div className="col-md-10 mt-5">
         <>
+        {/* <TinyEditor /> */}
             <Editor
+            apiKey="og3rhl59lf4s2xjbzvr12gnmdousustxzxc0jri4u3f72fiq"
             style={{zIndex:0}}
               onInit={(evt, editor) => (editorRef.current = editor)}
               initialValue={data?.content}
               init={{
                 height: 500,
-                menubar: false,
+                menubar: 'file edit view insert format tools table tc help',
+                
                 plugins: [
                   "a11ychecker",
                   "advlist",
@@ -254,8 +278,10 @@ const [data,setData]=useState({
                   "image",
                   "charmap",
                   "preview",
+                  // "quickbars",
                   "anchor",
                   "searchreplace",
+                  "fullscreen",
                   "visualblocks",
                   "powerpaste",
                   "fullscreen",
@@ -267,17 +293,19 @@ const [data,setData]=useState({
                   "wordcount",
                 ],
                 toolbar:
-                  "undo redo | casechange blocks | bold italic backcolor | " +
-                  "alignleft aligncenter alignright alignjustify | " +
-                  "bullist numlist checklist outdent indent | removeformat | a11ycheck code table help",
-                content_style:
-                  "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                "undo redo | casechange blocks | bold italic backcolor | " +
+                "alignleft aligncenter alignright alignjustify | " +
+                "bullist numlist checklist outdent indent | removeformat | a11ycheck code  table help    ",
+              content_style:
+                "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+            
+               
               }}
             />
             {/* <button onClick={log}>Log editor content</button> */}
           </>
         
-          <div className="mt-2 mb-2">
+          {/* <div className="mt-2 mb-2">
           <ImageUpload
               loader={loader}
               image={EnImage}
@@ -285,7 +313,7 @@ const [data,setData]=useState({
                 uploadEnimage(file);
               }}
             />
-          </div>
+          </div> */}
         </div>
         <div className="col-md-12">
         <div className="row ">

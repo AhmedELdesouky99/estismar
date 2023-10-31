@@ -199,7 +199,8 @@ const [errors,setErrors]=useState()
               initialValue={data?.content}
               init={{
                 height: 500,
-                menubar: false,
+                menubar: 'file edit view insert format tools table tc help',
+                
                 plugins: [
                   "a11ychecker",
                   "advlist",
@@ -213,8 +214,10 @@ const [errors,setErrors]=useState()
                   "image",
                   "charmap",
                   "preview",
+                  // "quickbars",
                   "anchor",
                   "searchreplace",
+                  "fullscreen",
                   "visualblocks",
                   "powerpaste",
                   "fullscreen",
@@ -226,11 +229,11 @@ const [errors,setErrors]=useState()
                   "wordcount",
                 ],
                 toolbar:
-                  "undo redo | casechange blocks | bold italic backcolor | " +
-                  "alignleft aligncenter alignright alignjustify | " +
-                  "bullist numlist checklist outdent indent | removeformat | a11ycheck code table help",
-                content_style:
-                  "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                "undo redo | casechange blocks | bold italic backcolor | " +
+                "alignleft aligncenter alignright alignjustify | " +
+                "bullist numlist checklist outdent indent | removeformat | a11ycheck code  table help    ",
+              content_style:
+                "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
               }}
             />
             {/* <button onClick={log}>Log editor content</button> */}
