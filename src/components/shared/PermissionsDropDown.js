@@ -4,11 +4,9 @@ import { ButtonGroup, Button, CircularProgress } from "@material-ui/core";
 import Select, { components } from "react-select";
 import { FormattedMessage } from "react-intl";
 import axios from "axios"
+import { useSelector } from "react-redux";
 
-const client = axios.create({
-  baseURL: "https://admin.waqfnami.com/api/admin" 
- 
-});
+
 const Menu = (props) => (
     
   <>
@@ -70,11 +68,16 @@ const PermissionsDropDown = ({
     const [options,setOptions]=useState([])
     const [pagination,setPagintation]=useState()
     const [page,setPage]=useState(1)
-
+    const { user } = useSelector((state) => state.authUser.user);
+    const client = axios.create({
+      baseURL: user.category =="admin" ? "https://admin.waqfnami.com/api/admin" :"https://admin.waqfnami.com/api" 
+     
+    });
     const incPage = () => setPage((pg) => pg + 1);
     const decPage = () => setPage((pg) => pg - 1);
     useEffect(()=>{
-        client.get("/roles?get_permissions=true" ,{
+      if(user.category =="admin"){
+        client.get("/roles?provider_group_permissions=true" ,{
           params:{
             page,
             limit:10
@@ -92,6 +95,28 @@ const PermissionsDropDown = ({
               currentPage:res.data.data?.current_page
           })
         })
+
+      }else if(user.category=="service-provider"){
+        client.get("/provider/group-permissions" ,{
+          params:{
+            page,
+            limit:10
+          }
+        }).then((res)=>{
+          const Alloptions =res.data.data.data.map(field=>(
+            {
+              label:field.display_name,
+              value:field.id,
+            }
+          ))
+          setOptions(Alloptions)
+          setPagintation({
+              last_page:res.data.data?.last_page,
+              currentPage:res.data.data?.current_page
+          })
+        })
+      }
+       
       
         
       },[page])

@@ -238,9 +238,9 @@ const handelClick=()=>{
                   </div>
                   <div className='col-md-5 col-sm-12'>
                      <div className='row justify-content-between m-0'>
-                        <p>
+                        {/* <p>
                         تذكرني
-                        </p>
+                        </p> */}
                         {/* <Link to="/" style={{color:"#150941"}}>
                         نسيت اسم المستخدم / كلمة المرور
                         </Link> */}

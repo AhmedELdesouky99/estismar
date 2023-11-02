@@ -32,6 +32,7 @@ const AddEditService = () => {
   const { id } = useParams();
   const history=useHistory()
 	const {user}=useSelector(state=>state.authUser.user)
+  const[errors,setErrors]=useState()
 console.log(user,"user redux ")
   const [Delivery, setDelivery] = useState({
     title:null,
@@ -126,11 +127,12 @@ console.log(user,"user redux ")
         text:" تم اضافه الخدمة بنجاح",
         icon: "success",
       });
+      setTimeout(()=>{
+        history.push("/app/services")
+      },2000)
+    }else{
+      setErrors(res.data.errors)
     }
-  }).then(()=>{
-    setTimeout(()=>{
-      history.push("/app/services")
-    },2000)
   })
  }
  const EditService=()=>{
@@ -148,10 +150,11 @@ console.log(user,"user redux ")
       setTimeout(()=>{
         history.push("/app/services")
       },2000)
+    }else{
+      setErrors(res.data.errors)
     }
   })
  }
- console.log(Delivery,"Delivery")
   return (
     <div className="clients-wrapper">
       <Helmet>
@@ -728,9 +731,9 @@ console.log(user,"user redux ")
                    
                   </ButtonGroup>
                 </div>
-                <div style={{ alignSelf: "center" }}>
+                {/* <div style={{ alignSelf: "center" }}>
                   <Switch inputProps={{ "aria-label": "primary checkbox" }} checked={true}/>
-                </div>
+                </div> */}
               </div>
               <div className="row mt-2">
                 <div className="col-md-3">
@@ -920,7 +923,6 @@ console.log(user,"user redux ")
                   <Select
                     options={rquiredOptions}
                     onChange={(sel) => {
-                      console.group(sel,"sel")
                       setServiceRequirements({
                         title: sel.label,
                         id: sel.value,
@@ -1127,6 +1129,22 @@ console.log(user,"user redux ")
                   </div>
                 </div>
               </div>
+              <div className='col-md-5 col-sm-12 '> 
+                  { 
+                  errors ? 
+                    Object.keys(errors)?.map((key,value)=>(
+                      <div className=''> 
+                        {errors[key]?.map(err=>(
+                        <div className='alert alert-danger'>
+                           {err}
+                        </div>
+                        ))
+                        }
+                      </div>
+                    ))
+                    : null
+                  }
+               </div>
               <div className="row justify-content-center mt-3">
         <div className="col-md-4">
           <button

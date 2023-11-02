@@ -53,9 +53,7 @@ export default function AllPosts() {
       }
     }).then(res=>setOwners(res.data.data))
 
-  }
-   
-     
+  }  
   },[page,limit,query,posts])
   useEffect(()=>{
     if(!posts){

@@ -25,7 +25,11 @@ const WalletTransactions =({ServiceProvider,advisorDetails})=>{
 return(
     <div>
          <div className="row justify-content-between">
-              <div className="col-sm-12 col-md-6 mt-1"> المحفظة</div>
+          {
+            user.category == "admin" ? 
+            <div className="col-sm-12 col-md-6 mt-1"> المحفظة</div>
+:null
+          }
               <div className="col-sm-12 col-md-6 mt-1">
                 <div className="row justify-content-end mt-3">
                { user.category !="admin" ?  null:

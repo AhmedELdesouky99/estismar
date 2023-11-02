@@ -380,7 +380,7 @@ const toggle=()=>setModal(!modal)
           </div>
         </div> */}
       </div>
-      <div className="row">
+      {/* <div className="row">
         <div className="col-md-4">
           <div>
             <FormGroup>
@@ -423,7 +423,7 @@ const toggle=()=>setModal(!modal)
             </FormGroup>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="row required">
       <div className="col-12">
        
