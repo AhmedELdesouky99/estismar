@@ -919,8 +919,18 @@ console.log(user,"user redux ")
                  </div>
                 </div>
                 <div className="col-md-10">
+                <Input
+                      style={{ borderColor: "#7EA831" }}
+                      placeholder={"00"}
+                      className="interval"
+                      type="text"
+                      value={serviceborder.price ? serviceborder.price : ""}
+                      onChange={(e) => {
+                        setServiceRequirements(e.target.value)
+                      }}
+                    />
                   {/* "service_requirment" */}
-                  <Select
+                  {/* <Select
                     options={rquiredOptions}
                     onChange={(sel) => {
                       setServiceRequirements({
@@ -929,7 +939,7 @@ console.log(user,"user redux ")
                       });
                     }}
                     placeholder="اختر من القائمة / ادخل متطلبات خدمتك"
-                  />
+                  /> */}
                 </div>
                 <div className="col-md-2">
                   <button
@@ -944,7 +954,7 @@ console.log(user,"user redux ")
                         ...Service?.service_requirment,
                       ];
                       console.log(serviceRequirements,serviceRequirements.length,"serviceRequirements karem")
-                      serviceRequirementsList.push(serviceRequirements.title ?serviceRequirements : [] );
+                      serviceRequirementsList.push(serviceRequirements ?serviceRequirements : [] );
 
                       setService({
                         ...Service,
