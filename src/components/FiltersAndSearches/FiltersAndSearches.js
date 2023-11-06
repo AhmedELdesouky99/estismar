@@ -165,7 +165,7 @@ export function FiltersAndSearches({
           <div className="col-md-2 mt-1">
             <FormGroup>
               <Label for="exampleEmail">
-                <FormattedMessage id={"االحالة"} />
+                <FormattedMessage id={"الحالة"} />
               </Label>
               <DropDownStatus1
                 valueAttribute="id"

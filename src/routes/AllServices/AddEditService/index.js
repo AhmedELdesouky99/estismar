@@ -295,7 +295,7 @@ console.log(user,"user redux ")
                     <div className="col-md-10">
                       <Input
                         style={{ borderColor: "#7EA831" }}
-                        placeholder={"ادخل خطوات التنفيذ كل خطوة على حدا"}
+                        placeholder={"أدخل خطوات التنفيذ "}
                         type="text"
                         value={steps}
                         onChange={(e) => setSteps(e.target.value)}
@@ -397,7 +397,7 @@ console.log(user,"user redux ")
                       <Input
                         style={{ borderColor: "#7EA831" }}
                         placeholder={
-                          "ادخل مخرجات الخدمة/ مواصفات التسليمات كل على حدا"
+                          "يكتب هنا ما سيتم تسليمه للعميل "
                         }
                         value={result}
                         type="text"
@@ -774,7 +774,7 @@ console.log(user,"user redux ")
                   <Input
                     style={{ borderColor: "#7EA831" }}
                     placeholder={
-                      "ادخل مخرجات الخدمة/ مواصفات التسليمات كل على حدا"
+                      "ادخل مراحل التسليم"
                     }
                     type="text"
                     value={Delivery.title || ""}
@@ -1028,7 +1028,7 @@ console.log(user,"user redux ")
                 <div className="col-md-7">
                   <Input
                     style={{ borderColor: "#7EA831" }}
-                    placeholder={"الأمور التي خارج النطاق"}
+                    placeholder={" ادخل ان وجدت خدمات مرتبطة بالحدمة أعلاه ولكن لها تكلفة جديدة "}
                     type="text"
                     value={serviceborder.title ? serviceborder.title : ""}
                     onChange={(e) => {
