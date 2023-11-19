@@ -16,8 +16,8 @@
 // import { Button } from "reactstrap";
 // import { FormattedMessage } from "react-intl";
 // const client = axios.create({
-//   baseURL: "https://admin.waqfnami.com/api/admin" 
- 
+//   baseURL: "https://admin.waqfnami.com/api/admin"
+
 // });
 // export default function ServiceProviders() {
 //   const location = useLocation();
@@ -66,8 +66,7 @@
 //         <div className="col-lg-3 col-md-3">
 //           <CustomCard color="#EEB6561A" name="مرفوض"/>
 //         </div>
-       
-      
+
 //       </div>
 //       <RctCard>
 //         <RctCardContent>
@@ -81,18 +80,18 @@
 //             color="primary"
 //             className="mx-smt-15 btn  mr-1 ml-1 border-0"
 //             onClick={()=>history.push("/app/owners-assets/add")}
-          
+
 //           >
 //             <span className="mr-1 ml-1">
 //               <FormattedMessage id={"إضافة وقف"} />
 //             </span>
 //           </Button>
-              
+
 //             </div>
 //           </div>
 //           <hr />
 //           <div className="row">
-          
+
 //                   <FiltersAndSearches
 //                     make="make"
 //                     submitbtnid="search.filter"
@@ -120,27 +119,34 @@
  * Crm Routes
  */
 /* eslint-disable */
-import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import React from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 // async components
 
-import ServiceProvidersComponent from "./ServiceProviders"
-import AddEditServiceProvider from "./AddEditServiceProvider/index"
+import ServiceProvidersComponent from "./ServiceProviders";
+import AddEditServiceProvider from "./AddEditServiceProvider/index";
 const ServiceProviders = ({ match }) => (
-  
-   <div className="Crm-wrapper">
-      <Switch>
-         {/* <Redirect exact from={`${match.url}/`} to={`${match.url}/`} /> */}
-         <Route exact path={`${match.url}/`} component={ServiceProvidersComponent} />
-         <Route exact path={`${match.url}/add`} component={AddEditServiceProvider} />
-       
-         <Route exact path={`${match.url}/:id`} component={AddEditServiceProvider} />
-
-
-         
-      </Switch>
-   </div>
+  <div className='Crm-wrapper'>
+    <Switch>
+      {/* <Redirect exact from={`${match.url}/`} to={`${match.url}/`} /> */}
+      <Route
+        exact
+        path={`${match.url}/`}
+        component={ServiceProvidersComponent}
+      />
+      <Route
+        exact
+        path={`${match.url}/add`}
+        component={AddEditServiceProvider}
+      />
+      <Route
+        exact
+        path={`${match.url}/:id`}
+        component={AddEditServiceProvider}
+      />
+    </Switch>
+  </div>
 );
 
 export default ServiceProviders;

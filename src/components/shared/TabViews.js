@@ -38,16 +38,11 @@
 //       notifications: null
 //    };
 
- 
-
 //    // get messages
- 
 
 //    // get notification types
 
-
 //    // get notifications
-
 
 //    handleChange = (event, value) => {
 //       this.setState({ value });
@@ -61,14 +56,13 @@
 //     * Function to return notification name
 //     */
 
-   
 //    render() {
 //       const { theme } = this.props;
 //       const { messages, notifications } = this.state;
 // console.log(this.state.value,"this.state.value")
 // function TabPanel(props) {
 //    const { children, value, index, ...other } = props;
- 
+
 //    return (
 //      <div
 //        role="tabpanel"
@@ -84,7 +78,7 @@
 //        )}
 //      </div>
 //    );
-//  } 
+//  }
 //       return (
 //          <Fragment>
 //             <AppBar position="static" color="default" className="mb-2">
@@ -96,24 +90,24 @@
 //                   variant="fullWidth"
 //                >
 //                  {
-//                   this.props.serviceProvider ? 
+//                   this.props.serviceProvider ?
 //                   <>
 //                   <Tab label={<IntlMessages id="البروفايل" />} />
 //                    <Tab label={<IntlMessages id="الخدمات" />} />
 //                   <Tab label={<IntlMessages id="الباقات" />} />
 //                   <Tab label={<IntlMessages id="الاستشارات" />} />
 //                   <Tab label={<IntlMessages id="المحفظة" />} />
-//                   <Tab label={<IntlMessages id="الفواتير" />} /> 
+//                   <Tab label={<IntlMessages id="الفواتير" />} />
 //                   </>
-                 
-//                   : this.props.advisor ? 
+
+//                   : this.props.advisor ?
 //                   <>
 //                    <Tab label={<IntlMessages id="البروفايل" />} />
 //                   <Tab label={<IntlMessages id="الاستشارات" />} />
 //                   <Tab label={<IntlMessages id="المحفظة" />} />
 //                   <Tab label={<IntlMessages id="الفواتير" />} />
 //                   </>
-                  
+
 //                   :
 //                  <>
 //                 <Tab label={<IntlMessages id="البروفايل" />} />
@@ -121,7 +115,7 @@
 //                   <Tab label={<IntlMessages id="الباقات" />} />
 //                   <Tab label={<IntlMessages id="الاستشارات" />} />
 //                   <Tab label={<IntlMessages id="المحفظة" />} />
-//                   <Tab label={<IntlMessages id="الفواتير" />} /> 
+//                   <Tab label={<IntlMessages id="الفواتير" />} />
 //                  </>
 //                  }
 //                </Tabs>
@@ -131,27 +125,27 @@
 //                   axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
 //                   index={this.state.value}
 //                   onChangeIndex={this.handleChangeIndex}>
-               
+
 //                </SwipeableViews> */}
 //                   <div className="card mb-2 notification-box">
 //                      <TabContainer dir={theme.direction}>
-                       
+
 //                         <TabPanel value={this.state.value} index={0}>
 //                         {
-//                            this.props.serviceProvider ? 
+//                            this.props.serviceProvider ?
 //                            <ServiceProviderProfile providerDetails={this.props.providerDetails}/>
-//                            : 
-//                            this.props.advisor ? 
-//                            <AdvisorProfile advisorDetails={this.props.advisorDetails}/> 
 //                            :
-//                         <OwnerProfile ownerDetails={this?.props?.ownerDetails}/> 
+//                            this.props.advisor ?
+//                            <AdvisorProfile advisorDetails={this.props.advisorDetails}/>
+//                            :
+//                         <OwnerProfile ownerDetails={this?.props?.ownerDetails}/>
 
 //                         }
 //                         </TabPanel>
 //                         <TabPanel value={this.state.value} index={1}>
 //                            <Services inTabs={true}/>
 //                         </TabPanel>
-                        
+
 //                      </TabContainer>
 //                   </div>
 //             {/* </Scrollbars> */}
@@ -162,34 +156,32 @@
 
 // export default withStyles(null, { withTheme: true })(TabViews);
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import OwnerProfile from './OwnersProfile';
-import ServiceProviderProfile from './ServiceProviderProfile';
-import AdvisorProfile from "./AdvisorProfile"
-import Services from '../../routes/AllServices/AllServices';
-import AssetsService from "../../routes/owner-assets/AssetsService"
-import AllTeam from '../../routes/service-providers/AllTeam';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import {
-  ChangeRoute
-} from 'Actions';
-import AllConsulting from '../../routes/Advisors/AllConsults';
-import WalletTransactions from './WalletTransactions';
-import InvoiceTable from './InvoicesTable';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import OwnerProfile from "./OwnersProfile";
+import ServiceProviderProfile from "./ServiceProviderProfile";
+import AdvisorProfile from "./AdvisorProfile";
+import Services from "../../routes/AllServices/AllServices";
+import AssetsService from "../../routes/owner-assets/AssetsService";
+import AllTeam from "../../routes/service-providers/AllTeam";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { ChangeRoute } from "Actions";
+import AllConsulting from "../../routes/Advisors/AllConsults";
+import WalletTransactions from "./WalletTransactions";
+import InvoiceTable from "./InvoicesTable";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
     <div
-      role="tabpanel"
+      role='tabpanel'
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
@@ -213,7 +205,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -227,99 +219,120 @@ const useStyles = makeStyles((theme) => ({
 export default function TabsView(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-const {user}=useSelector(state=>state.authUser.user)
-const {sidebar}=useSelector(state=>state)
-const dispatch=useDispatch()
+  const { user } = useSelector((state) => state.authUser.user);
+  const { sidebar } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const handleChange = (event, newValue) => {
-    dispatch(ChangeRoute(newValue))
+    dispatch(ChangeRoute(newValue));
     setValue(newValue);
   };
-// useEffect(()=>{
+  // useEffect(()=>{
 
-// },[sidebar.index])
+  // },[sidebar.index])
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{display:user.category =="service-provider"  || user.category =="provider-employee" ? "none" :""}}>
-     
-
-         {
-              props.serviceProvider ? 
-              <Tabs value={sidebar.index} onChange={handleChange} aria-label="simple tabs example" style={{justifyContent:"space-between"}}>
-              <Tab label="البروفايل" {...a11yProps(0)} />
-              <Tab label="الخدمات" {...a11yProps(1)} />
-              <Tab label="الباقات" {...a11yProps(2)} />
-              <Tab label="فريق العمل" {...a11yProps(3)} />
-              <Tab label="المحفظة" {...a11yProps(4)} />
-              <Tab label="الفواتير" {...a11yProps(5)} />
-              <Tab label="المراجعات" {...a11yProps(6)} />
-              </Tabs>
-            : 
-            props.advisor ? 
-            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example"  style={{justifyContent:"space-between"}}>
-            <Tab label="البروفايل" {...a11yProps(0)} />
-            <Tab label="الاستشارات" {...a11yProps(1)} />
-            <Tab label="المحفظة" {...a11yProps(2)} />
-            <Tab label="الفواتير" {...a11yProps(3)} />
-           </Tabs>
-          :
-          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" style={{justifyContent:"space-between"}}>
-          <Tab label="البروفايل" {...a11yProps(0)} />
-          <Tab label="الخدمات" {...a11yProps(1)} />
-          <Tab label="باقات" {...a11yProps(2)} />
-          <Tab label="استشارات" {...a11yProps(3)} />
-          <Tab label="المحفظة" {...a11yProps(4)} />
-          <Tab label="الفواتير" {...a11yProps(5)} />
+      <AppBar
+        position='static'
+        style={{
+          display:
+            user.category == "service-provider" ||
+            user.category == "provider-employee"
+              ? "none"
+              : "",
+        }}
+      >
+        {props.serviceProvider ? (
+          <Tabs
+            value={sidebar.index}
+            onChange={handleChange}
+            aria-label='simple tabs example'
+            style={{ justifyContent: "space-between" }}
+          >
+            <Tab label='البروفايل' {...a11yProps(0)} />
+            <Tab label='الخدمات' {...a11yProps(1)} />
+            <Tab label='الباقات' {...a11yProps(2)} />
+            <Tab label='فريق العمل' {...a11yProps(3)} />
+            <Tab label='المحفظة' {...a11yProps(4)} />
+            <Tab label='الفواتير' {...a11yProps(5)} />
+            <Tab label='المراجعات' {...a11yProps(6)} />
           </Tabs>
-
-         }
-           
-       
+        ) : props.advisor ? (
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label='simple tabs example'
+            style={{ justifyContent: "space-between" }}
+          >
+            <Tab label='البروفايل' {...a11yProps(0)} />
+            <Tab label='الاستشارات' {...a11yProps(1)} />
+            <Tab label='المحفظة' {...a11yProps(2)} />
+            <Tab label='الفواتير' {...a11yProps(3)} />
+          </Tabs>
+        ) : (
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label='simple tabs example'
+            style={{ justifyContent: "space-between" }}
+          >
+            <Tab label='البروفايل' {...a11yProps(0)} />
+            <Tab label='الخدمات' {...a11yProps(1)} />
+            <Tab label='باقات' {...a11yProps(2)} />
+            <Tab label='استشارات' {...a11yProps(3)} />
+            <Tab label='المحفظة' {...a11yProps(4)} />
+            <Tab label='الفواتير' {...a11yProps(5)} />
+          </Tabs>
+        )}
       </AppBar>
       <TabPanel value={sidebar.index} index={0}>
-      {
-                          props.serviceProvider ? 
-                            <ServiceProviderProfile providerDetails={props.providerDetails}/>
-                            : 
-                           props.advisor ? 
-                            <AdvisorProfile advisorDetails={props.advisorDetails}/> 
-                            :
-                         <OwnerProfile ownerDetails={props?.ownerDetails}/> 
-
-                         }
+        {props.serviceProvider ? (
+          <ServiceProviderProfile providerDetails={props.providerDetails} />
+        ) : props.advisor ? (
+          <AdvisorProfile advisorDetails={props.advisorDetails} />
+        ) : (
+          <OwnerProfile ownerDetails={props?.ownerDetails} />
+        )}
       </TabPanel>
       <TabPanel value={sidebar.index} index={1}>
-        {
-             props.serviceProvider ? 
-             <Services inTabs={true}/> : 
-             props?.ownerDetails ? 
-             <AssetsService />
-             : <AllConsulting  inTabs={true}/>
-        }
-     
+        {props.serviceProvider ? (
+          <Services inTabs={true} />
+        ) : props?.ownerDetails ? (
+          <AssetsService />
+        ) : (
+          <AllConsulting inTabs={true} />
+        )}
       </TabPanel>
       <TabPanel value={sidebar.index} index={2}>
-      {
-          <WalletTransactions ServiceProvider={props?.providerDetails} advisorDetails={props.advisorDetails} />
+        {
+          <WalletTransactions
+            ServiceProvider={props?.providerDetails}
+            advisorDetails={props.advisorDetails}
+          />
         }
       </TabPanel>
       <TabPanel value={sidebar.index} index={3}>
-        {
-          props.serviceProvider ? <AllTeam /> :    props.advisor  ?   <InvoiceTable ServiceProvider={props?.providerDetails} advisorDetails={props.advisorDetails}/> :null
-        }
+        {props.serviceProvider ? (
+          <AllTeam />
+        ) : props.advisor ? (
+          <InvoiceTable
+            ServiceProvider={props?.providerDetails}
+            advisorDetails={props.advisorDetails}
+          />
+        ) : null}
       </TabPanel>
       <TabPanel value={sidebar.index} index={4}>
         {
-          <WalletTransactions ServiceProvider={props?.providerDetails}  advisorDetails={props.advisorDetails} />
+          <WalletTransactions
+            ServiceProvider={props?.providerDetails}
+            advisorDetails={props.advisorDetails}
+          />
         }
       </TabPanel>
       <TabPanel value={sidebar.index} index={5}>
-        {
-          <InvoiceTable ServiceProvider={props?.providerDetails} />
-        }
+        {<InvoiceTable ServiceProvider={props?.providerDetails} />}
       </TabPanel>
-      
     </div>
   );
 }

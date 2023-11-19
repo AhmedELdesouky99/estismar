@@ -13,7 +13,10 @@ import PerPage from "Components/shared/PerPage";
 
 import axios from "axios"
 const client = axios.create({
-  baseURL: "https://admin.waqfnami.com/api/admin" 
+  baseURL: "https://admin.waqfnami.com/api/admin" ,
+  headers:{
+    'Authorization':`Bearer ${localStorage.getItem("token")}`,
+  },
  
 });
 function ServiceList({ allowners, loading, setPage, limit, setLimit ,status}) {
@@ -91,6 +94,8 @@ function ServiceList({ allowners, loading, setPage, limit, setLimit ,status}) {
   const dropdownActions =(record)=>(
     <StatusDropDown forService={true} status={status} activationStatus={record.is_active} id={record.id} client={client} url={`service/${record.id}`}/>
   )
+
+  console.log(collection,'collection')
   return (
     <Typography component="div" style={{ padding: "10px", marginTop: "20px" }}>
       <div>
