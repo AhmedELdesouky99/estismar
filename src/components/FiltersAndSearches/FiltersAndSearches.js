@@ -76,18 +76,23 @@ export function FiltersAndSearches({
     setcollectedQuery(query);
     setQuery(query);
   }
-	const {user}=useSelector(state=>state.authUser.user)
+  const { user } = useSelector((state) => state.authUser.user);
   return (
-    <form className="w-100" onSubmit={(e) => e.preventDefault()}>
-      <div className="row grid-gap-10 w-100 m-0">
+    <form className='w-100' onSubmit={(e) => e.preventDefault()}>
+      <div className='row grid-gap-10 w-100 m-0'>
         {fields
           ?.filter((field) => field?.type === "search")
           .map((field) => {
             if (!field.name) return Alert("Please Provide a name");
             return (
-              <div className={ role ? "col-sm-12 col-md-10 mt-1"  : "col-sm-12 col-md-3 mt-1"} key={field?.name}>
+              <div
+                className={
+                  role ? "col-sm-12 col-md-10 mt-1" : "col-sm-12 col-md-3 mt-1"
+                }
+                key={field?.name}
+              >
                 <FormGroup>
-                  <Label for="exampleEmail">
+                  <Label for='exampleEmail'>
                     <FormattedMessage id={field?.label} />
                   </Label>
                   <Input
@@ -107,17 +112,17 @@ export function FiltersAndSearches({
                           : e.target.value.trimStart(),
                       });
                     }}
-                    type="text"
+                    type='text'
                   />
                 </FormGroup>
               </div>
             );
           })}
- 
+
         {filters?.includes("fields") && (
-          <div className="col-md-3 mt-1">
+          <div className='col-md-3 mt-1'>
             <FormGroup>
-              <Label for="exampleEmail">
+              <Label for='exampleEmail'>
                 <FormattedMessage id={"قائمة التصنيفات"} />
               </Label>
 
@@ -129,132 +134,146 @@ export function FiltersAndSearches({
             </FormGroup>
           </div>
         )}
-        {filters?.includes("service_provider")  && user?.category != "service-provider" && (
-          <div className="col-md-3 mt-1">
-            <FormGroup>
-              <Label for="exampleEmail">
-                <FormattedMessage id={"مزود الخدمة"} />
-              </Label>
+        {filters?.includes("service_provider") &&
+          user?.category != "service-provider" && (
+            <div className='col-md-3 mt-1'>
+              <FormGroup>
+                <Label for='exampleEmail'>
+                  <FormattedMessage id={"مزود الخدمة"} />
+                </Label>
 
-              <ServiceProviderDropDown
-                onChange={(sel) => {
-                  setcollectedQuery({ ...collectedQuery, service_provider_id: sel.value });
-                }}
-              />
-            </FormGroup>
-          </div>
-        )}
-       {filters?.includes("status") && (
-          <div className="col-md-2 mt-1">
+                <ServiceProviderDropDown
+                  onChange={(sel) => {
+                    setcollectedQuery({
+                      ...collectedQuery,
+                      service_provider_id: sel.value,
+                    });
+                  }}
+                />
+              </FormGroup>
+            </div>
+          )}
+        {filters?.includes("status") && (
+          <div className='col-md-2 mt-1'>
             <FormGroup>
-              <Label for="exampleEmail">
-                <FormattedMessage id={"االحالة"} />
+              <Label for='exampleEmail'>
+                <FormattedMessage id={"الحالة"} />
               </Label>
               <DropDownStatus
-                valueAttribute="id"
+                valueAttribute='id'
                 selectedStatus={collectedQuery?.status}
                 onChange={(status) => {
-                  return setcollectedQuery({ ...collectedQuery, status: status.value == 0 ? "0" :status.value });
+                  return setcollectedQuery({
+                    ...collectedQuery,
+                    status: status.value == 0 ? "0" : status.value,
+                  });
                 }}
               />
             </FormGroup>
           </div>
         )}
-        
+
         {filters?.includes("status1") && (
-          <div className="col-md-2 mt-1">
+          <div className='col-md-2 mt-1'>
             <FormGroup>
-              <Label for="exampleEmail">
+              <Label for='exampleEmail'>
                 <FormattedMessage id={"الحالة"} />
               </Label>
               <DropDownStatus1
-                valueAttribute="id"
+                valueAttribute='id'
                 selectedStatus={collectedQuery?.status}
                 onChange={(status) => {
-                  return setcollectedQuery({ ...collectedQuery, status: status.value == 0 ? "0" :status.value });
+                  return setcollectedQuery({
+                    ...collectedQuery,
+                    status: status.value == 0 ? "0" : status.value,
+                  });
                 }}
               />
             </FormGroup>
           </div>
         )}
-        {
-          filters?.includes("support") && user.category!="service-provider" && (
-            <div className="col-md-2 mt-1">
+        {filters?.includes("support") &&
+          user.category != "service-provider" && (
+            <div className='col-md-2 mt-1'>
+              <FormGroup>
+                <Label for='exampleEmail'>
+                  <FormattedMessage id={"الدعم"} />
+                </Label>
+                <Select
+                  options={[
+                    { label: "مدعوم", value: "1" },
+                    { label: "غير مدعوم", value: "0" },
+                  ]}
+                  placeholder='عرض الكل'
+                  onChange={(sel) => {
+                    return setcollectedQuery({
+                      ...collectedQuery,
+                      support_ratio: sel.value,
+                    });
+                  }}
+                />
+              </FormGroup>
+            </div>
+          )}
+        {filters.includes("userCategory") && (
+          <div className='col-md-2 mt-1'>
             <FormGroup>
-              <Label for="exampleEmail">
-                <FormattedMessage id={"الدعم"} />
-              </Label>
-              <Select
-              options={[
-                {label:"مدعوم",value:"1"},
-                {label:"غير مدعوم",value:"0"}
-            ]}
-              placeholder="عرض الكل"
-                onChange={(sel) => {
-                  return setcollectedQuery({ ...collectedQuery, support_ratio: sel.value });
-                }}
-              />
-            </FormGroup>
-          </div>
-          )
-        }
-        {
-          filters.includes("userCategory") && (
-            <div className="col-md-2 mt-1">
-            <FormGroup>
-              <Label for="exampleEmail">
+              <Label for='exampleEmail'>
                 <FormattedMessage id={"نوع الحساب"} />
               </Label>
               <Select
-              options={[
-                {label:"مستشار",value:"advisor"},
-                {label:"وقف",value:"asset-owner"},
-                {label:"مزود خدمة",value:"service-provider"}
-
-            ]}
-              placeholder="عرض الكل"
+                options={[
+                  { label: "مستشار", value: "advisor" },
+                  { label: "وقف", value: "asset-owner" },
+                  { label: "مزود خدمة", value: "service-provider" },
+                ]}
+                placeholder='عرض الكل'
                 onChange={(sel) => {
-                  return setcollectedQuery({ ...collectedQuery, user_category: sel.value });
+                  return setcollectedQuery({
+                    ...collectedQuery,
+                    user_category: sel.value,
+                  });
                 }}
               />
             </FormGroup>
           </div>
-          )
-        }
-         {filters?.includes("Transstatus") && (
-          <div className="col-md-2 mt-1">
+        )}
+        {filters?.includes("Transstatus") && (
+          <div className='col-md-2 mt-1'>
             <FormGroup>
-              <Label for="exampleEmail">
-                <FormattedMessage id={"االحالة"} />
+              <Label for='exampleEmail'>
+                <FormattedMessage id={"الحالة"} />
               </Label>
               <Select
-              options={[
-                {label:"مدفوع",value:"paid"},
-                {label:"عير مدفوع",value:"failed"}
-
-            ]}
-              placeholder="عرض الكل"
+                options={[
+                  { label: "مدفوع", value: "paid" },
+                  { label: "عير مدفوع", value: "failed" },
+                ]}
+                placeholder='عرض الكل'
                 onChange={(sel) => {
-                  return setcollectedQuery({ ...collectedQuery, status: sel.value });
+                  return setcollectedQuery({
+                    ...collectedQuery,
+                    status: sel.value,
+                  });
                 }}
               />
             </FormGroup>
           </div>
         )}
         <div
-          className="mt-1 d-flex flex-row justify-content-end"
+          className='mt-1 d-flex flex-row justify-content-end'
           style={{ alignSelf: "center" }}
         >
           <Button
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             style={{
               background: "#7EA831",
               width: "200px",
               fontWeight: "bold",
             }}
-            className="mx-smt-15 btn  mr-1 ml-1"
-            type="submit"
+            className='mx-smt-15 btn  mr-1 ml-1'
+            type='submit'
             ref={submitBtnRef}
             onClick={() => {
               const trimmedQuery = {};
@@ -273,7 +292,7 @@ export function FiltersAndSearches({
               // refetch();
             }}
           >
-            <span className="mr-1 ml-1">
+            <span className='mr-1 ml-1'>
               <FormattedMessage id={"تصفية"} />
             </span>
           </Button>

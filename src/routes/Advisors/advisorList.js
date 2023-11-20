@@ -8,73 +8,85 @@ import useSetState from "Hooks/useSetState";
 import RctCollapsibleCard from "Components/RctCollapsibleCard/RctCollapsibleCard";
 import CustomTable from "Components/shared/CustomTable";
 import { AdvisorData } from "./AdvisorData";
-import StatusDropDown from "Components/shared/StatusDropDown"
+import StatusDropDown from "Components/shared/StatusDropDown";
 import PerPage from "Components/shared/PerPage";
 
-import axios from "axios"
+import axios from "axios";
 const client = axios.create({
-  baseURL: "https://admin.waqfnami.com/api/admin" 
- 
+  baseURL: "https://admin.waqfnami.com/api/admin",
 });
-function AdvisorList({ allowners, loading, setPage, limit, setLimit ,status}) {
+function AdvisorList({ allowners, loading, setPage, limit, setLimit, status }) {
   const history = useHistory();
   const [owners, setOwners] = useSetState({
     collection: [],
     metadata: {},
   });
-  const { collection ,metadata} = owners;
+  const { collection, metadata } = owners;
   useEffect(() => {
     setOwners({
       collection: allowners?.data,
       metadata: {
-        totalCount:allowners?.total,
-        currentPage:allowners?.current_page
-      }, 
+        totalCount: allowners?.total,
+        currentPage: allowners?.current_page,
+      },
     });
   }, [allowners]);
 
   const handelDeleteBanner = (id) => {
-    const filteredService= owners.collection.filter(service=>service.user_id != id)
+    const filteredService = owners.collection.filter(
+      (service) => service.user_id != id
+    );
     setOwners({
-      collection:filteredService,
-      metadata:allowners?.allowners?.metadata,
-    })
+      collection: filteredService,
+      metadata: allowners?.allowners?.metadata,
+    });
 
-    client.delete(`/advisor/${id}`).then((res)=>console.log(res,"res")).catch((err)=>console.log(err,"err"))
-
+    client
+      .delete(`/advisor/${id}`)
+      .then((res) => console.log(res, "res"))
+      .catch((err) => console.log(err, "err"));
   };
 
   const actions = ({ user_id }) => (
-    <div className="d-flex align-items-center" style={{ gap: "5px" }}>
+    <div className='d-flex align-items-center' style={{ gap: "5px" }}>
       {/* Redirects to Car details */}
 
-      
-        <Tooltip title={ "common.edit"} placement="top">
-          <Link to={`/app/advisors/${user_id}`}>
-            <button className="border-0" style={{background:"#23D381",color:"#fff"}}>
-            <i className=" ti-eye m-1"></i>
+      <Tooltip title={"common.edit"} placement='top'>
+        <Link to={`/app/advisors/${user_id}`}>
+          <button
+            className='border-0'
+            style={{ background: "#23D381", color: "#fff" }}
+          >
+            <i className=' ti-eye m-1'></i>
+          </button>
+        </Link>
+      </Tooltip>
 
-            </button>
-          </Link>
-        </Tooltip>
-      
-      <Tooltip title={"common.delete"} placement="top">
-      <button className="border-0" style={{background:"#CF4949",color:"#fff"}}>
-
-        <i
-          style={{ cursor: "pointer" }}
-          className=" ti-trash m-1"
-          onClick={() => handelDeleteBanner(user_id)}
-        ></i>
+      <Tooltip title={"common.delete"} placement='top'>
+        <button
+          className='border-0'
+          style={{ background: "#CF4949", color: "#fff" }}
+        >
+          <i
+            style={{ cursor: "pointer" }}
+            className=' ti-trash m-1'
+            onClick={() => handelDeleteBanner(user_id)}
+          ></i>
         </button>
       </Tooltip>
     </div>
   );
-  const dropdownActions =(record)=>(
-    <StatusDropDown status={status} activationStatus={record.user?.is_active} id={record.user_id} client={client} url={`advisor/${record.user_id}`}/>
-  )
+  const dropdownActions = (record) => (
+    <StatusDropDown
+      status={status}
+      activationStatus={record.user?.is_active}
+      id={record.user_id}
+      client={client}
+      url={`advisor/${record.user_id}`}
+    />
+  );
   return (
-    <Typography component="div" style={{ padding: "10px", marginTop: "20px" }}>
+    <Typography component='div' style={{ padding: "10px", marginTop: "20px" }}>
       <div>
         <RctCollapsibleCard fullBlock table>
           <CustomTable
@@ -87,7 +99,7 @@ function AdvisorList({ allowners, loading, setPage, limit, setLimit ,status}) {
           />
         </RctCollapsibleCard>
       </div>
-      <div className="d-flex justify-content-around">
+      <div className='d-flex justify-content-around'>
         {metadata?.currentPage && (
           <>
             <Pagination

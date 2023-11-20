@@ -91,6 +91,7 @@ export const LogOut = () => (dispatch) => {
    //    })
    dispatch({ type: LOGOUT_USER });
          localStorage.removeItem('user_id');
+         window.location.href="/signin"
          NotificationManager.success('User Logout Successfully');
 
 }
