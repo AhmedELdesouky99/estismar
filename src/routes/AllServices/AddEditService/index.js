@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
-// // page title bar
 import PageTitleBar from "Components/PageTitleBar/PageTitleBar";
-// // intl messages
 import IntlMessages from "Util/IntlMessages";
 
 import { RctCard, RctCardContent } from "Components/RctCard";
@@ -11,27 +9,27 @@ import { FormGroup, Label, Input, ButtonGroup, Button } from "reactstrap";
 // import Switch from "react-toggle-switch";
 import Switch from "@material-ui/core/Switch";
 
-import axios from "axios";
 import { FormattedHTMLMessage, FormattedMessage } from "react-intl";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
-import ServiceProviderDropDown from "../../../components/shared/ServiceProviderDropDown";
 import FieldsDropDown from "../../../components/shared/FieldsDropDown";
 import Select from "react-select";
 import { useSelector } from "react-redux";
-import { admin } from "../../../util/axios";
+import { admin, userReq } from "../../../util/axios";
 import swal from "sweetalert";
+import { checkObjectValues } from "../../../util/validateObj";
+import { showErrors } from "../../../util/errorsAlerts";
 
 const AddEditService = () => {
   const [rSelected, setRSelected] = useState(null);
   const [steps, setSteps] = useState();
   const [result, setResult] = useState();
-  const [rquiredOptions, setRequiredOptions] = useState([]);
+  // const [rquiredOptions, setRequiredOptions] = useState([]);
   const { id } = useParams();
   const history = useHistory();
   const { user } = useSelector((state) => state.authUser.user);
   const [errors, setErrors] = useState();
-  console.log(user, "user redux");
+  // console.log(user, "user redux");
   const [Delivery, setDelivery] = useState({
     title: null,
     count: null,
@@ -67,15 +65,7 @@ const AddEditService = () => {
     service_requirment: [],
     service_border: [],
   });
-  useEffect(() => {
-    admin.get("/service-requirment").then((res) => {
-      const options = res.data.data?.map((one) => ({
-        label: one.title,
-        value: one.title,
-      }));
-      setRequiredOptions(options);
-    });
-  }, []);
+
   useEffect(() => {
     if (id) {
       admin.get(`/service/${id}`).then((res) => {
@@ -118,9 +108,10 @@ const AddEditService = () => {
   }, [id]);
 
   const AddService = () => {
-    admin
-      .post("/service", {
+    userReq
+      .post("/provider/service", {
         ...Service,
+        support_ratio: 0,
       })
       .then((res) => {
         if (res.data.success) {
@@ -133,13 +124,13 @@ const AddEditService = () => {
             history.push("/app/services");
           }, 2000);
         } else {
-          setErrors(res.data.errors);
+          showErrors(res.data.errors);
         }
       });
   };
   const EditService = () => {
     admin
-      .put(`service/${id}`, {
+      .put(`/provider/service/${id}`, {
         ...Service,
         service_requirment: Service.service_requirment.map((req) => req.title),
         type: "update",
@@ -155,10 +146,53 @@ const AddEditService = () => {
             history.push("/app/services");
           }, 2000);
         } else {
-          setErrors(res.data.errors);
+          showErrors(res.data.errors);
         }
       });
   };
+
+  function handleSave() {
+    const result = checkObjectValues(
+      [
+        { key: "title", name: "اسم الخدمة" },
+        { key: "field_id", name: "تصنيف الخدمة" },
+        { key: "description", name: " وصف الخدمة" },
+        { key: "executive_steps", name: " خطوات التنفيذ" },
+        { key: "executive_result", name: " مخرجات الخدمة/ مواصفات التسليمات" },
+        { key: "stages_of_delivery", name: " مراحل التسليم" },
+        { key: "cost", name: " التكلفة" },
+      ],
+      Service
+    );
+    if (Service.title.length < 5) {
+      return swal({
+        title: "",
+        text: "اسم الخدمة لا يقل عن 5 احرف",
+        icon: "error",
+      });
+    }
+    if (Service.description.length < 5) {
+      return swal({
+        title: "",
+        text: "وصف الخدمة لا يقل عن 10 احرف",
+        icon: "error",
+      });
+    }
+
+    if (result.success) {
+      if (id) {
+        EditService();
+      } else {
+        AddService();
+      }
+    } else {
+      swal({
+        title: "",
+        text: result.because + " مطلوب",
+        icon: "error",
+      });
+    }
+  }
   return (
     <div className='admins-wrapper'>
       <Helmet>
@@ -179,7 +213,9 @@ const AddEditService = () => {
                 <div>
                   <FormGroup>
                     <Label for='exampleSelect'>مزود الخدمة</Label>
-                    <p>{user?.name}</p>
+                    <p>
+                      {user?.service_provider?.company_name_ar || "غير معروف"}
+                    </p>
 
                     {/* {user?.category == "service-provider" ||
                     user?.category == "provider-employee" ? (
@@ -221,6 +257,7 @@ const AddEditService = () => {
                       <FormattedMessage id={"اسم الخدمة"} />
                     </Label>
                     <Input
+                      minLength={5}
                       id='exampleSelect'
                       name='select'
                       type='text'
@@ -263,14 +300,14 @@ const AddEditService = () => {
                       <Input
                         id='exampleText'
                         name='text'
-                        type='textarea'
+                        type='text'
+                        value={Service?.description}
                         onChange={(e) => {
                           setService({
                             ...Service,
                             description: e.target.value,
                           });
                         }}
-                        value={Service.description}
                         style={{
                           height: "90px",
                           resize: "none",
@@ -1258,7 +1295,7 @@ const AddEditService = () => {
                       color: "#fff",
                       fontSize: "20px",
                     }}
-                    onClick={() => (id ? EditService() : AddService())}
+                    onClick={() => handleSave()}
                   >
                     حفظ
                   </button>

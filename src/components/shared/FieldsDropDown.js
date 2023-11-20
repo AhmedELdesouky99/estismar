@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ButtonGroup, Button, CircularProgress } from "@material-ui/core";
 import Select, { components } from "react-select";
 import { FormattedMessage } from "react-intl";
-import { admin } from "../../util/axios";
+import { userReq } from "../../util/axios";
 
 const Menu = (props) => (
   <>
@@ -70,8 +70,8 @@ const FieldsDropDown = ({
   const incPage = () => setPage((pg) => pg + 1);
   const decPage = () => setPage((pg) => pg - 1);
   useEffect(() => {
-    admin
-      .get("/service-provider-fields", {
+    userReq
+      .get("/fields", {
         params: {
           page,
           limit: 10,

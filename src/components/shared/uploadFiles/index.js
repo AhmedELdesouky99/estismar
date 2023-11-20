@@ -1,26 +1,49 @@
 import React from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import { message, Upload } from "antd";
+import { userReq } from "../../../util/axios";
 const { Dragger } = Upload;
 
 export const UploadFiles = ({
   setFiles,
   files,
+  onSuccess = () => {},
   className = "",
   title = "Click or drag file to this area to upload",
 }) => {
-  console.log(files, "UploadFiles");
   const props = {
     name: "file",
     multiple: true,
-    action:
-      "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aHVtYW58ZW58MHx8MHx8&w=1000&q=80",
+    action: (file) => {
+      const headers = {
+        "Content-Type": "multipart/form-data",
+      };
+      return new Promise((resolve, reject) => {
+        const formData = new FormData();
+        formData.append("title", file.name);
+        formData.append("file", file);
+        userReq
+          .post("/auth/upload-file", formData, {
+            headers,
+          })
+          .then((res) => {
+            if (res.data.success) {
+              onSuccess(res?.data?.data?.id);
+              console.log(onSuccess);
+              resolve("https://admin.waqfnami.com/api" + res?.data?.data?.path);
+            }
+          })
+          .catch((error) => reject(error));
+      });
+    },
     onChange(info) {
       const { status } = info.file;
       if (status !== "uploading") {
         console.log(info.file, info.fileList);
       }
       if (status === "done") {
+        // uploadAsset(info.file);
+        console.log(info.file, "xxx");
         setFiles((files) => [...files, info.file]);
         message.success(`${info.file.name} file uploaded successfully.`);
       } else if (status === "error") {
@@ -29,7 +52,7 @@ export const UploadFiles = ({
     },
     onDrop(e) {
       setFiles((files) => [...files, e.dataTransfer.files]);
-
+      uploadAsset(e.dataTransfer.files);
       console.log("Dropped files", e.dataTransfer.files);
     },
   };

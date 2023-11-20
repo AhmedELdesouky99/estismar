@@ -1,8 +1,14 @@
 import ImgCrop from "antd-img-crop";
 import React, { useState } from "react";
 import { Upload } from "antd";
+import { userReq } from "../../../util/axios";
 
-export const UploadImage = ({ count = 1, fileList, setFileList }) => {
+export const UploadImage = ({
+  count = 1,
+  fileList,
+  setFileList,
+  onSuccess = () => {},
+}) => {
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
@@ -23,7 +29,30 @@ export const UploadImage = ({ count = 1, fileList, setFileList }) => {
   return (
     <ImgCrop rotationSlider>
       <Upload
-        action='https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aHVtYW58ZW58MHx8MHx8&w=1000&q=80'
+        action={(file) => {
+          console.log(file);
+          const headers = {
+            "Content-Type": "multipart/form-data",
+          };
+          return new Promise((resolve, reject) => {
+            const formData = new FormData();
+            formData.append("title", "profile-img");
+            formData.append("file", file);
+            userReq
+              .post("/auth/upload-file", formData, {
+                headers,
+              })
+              .then((res) => {
+                if (res.data.success) {
+                  onSuccess(res?.data?.data?.id);
+                  resolve(
+                    "https://admin.waqfnami.com/api" + res?.data?.data?.path
+                  );
+                }
+              })
+              .catch((error) => reject(error));
+          });
+        }}
         listType='picture-card'
         fileList={fileList}
         onChange={onChange}
